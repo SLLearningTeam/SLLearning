@@ -54,7 +54,7 @@
 
 > * 设备分布图
 >
-> ![image](https://github.com/SLLearningTeam/SLLearning/blob/master/%E8%AE%BE%E5%A4%87%E5%88%86%E5%B8%83%E5%9B%BE.png)
+> ![image](./ReadmeImage/设备分布图.png)
 >
 > * 支撑软件
 >
@@ -70,3 +70,12 @@
 >
 >   无
 
+### 4.整体文档结构
+
+> 移动端文件夹 Mobile Folder
+>
+> 浏览器端文件夹 Browser Folder
+>
+> 服务端文件夹 Server Folder
+
+<b>您可以通过不同端文件夹查看相应源代码</b>
