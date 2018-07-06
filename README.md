@@ -1,4 +1,4 @@
-## <img src="./logo.png" style="height:40px,width:40px">&nbsp;&nbsp;听说 在线学习平台
+## &nbsp;&nbsp;听说 在线学习平台
 
 ![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)&nbsp;&nbsp;![Travis](https://img.shields.io/travis/USER/REPO.svg)&nbsp;![Jenkins coverage](https://img.shields.io/jenkins/c/https/jenkins.qa.ubuntu.com/view/Utopic/view/All/job/address-book-service-utopic-i386-ci.svg)
 
