@@ -52,7 +52,7 @@
 
 > * 设备分布图
 >
-> ![avatar](/Users/wangzhe/Desktop/听说在线学习平台/github信息/设备分布图.png)
+> ![avatar](./设备分布图.png)
 >
 > * 支撑软件
 >
