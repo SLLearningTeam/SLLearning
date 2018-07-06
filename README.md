@@ -52,7 +52,7 @@
 
 > * 设备分布图
 >
-> ![avatar](./设备分布图.png)
+> ![image](https://github.com/SLLearningTeam/SLLearning/blob/master/%E8%AE%BE%E5%A4%87%E5%88%86%E5%B8%83%E5%9B%BE.png)
 >
 > * 支撑软件
 >
