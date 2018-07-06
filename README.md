@@ -1,6 +1,6 @@
-## 听说 在线学习平台
+## <img src="./logo.png" style="height:40px">&nbsp;&nbsp;听说 在线学习平台
 
-![image](./logo.png){:height="50px" width="50px"}
+![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)![Travis](https://img.shields.io/travis/USER/REPO.svg)![Jenkins coverage](https://img.shields.io/jenkins/c/https/jenkins.qa.ubuntu.com/view/Utopic/view/All/job/address-book-service-utopic-i386-ci.svg)
 
 ### 1.范围定义
 
