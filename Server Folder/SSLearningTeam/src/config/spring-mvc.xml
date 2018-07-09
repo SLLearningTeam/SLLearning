@@ -11,9 +11,12 @@
 
 	<!-- 注解扫描包 -->
 	
-	<context:component-scan base-package="cn.net.realloyal" >      
-    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
-	</context:component-scan> 
+	<!-- 让Spring自己查找 -->
+	<context:component-scan base-package="cn.net.realloyal.action" />
+	<context:component-scan base-package="cn.net.realloyal.service" />
+	<context:component-scan base-package="cn.net.realloyal.mapper" />
+	<context:component-scan base-package="cn.net.realloyal.service.impl" />
+	<context:component-scan base-package="cn.net.realloyal.model" />
 	
 
 	<!-- 开启注解 -->
@@ -26,24 +29,25 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<!-- 可以直接相应转发的页面, 而无需再经过 Handler 的方法. -->
-	<mvc:view-controller path="/" view-name="index"/>
+	<!--可以直接相应转发的页面, 而无需再经过 Handler 的方法. -->
+	<!--  <mvc:view-controller path="/" view-name="index"/>
 	<mvc:view-controller path="/user/regFormModal" view-name="/common/regFormModal"/>
 	<mvc:view-controller path="/admin" view-name="adminLogin"/>
 	<mvc:view-controller path="/admin/home" view-name="/admin/home"/>
 	<mvc:view-controller path="/execute_result" view-name="/common/execute_result"/>
 	<mvc:view-controller path="/login" view-name="/common/login"/>
-	<mvc:view-controller path="/usercenter/index" view-name="/usercenter/index"/>
+	<mvc:view-controller path="/usercenter/index" view-name="/usercenter/index"/> -->
 	
 	
 	<!--
 		配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd
 	-->
 	
-	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/html/**" location="/html/" />
+	<mvc:resources mapping="/plugins/**" location="/plugins/" />
+	<mvc:resources mapping="/dist/**" location="/dist/" />
 
 	<!--  
 		default-servlet-handler 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler,
@@ -56,17 +60,17 @@
 	-->
 	<mvc:default-servlet-handler/>
 
-	<mvc:interceptors>
-	    <!-- 配置拦截器(不)作用的路径 -->  
+	<!-- <mvc:interceptors>
+	    配置拦截器(不)作用的路径  
 		<mvc:interceptor>
 		    <mvc:mapping path="/**"/> 
 		    <mvc:exclude-mapping path="/"/>
 		    <mvc:exclude-mapping path="/index"/>
 		    <mvc:exclude-mapping path="/admin"/>
-			<!-- <mvc:exclude-mapping path="/user/login"/>
+			<mvc:exclude-mapping path="/user/login"/>
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/user/reg"/>
-			<mvc:exclude-mapping path="/user/checkUserName"/> -->
+			<mvc:exclude-mapping path="/user/checkUserName"/>
 			<mvc:exclude-mapping path="/execute_result"/>
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/user/**"/>
@@ -81,9 +85,9 @@
          	<bean class="cn.edu.neu.core.common.LoginInterceptor"></bean>	
 		</mvc:interceptor>
 		
-		<!-- 配置 LocaleChanceInterceptor -->
+		配置 LocaleChanceInterceptor
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 	
 	<!-- 配置上传文件解析器 -->
 	<bean id="multipartResolver" 

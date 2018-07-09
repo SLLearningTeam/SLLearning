@@ -7,5 +7,7 @@
 	
  -->
 <mapper namespace="cn.net.realloyal.mapper.UserMapper">
-
+	<select id="checkLogin" resultType="User">
+		select * from user where userPhoneNumber=#{param1} and userPassword=#{param2}
+	</select>
 </mapper>
