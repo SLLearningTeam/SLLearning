@@ -1,5 +1,6 @@
 package cn.net.realloyal.action;
 
+import java.sql.Time;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,7 @@ public class UserAction {
 			back.setStatus(true);
 			back.setInfo("恭喜您,登陆成功");
 		}else {
-			back.setInfo(false);
+			back.setStatus(false);
 			back.setInfo("您的用户名或密码有误,请重新输入!");
 		}
 		return back;

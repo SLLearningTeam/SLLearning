@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.net.realloyal.core.util.AesEncryptUtil;
+import cn.net.realloyal.core.util.ShaEncryptUtil;
 import cn.net.realloyal.mapper.UserMapper;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.UserService;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
 		//AES解密处理并转交数据访问层
 		userPhoneNumber = AesEncryptUtil.desEncrypt(userPhoneNumber).trim();
 		userPassword = AesEncryptUtil.desEncrypt(userPassword).trim();
+		userPassword = ShaEncryptUtil.shaEncrypt(userPassword);
+		System.out.println(userPassword.length());
+		System.out.println(userPassword);
 		return userDao.checkLogin(userPhoneNumber,userPassword);
 	}
 

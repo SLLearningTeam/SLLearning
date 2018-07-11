@@ -24,65 +24,62 @@
   	.error{
   		color:red
   	}
-  	.div{
-		position: absolute;
-		left:20%;
-		top:20%;
-		margin-left:-20px;//-自身盒子宽度的50%
-		margin-top:-20px;//-自身盒子宽度的50%
-	}
-  </style>
+  	
+</style>
 </head>
 <body class="hold-transition login-page">
-<div id="loading"></div>
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>听说 </b> 在线学习平台</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">请输入您的账号</p>
-      <form id="loginForm">
-        <div class="form-group has-feedback">
-          <input name="userPhoneNumber" type="text" class="form-control" placeholder="请输入您的手机号">
-        </div>
-        <div class="form-group has-feedback">
-          <input name="userPassword" type="password" class="form-control" placeholder="请输入您的密码">
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="checkbox icheck">
-              <label>
-                <!-- <input name="userPermission" type="radio" value="0" checked="checked">&nbsp;&nbsp;普通账户
-                <input name="userPermission" type="radio" value="1">&nbsp;&nbsp;管理账户 -->
-                <input type="checkbox">&nbsp;&nbsp;记住账户
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="button" class="btn btn-primary btn-block btn-flat" onclick="pageSubmit()">登录</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
-      <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fa fa-facebook mr-2"></i>&nbsp;使用Facebook账号登录
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fa fa-google-plus mr-2"></i>&nbsp;使用Google+账号登录
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
+	<!-- 遮罩层 -->
+	<div id="selffade" style="width:100%;height:100%;background-color:#fff;opacity:0.9;position: fixed;left: 0;top: 0;bottom:0;z-index: 99;text-align:center;margin:auto;vertical-align: middle;">
+		<div id="loading" style="margin-top:300px;"><img src="${pageContext.request.contextPath}/img/icon/loading.gif"/></div>
+	</div>
+		<div class="login-box">
+		  <div class="login-logo">
+		    <a href="#"><b>听说 </b> 在线学习平台</a>
+		  </div>
+		  <!-- /.login-logo -->
+		  <div class="card">
+		    <div class="card-body login-card-body">
+		      <p class="login-box-msg" id="prompt">请输入您的账号</p>
+		      <form id="loginForm">
+		        <div class="form-group has-feedback">
+		          <input name="userPhoneNumber" type="text" class="form-control" placeholder="请输入您的手机号">
+		        </div>
+		        <div class="form-group has-feedback">
+		          <input name="userPassword" type="password" class="form-control" placeholder="请输入您的密码">
+		        </div>
+		        <div class="row">
+		          <div class="col-8">
+		            <div class="checkbox icheck">
+		              <label>
+		                <!-- <input name="userPermission" type="radio" value="0" checked="checked">&nbsp;&nbsp;普通账户
+		                <input name="userPermission" type="radio" value="1">&nbsp;&nbsp;管理账户 -->
+		                <input type="checkbox">&nbsp;&nbsp;记住账户
+		              </label>
+		            </div>
+		          </div>
+		          <!-- /.col -->
+		          <div class="col-4">
+		            <button id="submit" type="button" class="btn btn-primary btn-block btn-flat" onclick="pageSubmit()">登录</button>
+		          </div>
+		          <!-- /.col -->
+		        </div>
+		      </form>
+		
+		      <div class="social-auth-links text-center mb-3">
+		        <p>- OR -</p>
+		        <a href="#" class="btn btn-block btn-primary">
+		          <i class="fa fa-facebook mr-2"></i>&nbsp;使用Facebook账号登录
+		        </a>
+		        <a href="#" class="btn btn-block btn-danger">
+		          <i class="fa fa-google-plus mr-2"></i>&nbsp;使用Google+账号登录
+		        </a>
+		      </div>
+		      <!-- /.social-auth-links -->
+		    </div>
+		    <!-- /.login-card-body -->
+		  </div>
+		</div>
+		<!-- /.login-box -->
 
 <!-- jQuery -->
 <script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
@@ -106,8 +103,6 @@
 	     if (!$("#loginForm").valid()) {
 	        return;
 	     }
-	     console.log($("input[name='userPhoneNumber']").val());
-	     console.log($("input[name='userPassword']").val());
 	    var data = {
 	    		userPhoneNumber:cbcAesEncrypt($("input[name='userPhoneNumber']").val()),
 	    		userPassword:cbcAesEncrypt($("input[name='userPassword']").val())
@@ -119,29 +114,29 @@
 	      data: data,
 	      timeout:2000,
 	      beforeSend:loading,
-	      success:function(result){
-	    	  	if(result.status){
-	    	  		location.href="${pageContext.request.contextPath}/user/toindex"
-	    	  	}
-	    	  	else{
-	    	  		alert(result.info)
-	    	  	}
-	      },
-	      error:function(){}
+	      complete:complete,
+	      success:success,
+	      error:error
 	    });
 	}
 
 	  $(function () {
+		$("#selffade").hide()
+		$('#loading').hide(); 
 	    $('input').iCheck({
 	      checkboxClass: 'icheckbox_square-blue',
 	      radioClass   : 'iradio_square-blue',
 	      increaseArea : '20%' // optional
 	    })
+	    
+	    //validation手机号校验函数
 	    $.validator.addMethod("isMobile", function(value, element) {
 			var length = value.length;
 	 		var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
 			return this.optional(element) || (length == 11 && mobile.test(value));
 		}, "请填写正确的手机号码");
+	    
+	    //表单验证
 	    $('#loginForm').validate({
 	    		rules:{
 	    			userPhoneNumber:{
@@ -172,7 +167,35 @@
 	    		}
 	    	})
 	  })
+	  
+	  //加载函数
 	  function loading(){
+		  // 禁用按钮防止重复提交
+	      $("#submit").attr({ disabled: "disabled" });
+	      $("#selffade").show();
+		  $('#loading').show(); 
+	  }
+	  
+	  //加载完成函数
+	  function complete(){
+  	  	$('#loading').hide();
+	  	$("#selffade").hide();
+	  	$("#submit").removeAttr('disabled');
+  	  }
+	  
+	  //加载成功函数
+	  function success(result){
+	    	  	if(result.status){
+	    	  		location.href="${pageContext.request.contextPath}/user/toindex"
+	    	  	}
+	    	  	else{
+	    	  		var prompt = result.info;
+	    	  		$("#prompt").html(prompt).css("color","red");
+	    	  	}
+	  }
+	  
+	  //加载失败函数
+	  function error(result){
 		  
 	  }
 </script>
