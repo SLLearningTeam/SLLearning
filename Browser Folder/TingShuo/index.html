@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>home</title>
+    <link rel="stylesheet" href="./css/bootstrap-grid.css">
+    <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/mycss.css">
+
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body style="font-weight: 500">
+    <div class="container-fluid">
+        <div id="row1" class="row top">
+            <div class="col-lg-12 col-md-12">
+                <nav style="padding-left: 0px;padding-right: 0px" class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src="./img/logo.png" alt="logo">
+                    </a>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link daohang" href="#">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link daohang" href="#">分类</a>
+                            </li>
+                            <form style="margin: 370px;" class="form-inline my-2 my-lg-0">
+                                <input style="border:0px;border-bottom:#b3b3b3 1px solid;width: 400px" class="form-control mr-sm-2" type="search" placeholder="请在此输入 ..."
+                                    aria-label="Search">
+                                <button class="header-button-sousuo header-button-kong" type="submit">搜索</button>
+                            </form>
+                            <a href=""></a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="">
+                                    登录
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    注册
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+
+
+            </div>
+        </div>
+        <div class="container">
+            <!--下面是轮播-->
+            <div id="row2" class="row row-margin">
+                <div class="col-md-12 col-lg-12">
+                    <div id="lunbo" class="carousel slide lunbo" data-ride="carousel" data-interval="4000">
+
+                        <!-- 指示符 -->
+                        <ul class="carousel-indicators">
+                            <li data-target="#lunbo" data-slide-to="0" class="active"></li>
+                            <li data-target="#lunbo" data-slide-to="1"></li>
+                            <li data-target="#lunbo" data-slide-to="2"></li>
+                            <li data-target="#lunbo" data-slide-to="3"></li>
+                        </ul>
+
+                        <!-- 轮播图片 -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="lunbo" src="./img/1.jpg">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="lunbo" src="./img/2.jpg">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="lunbo" src="./img/3.jpg">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="lunbo" src="./img/4.jpg">
+                            </div>
+                        </div>
+
+                        <!-- 左右切换按钮 -->
+                        <a class="carousel-control-prev" href="#lunbo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#lunbo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-margin">
+                <div class="col-md-5 col-lg-5">
+                        <img class="tuijian" style="float:right;" src="./img/tuijian.png" alt="">
+                </div>
+                <div style="text-align: center;display: inline;" class="col-md-2 col-lg-2">
+                    <h3>好课推荐</h3>
+                </div>
+                <div class="col-md-5 col-lg-5">
+                        <img class="tuijian" style="float: left;" src="./img/tuijian.png" alt="">
+                </div>
+            </div>
+
+
+            <!--课程列表-->
+            <div id="courses" class="row">
+                <div class="col-md-12 col-lg-12">
+
+
+                    <div id="r1" class="row row-margin">
+                        <div class="col-md-3 col-lg-3">
+                            <div class="card course">
+                                <img class="card-img-top" src="./img/siji.jpg" alt="课程图片">
+                                <div class="card-body">
+                                    <p class="card-text">这里是说明</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
