@@ -20,7 +20,7 @@ import {
 import TitleBar from './TitleBar'
 import FaXianPage from './faXianPage'
 import FenLeiPage from './fenLeiPage'
-import KeChengPage from './keChengPage'
+import Course from '../Course/Course'
 import ShiTi from '../ZuJian/ShiTi'
 import WoDe from '../ZuJian/WoDe'
 import SideMenu from 'react-native-side-menu';
@@ -98,7 +98,7 @@ export default class DaoHang extends Component<Props> {
      <FenLeiPage navigator={this.props.navigator}/>
      </View>
      <View>
-     <KeChengPage navigator={this.props.navigator}/>
+     <Course navigator={this.props.navigator}/>
      </View>
      </ViewPagerAndroid>
      <View>
