@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 管理端  课程分类页</title>
+<title>听说在线学习平台 | 管理端 课程添加</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -39,14 +39,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
-<!-- 自定义样式 -->
-<style type="text/css">
-
-.left{
- float:right;
-
-}
-</style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -283,121 +275,366 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="container-fluid">
-					<!-- Small boxes (Stat box) -->
-					<div class="col-xs col-sm col-md">
-						<div class="card ">
-							<div class="card-header p-2 ">
-							<!-- 添加课程按钮 -->
-									<button class="left" >
-									<img  src="./img/resource/add.png"  height="20" width="20"/>
-									</button>
-							<!-- 课程导航 -->
-								<ul class="nav nav-pills ">
-									<li class="nav-item"><a class="nav-link active"
-										href="#activity" data-toggle="tab">阅读课程列表</a></li>
-									<li class="nav-item"><a class="nav-link" href="#timeline"
-										data-toggle="tab">听力课程列表</a></li>
-									<li class="nav-item"><a class="nav-link" href="#settings"
-										data-toggle="tab">口语课程列表</a></li>
-								</ul>
-								
-							</div>
-							<!-- 阅读课程列表 -->
-							<div class="card-body">
-								<div class="tab-content col-xs col-sm col-md">
-									<div class="active tab-pane" id="activity">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered ">
-												<tr style="text-align: center;color: #903d04 " >
-													<th>课程编号</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语阅读</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-												
-											</table>
-										</form>
+					<!-- 添加阅读课程 -->
+					<div class="row">
+						<div class="col-md">
+							<div class="card card-info collapsed-card card-outline">
+								<div class="card-header">
+									<h3 class="card-title">添加阅读课程</h3>
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool"
+											data-widget="collapse">
+											<i class="fa fa-plus"></i>
+										</button>
 									</div>
-									<!-- 听力课程列表-->
+									<!-- /.card-tools -->
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body">
+
+									<!-- 添加阅读 -->
 									<div class="tab-pane" id="timeline">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered">
-												<tr style="text-align: center;color: #8a0480 ">
-													<th>课程ID</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语听力</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-											</table>
+										<form class="form-horizontal" method=""
+											enctype="multipart/form-data">
+											<div class="form-group">
+												<label for="inputName" class="col-sm-2 control-label">课程名称</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputName"
+														placeholder="请填写听力课程名称">
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-8">
+													<label>请选择语言类别</label> <select class="form-control">
+														<option>英语</option>
+														<option>日语</option>
+
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-8">
+													<label>请选择语言类别类型</label> <select class="form-control">
+														<option>四级</option>
+														<option>六级</option>
+													</select>
+												</div>
+											</div>
+
+											<!-- 选择要分类的语言 -->
+
+											<div class="form-group">
+												<div class="col-sm-8">
+													<label>请选择要进行分类的语言</label> <select class="form-control">
+														<option>英语</option>
+														<option>日语</option>
+														<option>俄语</option>
+														<option>法语</option>
+														<option>泰语</option>
+														<option>德语</option>
+													</select>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程内容</label>
+												<div class="col-sm-8">
+													<textarea class="form-control" rows="3"
+														placeholder="请填写课程内容"></textarea>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-3 control-label">课程资源图标</label>
+												<div class="col-sm-8">
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="exampleInputFile"> <label
+															class="custom-file-label" for="exampleInputFile">请选择图标</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程下载量</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写课程下载量">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-6 control-label">图片链接</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写链接">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-8">
+													<button type="submit" class="btn btn-danger">提交</button>
+												</div>
+											</div>
 										</form>
+
 									</div>
-									<!-- 口语课程列表 -->
-									<div class="tab-pane" id="settings">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered">
-												<tr style="text-align: center;color: #04746e ">
-													<th>课程ID</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语口语</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-												
-											</table>
-										</form>
-									</div>
-									<!-- 分页 -->
-									
-                                      <div class="card-footer clearfix">
-											<ul class="pagination pagination-sm m-0 float-right">
-												<li class="page-item"><a class="page-link" href="#">«</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">»</a></li>
-											</ul>
-										</div>
-									</div>
-								
-								<!-- /.tab-content -->
+
+
+
+
+
+
+
+
+								</div>
+								<!-- /.card-body -->
 							</div>
-							<!-- /.card-body -->
+							<!-- /.card -->
 						</div>
+						<!-- 添加听力课程 -->
+						<div class="col-md">
+							<div class="card card-warning collapsed-card card-outline">
+								<div class="card-header">
+									<h3 class="card-title">添加听力课程</h3>
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool"
+											data-widget="collapse">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+									<!-- /.card-tools -->
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body">
+									<!-- 添加阅读 -->
+									<div class="tab-pane" id="timeline">
+										<form class="form-horizontal" method=""
+											enctype="multipart/form-data">
+											<div class="form-group">
+												<label for="inputName" class="col-sm-2 control-label">课程名称</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputName"
+														placeholder="请填写听力课程名称">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">语言类别</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写语言类别">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputName2" class="col-sm-2 control-label">类别类型</label>
+
+												<div class="col-sm-8">
+													<input type="text" class="form-control" id="inputName2"
+														placeholder="请填写类别类型">
+												</div>
+											</div>
+											<!-- 选择要分类的语言 -->
+
+											<div class="form-group">
+												<div class="col-sm-8">
+													<label>请选择要进行分类的语言</label> <select class="form-control">
+														<option>英语</option>
+														<option>日语</option>
+														<option>俄语</option>
+														<option>法语</option>
+														<option>泰语</option>
+														<option>德语</option>
+													</select>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程内容</label>
+												<div class="col-sm-8">
+													<textarea class="form-control" rows="3"
+														placeholder="请填写课程内容"></textarea>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-3 control-label">课程资源图标</label>
+												<div class="col-sm-8">
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="exampleInputFile"> <label
+															class="custom-file-label" for="exampleInputFile">请选择图标</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程下载量</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写课程下载量">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-6 control-label">图片链接</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写链接">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-8">
+													<button type="submit" class="btn btn-danger">提交</button>
+												</div>
+											</div>
+										</form>
+
+									</div>
+
+								</div>
+								<!-- /.card-body -->
+							</div>
+							<!-- /.card -->
+						</div>
+						<!-- 添加口语课程 -->
+						<div class="col-md">
+							<div class="card card-danger collapsed-card card-outline">
+								<div class="card-header">
+									<h3 class="card-title">添加口语课程</h3>
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool"
+											data-widget="collapse">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+									<!-- /.card-tools -->
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body">
+									<!-- 添加阅读 -->
+									<div class="tab-pane" id="timeline">
+										<form class="form-horizontal" method=""
+											enctype="multipart/form-data">
+											<div class="form-group">
+												<label for="inputName" class="col-sm-2 control-label">课程名称</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputName"
+														placeholder="请填写听力课程名称">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">语言类别</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写语言类别">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputName2" class="col-sm-2 control-label">类别类型</label>
+
+												<div class="col-sm-8">
+													<input type="text" class="form-control" id="inputName2"
+														placeholder="请填写类别类型">
+												</div>
+											</div>
+											<!-- 选择要分类的语言 -->
+
+											<div class="form-group">
+												<div class="col-sm-8">
+													<label>请选择要进行分类的语言</label> <select class="form-control">
+														<option>英语</option>
+														<option>日语</option>
+														<option>俄语</option>
+														<option>法语</option>
+														<option>泰语</option>
+														<option>德语</option>
+													</select>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程内容</label>
+												<div class="col-sm-8">
+													<textarea class="form-control" rows="3"
+														placeholder="请填写课程内容"></textarea>
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-3 control-label">课程资源图标</label>
+												<div class="col-sm-8">
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="exampleInputFile"> <label
+															class="custom-file-label" for="exampleInputFile">请选择图标</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-2 control-label">课程下载量</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写课程下载量">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="inputEmail" class="col-sm-6 control-label">图片链接</label>
+
+												<div class="col-sm-8">
+													<input type="email" class="form-control" id="inputEmail"
+														placeholder="请填写链接">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-8">
+													<button type="submit" class="btn btn-danger">提交</button>
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<!-- 添加听力阅读结束 -->
+								</div>
+								<!-- /.card-body -->
+							</div>
+
+						</div>
+
 					</div>
 				</div>
-			</section>
 		</div>
-
-		<footer class="main-footer">
-			<strong>Copyright &copy; 2018 <a href="#">听说 在线学习平台</a>.
-			</strong>
-			<div class="float-right d-none d-sm-inline-block">
-				<b>Version</b>3.0
-			</div>
-		</footer>
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+		</section>
+	</div>
+	<footer class="main-footer">
+		<strong>Copyright &copy; 2018 <a href="#">听说 在线学习平台</a>.
+		</strong>
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b>3.0
+		</div>
+	</footer>
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 

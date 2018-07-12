@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 管理端  课程分类页</title>
+<title>听说在线学习平台 | 管理端 首页</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -39,14 +39,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
-<!-- 自定义样式 -->
-<style type="text/css">
-
-.left{
- float:right;
-
-}
-</style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -284,120 +276,61 @@
 			<section class="content">
 				<div class="container-fluid">
 					<!-- Small boxes (Stat box) -->
-					<div class="col-xs col-sm col-md">
-						<div class="card ">
-							<div class="card-header p-2 ">
-							<!-- 添加课程按钮 -->
-									<button class="left" >
-									<img  src="./img/resource/add.png"  height="20" width="20"/>
-									</button>
-							<!-- 课程导航 -->
-								<ul class="nav nav-pills ">
-									<li class="nav-item"><a class="nav-link active"
-										href="#activity" data-toggle="tab">阅读课程列表</a></li>
-									<li class="nav-item"><a class="nav-link" href="#timeline"
-										data-toggle="tab">听力课程列表</a></li>
-									<li class="nav-item"><a class="nav-link" href="#settings"
-										data-toggle="tab">口语课程列表</a></li>
-								</ul>
-								
-							</div>
-							<!-- 阅读课程列表 -->
-							<div class="card-body">
-								<div class="tab-content col-xs col-sm col-md">
-									<div class="active tab-pane" id="activity">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered ">
-												<tr style="text-align: center;color: #903d04 " >
-													<th>课程编号</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语阅读</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-												
-											</table>
-										</form>
-									</div>
-									<!-- 听力课程列表-->
-									<div class="tab-pane" id="timeline">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered">
-												<tr style="text-align: center;color: #8a0480 ">
-													<th>课程ID</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语听力</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-											</table>
-										</form>
-									</div>
-									<!-- 口语课程列表 -->
-									<div class="tab-pane" id="settings">
-										<form action="#" method="post">
-											<table class="table table-hover table-bordered">
-												<tr style="text-align: center;color: #04746e ">
-													<th>课程ID</th>
-													<th>课程名称</th>
-													<th>语言类别</th>
-													<th>类别类型</th>
-												</tr>
-												
-												<tr style="text-align: center">
-													<td>1</td>
-													<td>英语口语</td>
-													<td>英语</td>
-													<td>四级</td>
-												</tr>
-												
-											</table>
-										</form>
-									</div>
-									<!-- 分页 -->
-									
-                                      <div class="card-footer clearfix">
-											<ul class="pagination pagination-sm m-0 float-right">
-												<li class="page-item"><a class="page-link" href="#">«</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">»</a></li>
-											</ul>
-										</div>
-									</div>
-								
-								<!-- /.tab-content -->
-							</div>
-							<!-- /.card-body -->
+					<div class="card-body">
+						<table id="example1" class="table table-bordered table-striped">
+							<thead>
+								<tr style="text-align: center;color: #f71f83 ">
+									<th>语言类型ID</th>
+									<th>语言名称</th>
+									<th>图标</th>
+									<th colspan="2" style="text-align: center;">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr style="text-align: center">
+									<td>1</td>
+									<td>英语</td>
+									<td><img  src="./img/resource/tu.png"  height="20" width="20"/></td>
+									<td><a href="#">修改</a></td>
+									<td><a href="#">删除</a></td>
+								</tr>
+						</table>
+						<div class="card-footer clearfix">
+							<ul class="pagination pagination-sm m-0 float-right">
+								<li class="page-item"><a class="page-link" href="#">«</a></li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">»</a></li>
+							</ul>
 						</div>
 					</div>
-				</div>
-			</section>
-		</div>
 
-		<footer class="main-footer">
-			<strong>Copyright &copy; 2018 <a href="#">听说 在线学习平台</a>.
-			</strong>
-			<div class="float-right d-none d-sm-inline-block">
-				<b>Version</b>3.0
-			</div>
-		</footer>
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+				</div>
+				<!-- /.card -->
+			</section>
+			<!-- right col -->
+		</div>
+		<!-- /.row (main row) -->
+	</div>
+	<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<footer class="main-footer">
+		<strong>Copyright &copy; 2018 <a href="#">听说 在线学习平台</a>.
+		</strong>
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b>3.0
+		</div>
+	</footer>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 
@@ -408,8 +341,8 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
-		$.widget.bridge('uibutton', $.ui.button)
-	</script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
 	<!-- Bootstrap 4 -->
 	<script
 		src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
