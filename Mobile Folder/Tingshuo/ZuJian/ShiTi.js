@@ -12,6 +12,7 @@ import CeShi from './CeShi'
 import Home from '../Home/Home'
 import faXianPage from '../Home/faXianPage'
 import XiangQing from './XiangQing'
+import XiaZai from './XiaZai'
 export default class ShiTi extends Component<Props> {
   render() {
     return (
@@ -22,7 +23,7 @@ export default class ShiTi extends Component<Props> {
      <View style={{flex:0.82}}> 
      {/*头部栏开始*/}
      <View style={{flex:0.09,backgroundColor:'white',borderBottomWidth:1,flexDirection:'row'}}>
-     <TouchableOpacity onPres={(this.tiaoZhu.bind(this))}>
+     <TouchableOpacity onPress={(this.tiao.bind(this))}>
      <Image style={{marginRight:85}} source={require('../imgs/fanhui.png')}/>
      </TouchableOpacity>  
      <TouchableOpacity onPress={this.change.bind(this)}>
@@ -30,7 +31,9 @@ export default class ShiTi extends Component<Props> {
      </TouchableOpacity>
      <Image style={styles.headImg} source={require('../imgs/dingyue.png')}/>
      <Image style={styles.headImg} source={require('../imgs/ziti.png')}/>
+     <TouchableOpacity onPress={this.xiazai.bind(this)}>
      <Image style={styles.headImg} source={require('../imgs/xiazai.png')}/>
+     </TouchableOpacity>
      </View>
      {/*头部栏结束*/}
      {/*试题部分开始*/}
@@ -70,6 +73,10 @@ export default class ShiTi extends Component<Props> {
      </View>
     );
   }
+  tiao(){
+  const navigator =this.props.navigator;
+  navigator.pop()
+ }
  change(){
   const navigator=this.props.navigator;
   navigator.push({
@@ -77,12 +84,14 @@ export default class ShiTi extends Component<Props> {
     name:'测试页',
   })
  }
- tiaoZhu(){
-  const navigator =this.props.navigator;
+ xiazai(){
+  const navigator=this.props.navigator;
   navigator.push({
-    component:XiangQing,
+    component:XiaZai,
+    name:'下载页'
   })
  }
+ 
  
  
 

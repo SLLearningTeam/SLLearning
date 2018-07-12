@@ -35,7 +35,7 @@ export default class DaoHang extends Component<Props> {
         };
     }
   render() {
-    const menu = <WoDe />;
+    const menu = <WoDe navigator={this.props.navigator}/>;
     return (
       <SideMenu 
                 menu={menu}                    //抽屉内的组件
