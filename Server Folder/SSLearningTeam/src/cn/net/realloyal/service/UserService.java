@@ -11,5 +11,7 @@ public interface UserService {
 	public User checkLogin(String userPhoneNumber,String userPassword) throws Exception;
 
 	public BackJsonUtil checkRegister(User user) throws Exception;
+
+	public BackJsonUtil getChaphcha(String userPhoneNumber, int randomChaphcha);
 	
 }

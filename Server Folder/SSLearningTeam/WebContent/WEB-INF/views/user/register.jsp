@@ -20,6 +20,16 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/square/blue.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style type="text/css">
+  	.errorStyle{
+  		color:red;
+  		margin-left:7%;
+  		margin-top:5px;
+  		margin-bottom:0px;
+  		font-size:1em;
+  		font-family: Georgia;
+  	}
+  </style>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -31,10 +41,10 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">注册账户</p>
 
-      <form action="#" method="post">
+      <form id="registerForm" action="#" method="post">
         <div class="form-group has-feedback">
           <span class="fa fa-user form-control-feedback" style="display: inline;margin-right:2%"></span>
-          <input type="text" class="form-control" placeholder="请输入您的用户名" style="width:92%;display:inline">
+          <input type="text" class="form-control" name="userName" placeholder="请输入您的用户名" style="width:92%;display:inline">
         </div>
         <div class="form-group has-feedback">
         	  <span>请选择您的性别：&nbsp;&nbsp;</span>
@@ -43,22 +53,25 @@
         </div>
         <div class="form-group has-feedback">
         		<span class="fa fa-phone form-control-feedback" style="display: inline;margin-right:2%"></span>
-        	    <input type="email" class="form-control" placeholder="请输入您的手机号" style="width:92%;display:inline">
-        	  	<input type="button" class="btn btn-block btn-outline-secondary btn-lg" style="padding:0.4rem;margin-top:-6px;margin-right:2%;width:30%;display:inline;font-size: 0.8rem;margin-left:7%" value="发送验证码"><input type="text" class="form-control" placeholder="请填写验证码" style="margin-top:2%;width:60%;display:inline">
+        	    <input type="text" class="form-control" name="userPhoneNumber" placeholder="请输入您的手机号" style="width:92%;display:inline">
+        	    <div>
+	        	  	<input type="button" id="sendChaphcha" class="btn btn-block btn-outline-secondary btn-lg" style="padding:0.4rem;margin-top:-6px;margin-right:2%;width:30%;display:inline;font-size: 0.8rem;margin-left:7%" value="发送验证码" onclick="clickSendChaphcha()">
+	        	  	<input type="text" class="form-control" name="chaphcha" placeholder="请填写验证码" style="margin-top:2%;width:60%;display:inline"/>        	    
+        	    </div>
         </div>
         <div class="form-group has-feedback">
         	  <span class="fa fa-lock form-control-feedback" style="display: inline;margin-right:3%"></span>
-          <input type="password" class="form-control" placeholder="请输入您的密码" style="width:92%;display:inline" >
+          <input type="password" class="form-control" name="userPassword" placeholder="请输入您的密码" style="width:92%;display:inline" >
         </div>
         <div class="form-group has-feedback">
         	  <span class="fa fa-lock form-control-feedback" style="display: inline;margin-right:3%"></span>
-          <input type="password" class="form-control" style="width:92%;display:inline" placeholder="请重新输入您的密码">
+          <input type="password" class="form-control" name="checkPassword" style="width:92%;display:inline" placeholder="请重新输入您的密码">
         </div>
         <div class="form-group">
-          <div class="input-group">
+          <div class="input-group" id="userAvatarParent">
           	<div class="custom-file">
-            		<input type="file" class="custom-file-input" id="exampleInputFile">
-            		<label class="custom-file-label" for="exampleInputFile">请选择您的头像图片</label>
+            		<input type="file" name="userAvatar" class="custom-file-input form-control" id="exampleInputFile" onchange="userAvatorChange()">
+            		<label class="custom-file-label" for="exampleInputFile" id="fileName">请选择您的头像图片</label>
             </div>
           </div>
         </div>
@@ -103,14 +116,194 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- iCheck -->
 <script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+<!-- validate -->
+<script src="${pageContext.request.contextPath}/js/plugins/validation/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/plugins/validation/messages_zh.js"></script>
+
 <script>
+  //用户头像变更函数
+  function userAvatorChange(){
+	var file = $('[name="userAvatar"]').val();
+	var fileName = getFileName(file);
+	$('#fileName').text(fileName);
+  }
+  
+  //获取文件名函数
+  function getFileName(file){
+	  var pos=file.lastIndexOf("\\");
+      return file.substring(pos+1);  
+  }
+  
+  //点击发送验证码请求
+  function clickSendChaphcha(){
+	  var $sendButton = $("#sendChaphcha");
+	  var $userPhoneNumber = $("[name='userPhoneNumber']");
+	  var count = 120;//倒计时时长
+	  //发送请求====待添加
+	  $sendButton.attr("disabled","disabled");
+	  $sendButton.val("剩余 "+count+"s");
+	  (function countdown(){
+		  if(count==0){
+			  $sendButton.removeAttr("disabled");
+			  $sendButton.val("发送验证码");
+		  }else{
+			  setTimeout(function(){
+				  count-=1;
+				  $sendButton.val("剩余 "+count+"s");
+				  countdown();
+			  },1000)
+		  }
+	  })();
+  }
+  
   $(function () {
+	// 上传文件名称显示
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass   : 'iradio_square-blue',
       increaseArea : '20%' // optional
     })
+    
+    //validation手机号校验函数
+    $.validator.addMethod("isMobile", function(value, element) {
+		var length = value.length;
+ 		var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+		return this.optional(element) || (length == 11 && mobile.test(value));
+	}, "请填写正确的手机号码");
+	
+    //上传文件验证
+    $.validator.addMethod("checkPic",function(value,element){
+    		var filepath=$("[name='userAvatar']").val();
+        //获得上传文件名
+        var fileArr=filepath.split("\\");
+        var fileTArr=fileArr[fileArr.length-1].toLowerCase().split(".");
+        var filetype=fileTArr[fileTArr.length-1];
+        //切割出后缀文件名
+        if(filetype!="jpg"){
+            return false;
+        }else{
+	        	if(filetype!="png"){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    },"上传图片格式不合适");
+    
+    //注册验证
+    $('#registerForm').validate({
+    		rules:{
+    			userName:{
+    				required:true,
+    				rangelength:[1,10]
+    			},
+    			userPhoneNumber:{
+    				required:true,
+    				maxlength:11,
+    				number:true,
+    				isMobile:true
+    			},
+    			chaphcha:{
+    				required:true,
+    				number:true,
+    				rangelength:[6,6]
+    			},
+    			userPassword:{
+    				required:true,
+    				minlength:6,
+    				maxlength:20
+    			},
+    			checkPassword:{
+    				required:true,
+    				minlength:6,
+    				maxlength:20,
+    				equalTo:"[name='userPassword']"
+    			},
+    			userAvatar:{
+    				required:true,
+    				checkPic:true
+    			}
+    		},
+    		messages:{
+    			userName:{
+    				required:"请输入用户名",
+    				rangelength:"请输入1-10位的用户名"
+    			},
+    			userPhoneNumber:{
+    				required:"请输入手机号",
+    				minlength:"请填写正确的手机号码",
+    				number:"请输入正确的手机号"
+    			},
+    			chaphcha:{
+    				required:"请输入验证码",
+    				number:"请输入正确的验证码",
+    				rangelength:"请输入正确的验证码"
+    			},
+    			userPassword:{
+    				required:"请输入密码",
+    				minlength:"请输入至少6位密码",
+    				maxlength:"您输入的密码过长"
+    			},
+    			checkPassword:{
+    				required:"请重新输入密码",
+    				minlength:"请输入至少6位密码",
+    				maxlength:"您输入的密码过长",
+    				equalTo:"您两次输入的密码不同"
+    			},
+    			userAvatar:{
+    				required:"请选择您的头像",
+    				checkPic:"请选择正确的文件"
+    			}
+    		},
+    		//错误信息展示位置设定
+    		errorPlacement: function(error, element) { 
+    			//如果是用户名，错误提示在元素下方
+    			if(element.is("[name='userName']")){
+    				error.addClass("errorStyle");
+        		    error.appendTo(element.parent()); 
+    			}else if(element.is("[name='userPhoneNumber']")){
+    				error.addClass("errorStyle");
+    				element.after(error);
+    			}else if(element.is("[name='chaphcha']")){
+    				error.addClass("errorStyle");
+    				error.appendTo(element.parent()); 
+    			}else if(element.is("[name='userPassword']")){
+    				error.addClass("errorStyle");
+    				error.appendTo(element.parent()); 
+    			}else if(element.is("[name='checkPassword']")){
+    				error.addClass("errorStyle");
+    				error.appendTo(element.parent()); 
+    			}else if(element.is("[name='userAvatar']")){
+    				error.addClass("errorStyle");
+    				error.appendTo($("#userAvatarParent").parent()); 
+    			}
+    		}
+	  })
   })
+  
+  	//提交方法
+	function registerSubmit() {
+	     if (!$("#registerForm").valid()) {
+	        return;
+	     }
+	    var data = {
+	    		userName:cbcAesEncrypt($("input[name='userName']").val()),
+	    		userSex:cbcAesEncrypt($("input[name='userName']").val()),
+	    		userPhoneNumber:cbcAesEncrypt($("input[name='userPhoneNumber']").val()),
+	    		userPassword:cbcAesEncrypt($("input[name='userPassword']").val())
+	    };
+	    console.log(data);
+	    $.ajax({
+	      type:"POST",
+	      url: "${pageContext.request.contextPath}/user/login",
+	      data: data,
+	      timeout:2000,
+	      beforeSend:loading,
+	      complete:complete,
+	      success:success,
+	      error:error
+	    });
+	}
 </script>
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
+import cn.net.realloyal.core.util.chaphcha.IndustrySMS;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.UserService;
 import net.sf.json.JSONObject;
@@ -82,6 +83,21 @@ public class UserAction {
 	public BackJsonUtil checkRegister(User user) throws Exception {
 		BackJsonUtil registerResult = userService.checkRegister(user);
 		return registerResult;
+	}
+	
+	//尽量不要测试，要钱啊啊啊啊啊！！！！
+	//短信验证码请求
+	@ResponseBody
+	@RequestMapping("/getchaphcha")
+	public BackJsonUtil getchaphcha(String userPhoneNumber){
+		int randomChaphcha = (int)(100000+Math.random()*900000);
+		IndustrySMS.execute(userPhoneNumber,randomChaphcha);
+		BackJsonUtil chaphchaResult = userService.getChaphcha(userPhoneNumber,randomChaphcha);
+		if(chaphchaResult.getStatus()) {
+			session.setAttribute("userPhoneNumber", userPhoneNumber);
+			session.setAttribute("chaphcha", randomChaphcha);
+		}
+		return chaphchaResult;
 	}
 	
 	@ResponseBody
