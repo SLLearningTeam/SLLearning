@@ -1,3 +1,5 @@
 import { AppRegistry } from 'react-native';
 import App from './Home/App'
-AppRegistry.registerComponent('Tingshuo', () => App);
+import demo from './Home/demo'
+import TT from './Home/TT'
+AppRegistry.registerComponent('Tingshuo', () =>App);
