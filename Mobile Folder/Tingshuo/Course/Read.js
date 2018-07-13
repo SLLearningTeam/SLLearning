@@ -36,13 +36,14 @@ export default class Read extends Component<Props> {
       }>
       <Image style={styles.list3} source={require('../imgs/back.png')}></Image>
       </TouchableOpacity>
+      <Text style={{fontSize:25,marginTop:5}}>阅读</Text>
       <TouchableOpacity onPress={
         this.HomePress.bind(this)
       }>
       <Image style={styles.list3} source={require('../imgs/home.png')}></Image>
       </TouchableOpacity>
       </View>
-    {/*听力分类开始*/}
+    {/*阅读分类开始*/}
       <View style={styles.class}>
        <Image style={styles.list} source={require('../imgs/kclisten.jpg')}></Image>
        <View>

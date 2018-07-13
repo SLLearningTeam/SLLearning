@@ -36,6 +36,7 @@ export default class Test extends Component<Props> {
       }>
       <Image style={styles.list3} source={require('../imgs/back.png')}></Image>
       </TouchableOpacity>
+      <Text style={{fontSize:25,marginTop:5}}>模拟</Text>
       <TouchableOpacity onPress={
         this.HomePress.bind(this)
       }>

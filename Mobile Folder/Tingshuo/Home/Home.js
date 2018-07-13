@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import TitleBar from './TitleBar'
 import FaXianPage from './faXianPage'
-import FenLeiPage from './fenLeiPage'
+import Sort from '../Classify/Sort'
 import Course from '../Course/Course'
 import ShiTi from '../ZuJian/ShiTi'
 import WoDe from '../ZuJian/WoDe'
@@ -95,7 +95,7 @@ export default class DaoHang extends Component<Props> {
      <FaXianPage navigator={this.props.navigator}/>
      </View>
      <View>
-     <FenLeiPage navigator={this.props.navigator}/>
+     <Sort navigator={this.props.navigator}/>
      </View>
      <View>
      <Course navigator={this.props.navigator}/>
