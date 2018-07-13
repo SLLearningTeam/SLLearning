@@ -27,7 +27,7 @@ export default class fenLeiPage extends Component<Props> {
       <Fenlei_ZuoCe />
       <Fenlei_ZuoCe />
       </View>
-      <View style={{flex:0.5,padding:5,flexWrap:'wrap',flexDirection:'row',}}>
+      <View style={{flex:0.65,padding:5,flexWrap:'wrap',flexDirection:'row',}}>
       <TouchableOpacity onPress={this.tiaoZhuan.bind(this)}>
       <Fenlei_YouCe />
       </TouchableOpacity>

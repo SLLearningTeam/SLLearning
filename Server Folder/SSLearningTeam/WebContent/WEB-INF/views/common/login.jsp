@@ -70,8 +70,8 @@
 		        <a href="#" class="btn btn-block btn-primary">
 		          <i class="fa fa-facebook mr-2"></i>&nbsp;使用Facebook账号登录
 		        </a>
-		        <a href="#" class="btn btn-block btn-danger">
-		          <i class="fa fa-google-plus mr-2"></i>&nbsp;使用Google+账号登录
+		        <a href="${pageContext.request.contextPath}/user/toregister" class="btn btn-block btn-danger">
+		          <i class="fa fa-google-plus mr-2"></i>&nbsp;注册账户
 		        </a>
 		      </div>
 		      <!-- /.social-auth-links -->

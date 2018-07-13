@@ -43,7 +43,6 @@ public class UserAction {
 	@ResponseBody
 	@RequestMapping("/login")
 	public BackJsonUtil checkLogin(String userPhoneNumber,String userPassword) throws Exception {
-		ModelAndView mv = new ModelAndView();
 		User user = userService.checkLogin(userPhoneNumber, userPassword);
 		BackJsonUtil back = new BackJsonUtil();
 		if(user!=null) {
@@ -71,8 +70,19 @@ public class UserAction {
 		return mv;		
 	}
 	
+	//跳转注册界面
+	@RequestMapping("/toregister")
+	public String toRegister() {
+		return "user/register";
+	}
 	
-	
+	//用户注册
+	@ResponseBody
+	@RequestMapping("/register")
+	public BackJsonUtil checkRegister(User user) throws Exception {
+		BackJsonUtil registerResult = userService.checkRegister(user);
+		return registerResult;
+	}
 	
 	@ResponseBody
 	@RequestMapping("/mobile/login")
