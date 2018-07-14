@@ -16,6 +16,6 @@
 	</select>
 	
 	<insert id="registerUser" parameterType="User">
-		insert into user (userId,userSex,userName,userPassword,userAvatarUrl,userPhoneNumber,userPermission) where values(null,#{userSex},#{userName},#{userPassword},#{userAvatarUrl},#{userPhoneNumber},#{userPermission})
+		insert into user (userId,userSex,userName,userPassword,userAvatarUrl,userPhoneNumber,userPermission) values(null,#{userSex},#{userName},#{userPassword},#{userAvatarUrl},#{userPhoneNumber},#{userPermission})
 	</insert>
 </mapper>

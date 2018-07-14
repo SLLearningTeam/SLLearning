@@ -22,4 +22,3 @@ function cbcAesDecrypt(encryptedBase64Str){
 	console.log('decryptedStr', decryptedStr);
 	return decryptedStr;
 }
-

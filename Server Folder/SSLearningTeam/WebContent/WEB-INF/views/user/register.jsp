@@ -32,6 +32,10 @@
   </style>
 </head>
 <body class="hold-transition register-page">
+<!-- 遮罩层 -->
+<div id="selffade" style="width:100%;height:100%;background-color:#fff;opacity:0.9;position: fixed;left: 0;top: 0;bottom:0;z-index: 99;text-align:center;margin:auto;vertical-align: middle;">
+	<div id="loading" style="margin-top:300px;"><img src="${pageContext.request.contextPath}/img/icon/loading.gif"/></div>
+</div>
 <div class="register-box">
   <div class="register-logo">
     <a href="#"><b>听说 </b> 在线学习平台</a>
@@ -39,9 +43,9 @@
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">注册账户</p>
+      <p class="login-box-msg" id="prompt">注册账户</p>
 
-      <form id="registerForm" action="#" method="post">
+      <form id="registerForm" enctype='multipart/form-data'>
         <div class="form-group has-feedback">
           <span class="fa fa-user form-control-feedback" style="display: inline;margin-right:2%"></span>
           <input type="text" class="form-control" name="userName" placeholder="请输入您的用户名" style="width:92%;display:inline">
@@ -70,8 +74,8 @@
         <div class="form-group">
           <div class="input-group" id="userAvatarParent">
           	<div class="custom-file">
-            		<input type="file" name="userAvatar" class="custom-file-input form-control" id="exampleInputFile" onchange="userAvatorChange()">
-            		<label class="custom-file-label" for="exampleInputFile" id="fileName">请选择您的头像图片</label>
+            		<input type="file" name="userAvatar" class="custom-file-input form-control" id="userAvatar" onchange="userAvatorChange()">
+            		<label class="custom-file-label" for="userAvatar" id="fileName">请选择您的头像图片</label>
             </div>
           </div>
         </div>
@@ -85,7 +89,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+            <button type="submit" id="submitRegister" class="btn btn-primary btn-block btn-flat" onclick="registerSubmit()">注册</button>
           </div>
           <!-- /.col -->
         </div>
@@ -119,7 +123,12 @@
 <!-- validate -->
 <script src="${pageContext.request.contextPath}/js/plugins/validation/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/plugins/validation/messages_zh.js"></script>
-
+<!-- require.js -->
+<script src="${pageContext.request.contextPath}/js/require.js"></script>
+<!-- AES加密 -->
+<script src="${pageContext.request.contextPath}/js/aes.js"></script>
+<!-- 自定义js文件 -->
+<script src="${pageContext.request.contextPath}/js/selfdefine.js"></script>
 <script>
   //用户头像变更函数
   function userAvatorChange(){
@@ -134,29 +143,58 @@
       return file.substring(pos+1);  
   }
   
+  //验证手机号函数
+  function checkUserPhone(userPhone){
+  	var realPhone = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+  	if(realPhone.test(userPhone)){
+  		return true;
+  	}else{
+  		return false;
+  	}
+  }
+  
   //点击发送验证码请求
   function clickSendChaphcha(){
 	  var $sendButton = $("#sendChaphcha");
 	  var $userPhoneNumber = $("[name='userPhoneNumber']");
-	  var count = 120;//倒计时时长
-	  //发送请求====待添加
-	  $sendButton.attr("disabled","disabled");
-	  $sendButton.val("剩余 "+count+"s");
-	  (function countdown(){
-		  if(count==0){
+	  if(checkUserPhone($userPhoneNumber.val())){
+		  var count = 120;//倒计时时长
+		  $.ajax({
+		      type:"POST",
+		      url: "${pageContext.request.contextPath}/user/getchaphcha",
+		      data: $userPhoneNumber.serialize(),
+		      timeout:2000,
+		      success:function(result){
+		    	  	if(!result.status){
+		    	  		alert(result.info);
+		    	  	}
+		      },
+		      error:function(result){
+		    	  	alert(result);
+		      }
+		    });
+			$sendButton.attr("disabled","disabled");
+			$sendButton.val("剩余 "+count+"s");
+			(function countdown(){
+			 if(count==0){
 			  $sendButton.removeAttr("disabled");
 			  $sendButton.val("发送验证码");
-		  }else{
+			 }else{
 			  setTimeout(function(){
 				  count-=1;
 				  $sendButton.val("剩余 "+count+"s");
 				  countdown();
 			  },1000)
-		  }
-	  })();
+			 }
+			})();
+	  }else{
+		$userPhoneNumber.focus();
+	  }
   }
   
   $(function () {
+	$("#selffade").hide();
+	$('#loading').hide(); 
 	// 上传文件名称显示
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -180,13 +218,13 @@
         var filetype=fileTArr[fileTArr.length-1];
         //切割出后缀文件名
         if(filetype!="jpg"){
-            return false;
-        }else{
-	        	if(filetype!="png"){
+            if(filetype!="png"){
                 return false;
             }else{
                 return true;
             }
+        }else{
+	        	return true;
         }
     },"上传图片格式不合适");
     
@@ -281,28 +319,61 @@
 	  })
   })
   
-  	//提交方法
+	//提交方法
 	function registerSubmit() {
-	     if (!$("#registerForm").valid()) {
-	        return;
-	     }
-	    var data = {
-	    		userName:cbcAesEncrypt($("input[name='userName']").val()),
-	    		userSex:cbcAesEncrypt($("input[name='userName']").val()),
-	    		userPhoneNumber:cbcAesEncrypt($("input[name='userPhoneNumber']").val()),
-	    		userPassword:cbcAesEncrypt($("input[name='userPassword']").val())
-	    };
-	    console.log(data);
+		if (!$("#registerForm").valid()) {
+		   return;
+		}
+		var formData = new FormData();//必须是new FormData后台才能接收到
+		formData.append("userName", cbcAesEncrypt($("input[name='userName']").val()));
+		formData.append("userSex", $("input[name='userSex']:checked").val());
+		formData.append("userPhoneNumber", $("input[name='userPhoneNumber']").val());
+		formData.append("chaphcha", $("input[name='chaphcha']").val());
+		formData.append("userPassword", cbcAesEncrypt($("input[name='userPassword']").val()));
+		formData.append("userAvatar", $("#userAvatar")[0].files[0]);
 	    $.ajax({
 	      type:"POST",
-	      url: "${pageContext.request.contextPath}/user/login",
-	      data: data,
-	      timeout:2000,
+	      cache: false,
+	      url: "${pageContext.request.contextPath}/user/register",
+	      data: formData,
+	      contentType: false,//必须false才会自动加上正确的Content-Type
+	      processData: false,//必须false才会避开jQuery对 formdata 的默认处理，XMLHttpRequest会对 formdata 进行正确的处理 
 	      beforeSend:loading,
 	      complete:complete,
 	      success:success,
 	      error:error
 	    });
+	}
+  
+	//加载函数
+	function loading(){
+	 // 禁用按钮防止重复提交
+	    $("#submitRegister").attr({ disabled: "disabled" });
+	    $("#selffade").show();
+	 	$('#loading').show(); 
+	}
+	
+	//加载完成函数
+	function complete(){
+	 	$('#loading').hide();
+		$("#selffade").hide();
+		$("#submitRegister").removeAttr('disabled');
+	 }
+	
+	//加载成功函数
+	function success(result){
+	  	  	if(result.status){
+	  	  		location.href="${pageContext.request.contextPath}/user/toindex"
+	  	  	}
+	  	  	else{
+	  	  		var prompt = result.info;
+	  	  		$("#prompt").html(prompt).css("color","red");
+	  	  	}
+	}
+	
+	//加载失败函数
+	function error(result){
+	 	alert(result);
 	}
 </script>
 </body>
