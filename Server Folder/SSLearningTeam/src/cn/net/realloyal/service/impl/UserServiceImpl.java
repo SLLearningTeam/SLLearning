@@ -73,5 +73,19 @@ public class UserServiceImpl implements UserService {
 		return back;
 	}
 
+	@Override
+	public BackJsonUtil getChaphcha(String userPhoneNumber, int randomChaphcha) {
+		// TODO Auto-generated method stub
+		BackJsonUtil back = new BackJsonUtil();
+		if(randomChaphcha>0&&randomChaphcha<1000000) {
+			back.setStatus(true);
+			back.setInfo(randomChaphcha);
+		}else {
+			back.setStatus(false);
+			back.setInfo("遇到未知错误，请重试！");
+		}
+		return back;
+	}
+
 
 }
