@@ -1,6 +1,9 @@
 package cn.net.realloyal.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.User;
@@ -10,8 +13,12 @@ public interface UserService {
 
 	public User checkLogin(String userPhoneNumber,String userPassword) throws Exception;
 
-	public BackJsonUtil checkRegister(User user) throws Exception;
+	public Boolean checkPhoneIsExist(String userPhoneNumber);
+	
+	public BackJsonUtil checkRegister(User user, CommonsMultipartFile userAvatar,HttpServletRequest request) throws Exception;
 
 	public BackJsonUtil getChaphcha(String userPhoneNumber, int randomChaphcha);
+
+	public User getUser(String userPhoneNumber, String userPassword) throws Exception;
 	
 }

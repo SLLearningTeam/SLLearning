@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
+import cn.net.realloyal.core.util.CheckUtil;
 import cn.net.realloyal.core.util.chaphcha.IndustrySMS;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.UserService;
@@ -62,10 +65,11 @@ public class UserAction {
 	public ModelAndView toIndex() {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
-		mv.addObject("admin",user);
 		if(user.getUserPermission()==1) {
+			mv.addObject("admin",user);
 			mv.setViewName("admin/index");
 		}else {
+			mv.addObject("user",user);
 			mv.setViewName("user/index");
 		}
 		return mv;		
@@ -80,9 +84,29 @@ public class UserAction {
 	//用户注册
 	@ResponseBody
 	@RequestMapping("/register")
-	public BackJsonUtil checkRegister(User user) throws Exception {
-		BackJsonUtil registerResult = userService.checkRegister(user);
-		return registerResult;
+	public BackJsonUtil checkRegister(String userName,String userSex,String userPhoneNumber,String chaphcha,String userPassword,@RequestParam(required=false) CommonsMultipartFile userAvatar,HttpServletRequest request) throws Exception {
+		System.out.println("存储用户手机号为:"+session.getAttribute("userPhoneNumber")+"   实际手机号为:"+userPhoneNumber);
+		System.out.println("存储验证码为:"+session.getAttribute("chaphcha")+"   实际验证码为:"+chaphcha);
+		System.out.println(userPhoneNumber.equals(session.getAttribute("userPhoneNumber")));
+		System.out.println(chaphcha.equals(session.getAttribute("chaphcha")));
+		if(userPhoneNumber.equals(session.getAttribute("userPhoneNumber"))&&chaphcha.equals(session.getAttribute("chaphcha"))) {
+//			return registerResult;
+			User user = new User();
+			user.setUserName(userName);
+			user.setUserPassword(userPassword);
+			user.setUserPermission(0);
+			user.setUserPhoneNumber(userPhoneNumber);
+			user.setUserSex(userSex);
+			BackJsonUtil registerResult = userService.checkRegister(user,userAvatar,request);
+			User session_user = userService.getUser(userPhoneNumber, userPassword);
+			System.out.println(session_user);
+			session.setAttribute("user",session_user);
+			return registerResult;
+		}
+		else {
+			BackJsonUtil chaphchaWrong = new BackJsonUtil(false,"验证码有误，请重新输入!");
+			return chaphchaWrong;
+		}
 	}
 	
 	//尽量不要测试，要钱啊啊啊啊啊！！！！
@@ -90,15 +114,34 @@ public class UserAction {
 	@ResponseBody
 	@RequestMapping("/getchaphcha")
 	public BackJsonUtil getchaphcha(String userPhoneNumber){
-		int randomChaphcha = (int)(100000+Math.random()*900000);
-		IndustrySMS.execute(userPhoneNumber,randomChaphcha);
-		BackJsonUtil chaphchaResult = userService.getChaphcha(userPhoneNumber,randomChaphcha);
-		if(chaphchaResult.getStatus()) {
-			session.setAttribute("userPhoneNumber", userPhoneNumber);
-			session.setAttribute("chaphcha", randomChaphcha);
+		if(CheckUtil.checkUserPhone(userPhoneNumber)) {
+			if(userService.checkPhoneIsExist(userPhoneNumber)) {
+				int randomChaphcha = (int)(100000+Math.random()*900000);
+				System.out.println("随机验证码为:"+randomChaphcha);
+//				IndustrySMS.execute(userPhoneNumber,randomChaphcha);
+//				BackJsonUtil chaphchaResult = userService.getChaphcha(userPhoneNumber,randomChaphcha);
+//				if(chaphchaResult.getStatus()) {
+//					session.setAttribute("userPhoneNumber", userPhoneNumber);
+//					session.setAttribute("chaphcha", randomChaphcha+"");
+//				}
+//				return chaphchaResult;			
+				
+				//测试
+				session.setAttribute("userPhoneNumber", userPhoneNumber);
+				session.setAttribute("chaphcha", randomChaphcha+"");	
+				return new BackJsonUtil(true,"成功");
+				
+			}else {
+				BackJsonUtil back = new BackJsonUtil(false,"您已注册，请登录!");
+				return back;
+			}
+		}else {
+			BackJsonUtil back = new BackJsonUtil(false,"您的手机号有误，请重新输入!");
+			return back;
 		}
-		return chaphchaResult;
 	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping("/mobile/login")
