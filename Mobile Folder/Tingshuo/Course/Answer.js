@@ -10,11 +10,10 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Image,
   Button,
+  TouchableOpacity,
 } from 'react-native';
-import Answer from './Answer'
 import Title from '../ZuJian/Title'
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,7 +23,7 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class Yasi extends Component<Props> {
+export default class Answer extends Component<Props> {
   render() {
     return (
       <View>
@@ -42,41 +41,44 @@ export default class Yasi extends Component<Props> {
      </View>
      {/*头部栏结束*/}
       <View style={styles.question}>
-      <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-      <Image source={require('../imgs/laba.png')}></Image>
-       <Button
-        title="查看问题"
-        color="#19BA94"
-        onPress={this.AnswerPress.bind(this)}
-      />
+      <View 
+      style={{width:180,height:40,marginLeft:85,backgroundColor:'#18BA94',borderRadius:20}}>
+      <Text style={{fontSize:25,color:'white',textAlign:'center'}}>100 Perfact!!!</Text>
+      </View>
+      <View style={{flexDirection:'row',marginTop:30}}>
+      <Image style={{marginTop:7}} source={require('../imgs/laba.png')}></Image>
+      <Text style={{fontSize:20,fontWeight:'bold',marginLeft:15}}>Are you interested in fashion or clothes fashion?</Text>
       </View>
       <View style={styles.border}>
-      <Image style={{width:200,height:200}} 
-      source={require('../imgs/question.png')}></Image>
-      <Text 
-      style={{textAlign:'center',fontSize:20,color:'#808080',marginTop:30}}
-      >
-      想想怎么回答这个问题吧？</Text>
+      <Text style={{fontSize:20,fontWeight:'bold',marginTop:30,marginLeft:30,marginRight:30}}>...but I don't want to look old-fashioned either.</Text>
+      
+      <View style={styles.tra}>
+      <Text style={styles.tran}>翻译</Text>
       </View>
       <View style={styles.play}>
-      <Image style={{height:50,width:50}} source={require('../imgs/playing.png')}></Image>
+      <Image style={{height:50,width:50,marginRight:40,marginLeft:48}} source={require('../imgs/playing.png')}></Image>
       <Image style={{height:70,width:70}} source={require('../imgs/luying.png')}></Image>
-      <Image style={{height:50,width:50}} source={require('../imgs/xiayige.png')}></Image>
+      <Image style={{height:50,width:50,marginLeft:40}} source={require('../imgs/xiayige.png')}></Image>
       </View>
+      </View>
+      </View>
+      <View 
+      style={{width:130,height:40,marginLeft:140,marginTop:30,backgroundColor:'#18BA94'}}>
+      <Text style={{fontSize:22,color:'white',textAlign:'center',marginTop:3}}>下一句</Text>
       </View>
       </View>
     );
   }
-   AnswerPress(){
+     translatePress(){
     let navigator = this.props.navigator;
     if (navigator) {
       navigator.push({
-        name:'答案',
-        component:Answer,
+        name:'翻译',
+        component:translate,
       });
     }
   }
-  fanhuiPress() {
+    fanhuiPress() {
       const navigator = this.props.navigator;
       if (navigator) {
         navigator.pop()
@@ -85,8 +87,8 @@ export default class Yasi extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  question:{
-    marginTop:70,
+    question:{
+    marginTop:40,
     marginRight:30,
     marginLeft:30,
   },
@@ -98,12 +100,25 @@ const styles = StyleSheet.create({
     shadowColor:'red',
     shadowOffset:{width:20,height:20},
     elevation:24,
-    alignItems:'center',
   },
   play:{
     flexDirection:'row',
-    justifyContent:'space-between',
-    margin:40,
+    marginTop:80,
+  },
+  tra:{
+    marginTop:10,width:60,
+    height:30,
+    marginLeft:30,
+    borderRadius:3,
+    borderWidth:2,
+    borderColor:'#808080'
+  },
+  tran:{
+    fontSize:15,
+    backgroundColor:'#FFFFFF',
+    color:'#808080',
+    textAlign:'center',
+    marginTop:1,
   },
   headImg:{
   width:35,
@@ -112,4 +127,4 @@ const styles = StyleSheet.create({
   marginLeft:30,
 },
 });
-module.exports = Yasi;
+module.modules=Answer;
