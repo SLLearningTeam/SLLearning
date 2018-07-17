@@ -10,4 +10,12 @@
 	<select id="checkLogin" resultType="User">
 		select * from user where userPhoneNumber=#{param1} and userPassword=#{param2}
 	</select>
+	
+	<select id="checkPhoneIsExist" resultType="User">
+		select * from user where userPhoneNumber=#{param1}
+	</select>
+	
+	<insert id="registerUser" parameterType="User">
+		insert into user (userId,userSex,userName,userPassword,userAvatarUrl,userPhoneNumber,userPermission) values(null,#{userSex},#{userName},#{userPassword},#{userAvatarUrl},#{userPhoneNumber},#{userPermission})
+	</insert>
 </mapper>

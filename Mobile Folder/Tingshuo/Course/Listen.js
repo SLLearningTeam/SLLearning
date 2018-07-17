@@ -34,8 +34,9 @@ export default class Listen extends Component<Props> {
        <TouchableOpacity onPress={
         this.BackPress.bind(this)
       }>
-      <Image style={styles.list3} source={require('../imgs/back.png')}></Image>
+      <Image style={styles.list3} source={require('../imgs/fanhui.png')}></Image>
       </TouchableOpacity>
+      <Text style={{fontSize:25,marginTop:5}}>听力</Text>
       <TouchableOpacity onPress={
         this.HomePress.bind(this)
       }>

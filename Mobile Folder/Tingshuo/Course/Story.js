@@ -33,9 +33,9 @@ export default class Story extends Component<Props> {
       <Image 
       style={{width:40,height:40,marginTop:5,marginLeft:5}} 
      
-      source={require('../imgs/back.png')}></Image>
+      source={require('../imgs/fanhui.png')}></Image>
       </TouchableOpacity>
-      <Text style={{fontSize:20,marginLeft:15,marginTop:8}}>口语故事</Text>
+      <Text style={{fontSize:20,marginLeft:30,marginTop:8}}>口语故事</Text>
       </View>
           {/*口语故事*/}
       <View style={{flex:0.3}}>
@@ -46,8 +46,14 @@ export default class Story extends Component<Props> {
       {/*Liz小姐游美国*/}
       <View style={{flex:0.5}}>
       <Image 
-      style={{width:405,height:340}}
+      style={{width:400,height:340}}
       source={require('../imgs/liz.png')}></Image>
+      </View> 
+      {/*艾伯特和他的朋友们*/}
+      <View style={{flex:0.5}}>
+      <Image 
+      style={{width:405,height:800}}
+      source={require('../imgs/abt.png')}></Image>
       </View> 
       </View>
        </ScrollView>

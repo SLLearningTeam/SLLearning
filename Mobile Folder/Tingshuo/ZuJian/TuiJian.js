@@ -15,7 +15,6 @@ import {
   Image
 } from 'react-native';
 
-
 export default class FirstView extends Component {
   render() {
       return (
@@ -41,6 +40,7 @@ export default class FirstView extends Component {
       </View>
         );
     } 
+
   }
 
 

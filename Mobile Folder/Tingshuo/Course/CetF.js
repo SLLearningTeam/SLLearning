@@ -27,7 +27,7 @@ export default class CetF extends Component<Props> {
     return (
       <View>
       <View style={styles.class1}>
-      <Image style={styles.list3} source={require('../imgs/back.png')}></Image>
+      <Image style={styles.list3} source={require('../imgs/fanhui.png')}></Image>
       <Image style={styles.list3} source={require('../imgs/home.png')}></Image>
       </View>
       <ScrollView>
