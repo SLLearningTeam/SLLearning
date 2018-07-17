@@ -186,19 +186,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/userManager/userList.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/user/user_info" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看用户列表</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="${pageContext.request.contextPath}/user/user_list" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看用户详情</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="${pageContext.request.contextPath}/user/users_chart" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>总览用户信息</p>
                 </a>
@@ -215,31 +215,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/charts/chartjs.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/language/languages_manage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理语言分类</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/charts/flot.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/ratetype/ratetypes_manage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理等级分类</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/charts/inline.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/course/courses_manage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>管理课程分类</p>
+                  <p>管理课程信息</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/charts/inline.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>管理课程内容</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/train/trains_manage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理考试内容</p>
                 </a>
@@ -256,19 +250,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/pages/websiteManager/ideaFeedback.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/advice/ideas_feedback" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看意见反馈</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/website/website_monitor" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看访问监控</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/websiteManager/recommendResource.html" class="nav-link">
+                <a href="${pageContext.request.contextPath}/website/recommend_resources" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理推荐资源</p>
                 </a>

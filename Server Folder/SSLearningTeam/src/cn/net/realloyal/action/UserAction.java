@@ -141,6 +141,29 @@ public class UserAction {
 		}
 	}
 	
+	//用户信息详情
+	@RequestMapping("/user_info")
+	public ModelAndView getUserInfo() {
+		ModelAndView mv = new ModelAndView("admin/userManager/user_info");
+		return mv;
+	}
+	
+	//用户列表
+	@RequestMapping("/user_list")
+	public ModelAndView getUserList() {
+		ModelAndView mv = new ModelAndView("admin/userManager/user_list");
+		return mv;
+	}
+	
+	//用户图表
+	@RequestMapping("/users_chart")
+	public ModelAndView getUsersChart() {
+		ModelAndView mv = new ModelAndView("admin/userManager/users_chart");
+		return mv;
+	}
+	
+	
+	
 	
 	
 	@ResponseBody
