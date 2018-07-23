@@ -18,7 +18,7 @@ export default class keCheng extends Component<Props> {
   render() {
     return (
       <View>
-      <Text>课程页</Text>
+      <Text>这是课程页</Text>
        </View>
      
     );
@@ -26,5 +26,5 @@ export default class keCheng extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  
+
 });

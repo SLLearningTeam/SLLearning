@@ -27,25 +27,48 @@ export default class CeShi extends Component<Props> {
      </View>
      {/*头部栏结束*/}
      {/*试题部分开始*/}
-     <View style={{alignItems:'baseline',flex:0.82}}>
-     <Text style={styles.biaoTi}>Section A</Text>
-     <Text style={styles.tiMuENG}>Directions:In the section,you will
-     hear 8 long conversition and 2 short conversion.</Text>
-     <Text style={styles.tiMuCHI}>考试说明：在这一部分你将会
-     听到8段长对话和2段短对话。</Text>
-     <Text style={styles.tiMuENG}>At the end of each conversion,
-     one or more questions will be asked about waht was said.</Text>
-     <Text style={styles.tiMuCHI}>每段对话结束后，请根据听到的内容
-     回答一个或多个问题。</Text>
-     <Text style={styles.tiMuENG}>Both the conversion and the questions 
-     will be spoken only once.</Text>
-     <Text style={styles.tiMuCHI}>同样的对话和问题只读一遍。</Text>
-     <Text style={styles.tiMuENG}>Both the conversion and the questions 
-     will be spoken only once.</Text>
-     <Text style={styles.tiMuCHI}>同样的对话和问题只读一遍。</Text>
-     <Text style={styles.tiMuENG}>Both the conversion and the questions 
-     will be spoken only once.</Text>
-     <Text style={styles.tiMuCHI}>同样的对话和问题只读一遍。</Text>
+     <View style={{alignItems:'baseline',flex:0.82,borderBottomWidth:1}}>
+     <Text style={styles.biaoTi}>Secsion A</Text>
+     <Text style={styles.xuhao}>1.</Text>
+     <Text style={styles.xuhao}>A、It is attaables to the rising value of the CHI</Text>
+     <Text style={styles.xuhao}>B、It is attaables to the rising value of the CHI goods merfifan</Text>
+     <Text style={styles.xuhao}>C、It is attaables to the rising of the CHI</Text>
+     <Text style={styles.xuhao}>D、It is attaables to the rising value of the CHI</Text>
+     <View style={{flexDirection:'row',marginLeft:100}}>
+     <Text style={styles.daan}>正确答案：A</Text>
+     <Text style={styles.button}>答案</Text>
+     <Text style={styles.button}>解析</Text>
+     </View>
+     </View>
+     {/*试题部分结束*/}
+     {/*试题部分开始*/}
+     <View style={{alignItems:'baseline',flex:0.82,borderBottomWidth:1}}>
+     <Text style={styles.biaoTi}>Secsion A</Text>
+     <Text style={styles.xuhao}>1.</Text>
+     <Text style={styles.xuhao}>A、It is attaables to the rising value of the CHI</Text>
+     <Text style={styles.xuhao}>B、It is attaables to the rising value of the CHI goods merfifan</Text>
+     <Text style={styles.xuhao}>C、It is attaables to the rising of the CHI</Text>
+     <Text style={styles.xuhao}>D、It is attaables to the rising value of the CHI</Text>
+     <View style={{flexDirection:'row',marginLeft:100}}>
+     <Text style={styles.daan}>正确答案：A</Text>
+     <Text style={styles.button}>答案</Text>
+     <Text style={styles.button}>解析</Text>
+     </View>
+     </View>
+     {/*试题部分结束*/}
+     {/*试题部分开始*/}
+     <View style={{alignItems:'baseline',flex:0.82,borderBottomWidth:1}}>
+     <Text style={styles.biaoTi}>Secsion A</Text>
+     <Text style={styles.xuhao}>1.</Text>
+     <Text style={styles.xuhao}>A、It is attaables to the rising value of the CHI</Text>
+     <Text style={styles.xuhao}>B、It is attaables to the rising value of the CHI goods merfifan</Text>
+     <Text style={styles.xuhao}>C、It is attaables to the rising of the CHI</Text>
+     <Text style={styles.xuhao}>D、It is attaables to the rising value of the CHI</Text>
+     <View style={{flexDirection:'row',marginLeft:100}}>
+     <Text style={styles.daan}>正确答案：A</Text>
+     <Text style={styles.button}>答案</Text>
+     <Text style={styles.button}>解析</Text>
+     </View>
      </View>
      {/*试题部分结束*/}
      </View>
@@ -82,14 +105,11 @@ biaoTi:{
   margin:10,
   color:'black'
 },
-tiMuENG:{
-  color:'red',
-  fontSize:20,
-  margin:15,
-},
-tiMuCHI:{
-  fontSize:20,
-  margin:15,
+xuhao:{
+  fontSize:15,
+  color:'black',
+  marginLeft:20,
+  marginBottom:10
 },
 bottomImg:{
   width:35,
@@ -97,4 +117,18 @@ bottomImg:{
   marginTop:6,
   marginLeft:40,
 },
+button:{
+  color:'white',
+  borderWidth:1,
+  fontSize:18,
+  padding:5,
+  backgroundColor:'green',
+  fontWeight:'bold',
+  marginLeft:50,
+},
+daan:{
+  fontSize:18,
+  color:'green',
+  marginTop:12,
+}
 });

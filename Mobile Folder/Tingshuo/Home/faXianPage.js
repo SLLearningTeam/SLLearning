@@ -31,6 +31,15 @@ export default class faXianPage extends Component<Props> {
       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
       <TuiJian />
       </TouchableOpacity>
+       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
+      <TuiJian />
+      </TouchableOpacity>
+       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
+      <TuiJian />
+      </TouchableOpacity>
+       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
+      <TuiJian />
+      </TouchableOpacity>
      </ScrollView>
     );
   }
