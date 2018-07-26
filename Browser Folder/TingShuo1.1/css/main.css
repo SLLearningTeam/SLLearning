@@ -1,0 +1,110 @@
+
+/*公用*/
+.comWidth{
+    widows: 1152px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.leftArea{float: left;}
+.rightArea{float: right;}
+
+/*header*/
+@keyframes headerBar{
+    0%{box-shadow:0px 72px 300px #fdbebe}
+    20%{box-shadow:0px 72px 300px #fdfcbe}
+    40%{box-shadow:0px 72px 300px #c5fdbe}
+    60%{box-shadow:0px 72px 300px #bef4fd}
+    80%{box-shadow:0px 72px 300px #d4befd}
+    1000%{box-shadow:0px 72px 300px #fdbebe}
+}
+
+.header-shadow{
+    height: 72px;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+}
+
+.headerBar{
+    height: 72px;
+    background-color: #fff;
+    animation: headerBar 25s infinite;
+}
+
+/*logo*/
+.logo{
+    float: left;
+    padding-left: 20px;
+}
+
+/*topNav*/
+.topNav{
+    line-height: 72px;
+    font-size: 16px;
+}
+.topNav a{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #4d555d;
+}
+.topNav a:hover{
+    color: #07111b;
+    text-decoration: none;
+}
+
+/*search*/
+.search-box{
+    padding-top: 10px;
+}
+.search-form{
+    height: 48px;
+    width: 260px;
+    border-bottom: 1px solid #D9DDE1;
+    display: inline-block;
+}
+.search-content{
+    margin: 0;
+    height: 35px;
+    line-height: 35px\9;
+    padding: 0 5px;
+    width: 230px;
+    font-size: 12px;
+    color: #71777d;
+    border: 0 solid #fff;
+    
+}
+
+.search-submit{
+    height: 20px;
+    width: 20px;
+    border: 0;
+    background: url(../icon/sousuo.png)center center no-repeat;
+}
+
+/*user_box*/
+.user_box{
+    height: 72px;
+    line-height: 72px;
+}
+.user_box li{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.user_box a{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #4d555d;
+}
+.user_box a:hover{
+    color: #f01414;
+    text-decoration: none;
+}
+.dropdown div{
+    display: none;
+}
+.dropdown:hover div{
+    display: block;
+}
+.download{
+    height: 100px;
+    width: 100px;
+    border: none;
+}

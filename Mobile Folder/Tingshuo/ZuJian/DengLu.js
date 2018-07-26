@@ -18,6 +18,7 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
+import YanZhengMa from './YanZhengMa'
  function getRequest(url){
     var opts={
         method:"GET"
@@ -35,7 +36,7 @@ import {
   }
   function postRequest(url){
   let formData = new FormData();
-  formData.append("id",this.state.text,);
+  formData.append("id",this.state.inputText,);
   formData.append("password",this.state.text1,);
   var opts={
     method:"POST",
@@ -58,7 +59,7 @@ export default class DengLu extends Component {
     constructor(props) {
     super(props);
     this.state = {
-     inputText:'',
+     
 
     };  
 
@@ -81,16 +82,18 @@ export default class DengLu extends Component {
       <View style={{flexDirection:'row'}}>
      <View style={{padding:10,width:420}}>
     <TextInput
-    onChangeText={(text) => this.setState({text})}
+    
     placeholder="请输入手机号:"
+    keyboardType="numeric"
     selectionColor="white"
-    style={{textAlign:'center'}}
+    style={{textAlign:'center'}}                      
     clearButtonMode={'always'}
     //清除输入
     onChangeText={(text) => {this.setState({inputText:text})}}
     value = {this.state.inputText}
     clearButtonMode="while-editing"
      //清除输入
+    
     />
      </View> 
      <View style={{width:20,height:20,marginLeft:-50,marginTop:26}}>
@@ -108,7 +111,12 @@ export default class DengLu extends Component {
       style={{textAlign:'center'}}
     />
     </View>
-    <TouchableOpacity onPress={postRequest.bind(this,"http://172.19.191.254:8080/SSLearningTeam/user/testlogin")}>
+    
+    <View style={{width:410,}}>
+    <YanZhengMa />
+    </View>
+
+    <TouchableOpacity onPress={postRequest.bind(this,"http://172.19.186.76:8080/SSLearningTeam/user/testlogin")}>
     <View style={styles.btn}>
     <Text style={styles.loginText}>登   陆</Text>
     </View>
@@ -135,7 +143,7 @@ export default class DengLu extends Component {
       })
     }
     qingchu(){
-this.setState({inputText:''});
+    this.setState({inputText:' '});
     }
 
   }
