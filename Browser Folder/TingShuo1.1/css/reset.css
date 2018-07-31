@@ -1,0 +1,38 @@
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldest,table,td,img,div,dl,dt,dd,input{
+    margin:0;padding:0;
+}
+body{
+    font-size: 12px;
+}
+img{
+    border: none;
+}
+li{
+    list-style: none;
+}
+input,select,textarea{
+    outline: none;
+}
+textarea{
+    resize: none;
+}
+a{
+    text-decoration: none;
+}
+/*清除浮动*/
+.clearfix:after{content: "";display: block;clear: both;}
+.clearfix{zoom: 1;}
+.fl{float: left;}
+.fr{float: right;}
+
+.index{
+    display: block;
+    padding: 0;
+    min-height: 750px;
+}
+
+
+
+
+
+
