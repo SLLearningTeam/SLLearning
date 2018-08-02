@@ -16,6 +16,7 @@ import {
 import {Navigator} from 'react-native-deprecated-custom-components';
 import TabNavigator from 'react-native-tab-navigator';
 import Course from './Course';
+import CeShi from '../ZuJian/CeShi'
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -27,7 +28,7 @@ type Props = {};
 export default class Test extends Component<Props> {
   render() {
     return (
-      <View style={{flex:1}}>
+      <View>
 
     {/*导航条开始*/}
       <View style={styles.class1}>
@@ -44,6 +45,7 @@ export default class Test extends Component<Props> {
       </TouchableOpacity>
       </View>
     {/*模拟分类开始*/}
+    <TouchableOpacity onPress={ this.CeShiPress.bind(this)}>
       <View style={styles.class}>
        <Image style={styles.list} source={require('../imgs/kclisten.jpg')}></Image>
        <View>
@@ -51,6 +53,8 @@ export default class Test extends Component<Props> {
        <Text style={styles.list2}>课程  10</Text>
        </View>
        </View>
+       </TouchableOpacity>
+    <TouchableOpacity onPress={ this.CeShiPress.bind(this)}>
        <View style={styles.class}>
        <Image style={styles.list} source={require('../imgs/kcet6.jpg')}></Image>
        <View>
@@ -58,6 +62,8 @@ export default class Test extends Component<Props> {
        <Text style={styles.list2}>课程  10</Text>
        </View>
        </View>
+       </TouchableOpacity>
+    <TouchableOpacity onPress={ this.CeShiPress.bind(this)}>
        <View style={styles.class}>
        <Image style={styles.list} source={require('../imgs/tuofu.jpg')}></Image>
        <View>
@@ -65,6 +71,7 @@ export default class Test extends Component<Props> {
        <Text style={styles.list2}>课程  10</Text>
        </View>
        </View>
+       </TouchableOpacity>
 
       </View>
     );
@@ -82,20 +89,21 @@ export default class Test extends Component<Props> {
       navigator.pop
     }
   }
+    CeShiPress() {
+    let navigator = this.props.navigator;
+    if (navigator) {
+      navigator.push({
+        name:'CeShi',
+        component:CeShi,
+      });
+    }
+  }
 }
 
 const styles = StyleSheet.create({
-  class:{
-    width:'100%',
-    height:'20%',
-    borderWidth:2,
-    borderBottomColor:'#F2F2F2',
-    borderColor:'#F2F2F2',
-    flexDirection:'row',
-  },
   class1:{
     width:'100%',
-    height:'8%',
+    height:50,
     borderWidth:2,
     borderBottomColor:'#F2F2F2',
     borderColor:'#F2F2F2',
@@ -103,34 +111,42 @@ const styles = StyleSheet.create({
     shadowColor:'#272822',
     justifyContent:'space-between',
   },
-  list:{
-    width:'20%',
-    height:'70%',
-    marginTop:'4%',
-    marginLeft:'7%',
-    borderRadius:8,
-    shadowColor:'#272822',
-  },
-  list1:{
-    fontSize:20,
-    color:'#272822',
-    marginTop:'12%',
-    marginLeft:'15%',
-    shadowColor:'#272822',
-  },
-  list2:{
-    fontSize:15,
-    color:'#A5A6A8',
-    marginTop:'3%',
-    marginLeft:'15%',
-    shadowColor:'#272822',
-  },
   list3:{
     width:'50%',
     height:'80%',
     marginTop:'1%',
     marginLeft:'10%',
     marginRight:'10%',
+  },
+      class:{
+    width:'100%',
+    height:130,
+    borderWidth:2,
+    borderBottomColor:'#F2F2F2',
+    borderColor:'#F2F2F2',
+    flexDirection:'row',
+  },  
+  list:{
+    width:100,
+    height:100,
+    marginTop:15,
+    marginLeft:15,
+    borderRadius:8,
+    shadowColor:'#272822',
+  },
+  list1:{
+    fontSize:25,
+    color:'#272822',
+    marginTop:25,
+    marginLeft:25,
+    shadowColor:'#272822',
+  },
+    list2:{
+    fontSize:18,
+    color:'#A5A6A8',
+    marginTop:10,
+    marginLeft:70,
+    shadowColor:'#272822',
   },
 });
 module.exports = Test;
