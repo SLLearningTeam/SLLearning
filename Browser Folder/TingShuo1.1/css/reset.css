@@ -25,6 +25,12 @@ a{
 .fl{float: left;}
 .fr{float: right;}
 
+.index{
+    display: block;
+    padding: 0;
+    min-height: 750px;
+}
+
 
 
 

@@ -108,3 +108,126 @@
     width: 100px;
     border: none;
 }
+
+/*lunboBar*/
+.lunboBar-w{
+    padding-top: 32px;
+}
+.lunboBar{
+    display: block;
+    position: relative;
+    height: 444px;
+    overflow: hidden;
+    width: 1152px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px 0 rgba(7,17,27,.06);
+    background-color: #fff!important;
+    background-size: cover;
+    box-shadow: 0 12px 24px 0 rgba(7,17,27,.2);
+}
+
+.lunboMenu{
+    position: relative;
+    float: left;
+    width: 216px;
+    height: 444px;
+    z-index: 2;
+    padding-top: 12px;
+    background: #2b333b;
+    border-bottom-left-radius: 4px;
+    font-weight: 400;
+    border-top-left-radius: 4px;
+    transition: all .1s;
+}
+
+.lunboMenu .menuContent{
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+    cursor: pointer;
+    padding-left: 12px;
+    position: relative;
+}
+
+.lunboMenu a{
+    color: #ffffffad;
+    padding: 0 16px;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 14px;
+    height: 60px;
+    width: 204px;
+}
+.menuContent img{
+    height: 12px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 10px;
+}
+
+.menuKuoZhan{
+    display: none;
+    background-color: #fff;
+    left: 216px;
+    width: 768px;
+    z-index: 1;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.1);
+    position: absolute;
+    top: 0;
+    height: 444px;
+}
+.innerBox{
+    background-color: #fff;
+    padding: 12px 48px 32px;
+    position: relative;
+    min-height: 150px;
+    overflow: hidden;
+}
+.box-title{
+    position: relative;
+    height: 1px;
+    margin: 35px 0 23px;
+    background-color: rgba(77,85,93,.08);
+}
+.lunboMenu a:hover{
+    color: #fcfcfc;
+    text-decoration: none;
+}
+.menuContent:hover{
+    background-color: rgb(107, 113, 118);
+}
+
+/*lunboImg*/
+.lunboImg{
+    float: left;
+    width: 936px;
+    position: relative;
+}
+
+/*推荐*/
+.tuijian{
+    position: relative;
+    width: 1152px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 36px 0 48px;
+}
+.tuijianTitle{
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    color: #93999F;
+}
+.tuijianTitle span{
+    font-weight: 900;
+    font-size: 20px;
+    color: #4D555D;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.tuijianContent{
+    margin-top: 24px; 
+}
