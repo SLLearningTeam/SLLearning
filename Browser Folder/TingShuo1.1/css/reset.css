@@ -3,6 +3,8 @@ body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldest,table,td,img,div,dl,dt,dd,input{
 }
 body{
     font-size: 12px;
+    background-size: cover;
+    background-color: #fff;
 }
 img{
     border: none;
@@ -30,7 +32,6 @@ a{
     padding: 0;
     min-height: 750px;
 }
-
 
 
 

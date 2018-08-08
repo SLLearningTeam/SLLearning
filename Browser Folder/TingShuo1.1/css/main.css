@@ -206,12 +206,18 @@
     position: relative;
 }
 
+
 /*推荐*/
+.tuijian-box{
+    box-shadow: 0 2px 8px 0 rgba(7,17,27,.06);
+    background: #fff!important;
+    background-size: cover;
+}
 .tuijian{
-    position: relative;
     width: 1152px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
     padding: 36px 0 48px;
 }
 .tuijianTitle{
@@ -230,4 +236,115 @@
 
 .tuijianContent{
     margin-top: 24px; 
+    margin-left: -18px;
+}
+/*课程盒子*/
+.course-box{
+    float: left;
+    margin-left: 18px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+
+    width: 216px;
+    height: 252px;
+    position: relative;
+    transition: .3s all linear;
+}
+.course-box a:link{
+    color: #1c1f21;
+}
+.course-box a:hover{
+    color: #f01414;
+    text-decoration: none;
+}
+/*图片盒子*/
+.course-img-box{
+    overflow: hidden;
+    width: 216px;
+    height: 120px;
+    position: relative;
+    border-radius: 8px;
+    transition: all .3s;
+}
+.course-img-box:hover{
+    box-shadow:0 8px 16px 0 rgba(7,17,27,.1)
+}
+.course-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+/*课程描述*/
+.course-content{
+    padding: 12px 8px;
+}
+.content-title{
+    font-size: 16px;
+    color: #07111b;
+    line-height: 24px;
+    word-wrap: break-word;/*允许长单词  换到下一行*/
+    overflow: hidden;/*超出内容   不显示*/
+    text-overflow: ellipsis;/*超过限制后用省略号代替文字*/
+    -webkit-line-clamp:2;/*超过两行就隐藏*/
+    -webkit-box-orient:vertical;/*子元素排列方式*/
+    max-height: 46px;
+    transition: all .3s;
+    font-weight: 400;
+}
+.content-title:hover{
+    color: #f01414;
+    text-decoration: none;
+}
+.course-type{
+    font-size: 12px;
+    color: #93999F;
+    line-height: 24px;
+    margin-top: 8px;
+    font-weight: 400;
+}
+.course-rate{
+    line-height: 20px;
+    text-align: center;
+}
+.rate-star{
+    margin-right: 0;
+    line-height: 20px;
+}
+.star{
+    height: 15px;
+}
+
+/*footer*/
+.footer-box{
+    padding: 36px 0;
+}
+.footer{
+    position: relative;
+    margin: 0 auto;
+    width: 1152px;
+}
+.footer-content{
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin: 0 auto;
+}
+.footer-content a{
+    margin: 0 10px;
+    color: #99a1a6;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 28px;
+}
+.footer-content a:hover{
+    text-decoration: none;
+    color: #07111b;
+}
+.footer-copyright{
+    font-size: 12px;
+    padding: 0 0 0 10px;
+    text-align: center;
+    margin-top: 8px;
+    color: #93999F;
+    line-height: 24px;
 }
