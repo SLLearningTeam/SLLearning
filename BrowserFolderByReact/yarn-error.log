@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/8.9.2/bin/node /usr/local/bin/yarn add styled=components
+  /usr/local/Cellar/node/8.9.2/bin/node /usr/local/bin/yarn add immuntable
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/TeX/texbin:/usr/local/mysql/bin
@@ -21,7 +21,11 @@ npm manifest:
     "dependencies": {
       "react": "^16.4.2",
       "react-dom": "^16.4.2",
-      "react-scripts": "1.1.4"
+      "react-redux": "^5.0.7",
+      "react-scripts": "1.1.4",
+      "react-transition-group": "^2.4.0",
+      "redux": "^4.0.0",
+      "styled-components": "^3.4.2"
     },
     "scripts": {
       "start": "react-scripts start",
@@ -1270,6 +1274,13 @@ Lockfile:
       ieee754 "^1.1.4"
       isarray "^1.0.0"
   
+  buffer@^5.0.3:
+    version "5.2.0"
+    resolved "http://registry.npm.taobao.org/buffer/download/buffer-5.2.0.tgz#53cf98241100099e9eeae20ee6d51d21b16e541e"
+    dependencies:
+      base64-js "^1.0.2"
+      ieee754 "^1.1.4"
+  
   builtin-modules@^1.0.0, builtin-modules@^1.1.1:
     version "1.1.1"
     resolved "http://registry.npm.taobao.org/builtin-modules/download/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
@@ -1771,6 +1782,10 @@ Lockfile:
     version "1.0.0"
     resolved "http://registry.npm.taobao.org/crypto-random-string/download/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
   
+  css-color-keywords@^1.0.0:
+    version "1.0.0"
+    resolved "http://registry.npm.taobao.org/css-color-keywords/download/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
+  
   css-color-names@0.0.4:
     version "0.0.4"
     resolved "http://registry.npm.taobao.org/css-color-names/download/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
@@ -1810,6 +1825,14 @@ Lockfile:
       cssesc "^0.1.0"
       fastparse "^1.1.1"
       regexpu-core "^1.0.0"
+  
+  css-to-react-native@^2.0.3:
+    version "2.2.1"
+    resolved "http://registry.npm.taobao.org/css-to-react-native/download/css-to-react-native-2.2.1.tgz#7f3f4c95de65501b8720c87bf0caf1f39073b88e"
+    dependencies:
+      css-color-keywords "^1.0.0"
+      fbjs "^0.8.5"
+      postcss-value-parser "^3.3.0"
   
   css-what@2.1:
     version "2.1.0"
@@ -2085,6 +2108,10 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/dom-converter/download/dom-converter-0.1.4.tgz#a45ef5727b890c9bffe6d7c876e7b19cb0e17f3b"
     dependencies:
       utila "~0.3"
+  
+  dom-helpers@^3.3.1:
+    version "3.3.1"
+    resolved "http://registry.npm.taobao.org/dom-helpers/download/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
   
   dom-serializer@0:
     version "0.1.0"
@@ -2703,7 +2730,7 @@ Lockfile:
     dependencies:
       bser "^2.0.0"
   
-  fbjs@^0.8.16:
+  fbjs@^0.8.16, fbjs@^0.8.5:
     version "0.8.17"
     resolved "http://registry.npm.taobao.org/fbjs/download/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
     dependencies:
@@ -3163,6 +3190,10 @@ Lockfile:
       minimalistic-assert "^1.0.0"
       minimalistic-crypto-utils "^1.0.1"
   
+  hoist-non-react-statics@^2.5.0:
+    version "2.5.5"
+    resolved "http://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  
   home-or-tmp@^2.0.0:
     version "2.0.0"
     resolved "http://registry.npm.taobao.org/home-or-tmp/download/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -3401,7 +3432,7 @@ Lockfile:
     version "1.1.0"
     resolved "http://registry.npm.taobao.org/interpret/download/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
   
-  invariant@^2.2.2:
+  invariant@^2.0.0, invariant@^2.2.2:
     version "2.2.4"
     resolved "http://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
     dependencies:
@@ -4244,6 +4275,10 @@ Lockfile:
       p-locate "^2.0.0"
       path-exists "^3.0.0"
   
+  lodash-es@^4.17.5:
+    version "4.17.10"
+    resolved "http://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
+  
   lodash._reinterpolate@~3.0.0:
     version "3.0.0"
     resolved "http://registry.npm.taobao.org/lodash._reinterpolate/download/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -4285,7 +4320,7 @@ Lockfile:
     version "4.5.0"
     resolved "http://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   
-  "lodash@>=3.5 <5", lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0:
+  "lodash@>=3.5 <5", lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
     version "4.17.10"
     resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
   
@@ -5429,7 +5464,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.10, prop-types@^15.6.0:
+  prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.2:
     version "15.6.2"
     resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
     dependencies:
@@ -5580,7 +5615,7 @@ Lockfile:
       strip-ansi "3.0.1"
       text-table "0.2.0"
   
-  react-dom@16.4.2:
+  react-dom@^16.4.2:
     version "16.4.2"
     resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
     dependencies:
@@ -5592,6 +5627,25 @@ Lockfile:
   react-error-overlay@^4.0.0:
     version "4.0.0"
     resolved "http://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
+  
+  react-is@^16.3.1:
+    version "16.4.2"
+    resolved "http://registry.npm.taobao.org/react-is/download/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
+  
+  react-lifecycles-compat@^3.0.4:
+    version "3.0.4"
+    resolved "http://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  
+  react-redux@^5.0.7:
+    version "5.0.7"
+    resolved "http://registry.npm.taobao.org/react-redux/download/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
+    dependencies:
+      hoist-non-react-statics "^2.5.0"
+      invariant "^2.0.0"
+      lodash "^4.17.5"
+      lodash-es "^4.17.5"
+      loose-envify "^1.1.0"
+      prop-types "^15.6.0"
   
   react-scripts@1.1.4:
     version "1.1.4"
@@ -5638,7 +5692,16 @@ Lockfile:
     optionalDependencies:
       fsevents "^1.1.3"
   
-  react@16.4.2:
+  react-transition-group@^2.4.0:
+    version "2.4.0"
+    resolved "http://registry.npm.taobao.org/react-transition-group/download/react-transition-group-2.4.0.tgz#1d9391fabfd82e016f26fabd1eec329dbd922b5a"
+    dependencies:
+      dom-helpers "^3.3.1"
+      loose-envify "^1.3.1"
+      prop-types "^15.6.2"
+      react-lifecycles-compat "^3.0.4"
+  
+  react@^16.4.2:
     version "16.4.2"
     resolved "http://registry.npm.taobao.org/react/download/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
     dependencies:
@@ -5733,6 +5796,13 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/reduce-function-call/download/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
     dependencies:
       balanced-match "^0.4.2"
+  
+  redux@^4.0.0:
+    version "4.0.0"
+    resolved "http://registry.npm.taobao.org/redux/download/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
+    dependencies:
+      loose-envify "^1.1.0"
+      symbol-observable "^1.2.0"
   
   regenerate@^1.2.1:
     version "1.4.0"
@@ -6423,6 +6493,28 @@ Lockfile:
       loader-utils "^1.0.2"
       schema-utils "^0.3.0"
   
+  styled-components@^3.4.2:
+    version "3.4.2"
+    resolved "http://registry.npm.taobao.org/styled-components/download/styled-components-3.4.2.tgz#8f518419932327e47fe9144824e3184b3e2da95d"
+    dependencies:
+      buffer "^5.0.3"
+      css-to-react-native "^2.0.3"
+      fbjs "^0.8.16"
+      hoist-non-react-statics "^2.5.0"
+      prop-types "^15.5.4"
+      react-is "^16.3.1"
+      stylis "^3.5.0"
+      stylis-rule-sheet "^0.0.10"
+      supports-color "^3.2.3"
+  
+  stylis-rule-sheet@^0.0.10:
+    version "0.0.10"
+    resolved "http://registry.npm.taobao.org/stylis-rule-sheet/download/stylis-rule-sheet-0.0.10.tgz#44e64a2b076643f4b52e5ff71efc04d8c3c4a430"
+  
+  stylis@^3.5.0:
+    version "3.5.3"
+    resolved "http://registry.npm.taobao.org/stylis/download/stylis-3.5.3.tgz#99fdc46afba6af4deff570825994181a5e6ce546"
+  
   supports-color@^2.0.0:
     version "2.0.0"
     resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -6486,6 +6578,10 @@ Lockfile:
     dependencies:
       path-to-regexp "^1.0.1"
       serviceworker-cache-polyfill "^4.0.0"
+  
+  symbol-observable@^1.2.0:
+    version "1.2.0"
+    resolved "http://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   
   symbol-tree@^3.2.1:
     version "3.2.2"
@@ -7202,7 +7298,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: https://registry.npm.taobao.org/styled=components: Not found
+  Error: https://registry.npm.taobao.org/immuntable: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:65019:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:132430:22)
       at emitTwo (events.js:126:13)
