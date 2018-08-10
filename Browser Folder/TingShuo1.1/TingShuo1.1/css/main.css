@@ -348,3 +348,152 @@
     color: #93999F;
     line-height: 24px;
 }
+
+/*-------------------------------------------上面是首页-------------------------------------------------*/
+/*main*/
+.main{
+    padding: 0 0 36px;
+    position: relative;
+    min-height: 750px;
+}
+
+/* user-info-box*/
+.user-info-box{
+    height: 148px;
+    background: linear-gradient(to  right,#5fc0ce,#36bbce,#3aaacf,#3a93cf);
+}
+.user-info{
+    position: relative;
+    width: 1152px;
+    margin: 0 auto;
+    padding-bottom: 0px;
+}
+/*头像*/
+.user-pic{
+    float: left;
+    width: 148px;
+    height: 148px;
+}
+.user-pic-bg{
+    border: 4px solid #FFF;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+    width: 148px;
+    height: 148px;
+    position: relative;
+    border-radius: 50%;
+    background: #fff;
+    top: 24px;
+}
+.user-pic-bg img{
+    text-align: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+/*基本信息*/
+.user-info-right{
+    float: right;
+    width: 980px;
+}
+.user-name{
+    font-weight: 600;
+    text-align: left;
+    font-size: 24px;
+    color: #FFF;
+    line-height: 28px;
+    margin-top: 48px;
+}
+.user-name span{
+    float: left;
+}
+.user-showinfo{
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+    text-align: left;
+    margin-top: 6px;
+}
+.user-showinfo span{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+}
+.user-showinfo img{
+    display: inline-block;
+    margin-right: 2px;
+    padding-bottom: 2px;
+}
+.more-info{
+    font-size: 12px;
+    color: #ffffff9f;
+    line-height: 16px;
+    display: inline-block;
+    height: 16px;
+    padding-left: 16px;
+    border-left: 2px solid #ffffff66;
+    cursor: pointer;
+}
+.more-info:hover{
+    text-decoration: none;
+    color: #ffffffb2;
+}
+/*学习时长，打卡*/
+.study-info{
+    position: absolute;
+    top: 48px;
+    right: 10px;
+    min-width: 200px;
+    text-align: right;
+}
+.study-info-item{
+    margin-right: 24px;
+    line-height: 48px;
+    vertical-align: middle;
+    height: 48px;
+    float: left;
+}
+.learn{
+    cursor: pointer;
+}
+.learn em{
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: rgba(255,255,255,.8);
+    line-height: 28px;
+    font-style: normal;
+}
+.learn span{
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255,255,255,.8);
+    line-height: 20px;
+    margin-top: 4px;
+}
+.set{
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 18px;
+    font-size: 14px;
+    color: rgba(255,255,255,.8);
+    line-height: 20px;
+    height: 20px;
+}
+.set img{
+    margin-right: 4px;
+    margin-bottom: 3px;
+}
+.set:hover{
+    color: #fff;
+    text-decoration: none;
+    border-color: #fff;
+}
+
+/*我的课程*/
+.user-course{
+
+}
