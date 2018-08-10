@@ -1,6 +1,3 @@
-## React开发重构前端内容
-> 此部分用作备，内容采用React+Redux进行前端开发。
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
