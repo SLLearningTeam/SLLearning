@@ -132,3 +132,4 @@ daan:{
   marginTop:12,
 }
 });
+module.exports=CeShi;

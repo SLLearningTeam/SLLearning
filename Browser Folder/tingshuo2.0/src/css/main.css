@@ -1,0 +1,242 @@
+
+/*公用*/
+.comWidth{
+    widows: 1152px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.leftArea{float: left;}
+.rightArea{float: right;}
+
+/*header*/
+@keyframes headerBar{
+    0%{box-shadow:0px 72px 300px #fdbebe}
+    20%{box-shadow:0px 72px 300px #fdfcbe}
+    40%{box-shadow:0px 72px 300px #c5fdbe}
+    60%{box-shadow:0px 72px 300px #bef4fd}
+    80%{box-shadow:0px 72px 300px #d4befd}
+    1000%{box-shadow:0px 72px 300px #fdbebe}
+}
+
+.header-shadow{
+    height: 72px;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+}
+
+.headerBar{
+    height: 72px;
+    background-color: #fff;
+    animation: headerBar 25s infinite;
+}
+
+/*logo*/
+.logo{
+    float: left;
+    padding-left: 20px;
+}
+.logo img{
+    height: 72px;
+}
+
+/*topNav*/
+.topNav{
+    line-height: 72px;
+    font-size: 16px;
+}
+.topNav a{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #4d555d;
+}
+.topNav a:hover{
+    color: #07111b;
+    text-decoration: none;
+}
+
+/*search*/
+.search-box{
+    padding-top: 10px;
+}
+.search-form{
+    height: 48px;
+    width: 260px;
+    border-bottom: 1px solid #D9DDE1;
+    display: inline-block;
+}
+.search-content{
+    margin: 0;
+    height: 35px;
+    line-height: 35px\9;
+    padding: 0 5px;
+    width: 230px;
+    font-size: 12px;
+    color: #71777d;
+    border: 0 solid #fff;
+    
+}
+
+.search-submit{
+    height: 20px;
+    width: 20px;
+    border: 0;
+    background: url(../icon/sousuo.png)center center no-repeat;
+}
+
+/*user_box*/
+.user_box{
+    height: 72px;
+    line-height: 72px;
+}
+.user_box li{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.user_box a{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #4d555d;
+}
+.user_box a:hover{
+    color: #f01414;
+    text-decoration: none;
+}
+.dropdown div{
+    display: none;
+}
+.dropdown:hover div{
+    display: block;
+}
+.download{
+    height: 100px;
+    width: 100px;
+    border: none;
+}
+
+/*lunboBar*/
+.lunboBar-w{
+    padding-top: 32px;
+}
+.lunboBar{
+    display: block;
+    position: relative;
+    height: 444px;
+    overflow: hidden;
+    width: 1152px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px 0 rgba(7,17,27,.06);
+    background-color: #fff!important;
+    background-size: cover;
+    box-shadow: 0 12px 24px 0 rgba(7,17,27,.2);
+}
+
+.lunboMenu{
+    position: relative;
+    float: left;
+    width: 216px;
+    height: 444px;
+    z-index: 2;
+    padding-top: 12px;
+    background: #2b333b;
+    border-bottom-left-radius: 4px;
+    font-weight: 400;
+    border-top-left-radius: 4px;
+    transition: all .1s;
+}
+
+.lunboMenu .menuContent{
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+    cursor: pointer;
+    padding-left: 12px;
+    position: relative;
+}
+
+.lunboMenu a{
+    color: #ffffffad;
+    padding: 0 16px;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 14px;
+    height: 60px;
+    width: 204px;
+}
+.menuContent img{
+    height: 12px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 10px;
+}
+
+.menuKuoZhan{
+    display: none;
+    background-color: #fff;
+    left: 216px;
+    width: 768px;
+    z-index: 1;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.1);
+    position: absolute;
+    top: 0;
+    height: 444px;
+}
+.innerBox{
+    background-color: #fff;
+    padding: 12px 48px 32px;
+    position: relative;
+    min-height: 150px;
+    overflow: hidden;
+}
+.box-title{
+    position: relative;
+    height: 1px;
+    margin: 35px 0 23px;
+    background-color: rgba(77,85,93,.08);
+}
+.lunboMenu a:hover{
+    color: #fcfcfc;
+    text-decoration: none;
+}
+.menuContent:hover{
+    background-color: rgb(107, 113, 118);
+}
+
+/*lunboImg*/
+.lunboImg{
+    float: left;
+    width: 936px;
+    position: relative;
+}
+
+/*推荐*/
+.tuijian{
+    position: relative;
+    width: 1152px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 36px 0 48px;
+}
+.tuijianTitle{
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    color: #93999F;
+}
+.tuijianTitle span{
+    font-weight: 900;
+    font-size: 20px;
+    color: #4D555D;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.tuijianContent{
+    margin-top: 24px; 
+}
+.hao{
+    margin-left: 20px;
+}
+.jian{
+    margin-right: 20px;
+}
