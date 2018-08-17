@@ -244,14 +244,11 @@
     margin-left: 18px;
     border-radius: 4px;
     margin-bottom: 12px;
-
+    color: #1c1f21;
     width: 216px;
     height: 252px;
     position: relative;
     transition: .3s all linear;
-}
-.course-box a:link{
-    color: #1c1f21;
 }
 .course-box a:hover{
     color: #f01414;
@@ -309,6 +306,7 @@
 .rate-star{
     margin-right: 0;
     line-height: 20px;
+    cursor: pointer;
 }
 .star{
     height: 15px;
@@ -347,4 +345,339 @@
     margin-top: 8px;
     color: #93999F;
     line-height: 24px;
+}
+
+/*-------------------------------------------上面是首页-------------------------------------------------*/
+/*main*/
+.main{
+    padding: 0 0 36px;
+    position: relative;
+    min-height: 750px;
+    box-shadow: 0 2px 8px 0 rgba(7,17,27,.06);
+}
+
+/* user-info-box*/
+.user-info-box{
+    height: 148px;
+    background: linear-gradient(to  right,#5fc0ce,#36bbce,#3aaacf,#3a93cf);
+}
+.user-info{
+    position: relative;
+    width: 1152px;
+    margin: 0 auto;
+    padding-bottom: 0px;
+}
+/*头像*/
+.user-pic{
+    float: left;
+    width: 148px;
+    height: 148px;
+}
+.user-pic-bg{
+    border: 4px solid #FFF;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+    width: 148px;
+    height: 148px;
+    position: relative;
+    border-radius: 50%;
+    background: #fff;
+    top: 24px;
+}
+.user-pic-bg img{
+    text-align: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+/*基本信息*/
+.user-info-right{
+    float: right;
+    width: 980px;
+}
+.user-name{
+    font-weight: 600;
+    text-align: left;
+    font-size: 24px;
+    color: #FFF;
+    line-height: 28px;
+    margin-top: 48px;
+}
+.user-name span{
+    float: left;
+}
+.user-showinfo{
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+    text-align: left;
+    margin-top: 6px;
+}
+.user-showinfo span{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+}
+.user-showinfo img{
+    display: inline-block;
+    margin-right: 2px;
+    padding-bottom: 2px;
+}
+.more-info{
+    font-size: 12px;
+    color: #ffffff9f;
+    line-height: 16px;
+    display: inline-block;
+    height: 16px;
+    padding-left: 16px;
+    border-left: 2px solid #ffffff66;
+    cursor: pointer;
+}
+.more-info:hover{
+    text-decoration: none;
+    color: #ffffffb2;
+}
+/*学习时长，打卡*/
+.study-info{
+    position: absolute;
+    top: 48px;
+    right: 10px;
+    min-width: 200px;
+    text-align: right;
+}
+.study-info-item{
+    margin-right: 24px;
+    line-height: 48px;
+    vertical-align: middle;
+    height: 48px;
+    float: left;
+}
+.learn{
+    cursor: pointer;
+}
+.learn em{
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: rgba(255,255,255,.8);
+    line-height: 28px;
+    font-style: normal;
+}
+.learn span{
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255,255,255,.8);
+    line-height: 20px;
+    margin-top: 4px;
+}
+.set{
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 18px;
+    font-size: 14px;
+    color: rgba(255,255,255,.8);
+    line-height: 20px;
+    height: 20px;
+    transition: all 0.5s;
+}
+.set img{
+    margin-right: 4px;
+    margin-bottom: 3px;
+}
+.set:hover{
+    color: #fff;
+    text-decoration: none;
+    border-color: #fff;
+    box-shadow: #fff 0 0 5px;
+}
+
+/*我的课程*/
+.user-course-box{
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.left-menu{
+    position: absolute;
+    left: 24px;
+    top: 0px;
+    width: 172px;
+}
+.left-menu ul li:first-child{
+    margin-top: 40px;
+}
+.left-menu ul li{
+    height: 48px;
+    width: 160px;
+    margin: 0 auto 8px;
+}
+.left-menu a{
+    position: relative;
+    display: block;
+    height: 48px;
+    font-size: 16px;
+    line-height: 48px;
+    color: #787d82;
+    padding-left: 54px;
+    text-align: left;
+    transition: all 0.5s;
+}
+.left-menu a:hover{
+    text-decoration: none;
+    color: #1c1f21;
+    background: #ffffff;
+    box-shadow: #cecece 1px 1px 5px;
+    border-radius: 5px;
+}
+.left-menu-icon{
+    height: 20px;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+}
+/*user-course-content*/
+.user-course{
+    padding: 0 0 0 64px;
+}
+.user-course-content{
+    margin-left: 240px;
+    min-height: 589px;
+}
+.user-course-title{
+    font-size: 14px;
+    height: 58px;
+    line-height: 58px;
+    margin-top: 10px;
+    border-bottom: 1px solid #d0d6d9;
+    color: #787d82;
+}
+.user-course-title-left a{
+    margin-right: 53px;
+    display: inline-block;
+    color: #787d82;
+}
+.user-course-title-left a:hover{
+    text-decoration: none;
+    color: #f01400;
+    border-bottom: solid 2px #f01400;
+}
+.course-log{
+    position: relative;
+    padding-left: 37px;
+    border-left: 1px solid #d3d7da;
+}
+.course-log::before{
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    left: -1px;
+    top: 0;
+    background-color: #fff;
+}
+.time{
+    position: absolute;
+    left: 0;
+    top: 20px;
+    margin-left: -64px;
+    line-height: 16px;
+    font-size: 12px;
+    color: #8a8c8f;
+}
+.time::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 60px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d0d6d9;
+}
+.time b{
+    font-size: 18px;
+    font-weight: 400;
+}
+.time em{
+    display: block;
+    margin-top: 2px;
+    font-style: normal;
+    font-weight: 400;
+}
+.course-list{
+    
+}
+.user-course .user-course-item{
+    padding: 30px 0;
+    position: relative;
+    border-bottom: 1px solid #eff1f0;
+}
+.user-course-img-box{
+
+}
+.user-course-img{
+    vertical-align: top;
+}
+.user-course-cont{
+    padding-left: 230px;
+}
+.course-name{
+    font-size: 18px;
+    font-weight: 700;
+    color: #12171b;
+    height: 29px;
+    line-height: 29px;
+    position: relative;
+}
+.course-name a{
+    color: #12171b;
+}
+.course-name a:hover{
+    color: #f01400;
+    text-decoration: none;
+}
+.course-name span{
+    float: right;
+}
+.course-list .course-state{
+    position: relative;
+    padding: 10px 0 22px;
+    line-height: 21px;
+    height: 76px;
+    word-wrap: break-word;
+}
+.state-cont{
+    /*text-overflow: ellipsis;*/
+    display: inline-block;
+    margin-right: 14px;
+    width: 350px;
+    color: #787d82;
+}
+.user-course-rate{
+    
+}
+.continue-study{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    border: 1px solid #f01400;
+    color: #f01400;
+    width: 90px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    background-color: #fff;
+    transition: all .5s;
+
+}
+.continue-study:hover{
+    color: #fff;
+    text-decoration: none;
+    background: #f01400;
+    box-shadow: #860b00 0px 1px 5px;
 }

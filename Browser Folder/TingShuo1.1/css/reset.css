@@ -5,6 +5,8 @@ body{
     font-size: 12px;
     background-size: cover;
     background-color: #fff;
+    color: #1c1f21;
+    min-width: 1200px;
 }
 img{
     border: none;
