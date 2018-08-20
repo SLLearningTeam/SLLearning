@@ -8,9 +8,23 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/course")
 public class CourseAction {
 
-	@RequestMapping("/courses_manage")
+	//获取课程列表——管理员
+	@RequestMapping("/admin/courses_manage")
 	public ModelAndView getCoursesManage() {
 		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		return mv;
+	}
+	
+	//获取课程添加页面——管理员
+	@RequestMapping("/admin/toaddcourses")
+	public ModelAndView toAddCourses() {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/addCourses");
+		return mv;
+	}
+	//获取课程修改页面——管理员
+	@RequestMapping("/admin/toupdatecourses")
+	public ModelAndView toUpdateCourses() {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/UpdateCourses");
 		return mv;
 	}
 }

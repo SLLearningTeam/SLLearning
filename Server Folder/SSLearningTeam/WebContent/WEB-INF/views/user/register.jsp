@@ -107,7 +107,7 @@
         </a>
       </div>
 
-      <a href="login.html" class="text-center">我已经拥有账户</a>
+      <a href="${pageContext.request.contextPath}/user/init" class="text-center">我已经拥有账户</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
