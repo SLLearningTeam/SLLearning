@@ -162,10 +162,6 @@ public class UserAction {
 		return mv;
 	}
 	
-	
-	
-	
-	
 	@ResponseBody
 	@RequestMapping("/mobile/login")
 	public BackJsonUtil mobileLogin() {
@@ -174,9 +170,4 @@ public class UserAction {
 	}
 	
 	
-	//胖哥测试接口
-	@RequestMapping("/testlogin")
-	public void testLogin(String id,String password) {
-		System.out.println(id+"   "+password);
-	}
 }

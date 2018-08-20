@@ -7,5 +7,30 @@
 	
  -->
 <mapper namespace="cn.net.realloyal.mapper.LanguageTypeMapper">
+	<select id="getLanguagesManage" resultType="LanguageType">
+		select * from languageType limit #{0},10
+	</select>
+
+	<insert id="addlanguage" parameterType="LanguageType">
+		insert into languageType values(null,#{languageName},#{languageIconUrl})
+	</insert>
+	
+	<select id="getLanguageTypeInfo" resultType="LanguageType">
+		select * from languageType where languageTypeId = #{param1}
+	</select>
+	
+	<update id="updatelanguageWithIcon" parameterType="LanguageType">
+		update languageType set languageName=#{languageName},languageIconUrl=#{languageIconUrl} where languageTypeId=#{languageTypeId}
+	</update>
+	
+	<update id="updatelanguageWithoutIcon" parameterType="LanguageType">
+		update languageType set languageName=#{languageName} where languageTypeId=#{languageTypeId}
+	</update>
+	
+	<delete id="languageTypeId">
+		delete from languageType where languageTypeId=#{param1}
+	</delete>
+	
+	
 
 </mapper>

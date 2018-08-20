@@ -49,5 +49,7 @@
 			</div>
 		</section>
 	</div>
+	<div>${pageName }</div>
+	<div>${languageTypes}</div>
 </body>
 </html>

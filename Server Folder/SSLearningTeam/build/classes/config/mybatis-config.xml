@@ -6,12 +6,18 @@
 	<!-- 实体类,简称 -设置别名 -->
 	<typeAliases>
 		<typeAlias alias="User" type="cn.net.realloyal.model.User" />
+		<typeAlias alias="LanguageType" type="cn.net.realloyal.model.LanguageType" />
+		<typeAlias alias="RateType" type="cn.net.realloyal.model.RateType" />
+		<typeAlias alias="Course" type="cn.net.realloyal.model.Course" />
 	</typeAliases>
 
 	<!-- 实体接口映射资源 -->
 	<!-- 说明：如果xxMapper.xml配置文件放在和xxMapper.java统一目录下，mappers也可以省略，因为org.mybatis.spring.mapper.MapperFactoryBean默认会去查找与xxMapper.java相同目录和名称的xxMapper.xml -->
 	<mappers>
 		<mapper resource="cn/net/realloyal/mapper/userMapper.xml" />
+		<mapper resource="cn/net/realloyal/mapper/languageTypeMapper.xml" />
+		<mapper resource="cn/net/realloyal/mapper/rateTypeMapper.xml" />
+		<mapper resource="cn/net/realloyal/mapper/courseMapper.xml" />
 	</mappers>
 
 </configuration>  
