@@ -8,23 +8,10 @@
 <title>听说在线学习平台 | 用户详情页</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap4.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-	rel="stylesheet">
+<jsp:include page="../leftNavigation.jsp"></jsp:include>	
 </head>
 <body class="hold-transition sidebar-mini">
-	<div class="wrapper">
+	<div class="content-wrapper">
 		<section class="content">
 			<div class="row" style="padding-top: 15px">
 				<div class="col-12">

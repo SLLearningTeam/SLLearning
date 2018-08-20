@@ -8,9 +8,10 @@
 	  <title>听说在线学习平台 | 考试管理</title>
 	  <!-- Tell the browser to be responsive to screen width -->
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <jsp:include page="../leftNavigation.jsp"></jsp:include>
 	</head>
 	<body class="hold-transition sidebar-mini">
-		<div class="wrapper">
+		<div class="content-wrapper">
 			这里是trains manage内容
 		</div>
 	</body>

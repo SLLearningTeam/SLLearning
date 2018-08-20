@@ -8,9 +8,7 @@
 <title>听说在线学习平台 | 添加语言类别</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Theme style -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
+<jsp:include page="../leftNavigation.jsp"></jsp:include>
 <!-- 自定义样式 -->
 <style>
 .col-center-block {
@@ -27,7 +25,7 @@ label{ color: #7e0675}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
-	<div class="wrapper">
+	<div class="content-wrapper">
 			<section class="content  ">
 				<div class="container-fluid ">
 					<!--添加语言类别 -->

@@ -8,23 +8,7 @@
 <title>听说在线学习平台 | 课程添加</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/font-awesome/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-<!-- Date Picker -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/datepicker/datepicker3.css">
-<!-- Daterange picker -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker-bs3.css">
+<jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
 label {
 	color: #ab0351
@@ -32,7 +16,8 @@ label {
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
-	<div class="wrapper">
+
+	<div class="content-wrapper">
 		<section class="content">
 			<div class="container-fluid">
 				<!-- 添加阅读课程 -->
@@ -311,9 +296,5 @@ label {
 			</div>
 		</section>
 	</div>
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
 </body>
 </html>

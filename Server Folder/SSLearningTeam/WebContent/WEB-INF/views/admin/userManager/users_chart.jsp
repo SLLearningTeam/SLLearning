@@ -10,7 +10,7 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body class="hold-transition sidebar-mini">
-		<div class="wrapper">
+		<div class="content-wrapper">
 			这里是user charts内容
 		</div>
 	</body>
