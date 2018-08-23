@@ -23,4 +23,6 @@ public interface LanguageTypeService {
 	public void updateLanguage(Integer languageTypeId, String languageName, CommonsMultipartFile languageIcon,
 			HttpServletRequest request);
 
+	public BackJsonUtil getLanguages(Integer pageNum);
+
 }

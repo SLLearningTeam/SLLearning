@@ -58,7 +58,7 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
                 e.printStackTrace();  
             }  
         }
-        languageType.setLanguageIconUrl(newFileName);
+        languageType.setLanguageIconUrl(sc.getContextPath()+"/Languages/"+newFileName);
 		languageType.setLanguageName(languageName);
 		languageTypeMapper.addlanguage(languageType);
 	}
@@ -115,11 +115,21 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 	                e.printStackTrace();  
 	            }  
 	        }
-	        languageType.setLanguageIconUrl(newFileName);
+	        languageType.setLanguageIconUrl(sc.getContextPath()+"/Languages/"+newFileName);
 	        languageTypeMapper.updatelanguageWithIcon(languageType);
 		}else {
 			languageTypeMapper.updatelanguageWithoutIcon(languageType);
 		}
+	}
+
+	@Override
+	public BackJsonUtil getLanguages(Integer pageNum) {
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+		List<LanguageType>languageTypes = languageTypeMapper.getLanguagesManage(startNum);
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		backJsonUtil.setStatus(true);
+		backJsonUtil.setInfo(languageTypes);
+		return backJsonUtil;
 	}
 	
 	
