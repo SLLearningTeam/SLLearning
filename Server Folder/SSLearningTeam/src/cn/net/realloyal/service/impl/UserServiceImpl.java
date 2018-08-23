@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 	                e.printStackTrace();  
 	            }  
 	        }
-	        user.setUserAvatarUrl(path+newFileName);
+	        user.setUserAvatarUrl(newFileName);
 	        System.out.println("头像名称地址为:"+user.getUserAvatarUrl());
 	        System.out.println("头像名称地址长度为:"+user.getUserAvatarUrl().length());
 			int registerStatus = userDao.registerUser(user);

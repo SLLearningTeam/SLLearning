@@ -30,13 +30,14 @@ label{ color: #7e0675}
 				<div class="container-fluid ">
 					<!--添加语言类别 -->
 					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
-						<label for="rateName">语言类型名称</label>
-						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称">
+						<form action="${pageContext.request.contextPath}/language/admin/addlanguage" enctype="multipart/form-data" method="POST">
+						<label for="languageName">语言类型名称</label>
+						<input type="text" class="form-control" id="languageName" placeholder="请填写类别类型名称" name="languageName">
 						<div class="form-group">
-							<label for="rateIconUrl">语言类型图标</label>
+							<label for="languageIcon">语言类型图标</label>
 							<div class="input-group">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="rateIconUrl">
+									<input type="file" class="custom-file-input" id="languageIcon" name="languageIcon">
 									<label class="custom-file-label" for="rateIconUrl">请选择图标</label>
 								</div>
 							</div>
@@ -44,10 +45,10 @@ label{ color: #7e0675}
 							<button type="submit" class="btn btn-primary float-right">提交</button>
 						    </div>
 						</div>
+						</form>
 					</div>
 				</div>
 			</section>
 		</div>
-	
 </body>
 </html>

@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
@@ -18,6 +19,7 @@ import cn.net.realloyal.mapper.LanguageTypeMapper;
 import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.service.LanguageTypeService;
 
+@Service
 public class LanguageTypeServiceImpl implements LanguageTypeService {
 	
 	@Autowired
@@ -32,11 +34,8 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 	@Override
 	public void addlanguage(String languageName, CommonsMultipartFile languageIcon,HttpServletRequest request) {
 		LanguageType languageType = new LanguageType();
-		// 获得原始文件名  
-        String fileName = languageIcon.getOriginalFilename();  
-        System.out.println("原始文件名:" + fileName);  
         // 新文件名  
-        String newFileName = UUID.randomUUID() + languageName + "_language.png";  
+        String newFileName = UUID.randomUUID() + "_language.png";  
         System.out.println("新文件名:" + newFileName); 
         // 获得项目的路径  
         ServletContext sc = request.getSession().getServletContext();  
@@ -59,7 +58,7 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
                 e.printStackTrace();  
             }  
         }
-        languageType.setLanguageIconUrl(path+newFileName);
+        languageType.setLanguageIconUrl(newFileName);
 		languageType.setLanguageName(languageName);
 		languageTypeMapper.addlanguage(languageType);
 	}
@@ -91,12 +90,9 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 		LanguageType languageType = new LanguageType();
 		languageType.setLanguageTypeId(languageTypeId);
 		languageType.setLanguageName(languageName);
-		if(languageIcon!=null) {
-			// 获得原始文件名  
-	        String fileName = languageIcon.getOriginalFilename();  
-	        System.out.println("原始文件名:" + fileName);  
+		if(languageIcon!=null) { 
 	        // 新文件名  
-	        String newFileName = UUID.randomUUID() + languageName + "_language.png";  
+	        String newFileName = UUID.randomUUID() + "_language.png";  
 	        System.out.println("新文件名:" + newFileName); 
 	        // 获得项目的路径  
 	        ServletContext sc = request.getSession().getServletContext();  
@@ -119,7 +115,7 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 	                e.printStackTrace();  
 	            }  
 	        }
-	        languageType.setLanguageIconUrl(path+newFileName);
+	        languageType.setLanguageIconUrl(newFileName);
 	        languageTypeMapper.updatelanguageWithIcon(languageType);
 		}else {
 			languageTypeMapper.updatelanguageWithoutIcon(languageType);

@@ -27,7 +27,7 @@
 		update languageType set languageName=#{languageName} where languageTypeId=#{languageTypeId}
 	</update>
 	
-	<delete id="languageTypeId">
+	<delete id="deletelanguage" parameterType="Integer">
 		delete from languageType where languageTypeId=#{param1}
 	</delete>
 	

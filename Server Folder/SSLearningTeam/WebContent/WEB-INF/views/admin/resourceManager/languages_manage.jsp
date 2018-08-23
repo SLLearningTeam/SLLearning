@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +28,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr style="text-align: center">
-								<td>1</td>
-								<td>英语</td>
-								<td><img src="./img/resource/tu.png" height="20" width="20" /></td>
-								<td><a href="#">修改</a></td>
-								<td><a href="#">删除</a></td>
-							</tr>
+							<c:forEach var="languageType" items="${languageTypes}" varStatus="status">
+								<tr style="text-align: center">
+									<td>${status.count}</td>
+									<td>${languageType.languageName}</td>
+									<td><img src="${languageType.languageIconUrl}" height="20" width="20" /></td>
+									<td><a href="#">修改</a></td>
+									<td><a href="#">删除</a></td>
+								</tr>
+							</c:forEach>
 					</table>
 					<!-- 分页 -->
 					<div class="card-footer clearfix">

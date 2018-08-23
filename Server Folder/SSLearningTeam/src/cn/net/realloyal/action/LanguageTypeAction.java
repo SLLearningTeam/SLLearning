@@ -72,4 +72,5 @@ public class LanguageTypeAction {
 	public BackJsonUtil deletelanguage(@RequestParam("languageTypeId")Integer languageTypeId) {
 		return languageTypeService.deletelanguage(languageTypeId);
 	}
+	
 }
