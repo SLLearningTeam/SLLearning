@@ -19,4 +19,8 @@ public interface RateTypeMapper {
 
 	void updateRateTypeWithoutIcon(RateTypeForSQL rateType);
 
+	List<RateTypeForSQL> getAllRateTypes();
+
+	List<RateTypeForSQL> getRateTypesByLanguageTypeId(Integer languageTypeId);
+
 }

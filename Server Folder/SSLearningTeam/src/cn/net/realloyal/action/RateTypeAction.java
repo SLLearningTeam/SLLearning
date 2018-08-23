@@ -54,7 +54,7 @@ public class RateTypeAction {
 	//获取种类类别修改页面——管理员
 	@RequestMapping("/admin/toupdateratetypes")
 	public ModelAndView toUpdateRateTypes(@RequestParam("rateTypeId")Integer rateTypeId) {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/UpdateRateTypes");
+		ModelAndView mv = new ModelAndView("admin/resourceManager/updateRateTypes");
 		mv.addObject("pageName","rateTypeManage");
 		//查询当前种类类别的相关信息用于表单回显
 		RateType rateType = rateTypeService.getRateTypeInfo(rateTypeId);
@@ -81,5 +81,12 @@ public class RateTypeAction {
 	@RequestMapping("/user/getratetypes/{pageNum}")
 	public BackJsonUtil getRateTypes(@PathVariable(value="pageNum")Integer pageNum) {
 		return rateTypeService.getRateTypes(pageNum);
+	}
+	
+	//获得所有种类类别内容——用户
+	@ResponseBody
+	@RequestMapping("/user/getratetypebylanguagetypeid")
+	public BackJsonUtil getRateTypesByLanguageTypeId(@RequestParam(value="languageTypeId")Integer languageTypeId) {
+		return rateTypeService.getRateTypesByLanguageTypeId(languageTypeId);
 	}
 }

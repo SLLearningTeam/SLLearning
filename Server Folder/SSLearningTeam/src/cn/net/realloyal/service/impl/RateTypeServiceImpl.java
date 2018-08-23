@@ -141,4 +141,18 @@ public class RateTypeServiceImpl implements RateTypeService {
 		return languageTypeMapper.getAllLanguages();
 	}
 
+	@Override
+	public List<RateTypeForSQL> getRateTypes() {
+		return rateTypeMapper.getAllRateTypes();
+	}
+
+	@Override
+	public BackJsonUtil getRateTypesByLanguageTypeId(Integer languageTypeId) {
+		List<RateTypeForSQL>rateTypes = rateTypeMapper.getRateTypesByLanguageTypeId(languageTypeId);
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		backJsonUtil.setStatus(true);
+		backJsonUtil.setInfo(rateTypes);
+		return backJsonUtil;
+	}
+
 }

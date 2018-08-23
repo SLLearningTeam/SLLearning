@@ -10,6 +10,12 @@
 		<typeAlias alias="RateType" type="cn.net.realloyal.model.RateType" />
 		<typeAlias alias="RateTypeForSQL" type="cn.net.realloyal.vo.RateTypeForSQL" />
 		<typeAlias alias="Course" type="cn.net.realloyal.model.Course" />
+		<typeAlias alias="ListeningCourse" type="cn.net.realloyal.model.ListeningCourse" />
+		<typeAlias alias="OralCourse" type="cn.net.realloyal.model.OralCourse" />
+		<typeAlias alias="ReadingCourse" type="cn.net.realloyal.model.ReadingCourse" />
+		<typeAlias alias="ListeningCourseForSQL" type="cn.net.realloyal.vo.ListeningCourseForSQL" />
+		<typeAlias alias="OralCourseForSQL" type="cn.net.realloyal.vo.OralCourseForSQL" />
+		<typeAlias alias="ReadingCourseForSQL" type="cn.net.realloyal.vo.ReadingCourseForSQL" />
 	</typeAliases>
 
 	<!-- 实体接口映射资源 -->

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.model.RateType;
+import cn.net.realloyal.vo.RateTypeForSQL;
 
 @Service
 public interface RateTypeService {
@@ -31,5 +32,9 @@ public interface RateTypeService {
 			HttpServletRequest request);
 
 	List<LanguageType> getLanguages();
+	
+	List<RateTypeForSQL> getRateTypes();
+
+	BackJsonUtil getRateTypesByLanguageTypeId(Integer languageTypeId);
 
 }

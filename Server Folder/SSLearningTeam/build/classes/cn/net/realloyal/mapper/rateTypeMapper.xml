@@ -44,4 +44,13 @@
 		<collection property="languageType" ofType="LanguageType" select="getLanguageType" column="languageTypeId"></collection>
 	</resultMap>
 	
+	<!-- 获取所有rateType -->
+	<select id="getAllRateTypes" resultType="RateTypeForSQL">
+		select * from RateType;
+	</select>
+	
+	<!-- 实现二级联动，通过languageTypeId获得对应的RateTypeForSQL -->
+	<select id="getRateTypesByLanguageTypeId" resultType="RateTypeForSQL">
+		select * from RateType where languageTypeId=#{param1};
+	</select>
 </mapper>

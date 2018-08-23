@@ -8,4 +8,16 @@
  -->
 <mapper namespace="cn.net.realloyal.mapper.CourseMapper">
 
+	<insert id="addListeningCourse" parameterType="ListeningCourseForSQL">
+		insert into ListeningCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,courseResourceUrl,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{courseResourceUrl},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
+	<insert id="addOralCourse" parameterType="OralCourseForSQL">
+		insert into OralCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
+	<insert id="addReadingCourse" parameterType="ReadingCourseForSQL">
+		insert into ReadingCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
 </mapper>

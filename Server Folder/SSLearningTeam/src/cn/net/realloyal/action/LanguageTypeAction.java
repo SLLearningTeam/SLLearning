@@ -51,7 +51,7 @@ public class LanguageTypeAction {
 	//获取语言修改页面——管理员
 	@RequestMapping("/admin/toupdatelanguages")
 	public ModelAndView toUpdateLanguages(@RequestParam("languageTypeId")Integer languageTypeId) {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/UpdateLanguages");
+		ModelAndView mv = new ModelAndView("admin/resourceManager/updateLanguages");
 		mv.addObject("pageName", "languageManage");
 		//查询当前语言类别的相关信息用于表单回显
 		LanguageType languageType = languageTypeService.getLanguageTypeInfo(languageTypeId);
