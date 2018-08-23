@@ -7,5 +7,41 @@
 	
  -->
 <mapper namespace="cn.net.realloyal.mapper.RateTypeMapper">
-
+	<insert id="addRateType" parameterType="RateTypeForSQL">
+		insert into RateType(rateTypeId,rateName,rateIconUrl,languageTypeId) values(null,#{rateName},#{rateIconUrl},#{languageTypeId})
+	</insert>
+	<delete id="deleteRateType">
+		delete from RateType where rateTypeId=#{param1}
+	</delete>
+	<update id="updateRateTypeWithIcon" parameterType="RateTypeForSQL">
+		update RateType set rateName=#{rateName}, rateIconUrl=#{rateIconUrl}, languageTypeId=#{languageTypeId} where rateTypeId=#{rateTypeId}
+	</update>
+	<update id="updateRateTypeWithoutIcon" parameterType="RateTypeForSQL">
+		update RateType set rateName=#{rateName}, languageTypeId=#{languageTypeId} where rateTypeId=#{rateTypeId}
+	</update>
+	<!-- 嵌套查询rateTypes -->
+	<select id="getRateTypes" parameterType="java.lang.Integer" resultMap="RateTypesMap">
+		select * from RateType limit #{0},10
+	</select>
+	<resultMap type="RateType" id="RateTypesMap">
+		<id column="rateTypeId" property="rateTypeId"/>
+		<result column="rateName" property="rateName"/>
+		<result column="rateIconUrl" property="rateIconUrl"/>
+		<collection property="languageType" ofType="LanguageType" select="getLanguageType" column="languageTypeId"></collection>
+	</resultMap>
+	<select id="getLanguageType" parameterType="java.lang.Integer" resultType="LanguageType">
+		select * from languageType where languageTypeId = #{languageTypeId}
+	</select>
+	
+	<!-- 嵌套查询rateType -->
+	<select id="getRateTypeInfo" parameterType="java.lang.Integer" resultMap="RateTypeInfoMap">
+		select * from RateType where rateTypeId = #{param1}
+	</select>
+	<resultMap type="RateType" id="RateTypeInfoMap">
+		<id column="rateTypeId" property="rateTypeId"/>
+		<result column="rateName" property="rateName"/>
+		<result column="rateIconUrl" property="rateIconUrl"/>
+		<collection property="languageType" ofType="LanguageType" select="getLanguageType" column="languageTypeId"></collection>
+	</resultMap>
+	
 </mapper>

@@ -31,6 +31,9 @@
 		delete from languageType where languageTypeId=#{param1}
 	</delete>
 	
+	<select id="getAllLanguages" resultType="LanguageType">
+		select * from languageType
+	</select>
 	
 
 </mapper>

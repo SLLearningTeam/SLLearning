@@ -17,7 +17,7 @@
 	<context:component-scan base-package="cn.net.realloyal.mapper" />
 	<context:component-scan base-package="cn.net.realloyal.service.impl" />
 	<context:component-scan base-package="cn.net.realloyal.model" />
-	
+	<context:component-scan base-package="cn.net.realloyal.vo" />
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />

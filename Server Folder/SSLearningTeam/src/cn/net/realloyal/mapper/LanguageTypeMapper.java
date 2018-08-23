@@ -18,4 +18,6 @@ public interface LanguageTypeMapper {
 
 	void updatelanguageWithoutIcon(LanguageType languageType);
 
+	List<LanguageType> getAllLanguages();
+
 }

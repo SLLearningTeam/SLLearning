@@ -8,6 +8,7 @@
 		<typeAlias alias="User" type="cn.net.realloyal.model.User" />
 		<typeAlias alias="LanguageType" type="cn.net.realloyal.model.LanguageType" />
 		<typeAlias alias="RateType" type="cn.net.realloyal.model.RateType" />
+		<typeAlias alias="RateTypeForSQL" type="cn.net.realloyal.vo.RateTypeForSQL" />
 		<typeAlias alias="Course" type="cn.net.realloyal.model.Course" />
 	</typeAliases>
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,22 +31,20 @@ label{ color: #7e0675}
 				<div class="container-fluid ">
 					<!--添加语言类别 -->
 					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
+					<form action="${pageContext.request.contextPath}/ratetype/admin/addratetypes" enctype="multipart/form-data" method="POST">
 						<label>请选择语言类别</label> 
-						<select class="form-control">
-							<option>英语</option>
-							<option>日语</option>
-							<option>俄语</option>
-							<option>法语</option>
-							<option>泰语</option>
-							<option>德语</option>
+						<select class="form-control" name="languageTypeId">
+							<c:forEach items="${languageTypes}" var="language">
+								<option value="${language.languageTypeId }">${language.languageName }</option>
+							</c:forEach>
 						</select> 
 						<label for="rateName">类别类型名称</label>
-						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称">
+						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称" name="rateName">
 						<div class="form-group">
 							<label for="rateIconUrl">添加类别类型图标</label>
 							<div class="input-group">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="rateIconUrl">
+									<input type="file" class="custom-file-input" id="rateIconUrl" name="rateIcon">
 									<label class="custom-file-label" for="rateIconUrl">请选择图标</label>
 								</div>
 							</div>
@@ -53,6 +52,7 @@ label{ color: #7e0675}
 							<button type="submit" class="btn btn-primary float-right">提交</button>
 						    </div>
 						</div>
+					</form>
 					</div>
 				</div>
 				<!-- /.container-fluid -->

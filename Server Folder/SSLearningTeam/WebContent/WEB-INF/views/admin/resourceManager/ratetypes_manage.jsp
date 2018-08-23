@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +26,18 @@
 							<th>类别类型图标</th>
 							<th colspan="2">操作</th>
 						</tr>
-						<tr style="text-align: center">
-							<td>1</td>
-							<td>英语</td>
-							<td>四级</td>
-							<td><span class="tag tag-success"><img
-									src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1531362740&di=f74f8a48242f689f1ecd128d02e1aa62&src=http://up.zyxschool.com/mingxiao/20160429/14618955473241.jpg"
-									alt="picture" width=“20px” height="20px"> </span></td>
-							<td><a href="#">修改</a></td>
-							<td><a href="#">删除</a></td>
-						</tr>
-
+						<c:forEach var="rateType" items="${rateTypes}" varStatus="status">
+							<tr style="text-align: center">
+								<td>${status.count}</td>
+								<td>${rateType.languageType.languageName }</td>
+								<td>${rateType.rateName }</td>
+								<td><span class="tag tag-success"><img
+										src="${rateType.rateIconUrl}"
+										alt="picture" width=“20px” height="20px"> </span></td>
+								<td><a href="#">修改</a></td>
+								<td><a href="#">删除</a></td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<!-- 分页 -->
