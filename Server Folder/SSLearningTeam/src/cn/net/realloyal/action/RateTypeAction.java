@@ -48,6 +48,9 @@ public class RateTypeAction {
 		mv.addObject("pageName","rateTypeManage");
 		List<RateType>rateTypes = rateTypeService.getRatetypesManage(pageNum);
 		mv.addObject("rateTypes", rateTypes);
+		int pageNumber = rateTypeService.getPageNumber();
+		mv.addObject("pageNumber", pageNumber);
+		mv.addObject("currentPage", pageNum);
 		return mv;
 	}
 	

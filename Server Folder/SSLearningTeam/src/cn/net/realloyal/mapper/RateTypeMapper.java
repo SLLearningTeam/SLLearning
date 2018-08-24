@@ -23,4 +23,6 @@ public interface RateTypeMapper {
 
 	List<RateTypeForSQL> getRateTypesByLanguageTypeId(Integer languageTypeId);
 
+	int getRateTypesCount();
+
 }

@@ -35,5 +35,8 @@
 		select * from languageType
 	</select>
 	
+	<select id="getLanguagesCount" resultType="Integer">
+		select count(*) from languageType
+	</select>
 
 </mapper>

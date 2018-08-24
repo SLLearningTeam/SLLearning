@@ -47,22 +47,22 @@
 
 ### 2.用户获取种类类别信息
 
-#### 1.1 功能描述
+#### 2.1 功能描述
 
 用户获取种类类别信息
 
-#### 1.2 请求说明
+#### 2.2 请求说明
 
 > 请求方式：GET
 > 请求URL ：/language/user/getratetypes/{pageNum} 
 >
 > URL参数含义：pageNum表示当前页号
 
-#### 1.3 请求参数
+#### 2.3 请求参数
 
 无
 
-#### 1.4 返回结果接收
+#### 2.4 返回结果接收
 
 ```json  
 {
@@ -82,7 +82,7 @@
 }
 ```
 
-#### 1.5 返回参数
+#### 2.5 返回参数
 
 | 字段            | 字段类型 | 字段说明         |
 | --------------- | -------- | ---------------- |
@@ -92,6 +92,48 @@
 | rateTypeId      | Int      | 类别类型Id       |
 | rateName        | string   | 类别类型名称     |
 | rateIconUrl     | string   | 类别类型图标Url  |
+
+### 3.用户通过语言获取种类类别信息
+
+#### 3.1 功能描述
+
+用户通过语言获取种类类别信息
+
+#### 3.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/ratetype/user/getratetypebylanguagetypeid 
+
+#### 3.3 请求参数
+
+| 字段           | 字段类型 | 字段说明   |
+| -------------- | -------- | ---------- |
+| languageTypeId | int      | 语言类别Id |
+
+#### 3.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": [
+        {
+            "rateTypeId": 2,
+            "languageTypeId": 5,
+            "rateName": "二级",
+            "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+        }
+    ]
+}
+```
+
+#### 3.5 返回参数
+
+| 字段           | 字段类型 | 字段说明    |
+| -------------- | -------- | ----------- |
+| rateTypeId     | Int      | 类别类型Id  |
+| languageTypeId | int      | 语言类别Id  |
+| rateName       | string   | 类别名称    |
+| rateIconUrl    | string   | 类别图标Url |
 
 
 

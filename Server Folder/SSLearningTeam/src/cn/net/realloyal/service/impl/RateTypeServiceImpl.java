@@ -155,4 +155,11 @@ public class RateTypeServiceImpl implements RateTypeService {
 		return backJsonUtil;
 	}
 
+	@Override
+	public int getPageNumber() {
+		int rateTypesCount = rateTypeMapper.getRateTypesCount();
+		int pageNumber = (int)rateTypesCount/10+1;
+		return pageNumber;
+	}
+
 }

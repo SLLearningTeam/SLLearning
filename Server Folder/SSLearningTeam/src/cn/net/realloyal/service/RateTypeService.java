@@ -37,4 +37,6 @@ public interface RateTypeService {
 
 	BackJsonUtil getRateTypesByLanguageTypeId(Integer languageTypeId);
 
+	int getPageNumber();
+
 }

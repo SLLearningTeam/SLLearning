@@ -53,4 +53,9 @@
 	<select id="getRateTypesByLanguageTypeId" resultType="RateTypeForSQL">
 		select * from RateType where languageTypeId=#{param1};
 	</select>
+	
+	<!-- 获取所有的rateType的个数 -->
+	<select id="getRateTypesCount" resultType="Integer">
+		select count(*) from RateType
+	</select>
 </mapper>

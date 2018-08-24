@@ -25,4 +25,6 @@ public interface LanguageTypeService {
 
 	public BackJsonUtil getLanguages(Integer pageNum);
 
+	public int getPageNumber();
+
 }

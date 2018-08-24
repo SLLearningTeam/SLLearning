@@ -20,4 +20,6 @@ public interface LanguageTypeMapper {
 
 	List<LanguageType> getAllLanguages();
 
+	int getLanguagesCount();
+
 }
