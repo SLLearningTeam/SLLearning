@@ -1,11 +1,13 @@
 package cn.net.realloyal.action;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -165,13 +167,27 @@ public class CourseAction {
 	
 	
 	//获取综合课程列表——管理员
-	@RequestMapping("/admin/courses_manage")
-	public ModelAndView getCoursesManage() {
+	@RequestMapping("/admin/courses_manage/{pageNum}")
+	public ModelAndView getCoursesManage(@PathVariable("pageNum")Integer pageNum) {
 		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
 		mv.addObject("pageName","courseManage");
+		//返回综合课程信息
+		Map<String,List>allTypeCourses = courseService.getAllTypeCourses(pageNum);
+		mv.addObject("courses", allTypeCourses);
+		//返回总页数
+		int totalPages = courseService.allTypesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
 		return mv;
 	}
 	
+	//获取综合课程列表——用户
+	@ResponseBody
+	@RequestMapping("/user/courses_manage/{pageNum}")
+	public BackJsonUtil getCoursesManageByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getCoursesManageByUser(pageNum);
+	}
 	
 	//获得口语课程列表——管理员
 	

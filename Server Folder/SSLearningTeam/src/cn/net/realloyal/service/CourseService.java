@@ -1,5 +1,8 @@
 package cn.net.realloyal.service;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
@@ -44,5 +47,11 @@ public interface CourseService {
 
 	void updateReadingCourse(Integer courseId,Integer languageTypeId, Integer rateTypeId, String courseName, String courseChineseContent,
 			String courseEnglishContent,@RequestParam("downloadNum")Integer downloadNum, CommonsMultipartFile instructionImg, HttpServletRequest request);
+
+	Map<String, List> getAllTypeCourses(Integer pageNum);
+
+	int allTypesTotalPages();
+
+	BackJsonUtil getCoursesManageByUser(Integer pageNum);
 
 }

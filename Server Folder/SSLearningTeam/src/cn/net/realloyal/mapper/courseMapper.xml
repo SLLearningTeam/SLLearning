@@ -123,8 +123,30 @@
 		update readingCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
 	</update>
 	
+	<!-- 获取所有听力课程个数 -->
+	<select id="getListeningCoursesNum" resultType="Integer">
+		select count(*) from ListeningCourse
+	</select>
+	<!-- 获取所有口语课程个数 -->
+	<select id="getOralCoursesNum" resultType="Integer">
+		select count(*) from oralCourse
+	</select>
+	<!-- 获取所有阅读课程个数 -->
+	<select id="getReadingCoursesNum" resultType="Integer">
+		select count(*) from ReadingCourse
+	</select>
 	
-	
-	
+	<!-- 获取指定索引的听力课程 -->
+	<select id="getListeningCourses" resultMap="ListeningCourseMap">
+		select * from ListeningCourse limit #{param1},#{param2}
+	</select>
+	<!-- 获取指定索引的口语课程 -->
+	<select id="getOralCourses" resultMap="OralCourseMap">
+		select * from OralCourse limit #{param1},#{param2}
+	</select>
+	<!-- 获取指定索引的阅读课程 -->
+	<select id="getReadingCourses" resultMap="ReadingCourseMap">
+		select * from ReadingCourse limit #{param1},#{param2}
+	</select>
 	
 </mapper>

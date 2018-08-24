@@ -1,5 +1,7 @@
 package cn.net.realloyal.mapper;
 
+import java.util.List;
+
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
@@ -42,6 +44,24 @@ public interface CourseMapper {
 	void updateReadingCourseWithImg(ReadingCourseForSQL readingCourse);
 
 	void updateReadingCourseWithoutImg(ReadingCourseForSQL readingCourse);
+
+	//获取所有听力课程个数
+	int getListeningCoursesNum();
+	//获取所有口语课程个数
+	int getOralCoursesNum();
+	//获取所有阅读课程个数
+	int getReadingCoursesNum();
+
+	//获取指定索引的听力课程
+	List<ListeningCourse> getListeningCourses(int startIndex, int needNum);
+
+	//获取指定索引的口语课程
+	List<OralCourse> getOralCourses(int startIndex, int needNum);
+
+	//获取指定索引的阅读课程
+	List<ReadingCourse> getReadingCourses(int startIndex, int needNum);
+
+	
 	
 
 }
