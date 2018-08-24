@@ -20,4 +20,18 @@
 		insert into ReadingCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{downloadNum},#{instructionImgUrl})
 	</insert>
 	
+	<!-- 删除听力课程 -->
+	<delete id="deleteListeningCourse" parameterType="Integer">
+		delete from ListeningCourse where courseId = #{param1}
+	</delete>
+	<!-- 删除口语课程 -->
+	<delete id="deleteOralCourse" parameterType="Integer">
+		delete from OralCourse where courseId = #{param1}
+	</delete>
+	
+	<!-- 删除阅读课程 -->
+	<delete id="deleteReadingCourse" parameterType="Integer">
+		delete from ReadingCourse where courseId = #{param1}
+	</delete>
+	
 </mapper>

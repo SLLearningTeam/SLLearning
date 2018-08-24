@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.service.RateTypeService;
@@ -74,6 +76,28 @@ public class CourseAction {
 		courseService.addReadingCourse(languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,instructionImg,request);
 		return "redirect:/course/admin/courses_manage";
 	}
+	
+	//删除听力课程接口
+	@ResponseBody
+	@RequestMapping("/admin/deleteListeningCourse")
+	public BackJsonUtil deleteListeningCourse(@RequestParam("courseId")Integer courseId) {
+		return courseService.deleteListeningCourse(courseId);
+	}
+	
+	//删除口语课程接口
+	@ResponseBody
+	@RequestMapping("/admin/deleteOralCourse")
+	public BackJsonUtil deleteOralCourse(@RequestParam("courseId")Integer courseId) {
+		return courseService.deleteOralCourse(courseId);
+	}
+	
+	//删除阅读课程接口
+	@ResponseBody
+	@RequestMapping("/admin/deleteReadingCourse")
+	public BackJsonUtil deleteReadingCourse(@RequestParam("courseId")Integer courseId) {
+		return courseService.deleteReadingCourse(courseId);
+	}
+	
 
 	//获取综合课程列表——管理员
 	@RequestMapping("/admin/courses_manage")

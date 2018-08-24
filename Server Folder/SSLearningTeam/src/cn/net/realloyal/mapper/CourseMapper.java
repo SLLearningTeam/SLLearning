@@ -11,6 +11,12 @@ public interface CourseMapper {
 	void addOralCourse(OralCourseForSQL oralCourse);
 
 	void addReadingCourse(ReadingCourseForSQL readingCourse);
+
+	int deleteListeningCourse(Integer courseId);
+
+	int deleteOralCourse(Integer courseId);
+
+	int deleteReadingCourse(Integer courseId);
 	
 	
 

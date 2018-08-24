@@ -263,3 +263,88 @@
 | rateName       | string   | 类别名称    |
 | rateIconUrl    | string   | 类别图标Url |
 
+### 14.管理员删除听力课程接口
+
+#### 请求地址
+
+> URL：/course/admin/deleteListeningCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 响应字段内容
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| status   | boolean  |
+| iinfo    | string   |
+
+#### 响应实例
+
+```json
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+### 15.管理员删除口语课程接口
+
+#### 请求地址
+
+> URL：/course/admin/deleteOralCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 响应字段内容
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| status   | boolean  |
+| iinfo    | string   |
+
+#### 响应实例
+
+```json
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+### 16.管理员删除阅读课程接口
+
+#### 请求地址
+
+> URL：/course/admin/deleteReadingCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 响应字段内容
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| status   | boolean  |
+| iinfo    | string   |
+
+#### 响应实例
+
+```json
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+### 

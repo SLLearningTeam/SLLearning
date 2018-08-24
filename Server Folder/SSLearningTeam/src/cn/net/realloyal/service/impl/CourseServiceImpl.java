@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.mapper.CourseMapper;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.service.CourseService;
@@ -150,5 +151,52 @@ public class CourseServiceImpl implements CourseService {
 		ReadingCourseForSQL readingCourse = new ReadingCourseForSQL(0,languageTypeId,rateTypeId,courseName,courseEnglishContent,courseChineseContent,0,instructionImgUrl);
 		courseMapper.addReadingCourse(readingCourse);
 	}
+
+	//删除听力课程
+	@Override
+	public BackJsonUtil deleteListeningCourse(Integer courseId) {
+		int status = courseMapper.deleteListeningCourse(courseId);
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(status!=0) {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}else {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}
+		return backJsonUtil;
+	}
+
+	//删除口语课程
+	@Override
+	public BackJsonUtil deleteOralCourse(Integer courseId) {
+		int status = courseMapper.deleteOralCourse(courseId);
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(status!=0) {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}else {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}
+		return backJsonUtil;
+	}
+
+	//删除阅读课程
+	@Override
+	public BackJsonUtil deleteReadingCourse(Integer courseId) {
+		int status = courseMapper.deleteReadingCourse(courseId);
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(status!=0) {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}else {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}
+		return backJsonUtil;
+	}
+	
+	
 
 }
