@@ -90,7 +90,7 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 		LanguageType languageType = new LanguageType();
 		languageType.setLanguageTypeId(languageTypeId);
 		languageType.setLanguageName(languageName);
-		if(languageIcon!=null) { 
+		if(!languageIcon.isEmpty()) { 
 	        // 新文件名  
 	        String newFileName = UUID.randomUUID() + "_language.png";  
 	        System.out.println("新文件名:" + newFileName); 
@@ -101,20 +101,18 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 	        File f = new File(path);  
 	        if (!f.exists())  
 	            f.mkdirs();  
-	        if (!languageIcon.isEmpty()) {  
-	            try {  
-	                FileOutputStream fos = new FileOutputStream(path + newFileName);  
-	                InputStream in = languageIcon.getInputStream();  
-	                int b = 0;  
-	                while ((b = in.read()) != -1) {  
-	                    fos.write(b);  
-	                }  
-	                fos.close();  
-	                in.close();  
-	            } catch (Exception e) {  
-	                e.printStackTrace();  
-	            }  
-	        }
+            try {  
+                FileOutputStream fos = new FileOutputStream(path + newFileName);  
+                InputStream in = languageIcon.getInputStream();  
+                int b = 0;  
+                while ((b = in.read()) != -1) {  
+                    fos.write(b);  
+                }  
+                fos.close();  
+                in.close();  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            }  
 	        languageType.setLanguageIconUrl(sc.getContextPath()+"/Languages/"+newFileName);
 	        languageTypeMapper.updatelanguageWithIcon(languageType);
 		}else {

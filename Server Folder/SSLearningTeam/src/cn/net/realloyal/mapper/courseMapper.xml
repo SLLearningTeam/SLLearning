@@ -34,4 +34,97 @@
 		delete from ReadingCourse where courseId = #{param1}
 	</delete>
 	
+	<!-- 根据Id查询听力课程的相关信息,用到嵌套查询 -->
+	<select id="getListeningCourseInfo" parameterType="Integer" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where courseId = #{param1}
+	</select>
+	<resultMap type="ListeningCourse" id="ListeningCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="courseResourceUrl" property="courseResourceUrl"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	<select id="getLanguageType" parameterType="java.lang.Integer" resultType="LanguageType">
+		select * from languageType where languageTypeId = #{languageTypeId}
+	</select>
+	<select id="getRateType" parameterType="java.lang.Integer" resultType="RateType">
+		select * from RateType where rateTypeId = #{rateTypeId}
+	</select>
+	
+	
+	<!-- 根据Id查询口语课程的相关信息,用到嵌套查询 -->
+	<select id="getOralCourseInfo" parameterType="Integer" resultMap="OralCourseMap">
+		select * from OralCourse where courseId = #{param1}
+	</select>
+	<resultMap type="OralCourse" id="OralCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	
+	<!-- 根据Id查询阅读课程的相关信息,用到嵌套查询 -->
+	<select id="getReadingCourseInfo" parameterType="Integer" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where courseId = #{param1}
+	</select>
+	<resultMap type="ReadingCourse" id="ReadingCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	
+	<!-- 更新所有听力信息 -->
+	<update id="updateListeningCourseWithRousourceWithImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},courseResourceUrl=#{courseResourceUrl},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外其他听力信息 -->
+	<update id="updateListeningCourseWithRousourceWithoutImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},courseResourceUrl=#{courseResourceUrl},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新除资源外其他听力信息 -->
+	<update id="updateListeningCourseWithoutRousourceWithImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除资源和图标外其他听力信息 -->
+	<update id="updateListeningCourseWithoutRousourceWithoutImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新所有口语信息 -->
+	<update id="updateOralCourseWithImg" parameterType="OralCourseForSQL">
+		update oralCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外口语信息 -->
+	<update id="updateOralCourseWithoutImg" parameterType="OralCourseForSQL">
+		update oralCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新所有阅读信息 -->
+	<update id="updateReadingCourseWithImg" parameterType="ReadingCourseForSQL">
+		update readingCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外阅读信息 -->
+	<update id="updateReadingCourseWithoutImg" parameterType="ReadingCourseForSQL">
+		update readingCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	
+	
+	
+	
+	
 </mapper>

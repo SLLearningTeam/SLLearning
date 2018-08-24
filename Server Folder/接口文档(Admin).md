@@ -347,4 +347,148 @@
 }
 ```
 
-### 
+### 17.管理员跳转修改听力课程信息页面
+
+#### 请求地址
+
+> URL：/course/admin/toUpdateListeningCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 返回携带内容
+
+| 字段内容        | 字段类型           |
+| --------------- | ------------------ |
+| pageName        | string             |
+| listeningCourse | ListeningCourse    |
+| languageTypes   | List<LanguageType> |
+| courseId        | Integer            |
+
+### 18.管理员跳转修改口语课程信息页面
+
+#### 请求地址
+
+> URL：/course/admin/toUpdateOralCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 返回携带内容
+
+| 字段内容      | 字段类型           |
+| ------------- | ------------------ |
+| pageName      | string             |
+| oralCourse    | OralCourse         |
+| languageTypes | List<LanguageType> |
+| courseId      | Integer            |
+
+### 19.管理员跳转修改阅读课程信息页面
+
+#### 请求地址
+
+> URL：/course/admin/toUpdateReadingCourse 
+
+#### 请求参数
+
+| 字段名称 | 字段类型 |
+| -------- | -------- |
+| courseId | int      |
+
+#### 返回携带内容
+
+| 字段内容      | 字段类型           |
+| ------------- | ------------------ |
+| pageName      | string             |
+| readingCourse | ReadingCourse      |
+| languageTypes | List<LanguageType> |
+| courseId      | Integer            |
+
+### 20.管理员修改听力课程信息接口
+
+#### 请求地址
+
+> URL：/course/admin/updateListeningCourse 
+
+#### 请求参数
+
+| 字段名称             | 字段类型 |
+| -------------------- | -------- |
+| courseId             | int      |
+| languageTypeId       | int      |
+| rateTypeId           | int      |
+| courseName           | string   |
+| courseChineseContent | string   |
+| courseEnglishContent | string   |
+| courseResource       | file     |
+| downloadNum          | int      |
+| instructionImg       | file     |
+
+#### 返回携带内容
+
+无
+
+#### 显示页面
+
+> 重定向到综合显示课程列表
+
+### 21.管理员修改口语课程信息接口
+
+#### 请求地址
+
+> URL：/course/admin/updateOralCourse 
+
+#### 请求参数
+
+| 字段名称             | 字段类型 |
+| -------------------- | -------- |
+| courseId             | int      |
+| languageTypeId       | int      |
+| rateTypeId           | int      |
+| courseName           | string   |
+| courseChineseContent | string   |
+| courseEnglishContent | string   |
+| downloadNum          | int      |
+| instructionImg       | file     |
+
+#### 返回携带内容
+
+无
+
+#### 显示页面
+
+> 重定向到综合显示课程列表
+
+### 22.管理员修改阅读课程信息接口
+
+#### 请求地址
+
+> URL：/course/admin/updateReadingCourse 
+
+#### 请求参数
+
+| 字段名称             | 字段类型 |
+| -------------------- | -------- |
+| courseId             | int      |
+| languageTypeId       | int      |
+| rateTypeId           | int      |
+| courseName           | string   |
+| courseChineseContent | string   |
+| courseEnglishContent | string   |
+| downloadNum          | int      |
+| instructionImg       | file     |
+
+#### 返回携带内容
+
+无
+
+#### 显示页面
+
+> 重定向到综合显示课程列表
+

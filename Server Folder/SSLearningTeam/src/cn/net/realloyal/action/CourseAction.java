@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.LanguageType;
+import cn.net.realloyal.model.ListeningCourse;
+import cn.net.realloyal.model.OralCourse;
+import cn.net.realloyal.model.ReadingCourse;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.service.RateTypeService;
 import cn.net.realloyal.vo.RateTypeForSQL;
@@ -33,7 +36,6 @@ public class CourseAction {
 		mv.addObject("pageName","courseManage");
 		List<LanguageType>languageTypes = rateTypeService.getLanguages();
 		mv.addObject("languageTypes", languageTypes);
-		System.out.println(languageTypes);
 		return mv;
 	}
 	
@@ -98,7 +100,70 @@ public class CourseAction {
 		return courseService.deleteReadingCourse(courseId);
 	}
 	
-
+	//跳转修改听力课程信息页面
+	@RequestMapping("/admin/toUpdateListeningCourse")
+	public ModelAndView toUpdateListeningCourse(@RequestParam("courseId")Integer courseId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/updateListeningCourse");
+		mv.addObject("pageName","courseManage");
+		//查看当前课程的相关信息用于表单回显
+		ListeningCourse listeningCourse = courseService.getListeningCourseInfo(courseId);
+		mv.addObject("listeningCourse",listeningCourse);
+		//返回所有的languageType选项
+		List<LanguageType>languageTypes = rateTypeService.getLanguages();
+		mv.addObject("languageTypes", languageTypes);
+		return mv;
+	}
+	
+	//跳转修改口语课程信息页面
+	@RequestMapping("/admin/toUpdateOralCourse")
+	public ModelAndView toUpdateOralCourse(@RequestParam("courseId")Integer courseId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/updateOralCourse");
+		mv.addObject("pageName","courseManage");
+		//查看当前课程的相关信息用于表单回显
+		OralCourse oralCourse = courseService.getOralCourseInfo(courseId);
+		mv.addObject("oralCourse",oralCourse);
+		//返回所有的languageType选项
+		List<LanguageType>languageTypes = rateTypeService.getLanguages();
+		mv.addObject("languageTypes", languageTypes);
+		return mv;
+	}
+	
+	//跳转修改阅读课程信息页面
+	@RequestMapping("/admin/toUpdateReadingCourse")
+	public ModelAndView toUpdateReadingCourse(@RequestParam("courseId")Integer courseId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/updateReadingCourse");
+		mv.addObject("pageName","courseManage");
+		//查看当前课程的相关信息用于表单回显
+		ReadingCourse readingCourse = courseService.getReadingCourseInfo(courseId);
+		mv.addObject("readingCourse",readingCourse);
+		//返回所有的languageType选项
+		List<LanguageType>languageTypes = rateTypeService.getLanguages();
+		mv.addObject("languageTypes", languageTypes);
+		return mv;
+	}
+	
+	//修改听力课程信息接口
+	@RequestMapping("/admin/updateListeningCourse")
+	public String updateListeningCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam(value="courseResource",required=false)CommonsMultipartFile courseResource,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
+		courseService.updateListeningCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,courseResource,downloadNum,instructionImg,request);
+		return "redirect:/course/admin/courses_manage";
+	}
+	
+	//修改口语课程信息接口
+	@RequestMapping("/admin/updateOralCourse")
+	public String updateOralCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
+		courseService.updateOralCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImg,request);
+		return "redirect:/course/admin/courses_manage";
+	}
+	
+	//修改阅读课程信息接口
+	@RequestMapping("/admin/updateReadingCourse")
+	public String updateReadingCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
+		courseService.updateReadingCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImg,request);
+		return "redirect:/course/admin/courses_manage";
+	}
+	
+	
 	//获取综合课程列表——管理员
 	@RequestMapping("/admin/courses_manage")
 	public ModelAndView getCoursesManage() {
@@ -106,6 +171,7 @@ public class CourseAction {
 		mv.addObject("pageName","courseManage");
 		return mv;
 	}
+	
 	
 	//获得口语课程列表——管理员
 	

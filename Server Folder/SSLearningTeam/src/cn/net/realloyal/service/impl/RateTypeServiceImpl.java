@@ -105,7 +105,7 @@ public class RateTypeServiceImpl implements RateTypeService {
 		rateType.setRateTypeId(rateTypeId);
 		rateType.setLanguageTypeId(languageTypeId);
         rateType.setRateName(rateName);
-        if(rateIcon!=null) {
+        if(!rateIcon.isEmpty()) {
         		// 新文件名  
             String newFileName = UUID.randomUUID() + "_ratetype.png";
             // 获得项目的路径  
@@ -115,20 +115,18 @@ public class RateTypeServiceImpl implements RateTypeService {
             File f = new File(path);  
             if (!f.exists())  
                 f.mkdirs();  
-            if (!rateIcon.isEmpty()) {  
-                try {  
-                    FileOutputStream fos = new FileOutputStream(path + newFileName);  
-                    InputStream in = rateIcon.getInputStream();  
-                    int b = 0;  
-                    while ((b = in.read()) != -1) {  
-                        fos.write(b);  
-                    }  
-                    fos.close();  
-                    in.close();  
-                } catch (Exception e) {  
-                    e.printStackTrace();  
+            try {  
+                FileOutputStream fos = new FileOutputStream(path + newFileName);  
+                InputStream in = rateIcon.getInputStream();  
+                int b = 0;  
+                while ((b = in.read()) != -1) {  
+                    fos.write(b);  
                 }  
-            }
+                fos.close();  
+                in.close();  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            }  
             rateType.setRateIconUrl(sc.getContextPath()+"/Ratetypes/"+newFileName);
             rateTypeMapper.updateRateTypeWithIcon(rateType);
         }else {
