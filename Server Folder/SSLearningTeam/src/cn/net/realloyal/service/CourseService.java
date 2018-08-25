@@ -54,4 +54,12 @@ public interface CourseService {
 
 	BackJsonUtil getCoursesManageByUser(Integer pageNum);
 
+	Map<String, List> getListeningCourses(Integer pageNum);
+
+	int getListeningCoursesTotalPages();
+
+	Map<String, List> getListeningCoursesByDownload(Integer pageNum);
+
+	BackJsonUtil getListeningCourses_manageByUser(Integer pageNum);
+
 }

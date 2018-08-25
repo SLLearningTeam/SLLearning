@@ -40,7 +40,6 @@ public class CourseAction {
 		mv.addObject("languageTypes", languageTypes);
 		return mv;
 	}
-	
 	//获取口语课程添加页面——管理员
 	@RequestMapping("/admin/toAddOralCourse")
 	public ModelAndView toAddOralCourse() {
@@ -182,22 +181,65 @@ public class CourseAction {
 		return mv;
 	}
 	
-	//获取综合课程列表——用户
+	//获取综合课程列表JSON——用户
 	@ResponseBody
 	@RequestMapping("/user/courses_manage/{pageNum}")
 	public BackJsonUtil getCoursesManageByUser(@PathVariable("pageNum")Integer pageNum) {
 		return courseService.getCoursesManageByUser(pageNum);
 	}
 	
+	//获取听力课程列表——管理员
+	@RequestMapping("/admin/listeningCourses_manage/{pageNum}")
+	public ModelAndView getListeningCourses_manage(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回听力课程信息
+		Map<String,List>listeningCourses = courseService.getListeningCourses(pageNum);
+		mv.addObject("courses", listeningCourses);
+		//返回听力课程总页数
+		int totalPages = courseService.getListeningCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("pageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+listeningCourses);
+		return mv;
+	}
+	
+	//获得听力课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/listeningCourses_manage/{pageNum}")
+	public BackJsonUtil getListeningCourses_manageByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getListeningCourses_manageByUser(pageNum);
+	}
+	
+	
+	//获取按下载量排序：听力课程列表——管理员
+	@RequestMapping("/admin/listeningCourses_manageByDownload/{pageNum}")
+	public ModelAndView getListeningCourses_manageByDownload(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回听力课程信息
+		Map<String,List>listeningCoursesByDownload = courseService.getListeningCoursesByDownload(pageNum);
+		mv.addObject("courses", listeningCoursesByDownload);
+		//返回听力课程总页数
+		int totalPages = courseService.getListeningCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		return mv;
+	}
+	
+	
+	
 	//获得口语课程列表——管理员
 	
-	//获得听力课程列表——管理员
+	//获得口语课程列表JSON——用户
+	
+	//获取按下载量排序：口语课程列表——管理员
 	
 	//获得阅读课程列表——管理员
 	
-	//获得综合课程列表JSON——用户
-	
-	//获得口语课程列表JSON——用户
+	//获取按下载量排序：阅读课程列表——管理员
 	
 	//获得阅读课程列表JSON——用户
 	
@@ -206,12 +248,4 @@ public class CourseAction {
 	//根据课程名称搜索得到综合课程列表JSON——用户
 	
 	
-	
-	
-	//获取课程修改页面——管理员
-	@RequestMapping("/admin/toupdatecourses")
-	public ModelAndView toUpdateCourses() {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/UpdateCourses");
-		return mv;
-	}
 }

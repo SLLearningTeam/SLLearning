@@ -392,9 +392,9 @@ public class CourseServiceImpl implements CourseService {
 		}
 	}
 
+	//取所有类型的课程：听力先取，取完为止；口语再取，取完为止；阅读再取，取完为止
 	@Override
 	public Map<String, List> getAllTypeCourses(Integer pageNum) {
-		//听力先取，取完为止；口语再取，取完为止；阅读再取，取完为止
 		int startIndex = CalculateStartIndex.getStartIndex(pageNum, 10);
 		Map<String,List> allTypeCourses = new HashMap<String,List>();
 		allTypeCourses.put("listeningCourses", new ArrayList<ListeningCourse>());
@@ -429,10 +429,10 @@ public class CourseServiceImpl implements CourseService {
 				allTypeCourses.replace("readingCourses", readingCourses);
 			}
 		}
-		System.out.println(allTypeCourses);
 		return allTypeCourses;
 	}
-
+	
+	//所有类型课程的总页数
 	@Override
 	public int allTypesTotalPages() {
 		int listeningCoursesNum=courseMapper.getListeningCoursesNum();
@@ -442,6 +442,7 @@ public class CourseServiceImpl implements CourseService {
 		return totalPages;
 	}
 
+	//取所有类型的课程（返回JSON）：听力先取，取完为止；口语再取，取完为止；阅读再取，取完为止
 	@Override
 	public BackJsonUtil getCoursesManageByUser(Integer pageNum) {
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
@@ -491,11 +492,59 @@ public class CourseServiceImpl implements CourseService {
 					allTypeCourses.replace("readingCourses", readingCourses);
 				}
 			}
-			result.put("allTypeCourses", allTypeCourses);
+			result.put("courses", allTypeCourses);
 			backJsonUtil.setInfo(result);
 		}
 		return backJsonUtil;
 	}
+
+	//取听力类型课程的内容
+	@Override
+	public Map<String, List> getListeningCourses(Integer pageNum) {
+		int startIndex = CalculateStartIndex.getStartIndex(pageNum, 10);
+		Map<String,List> allTypeCourses = new HashMap<String,List>();
+		allTypeCourses.put("listeningCourses", new ArrayList<ListeningCourse>());
+		allTypeCourses.put("oralCourses", new ArrayList<OralCourse>());
+		allTypeCourses.put("readingCourses", new ArrayList<ReadingCourse>());
+		List<ListeningCourse> listeningCourses = courseMapper.getListeningCourses(startIndex,10);
+		allTypeCourses.replace("listeningCourses", listeningCourses);
+		return allTypeCourses;
+	}
+
+	//取听力课程的总页数
+	@Override
+	public int getListeningCoursesTotalPages() {
+		int listeningCoursesNum=courseMapper.getListeningCoursesNum();
+		return (int)(listeningCoursesNum)/10+1;
+	}
+
+	//获得听力课程列表JSON——用户
+	@Override
+	public BackJsonUtil getListeningCourses_manageByUser(Integer pageNum) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int totalPages=getListeningCoursesTotalPages();
+		if(pageNum>totalPages) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您的访问页数有误，请重新选择!");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("totalPages", totalPages);
+			result.put("currentPage", pageNum);
+			result.put("courses", getListeningCourses(pageNum));
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+	
+	//通过下载量排序，取听力类型课程的内容
+	@Override
+	public Map<String, List> getListeningCoursesByDownload(Integer pageNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 	
 
