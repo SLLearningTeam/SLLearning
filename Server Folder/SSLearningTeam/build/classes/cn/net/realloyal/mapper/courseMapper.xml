@@ -149,4 +149,36 @@
 		select * from ReadingCourse limit #{param1},#{param2}
 	</select>
 	
+	<!-- 通过下载量排序，获取指定索引的听力课程 -->
+	<select id="getListeningCoursesByDownload" resultMap="ListeningCourseMap">
+		select * from ListeningCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	<!-- 通过下载量排序，获取指定索引的口语课程 -->
+	<select id="getOralCoursesByDownload" resultMap="OralCourseMap">
+		select * from OralCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	<!-- 通过下载量排序，获取指定索引的阅读课程 -->
+	<select id="getReadingCoursesByDownload" resultMap="ReadingCourseMap">
+		select * from ReadingCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	
+	<!-- 取听力课程的总页数——通过语言类别筛选 -->
+	<select id="getListeningCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from ListeningCourse where languageTypeId=#{param1}
+	</select>
+	<!-- 取听力课程的总页数——通过种类类别筛选 -->
+	<select id="getListeningCoursesNumByRateType" resultType="Integer">
+		select count(*) from ListeningCourse where rateTypeId=#{rateTypeId}
+	</select>
+	
+	<!-- 通过语言类别，取听力类型课程的内容 -->
+	<select id="getListeningCoursesByLanguageType" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过种类类别，取听力类型课程的内容 -->
+	<select id="getListeningCoursesByRateType" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	
+	
 </mapper>

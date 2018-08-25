@@ -61,6 +61,20 @@ public interface CourseMapper {
 	//获取指定索引的阅读课程
 	List<ReadingCourse> getReadingCourses(int startIndex, int needNum);
 
+	List<ListeningCourse> getListeningCoursesByDownload(int startIndex, int needNum);
+
+	//取听力课程的总页数——通过语言类别筛选
+	int getListeningCoursesNumByLanguageType(Integer languageTypeId);
+
+	//取听力课程的总页数——通过种类类别筛选
+	int getListeningCoursesNumByRateType(Integer rateTypeId);
+
+	//通过语言类别，取听力类型课程的内容
+	List<ListeningCourse> getListeningCoursesByLanguageType(int startIndex, int i, Integer languageTypeId);
+
+	//通过种类类别，取听力类型课程的内容
+	List<ListeningCourse> getListeningCoursesByRateType(int startIndex, int i, Integer rateTypeId);
+
 	
 	
 

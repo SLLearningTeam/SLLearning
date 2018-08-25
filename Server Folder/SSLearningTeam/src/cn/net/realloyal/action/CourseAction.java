@@ -40,6 +40,7 @@ public class CourseAction {
 		mv.addObject("languageTypes", languageTypes);
 		return mv;
 	}
+	
 	//获取口语课程添加页面——管理员
 	@RequestMapping("/admin/toAddOralCourse")
 	public ModelAndView toAddOralCourse() {
@@ -49,6 +50,7 @@ public class CourseAction {
 		mv.addObject("languageTypes", languageTypes);
 		return mv;
 	}
+	
 	//获取阅读课程添加页面——管理员
 	@RequestMapping("/admin/toAddReadingCourse")
 	public ModelAndView toAddReadingCourse() {
@@ -164,7 +166,6 @@ public class CourseAction {
 		return "redirect:/course/admin/courses_manage";
 	}
 	
-	
 	//获取综合课程列表——管理员
 	@RequestMapping("/admin/courses_manage/{pageNum}")
 	public ModelAndView getCoursesManage(@PathVariable("pageNum")Integer pageNum) {
@@ -201,7 +202,6 @@ public class CourseAction {
 		mv.addObject("totalPages", totalPages);
 		//返回当前页面页号
 		mv.addObject("pageNum", pageNum);
-		//System.out.println("pageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+listeningCourses);
 		return mv;
 	}
 	
@@ -211,7 +211,6 @@ public class CourseAction {
 	public BackJsonUtil getListeningCourses_manageByUser(@PathVariable("pageNum")Integer pageNum) {
 		return courseService.getListeningCourses_manageByUser(pageNum);
 	}
-	
 	
 	//获取按下载量排序：听力课程列表——管理员
 	@RequestMapping("/admin/listeningCourses_manageByDownload/{pageNum}")
@@ -229,7 +228,60 @@ public class CourseAction {
 		return mv;
 	}
 	
+	//获取按下载量排序JSON：听力课程列表——用户
+	@ResponseBody
+	@RequestMapping("/user/listeningCourses_manageByDownload/{pageNum}")
+	public BackJsonUtil getListeningCourses_manageByDownloadByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getListeningCourses_manageByDownloadByUser(pageNum);
+	}
 	
+	//获取筛选指定语言类别的听力课程列表——管理员
+	@RequestMapping("/admin/listeningCourses_manageByLanguageType/{pageNum}")
+	public ModelAndView getListeningCourses_manageByLanguageType(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定语言类别的听力课程信息
+		Map<String,List>listeningCoursesByLanguageType = courseService.getListeningCoursesByLanguageType(pageNum,languageTypeId);
+		mv.addObject("courses", listeningCoursesByLanguageType);
+		//返回指定语言类别的听力课程总页数
+		int totalPages = courseService.getListeningCoursesTotalPagesByLanguageType(languageTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("Language------pageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+listeningCoursesByLanguageType);
+		return mv;
+	}
+	
+	//获取筛选指定语言类别的听力课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/listeningCourses_manageByLanguageType/{pageNum}")
+	public BackJsonUtil getListeningCourses_manageByLanguageTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		return courseService.getListeningCourses_manageByLanguageTypeByUser(pageNum,languageTypeId);
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表——管理员
+	@RequestMapping("/admin/listeningCourses_manageByRateType/{pageNum}")
+	public ModelAndView getListeningCourses_manageByRateType(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定种类类别的听力课程信息
+		Map<String,List>listeningCoursesByRateType = courseService.getListeningCourses_manageByRateType(pageNum,rateTypeId);
+		mv.addObject("courses", listeningCoursesByRateType);
+		//返回指定种类类别的听力课程总页数
+		int totalPages = courseService.getListeningCoursesTotalPagesByRateType(rateTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("ratetype------pageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+listeningCoursesByRateType);
+		return mv;
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/listeningCourses_manageByRateType/{pageNum}")
+	public BackJsonUtil getListeningCourses_manageByRateTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		return courseService.getListeningCourses_manageByRateTypeByUser(pageNum,rateTypeId);
+	}
 	
 	//获得口语课程列表——管理员
 	

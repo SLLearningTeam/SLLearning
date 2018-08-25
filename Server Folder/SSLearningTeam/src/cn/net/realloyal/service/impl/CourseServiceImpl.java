@@ -540,8 +540,119 @@ public class CourseServiceImpl implements CourseService {
 	//通过下载量排序，取听力类型课程的内容
 	@Override
 	public Map<String, List> getListeningCoursesByDownload(Integer pageNum) {
-		// TODO Auto-generated method stub
-		return null;
+		int startIndex = CalculateStartIndex.getStartIndex(pageNum, 10);
+		Map<String,List> allTypeCourses = new HashMap<String,List>();
+		allTypeCourses.put("listeningCourses", new ArrayList<ListeningCourse>());
+		allTypeCourses.put("oralCourses", new ArrayList<OralCourse>());
+		allTypeCourses.put("readingCourses", new ArrayList<ReadingCourse>());
+		List<ListeningCourse> listeningCourses = courseMapper.getListeningCoursesByDownload(startIndex,10);
+		allTypeCourses.replace("listeningCourses", listeningCourses);
+		return allTypeCourses;
+	}
+
+	//获取按下载量排序JSON：听力课程列表——用户
+	@Override
+	public BackJsonUtil getListeningCourses_manageByDownloadByUser(Integer pageNum) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int totalPages=getListeningCoursesTotalPages();
+		if(pageNum>totalPages) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您的访问页数有误，请重新选择!");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("totalPages", totalPages);
+			result.put("currentPage", pageNum);
+			result.put("courses", getListeningCoursesByDownload(pageNum));
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	
+	//通过语言类别，取听力类型课程的内容
+	@Override
+	public Map<String, List> getListeningCoursesByLanguageType(Integer pageNum, Integer languageTypeId) {
+		int startIndex = CalculateStartIndex.getStartIndex(pageNum, 10);
+		Map<String,List> allTypeCourses = new HashMap<String,List>();
+		allTypeCourses.put("listeningCourses", new ArrayList<ListeningCourse>());
+		allTypeCourses.put("oralCourses", new ArrayList<OralCourse>());
+		allTypeCourses.put("readingCourses", new ArrayList<ReadingCourse>());
+		List<ListeningCourse> listeningCoursesByLanguageType = courseMapper.getListeningCoursesByLanguageType(startIndex,10,languageTypeId);
+		allTypeCourses.replace("listeningCourses", listeningCoursesByLanguageType);
+		return allTypeCourses;
+	}
+	
+	//取听力课程的总页数——通过语言类别筛选
+
+	@Override
+	public int getListeningCoursesTotalPagesByLanguageType(Integer languageTypeId) {
+		int listeningCoursesNumByLanguageType=courseMapper.getListeningCoursesNumByLanguageType(languageTypeId);
+		int totalPages = (int)(listeningCoursesNumByLanguageType)/10+1;
+		return totalPages;
+	}
+	
+	//通过种类类别，取听力类型课程的内容
+
+	@Override
+	public Map<String, List> getListeningCourses_manageByRateType(Integer pageNum, Integer rateTypeId) {
+		int startIndex = CalculateStartIndex.getStartIndex(pageNum, 10);
+		Map<String,List> allTypeCourses = new HashMap<String,List>();
+		allTypeCourses.put("listeningCourses", new ArrayList<ListeningCourse>());
+		allTypeCourses.put("oralCourses", new ArrayList<OralCourse>());
+		allTypeCourses.put("readingCourses", new ArrayList<ReadingCourse>());
+		List<ListeningCourse> listeningCoursesByRateType = courseMapper.getListeningCoursesByRateType(startIndex,10,rateTypeId);
+		allTypeCourses.replace("listeningCourses", listeningCoursesByRateType);
+		return allTypeCourses;
+	}
+	
+	//取听力课程的总页数——通过种类类别筛选
+
+	@Override
+	public int getListeningCoursesTotalPagesByRateType(Integer rateTypeId) {
+		int listeningCoursesNumByRateType=courseMapper.getListeningCoursesNumByRateType(rateTypeId);
+		int totalPages = (int)(listeningCoursesNumByRateType)/10+1;
+		return totalPages;
+	}
+	
+	//获取筛选指定语言类别的听力课程列表JSON——用户
+
+	@Override
+	public BackJsonUtil getListeningCourses_manageByLanguageTypeByUser(Integer pageNum, Integer languageTypeId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int totalPages=getListeningCoursesTotalPagesByLanguageType(languageTypeId);
+		if(pageNum>totalPages) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您的访问页数有误，请重新选择!");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("totalPages", totalPages);
+			result.put("currentPage", pageNum);
+			result.put("courses", getListeningCoursesByLanguageType(pageNum,languageTypeId));
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表JSON——用户
+
+	@Override
+	public BackJsonUtil getListeningCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int totalPages=getListeningCoursesTotalPagesByRateType(rateTypeId);
+		if(pageNum>totalPages) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您的访问页数有误，请重新选择!");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("totalPages", totalPages);
+			result.put("currentPage", pageNum);
+			result.put("courses", getListeningCourses_manageByRateType(pageNum,rateTypeId));
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
 	}
 
 	

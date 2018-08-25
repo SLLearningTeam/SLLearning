@@ -417,11 +417,386 @@
 
 #### 5.5 返回参数
 
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 6.用户获取听力课程列表（按下载量排序）
+
+#### 6.1 功能描述
+
+用户获取听力课程列表
+
+#### 6.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/listeningCourses_manageByDownload/{pageNum} 
+>
+> pageNum表示页号
+
+#### 6.3 请求参数
+
+无
+
+#### 6.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [],
+            "listeningCourses": [
+                {
+                    "courseId": 4,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力3",
+                    "courseEnglishContent": "listening",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9学员网页端.mp3",
+                    "downloadNum": 5,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/417c1422-94c0-4b2d-831e-22fc97bc7020中文.png",
+                    "courseChineseContent": "听力"
+                },
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png",
+                    "courseChineseContent": "中文"
+                },
+                {
+                    "courseId": 5,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力99s",
+                    "courseEnglishContent": "lalaa99ss",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/c020b6f7-676a-4650-94bf-9cb660306280学员网页端.mp3",
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/10520d9e-06c2-46bc-a218-2d42382ea384java.jpeg",
+                    "courseChineseContent": "啦啦a99ss"
+                },
+                {
+                    "courseId": 3,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力2",
+                    "courseEnglishContent": "English",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3",
+                    "downloadNum": 1,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png",
+                    "courseChineseContent": "英文"
+                }
+            ]
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 6.5 返回参数
+
 | 字段        | 字段类型 | 字段说明     |
 | ----------- | -------- | ------------ |
 | totalPages  | Int      | 总页数       |
 | currentPage | int      | 当前页数     |
 | courses     | Object   | 听力课程对象 |
+
+### 7.用户获取筛选指定语言类别的听力课程列表 
+
+#### 7.1 功能描述
+
+用户获取筛选指定语言类别的听力课程列表 
+
+#### 7.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/listeningCourses_manageByLanguageType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 7.3 请求参数
+
+| 字段           | 字段类型 | 字段说明   |
+| -------------- | -------- | ---------- |
+| languageTypeId | int      | 语言类别Id |
+
+#### 7.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [],
+            "listeningCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png",
+                    "courseChineseContent": "中文"
+                },
+                {
+                    "courseId": 3,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力2",
+                    "courseEnglishContent": "English",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3",
+                    "downloadNum": 1,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png",
+                    "courseChineseContent": "英文"
+                },
+                {
+                    "courseId": 4,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力3",
+                    "courseEnglishContent": "listening",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9学员网页端.mp3",
+                    "downloadNum": 5,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/417c1422-94c0-4b2d-831e-22fc97bc7020中文.png",
+                    "courseChineseContent": "听力"
+                },
+                {
+                    "courseId": 5,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力99s",
+                    "courseEnglishContent": "lalaa99ss",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/c020b6f7-676a-4650-94bf-9cb660306280学员网页端.mp3",
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/10520d9e-06c2-46bc-a218-2d42382ea384java.jpeg",
+                    "courseChineseContent": "啦啦a99ss"
+                }
+            ]
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 7.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 8.用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表 
+
+#### 8.1 功能描述
+
+用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表 
+
+#### 8.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/listeningCourses_manageByRateType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 8.3 请求参数
+
+| 字段       | 字段类型 | 字段说明   |
+| ---------- | -------- | ---------- |
+| rateTypeId | int      | 种类类别Id |
+
+#### 8.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [],
+            "listeningCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png",
+                    "courseChineseContent": "中文"
+                },
+                {
+                    "courseId": 3,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力2",
+                    "courseEnglishContent": "English",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3",
+                    "downloadNum": 1,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png",
+                    "courseChineseContent": "英文"
+                },
+                {
+                    "courseId": 4,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力3",
+                    "courseEnglishContent": "listening",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9学员网页端.mp3",
+                    "downloadNum": 5,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/417c1422-94c0-4b2d-831e-22fc97bc7020中文.png",
+                    "courseChineseContent": "听力"
+                },
+                {
+                    "courseId": 5,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力99s",
+                    "courseEnglishContent": "lalaa99ss",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/c020b6f7-676a-4650-94bf-9cb660306280学员网页端.mp3",
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/10520d9e-06c2-46bc-a218-2d42382ea384java.jpeg",
+                    "courseChineseContent": "啦啦a99ss"
+                }
+            ]
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 8.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+
 
 
 

@@ -62,4 +62,20 @@ public interface CourseService {
 
 	BackJsonUtil getListeningCourses_manageByUser(Integer pageNum);
 
+	BackJsonUtil getListeningCourses_manageByDownloadByUser(Integer pageNum);
+
+	Map<String, List> getListeningCoursesByLanguageType(Integer pageNum, Integer languageTypeId);
+
+	int getListeningCoursesTotalPagesByLanguageType(Integer languageTypeId);
+
+	Map<String, List> getListeningCourses_manageByRateType(Integer pageNum, Integer rateTypeId);
+
+	int getListeningCoursesTotalPagesByRateType(Integer rateTypeId);
+
+	BackJsonUtil getListeningCourses_manageByLanguageTypeByUser(Integer pageNum, Integer languageTypeId);
+
+	BackJsonUtil getListeningCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
+
+	
+
 }
