@@ -284,20 +284,194 @@ public class CourseAction {
 	}
 	
 	//获得口语课程列表——管理员
+	@RequestMapping("/admin/oralCourses_manage/{pageNum}")
+	public ModelAndView getOralCourses_manage(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回口语课程信息
+		Map<String,List>oralCourses = courseService.getOralCourses(pageNum);
+		mv.addObject("courses", oralCourses);
+		//返回口语课程总页数
+		int totalPages = courseService.getOralCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("OralCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+oralCourses);
+		return mv;
+	}
 	
 	//获得口语课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/oralCourses_manage/{pageNum}")
+	public BackJsonUtil getOralCourses_manageByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getOralCourses_manageByUser(pageNum);
+	}
 	
 	//获取按下载量排序：口语课程列表——管理员
+	@RequestMapping("/admin/oralCourses_manageByDownload/{pageNum}")
+	public ModelAndView getOralCourses_manageByDownload(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回口语课程信息
+		Map<String,List>oralCoursesByDownload = courseService.getOralCoursesByDownload(pageNum);
+		mv.addObject("courses", oralCoursesByDownload);
+		//返回口语课程总页数
+		int totalPages = courseService.getOralCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("OralCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+oralCoursesByDownload);
+		return mv;
+	}
+	
+	//获取按下载量排序JSON：口语课程列表——用户
+	@ResponseBody
+	@RequestMapping("/user/oralCourses_manageByDownload/{pageNum}")
+	public BackJsonUtil getOralCourses_manageByDownloadByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getOralCourses_manageByDownloadByUser(pageNum);
+	}
+	
+	//获取筛选指定语言类别的口语课程列表——管理员
+	@RequestMapping("/admin/oralCourses_manageByLanguageType/{pageNum}")
+	public ModelAndView getOralCourses_manageByLanguageType(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定语言类别的口语课程信息
+		Map<String,List>oralCoursesByLanguageType = courseService.getOralCoursesByLanguageType(pageNum,languageTypeId);
+		mv.addObject("courses", oralCoursesByLanguageType);
+		//返回指定语言类别的口语课程总页数
+		int totalPages = courseService.getOralCoursesTotalPagesByLanguageType(languageTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("OralCourses\n\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+oralCoursesByLanguageType);
+		return mv;
+	}
+	
+	//获取筛选指定语言类别的口语课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/oralCourses_manageByLanguageType/{pageNum}")
+	public BackJsonUtil getOralCourses_manageByLanguageTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		return courseService.getOralCourses_manageByLanguageTypeByUser(pageNum,languageTypeId);
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的口语课程列表——管理员
+	@RequestMapping("/admin/oralCourses_manageByRateType/{pageNum}")
+	public ModelAndView getOralCourses_manageByRateType(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定种类类别的口语课程信息
+		Map<String,List>oralCoursesByRateType = courseService.getOralCourses_manageByRateType(pageNum,rateTypeId);
+		mv.addObject("courses", oralCoursesByRateType);
+		//返回指定种类类别的口语课程总页数
+		int totalPages = courseService.getOralCoursesTotalPagesByRateType(rateTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("OralCourses\n\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+oralCoursesByRateType);
+		return mv;
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的口语课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/oralCourses_manageByRateType/{pageNum}")
+	public BackJsonUtil getOralCourses_manageByRateTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		return courseService.getOralCourses_manageByRateTypeByUser(pageNum,rateTypeId);
+	}
 	
 	//获得阅读课程列表——管理员
-	
-	//获取按下载量排序：阅读课程列表——管理员
+	@RequestMapping("/admin/readingCourses_manage/{pageNum}")
+	public ModelAndView getReadingCourses_manage(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回阅读课程信息
+		Map<String,List>readingCourses = courseService.getReadingCourses(pageNum);
+		mv.addObject("courses", readingCourses);
+		//返回阅读课程总页数
+		int totalPages = courseService.getReadingCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("ReadingCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+readingCourses);
+		return mv;
+	}
 	
 	//获得阅读课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/readingCourses_manage/{pageNum}")
+	public BackJsonUtil getReadingCourses_manageByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getReadingCourses_manageByUser(pageNum);
+	}
 	
-	//根据课程名称搜索得到综合课程列表——管理员
+	//获取按下载量排序：阅读课程列表——管理员
+	@RequestMapping("/admin/readingCourses_manageByDownload/{pageNum}")
+	public ModelAndView getReadingCourses_manageByDownload(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回阅读课程信息
+		Map<String,List>readingCoursesByDownload = courseService.getReadingCoursesByDownload(pageNum);
+		mv.addObject("courses", readingCoursesByDownload);
+		//返回阅读课程总页数
+		int totalPages = courseService.getReadingCoursesTotalPages();
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("ReadingCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+readingCoursesByDownload);
+		return mv;
+	}
 	
-	//根据课程名称搜索得到综合课程列表JSON——用户
+	//获取按下载量排序JSON：阅读课程列表——用户
+	@ResponseBody
+	@RequestMapping("/user/readingCourses_manageByDownload/{pageNum}")
+	public BackJsonUtil getReadingCourses_manageByDownloadByUser(@PathVariable("pageNum")Integer pageNum) {
+		return courseService.getReadingCourses_manageByDownloadByUser(pageNum);
+	}
 	
+	//获取筛选指定语言类别的阅读课程列表——管理员
+	@RequestMapping("/admin/readingCourses_manageByLanguageType/{pageNum}")
+	public ModelAndView getReadingCourses_manageByLanguageType(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定语言类别的阅读课程信息
+		Map<String,List>readingCoursesByLanguageType = courseService.getReadingCoursesByLanguageType(pageNum,languageTypeId);
+		mv.addObject("courses", readingCoursesByLanguageType);
+		//返回指定语言类别的阅读课程总页数
+		int totalPages = courseService.getReadingCoursesTotalPagesByLanguageType(languageTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("ReadingCourses\n\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+readingCoursesByLanguageType);
+		return mv;
+	}
 	
+	//获取筛选指定语言类别的阅读课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/readingCourses_manageByLanguageType/{pageNum}")
+	public BackJsonUtil getReadingCourses_manageByLanguageTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("languageTypeId")Integer languageTypeId) {
+		return courseService.getReadingCourses_manageByLanguageTypeByUser(pageNum,languageTypeId);
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的阅读课程列表——管理员
+	@RequestMapping("/admin/readingCourses_manageByRateType/{pageNum}")
+	public ModelAndView getReadingCourses_manageByRateType(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		mv.addObject("pageName","courseManage");
+		//返回指定种类类别的口语课程信息
+		Map<String,List>readingCoursesByRateType = courseService.getReadingCourses_manageByRateType(pageNum,rateTypeId);
+		mv.addObject("courses", readingCoursesByRateType);
+		//返回指定种类类别的口语课程总页数
+		int totalPages = courseService.getReadingCoursesTotalPagesByRateType(rateTypeId);
+		mv.addObject("totalPages", totalPages);
+		//返回当前页面页号
+		mv.addObject("pageNum", pageNum);
+		//System.out.println("ReadingCourses\n\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+readingCoursesByRateType);
+		return mv;
+	}
+	
+	//获取筛选指定种类类别(种类类别已经确定了语言类别)的阅读课程列表JSON——用户
+	@ResponseBody
+	@RequestMapping("/user/readingCourses_manageByRateType/{pageNum}")
+	public BackJsonUtil getReadingCourses_manageByRateTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
+		return courseService.getReadingCourses_manageByRateTypeByUser(pageNum,rateTypeId);
+	}
 }

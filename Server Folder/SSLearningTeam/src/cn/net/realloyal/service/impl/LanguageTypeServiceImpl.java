@@ -136,8 +136,14 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 		int pageNumber = (int)languagesCount/10+1;
 		return pageNumber;
 	}
-	
-	
-	
+
+	@Override
+	public BackJsonUtil getAllLanguages() {
+		List<LanguageType>languageTypes = languageTypeMapper.getAllLanguages();
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		backJsonUtil.setStatus(true);
+		backJsonUtil.setInfo(languageTypes);
+		return backJsonUtil;
+	}
 
 }

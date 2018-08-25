@@ -166,18 +166,52 @@
 	<select id="getListeningCoursesNumByLanguageType" resultType="Integer">
 		select count(*) from ListeningCourse where languageTypeId=#{param1}
 	</select>
+	<!-- 取口语课程的总页数——通过语言类别筛选 -->
+	<select id="getOralCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from OralCourse where languageTypeId=#{param1}
+	</select>
+	<!-- 取阅读课程的总页数——通过语言类别筛选 -->
+	<select id="getReadingCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from ReadingCourse where languageTypeId=#{param1}
+	</select>
+	
 	<!-- 取听力课程的总页数——通过种类类别筛选 -->
 	<select id="getListeningCoursesNumByRateType" resultType="Integer">
 		select count(*) from ListeningCourse where rateTypeId=#{rateTypeId}
+	</select>
+	<!-- 取口语课程的总页数——通过种类类别筛选 -->
+	<select id="getOralCoursesNumByRateType" resultType="Integer">
+		select count(*) from OralCourse where rateTypeId=#{rateTypeId}
+	</select>
+	<!-- 取阅读课程的总页数——通过种类类别筛选 -->
+	<select id="getReadingCoursesNumByRateType" resultType="Integer">
+		select count(*) from ReadingCourse where rateTypeId=#{rateTypeId}
 	</select>
 	
 	<!-- 通过语言类别，取听力类型课程的内容 -->
 	<select id="getListeningCoursesByLanguageType" resultMap="ListeningCourseMap">
 		select * from ListeningCourse where languageTypeId=#{param3} limit #{param1},#{param2}
 	</select>
+	<!-- 通过语言类别，取口语类型课程的内容 -->
+	<select id="getOralCoursesByLanguageType" resultMap="OralCourseMap">
+		select * from OralCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过语言类别，取阅读类型课程的内容 -->
+	<select id="getReadingCoursesByLanguageType" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	
 	<!-- 通过种类类别，取听力类型课程的内容 -->
 	<select id="getListeningCoursesByRateType" resultMap="ListeningCourseMap">
 		select * from ListeningCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过种类类别，取口语类型课程的内容 -->
+	<select id="getOralCoursesByRateType" resultMap="OralCourseMap">
+		select * from OralCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过种类类别，取阅读类型课程的内容 -->
+	<select id="getReadingCoursesByRateType" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where rateTypeId=#{param3} limit #{param1},#{param2}
 	</select>
 	
 	

@@ -76,6 +76,48 @@ public interface CourseService {
 
 	BackJsonUtil getListeningCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
 
-	
+	Map<String, List> getOralCourses(Integer pageNum);
+
+	int getOralCoursesTotalPages();
+
+	Map<String, List> getReadingCourses(Integer pageNum);
+
+	int getReadingCoursesTotalPages();
+
+	BackJsonUtil getOralCourses_manageByUser(Integer pageNum);
+
+	BackJsonUtil getReadingCourses_manageByUser(Integer pageNum);
+
+	Map<String, List> getOralCoursesByDownload(Integer pageNum);
+
+	Map<String, List> getReadingCoursesByDownload(Integer pageNum);
+
+	BackJsonUtil getOralCourses_manageByDownloadByUser(Integer pageNum);
+
+	BackJsonUtil getReadingCourses_manageByDownloadByUser(Integer pageNum);
+
+	Map<String, List> getOralCoursesByLanguageType(Integer pageNum, Integer languageTypeId);
+
+	int getOralCoursesTotalPagesByLanguageType(Integer languageTypeId);
+
+	Map<String, List> getReadingCoursesByLanguageType(Integer pageNum, Integer languageTypeId);
+
+	int getReadingCoursesTotalPagesByLanguageType(Integer languageTypeId);
+
+	BackJsonUtil getOralCourses_manageByLanguageTypeByUser(Integer pageNum, Integer languageTypeId);
+
+	BackJsonUtil getReadingCourses_manageByLanguageTypeByUser(Integer pageNum, Integer languageTypeId);
+
+	Map<String, List> getOralCourses_manageByRateType(Integer pageNum, Integer rateTypeId);
+
+	int getOralCoursesTotalPagesByRateType(Integer rateTypeId);
+
+	Map<String, List> getReadingCourses_manageByRateType(Integer pageNum, Integer rateTypeId);
+
+	int getReadingCoursesTotalPagesByRateType(Integer rateTypeId);
+
+	BackJsonUtil getOralCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
+
+	BackJsonUtil getReadingCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
 
 }

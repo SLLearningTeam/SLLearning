@@ -77,11 +77,18 @@ public class LanguageTypeAction {
 		return languageTypeService.deletelanguage(languageTypeId);
 	}
 	
-	//获得所有语言类别内容——用户
+	//分页获得语言类别内容——用户
 	@ResponseBody
 	@RequestMapping("/user/getlanguages/{pageNum}")
 	public BackJsonUtil getLanguages(@PathVariable(value="pageNum")Integer pageNum) {
 		return languageTypeService.getLanguages(pageNum);
+	}
+	
+	//获得所有语言类别内容——用户
+	@ResponseBody
+	@RequestMapping("/user/getlanguages")
+	public BackJsonUtil getAllLanguages() {
+		return languageTypeService.getAllLanguages();
 	}
 	
 }

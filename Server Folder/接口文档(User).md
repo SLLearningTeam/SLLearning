@@ -1,6 +1,6 @@
 ## 接口文档（用户）
 
-### 1.用户获取语言信息
+### 1.用户获取语言信息[分不分页都写了,不传pageNum就是获取所有的)]
 
 #### 1.1 功能描述
 
@@ -789,6 +789,518 @@
 ```
 
 #### 8.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 9.用户获取口语课程列表
+
+#### 9.1 功能描述
+
+用户获取口语课程列表
+
+#### 9.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/oralCourses_manage/{pageNum} 
+>
+> pageNum表示页号
+
+#### 9.3 请求参数
+
+无
+
+#### 9.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试口语1",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/OralCourseResource/e428d718-73cb-411a-9fe9-2e7a3b3f5013成功.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 9.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 10.用户获取口语课程列表（按下载量排序）
+
+#### 10.1 功能描述
+
+用户获取口语课程列表
+
+#### 10.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/oralCourses_manageByDownload/{pageNum} 
+>
+> pageNum表示页号
+
+#### 10.3 请求参数
+
+无
+
+#### 10.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试口语1",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/OralCourseResource/e428d718-73cb-411a-9fe9-2e7a3b3f5013成功.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 10.5 返回参数
+
+| 字段        | 字段类型 | 字段说明     |
+| ----------- | -------- | ------------ |
+| totalPages  | Int      | 总页数       |
+| currentPage | int      | 当前页数     |
+| courses     | Object   | 听力课程对象 |
+
+### 11.用户获取筛选指定语言类别的口语课程列表 
+
+#### 11.1 功能描述
+
+用户获取筛选指定语言类别的口语课程列表 
+
+#### 11.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/oralCourses_manageByLanguageType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 11.3 请求参数
+
+| 字段           | 字段类型 | 字段说明   |
+| -------------- | -------- | ---------- |
+| languageTypeId | int      | 语言类别Id |
+
+#### 11.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试口语1",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/OralCourseResource/e428d718-73cb-411a-9fe9-2e7a3b3f5013成功.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 11.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 12.用户获取筛选指定种类类别(种类类别已经确定了语言类别)的口语课程列表 
+
+#### 12.1 功能描述
+
+用户获取筛选指定种类类别(种类类别已经确定了语言类别)的口语课程列表 
+
+#### 12.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/oralCourses_manageByRateType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 12.3 请求参数
+
+| 字段       | 字段类型 | 字段说明   |
+| ---------- | -------- | ---------- |
+| rateTypeId | int      | 种类类别Id |
+
+#### 12.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [],
+            "oralCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试口语1",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 3,
+                    "instructionImgUrl": "/SSLearningTeam/OralCourseResource/e428d718-73cb-411a-9fe9-2e7a3b3f5013成功.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 12.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 13.用户获取阅读课程列表
+
+#### 13.1 功能描述
+
+用户获取阅读课程列表
+
+#### 13.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/readingCourses_manage/{pageNum} 
+>
+> pageNum表示页号
+
+#### 13.3 请求参数
+
+无
+
+#### 13.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试阅读1s",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "oralCourses": [],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 13.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 14.用户获取阅读课程列表（按下载量排序）
+
+#### 14.1 功能描述
+
+用户获取阅读课程列表
+
+#### 14.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/readingCourses_manageByDownload/{pageNum} 
+>
+> pageNum表示页号
+
+#### 14.3 请求参数
+
+无
+
+#### 14.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试阅读1s",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "oralCourses": [],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 14.5 返回参数
+
+| 字段        | 字段类型 | 字段说明     |
+| ----------- | -------- | ------------ |
+| totalPages  | Int      | 总页数       |
+| currentPage | int      | 当前页数     |
+| courses     | Object   | 听力课程对象 |
+
+### 15.用户获取筛选指定语言类别的阅读课程列表 
+
+#### 15.1 功能描述
+
+用户获取筛选指定语言类别的阅读课程列表 
+
+#### 15.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/readingCourses_manageByLanguageType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 15.3 请求参数
+
+| 字段           | 字段类型 | 字段说明   |
+| -------------- | -------- | ---------- |
+| languageTypeId | int      | 语言类别Id |
+
+#### 15.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试阅读1s",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "oralCourses": [],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 15.5 返回参数
+
+| 字段        | 字段类型 | 字段说明 |
+| ----------- | -------- | -------- |
+| totalPages  | Int      | 总页数   |
+| currentPage | int      | 当前页数 |
+| courses     | Object   | 课程对象 |
+
+### 16.用户获取筛选指定种类类别(种类类别已经确定了语言类别)的阅读课程列表 
+
+#### 16.1 功能描述
+
+用户获取筛选指定种类类别(种类类别已经确定了语言类别)的阅读课程列表 
+
+#### 16.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/readingCourses_manageByRateType/{pageNum} 
+>
+> pageNum表示页号
+
+#### 16.3 请求参数
+
+| 字段       | 字段类型 | 字段说明   |
+| ---------- | -------- | ---------- |
+| rateTypeId | int      | 种类类别Id |
+
+#### 16.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "courses": {
+            "readingCourses": [
+                {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试阅读1s",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png",
+                    "courseChineseContent": "测试s"
+                }
+            ],
+            "oralCourses": [],
+            "listeningCourses": []
+        },
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 16.5 返回参数
 
 | 字段        | 字段类型 | 字段说明 |
 | ----------- | -------- | -------- |

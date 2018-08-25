@@ -74,8 +74,35 @@ public interface CourseMapper {
 
 	//通过种类类别，取听力类型课程的内容
 	List<ListeningCourse> getListeningCoursesByRateType(int startIndex, int i, Integer rateTypeId);
+	
+	//通过下载量排序，获取指定索引的口语课程
+	List<OralCourse> getOralCoursesByDownload(int startIndex, int needNum);
 
-	
-	
+	//通过下载量排序，获取指定索引的阅读课程
+	List<ReadingCourse> getReadingCoursesByDownload(int startIndex, int needNum);
+
+	//通过语言类别，取口语类型课程的内容
+	List<OralCourse> getOralCoursesByLanguageType(int startIndex, int needNum, Integer languageTypeId);
+
+	//通过语言类别，取阅读类型课程的内容
+	List<ReadingCourse> getReadingCoursesByLanguageType(int startIndex, int needNum, Integer languageTypeId);
+
+	//取口语课程的总页数——通过语言类别筛选
+	int getOralCoursesNumByLanguageType(Integer languageTypeId);
+
+	//取阅读课程的总页数——通过语言类别筛选
+	int getReadingCoursesNumByLanguageType(Integer languageTypeId);
+
+	//通过种类类别，取口语类型课程的内容
+	List<OralCourse> getOralCoursesByRateType(int startIndex, int needNum, Integer rateTypeId);
+
+	//通过种类类别，取阅读类型课程的内容
+	List<ReadingCourse> getReadingCoursesByRateType(int startIndex, int needNum, Integer rateTypeId);
+
+	//取口语课程的总页数——通过种类类别筛选
+	int getOralCoursesNumByRateType(Integer rateTypeId);
+
+	//取阅读课程的总页数——通过种类类别筛选
+	int getReadingCoursesNumByRateType(Integer rateTypeId);
 
 }
