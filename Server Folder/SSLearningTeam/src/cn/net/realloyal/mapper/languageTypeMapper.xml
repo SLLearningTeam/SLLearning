@@ -39,4 +39,7 @@
 		select count(*) from languageType
 	</select>
 
+	<select id="selectLanguageNameRepeat" resultType="Integer">
+		select count(*) from languageType where languageName = #{param1}
+	</select>
 </mapper>

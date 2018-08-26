@@ -146,4 +146,17 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 		return backJsonUtil;
 	}
 
+	@Override
+	public BackJsonUtil selectLanguageNameRepeat(String languageName) {
+		BackJsonUtil backJson = new BackJsonUtil();
+		if(languageTypeMapper.selectLanguageNameRepeat(languageName)!=0) {
+			backJson.setStatus(false);
+			backJson.setInfo("您输入的语言类别名称已存在，请重新输入!");
+		}else {
+			backJson.setStatus(true);
+			backJson.setInfo("您输入的语言类别不存在，可以使用该名称!");
+		}
+		return backJson;
+	}
+
 }

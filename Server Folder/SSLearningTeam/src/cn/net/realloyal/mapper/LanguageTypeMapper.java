@@ -22,4 +22,6 @@ public interface LanguageTypeMapper {
 
 	int getLanguagesCount();
 
+	int selectLanguageNameRepeat(String languageName);
+
 }

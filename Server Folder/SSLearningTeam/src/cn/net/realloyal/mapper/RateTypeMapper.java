@@ -25,4 +25,6 @@ public interface RateTypeMapper {
 
 	int getRateTypesCount();
 
+	int selectRateNameRepeat(String rateName);
+
 }

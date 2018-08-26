@@ -91,4 +91,10 @@ public class LanguageTypeAction {
 		return languageTypeService.getAllLanguages();
 	}
 	
+	//语言类别名称查重接口JSON——管理员
+	@ResponseBody
+	@RequestMapping("/admin/selectLanguageNameRepeat")
+	public BackJsonUtil selectLanguageNameRepeat(@RequestParam("languageName")String languageName){
+		return languageTypeService.selectLanguageNameRepeat(languageName);
+	}
 }

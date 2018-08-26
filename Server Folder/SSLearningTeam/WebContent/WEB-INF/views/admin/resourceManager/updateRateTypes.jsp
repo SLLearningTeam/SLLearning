@@ -40,7 +40,7 @@ label {
 						<option>泰语</option>
 						<option>德语</option>
 					</select> <label for="rateName">类别类型名称</label> <input type="text"
-						class="form-control" id="rateName">
+						class="form-control" id="rateName" value="${rateType.rateName }">
 					<div class="form-group">
 						<label for="rateIconUrl">类别类型图标</label>
 						<div class="input-group">

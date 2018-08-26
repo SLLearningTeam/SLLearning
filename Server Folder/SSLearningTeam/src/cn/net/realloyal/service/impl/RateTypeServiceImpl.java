@@ -160,4 +160,17 @@ public class RateTypeServiceImpl implements RateTypeService {
 		return pageNumber;
 	}
 
+	@Override
+	public BackJsonUtil selectRateNameRepeat(String rateName) {
+		BackJsonUtil backJson = new BackJsonUtil();
+		if(rateTypeMapper.selectRateNameRepeat(rateName)!=0) {
+			backJson.setStatus(false);
+			backJson.setInfo("您输入的种类类别名称已存在，请重新输入!");
+		}else {
+			backJson.setStatus(true);
+			backJson.setInfo("您输入的种类类别不存在，可以使用该名称!");
+		}
+		return backJson;
+	}
+
 }

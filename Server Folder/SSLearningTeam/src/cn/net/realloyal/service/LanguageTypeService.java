@@ -29,4 +29,6 @@ public interface LanguageTypeService {
 
 	public BackJsonUtil getAllLanguages();
 
+	public BackJsonUtil selectLanguageNameRepeat(String languageName);
+
 }

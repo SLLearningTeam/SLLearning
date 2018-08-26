@@ -937,4 +937,81 @@ courses:{readingCourses=[ReadingCourse [courseId=2, languageType=LanguageType [l
 pageName:"courseManage"
 ```
 
-#### 
+<hr/>
+
+## 追加补充内容
+
+### 1.语言类别查重接口JSON
+
+#### 1.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/language/admin/selectLanguageNameRepeat 
+
+#### 1.2 请求参数
+
+| 字段         | 字段类型 | 字段说明 |
+| ------------ | -------- | -------- |
+| languageName | string   | 语言名称 |
+
+#### 1.3 返回结果接收
+
+* 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "您输入的语言类别不存在，可以使用该名称!"
+}
+```
+
+* 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "您输入的语言类别名称已存在，请重新输入!"
+}
+```
+
+#### 1.4 返回参数
+
+过于简单，不作讲解
+
+### 2.种类类别查重接口JSON
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/ratetype/admin/selectRateNameRepeat
+
+#### 2.2 请求参数
+
+| 字段     | 字段类型 | 字段说明     |
+| -------- | -------- | ------------ |
+| rateName | string   | 种类类别名称 |
+
+#### 2.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "您输入的种类类别不存在，可以使用该名称!"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "您输入的种类类别名称已存在，请重新输入!"
+}
+```
+
+#### 2.4 返回参数
+
+过于简单，不作讲解
+

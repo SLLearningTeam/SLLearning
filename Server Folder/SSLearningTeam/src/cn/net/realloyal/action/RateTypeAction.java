@@ -62,6 +62,9 @@ public class RateTypeAction {
 		//查询当前种类类别的相关信息用于表单回显
 		RateType rateType = rateTypeService.getRateTypeInfo(rateTypeId);
 		mv.addObject("rateType", rateType);
+		List<LanguageType> languageTypes = rateTypeService.getLanguages();
+		mv.addObject("languageTypes", languageTypes);
+		System.out.println(rateType);
 		return mv;
 	}
 	
@@ -91,5 +94,12 @@ public class RateTypeAction {
 	@RequestMapping("/user/getratetypebylanguagetypeid")
 	public BackJsonUtil getRateTypesByLanguageTypeId(@RequestParam(value="languageTypeId")Integer languageTypeId) {
 		return rateTypeService.getRateTypesByLanguageTypeId(languageTypeId);
+	}
+	
+	//种类类别名称查重接口JSON——管理员
+	@ResponseBody
+	@RequestMapping("/admin/selectRateNameRepeat")
+	public BackJsonUtil selectRateNameRepeat(@RequestParam("rateName")String rateName){
+		return rateTypeService.selectRateNameRepeat(rateName);
 	}
 }

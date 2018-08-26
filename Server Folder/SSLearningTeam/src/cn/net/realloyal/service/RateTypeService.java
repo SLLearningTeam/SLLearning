@@ -39,4 +39,6 @@ public interface RateTypeService {
 
 	int getPageNumber();
 
+	BackJsonUtil selectRateNameRepeat(String rateName);
+
 }

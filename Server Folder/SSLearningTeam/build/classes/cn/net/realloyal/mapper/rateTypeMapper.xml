@@ -58,4 +58,9 @@
 	<select id="getRateTypesCount" resultType="Integer">
 		select count(*) from RateType
 	</select>
+	
+	<!-- 种类类别查重接口 -->
+	<select id="selectRateNameRepeat" resultType="Integer">
+		select count(*) from RateType where rateName = #{param1}
+	</select>
 </mapper>
