@@ -939,6 +939,233 @@ pageName:"courseManage"
 
 <hr/>
 
+## 轮播图相关接口
+
+### 1.获取轮播图上传页面
+
+#### 1.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/toAddCarouselMap 
+
+#### 1.2 请求参数
+
+无
+
+#### 1.3 返回数据
+
+- 样例
+
+```java
+pageName："recommendManage"
+```
+
+- 数据说明
+
+| 字段     | 类型   | 含义     |
+| -------- | ------ | -------- |
+| pageName | string | 页面名称 |
+
+#### 1.4 返回页面
+
+> admin/websiteManager/addCarouselMap.jsp
+
+### 2.轮播图上传接口
+
+#### 2.1 请求说明
+
+> 请求方式：POST
+> 请求URL ：/website/admin/addCarouselMap 
+
+#### 2.2 请求参数
+
+| 字段                | 类型   | 含义           |
+| ------------------- | ------ | -------------- |
+| carouselInstruction | string | 轮播图简介     |
+| carouselImg         | file   | 轮播图图片     |
+| carouseLinkUrl      | string | 轮播图链接地址 |
+
+#### 2.3 返回数据
+
+- 样例
+
+无
+
+- 数据说明
+
+无
+
+#### 2.4 返回页面
+
+> 重定向到：admin/websiteManager/carouselMap_manage.jsp
+
+### 3.轮播图删除接口JSON 
+
+#### 3.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/language/admin/deleteCarouselMap 
+
+#### 3.2 请求参数
+
+| 字段                | 类型   | 含义           |
+| ------------------- | ------ | -------------- |
+| carouselInstruction | string | 轮播图简介     |
+| carouselImg         | file   | 轮播图图片     |
+| carouseLinkUrl      | string | 轮播图链接地址 |
+
+#### 3.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+
+```
+
+- 失败时返回内容
+
+```json
+
+```
+
+#### 3.4 返回参数
+
+过于简单，不作讲解
+
+### 4.获取轮播图修改页面
+
+#### 4.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/toUpdateCarouselMap 
+
+#### 4.2 请求参数
+
+| 字段       | 类型    | 含义     |
+| ---------- | ------- | -------- |
+| carouselId | Integer | 轮播图Id |
+
+#### 4.3 返回数据
+
+- 样例
+
+```java
+pageName："recommendManage"
+
+```
+
+- 数据说明
+
+| 字段        | 类型        | 含义       |
+| ----------- | ----------- | ---------- |
+| pageName    | string      | 页面名称   |
+| carouselMap | CarouselMap | 轮播图对象 |
+
+#### 4.4 返回页面
+
+> admin/websiteManager/updateCarouselMap
+
+### 5.轮播图修改接口
+
+#### 5.1 请求说明
+
+> 请求方式：POST
+> 请求URL ：/website/admin/updateCarouselMap 
+
+#### 5.2 请求参数
+
+| 字段                | 类型   | 含义           |
+| ------------------- | ------ | -------------- |
+| carouselInstruction | string | 轮播图简介     |
+| carouselImg         | file   | 轮播图图片     |
+| carouseLinkUrl      | string | 轮播图链接地址 |
+
+#### 5.3 返回数据
+
+- 样例
+
+无
+
+- 数据说明
+
+无
+
+#### 5.4 返回页面
+
+> 重定向到：admin/websiteManager/carouselMap_manage.jsp
+
+### 6.查看轮播图列表(分页) 
+
+#### 6.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/carouselMap_manage/{pageNum} 
+>
+> pageNum表示页号
+
+#### 6.2 请求参数
+
+无
+
+#### 6.3 返回数据
+
+- 样例
+
+```java
+pageName："recommendManage"
+
+```
+
+- 数据说明
+
+| 字段        | 类型              | 含义           |
+| ----------- | ----------------- | -------------- |
+| pageName    | string            | 页面名称       |
+| carouselMap | List<CarouselMap> | 轮播图对象集合 |
+| pageNumber  | Integer           | 总页数         |
+| currentPage | Integer           | 当前页号       |
+
+#### 6.4 返回页面
+
+> admin/websiteManager/carouselMap_manage 
+
+### 7.查看所有轮播图列表(不分页) 
+
+#### 7.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/carouselMap_manage
+
+#### 7.2 请求参数
+
+无
+
+#### 7.3 返回数据
+
+- 样例
+
+```java
+pageName："recommendManage"
+
+```
+
+- 数据说明
+
+| 字段        | 类型              | 含义           |
+| ----------- | ----------------- | -------------- |
+| pageName    | string            | 页面名称       |
+| carouselMap | List<CarouselMap> | 轮播图对象集合 |
+| pageNumber  | Integer           | 总页数         |
+| currentPage | Integer           | 当前页号       |
+
+#### 7.4 返回页面
+
+> admin/websiteManager/carouselMap_manage 
+
+
+
+<hr/>
+
 ## 追加补充内容
 
 ### 1.语言类别查重接口JSON
