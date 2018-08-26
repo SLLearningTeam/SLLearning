@@ -2,20 +2,20 @@ package cn.net.realloyal.model;
 
 public class CarouselMap  {
 
-	private int carouseId;
+	private int carouselId;
 
 	private String carouselInstruction;
 
 	private String carouselImgUrl;
 
-	private String carouseLinkUrl;
+	private String carouselLinkUrl;
 
-	public int getCarouseId() {
-		return carouseId;
+	public int getCarouselId() {
+		return carouselId;
 	}
 
-	public void setCarouseId(int carouseId) {
-		this.carouseId = carouseId;
+	public void setCarouselId(int carouselId) {
+		this.carouselId = carouselId;
 	}
 
 	public String getCarouselInstruction() {
@@ -34,31 +34,32 @@ public class CarouselMap  {
 		this.carouselImgUrl = carouselImgUrl;
 	}
 
-	public String getCarouseLinkUrl() {
-		return carouseLinkUrl;
+	public String getCarouselLinkUrl() {
+		return carouselLinkUrl;
 	}
 
-	public void setCarouseLinkUrl(String carouseLinkUrl) {
-		this.carouseLinkUrl = carouseLinkUrl;
+	public void setCarouselLinkUrl(String carouselLinkUrl) {
+		this.carouselLinkUrl = carouselLinkUrl;
 	}
 
 	@Override
 	public String toString() {
-		return "CarouselMap [carouseId=" + carouseId + ", carouselInstruction=" + carouselInstruction
-				+ ", carouselImgUrl=" + carouselImgUrl + ", carouseLinkUrl=" + carouseLinkUrl + "]";
+		return "CarouselMap [carouselId=" + carouselId + ", carouselInstruction=" + carouselInstruction
+				+ ", carouselImgUrl=" + carouselImgUrl + ", carouselLinkUrl=" + carouselLinkUrl + "]";
 	}
 
-	public CarouselMap(int carouseId, String carouselInstruction, String carouselImgUrl, String carouseLinkUrl) {
+	public CarouselMap(int carouselId, String carouselInstruction, String carouselImgUrl, String carouselLinkUrl) {
 		super();
-		this.carouseId = carouseId;
+		this.carouselId = carouselId;
 		this.carouselInstruction = carouselInstruction;
 		this.carouselImgUrl = carouselImgUrl;
-		this.carouseLinkUrl = carouseLinkUrl;
+		this.carouselLinkUrl = carouselLinkUrl;
 	}
 
 	public CarouselMap() {
 		super();
 	}
 
+	
 	
 }

@@ -983,7 +983,7 @@ pageName："recommendManage"
 | ------------------- | ------ | -------------- |
 | carouselInstruction | string | 轮播图简介     |
 | carouselImg         | file   | 轮播图图片     |
-| carouseLinkUrl      | string | 轮播图链接地址 |
+| carouselLinkUrl     | string | 轮播图链接地址 |
 
 #### 2.3 返回数据
 
@@ -1008,24 +1008,28 @@ pageName："recommendManage"
 
 #### 3.2 请求参数
 
-| 字段                | 类型   | 含义           |
-| ------------------- | ------ | -------------- |
-| carouselInstruction | string | 轮播图简介     |
-| carouselImg         | file   | 轮播图图片     |
-| carouseLinkUrl      | string | 轮播图链接地址 |
+| 字段       | 类型 | 含义     |
+| ---------- | ---- | -------- |
+| carouselId | int  | 轮播图Id |
 
 #### 3.3 返回结果接收
 
 - 成功时返回内容
 
 ```json  
-
+{
+    "status": true,
+    "info": "删除成功"
+}
 ```
 
 - 失败时返回内容
 
 ```json
-
+{
+    "status": false,
+    "info": "删除失败"
+}
 ```
 
 #### 3.4 返回参数
@@ -1041,9 +1045,9 @@ pageName："recommendManage"
 
 #### 4.2 请求参数
 
-| 字段       | 类型    | 含义     |
-| ---------- | ------- | -------- |
-| carouselId | Integer | 轮播图Id |
+| 字段       | 类型 | 含义     |
+| ---------- | ---- | -------- |
+| carouselId | int  | 轮播图Id |
 
 #### 4.3 返回数据
 
@@ -1051,7 +1055,8 @@ pageName："recommendManage"
 
 ```java
 pageName："recommendManage"
-
+    
+carouselMap:CarouselMap [carouselId=0, carouselInstruction=轮播图2, carouselImgUrl=/SSLearningTeam/CarouselMaps/5a74771d-4de9-4342-9f58-6e47fd8dd8ee_carouselMap.png, carouselLinkUrl=www.souhu.com]
 ```
 
 - 数据说明
@@ -1078,7 +1083,8 @@ pageName："recommendManage"
 | ------------------- | ------ | -------------- |
 | carouselInstruction | string | 轮播图简介     |
 | carouselImg         | file   | 轮播图图片     |
-| carouseLinkUrl      | string | 轮播图链接地址 |
+| carouselLinkUrl     | string | 轮播图链接地址 |
+| carouselId          | int    | 轮播图Id       |
 
 #### 5.3 返回数据
 
@@ -1113,7 +1119,12 @@ pageName："recommendManage"
 
 ```java
 pageName："recommendManage"
+    
+carouselMaps:[CarouselMap [carouselId=0, carouselInstruction=轮播图1, carouselImgUrl=/SSLearningTeam/CarouselMaps/5bdf3f5c-1786-4b13-9423-5c4b944e5212_carouselMap.png, carouselLinkUrl=www.baidu.com], CarouselMap [carouselId=0, carouselInstruction=轮播图2, carouselImgUrl=/SSLearningTeam/CarouselMaps/5a74771d-4de9-4342-9f58-6e47fd8dd8ee_carouselMap.png, carouselLinkUrl=www.souhu.com]]
 
+pageNumber:1
+
+currentPage:1
 ```
 
 - 数据说明
@@ -1146,7 +1157,12 @@ pageName："recommendManage"
 
 ```java
 pageName："recommendManage"
+    
+carouselMaps:[CarouselMap [carouselId=0, carouselInstruction=轮播图1, carouselImgUrl=/SSLearningTeam/CarouselMaps/5bdf3f5c-1786-4b13-9423-5c4b944e5212_carouselMap.png, carouselLinkUrl=www.baidu.com], CarouselMap [carouselId=0, carouselInstruction=轮播图2, carouselImgUrl=/SSLearningTeam/CarouselMaps/5a74771d-4de9-4342-9f58-6e47fd8dd8ee_carouselMap.png, carouselLinkUrl=www.souhu.com]]
 
+pageNumber:1
+
+currentPage1
 ```
 
 - 数据说明

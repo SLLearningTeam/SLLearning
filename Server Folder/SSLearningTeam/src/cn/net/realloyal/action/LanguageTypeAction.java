@@ -31,7 +31,7 @@ public class LanguageTypeAction {
 		List<LanguageType> languageTypes = languageTypeService.getLanguagesManage(pageNum);
 		mv.addObject("languageTypes", languageTypes);
 		int pageNumeber = languageTypeService.getPageNumber();//获得所有language个数
-		System.out.println("后台取到pageNumber:"+pageNumeber);
+		//System.out.println("后台取到pageNumber:"+pageNumeber);
 		mv.addObject("pageNumeber", pageNumeber);
 		mv.addObject("currentPage", pageNum);
 		return mv;//返回pageName用于导航栏显示选中；languageTypes表示所有语言类别

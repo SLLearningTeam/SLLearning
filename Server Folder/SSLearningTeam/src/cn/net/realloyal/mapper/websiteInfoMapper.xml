@@ -7,5 +7,36 @@
 	
  -->
 <mapper namespace="cn.net.realloyal.mapper.WebsiteInfoMapper">
+	<insert id="addCarouselMap" parameterType="CarouselMap">
+		insert into carouselMap values(null,#{carouselInstruction},#{carouselImgUrl},#{carouselLinkUrl})
+	</insert>
 
+	<delete id="deleteCarouselMap" parameterType="Integer">
+		delete from carouselMap where carouselId=#{param1}
+	</delete>
+	
+	<select id="getCarouselMapInfo" resultType="CarouselMap">
+		select * from carouselMap where carouselId = #{param1}
+	</select>
+
+	<update id="updateCarouselMapWithImg" parameterType="CarouselMap">
+		update carouselMap set carouselInstruction=#{carouselInstruction},carouselImgUrl=#{carouselImgUrl},carouselLinkUrl=#{carouselLinkUrl} where carouselId=#{carouselId}
+	</update>
+	
+	<update id="updateCarouselMapWithoutImg" parameterType="CarouselMap">
+		update carouselMap set carouselInstruction=#{carouselInstruction},carouselLinkUrl=#{carouselLinkUrl} where carouselId=#{carouselId}
+	</update>
+	
+	<select id="getCarouselMapCount" resultType="Integer">
+		select count(*) from carouselMap
+	</select>
+
+	<select id="getCarouselMapManage" resultType="CarouselMap">
+		select * from carouselMap limit #{0},10
+	</select>
+	
+	<select id="getAllCarouselMaps" resultType="CarouselMap">
+		select * from carouselMap
+	</select>
+	
 </mapper>

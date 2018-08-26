@@ -1317,7 +1317,7 @@
 #### 17.2 请求说明
 
 > 请求方式：GET
-> 请求URL ：/course/user/getCarouselMaps 
+> 请求URL ：/website/user/getCarouselMaps 
 
 #### 17.3 请求参数
 
@@ -1326,7 +1326,23 @@
 #### 17.4 返回结果接收
 
 ```json  
-
+{
+    "status": true,
+    "info": [
+        {
+            "carouselId": 0,
+            "carouselInstruction": "轮播图1",
+            "carouselImgUrl": "/SSLearningTeam/CarouselMaps/5bdf3f5c-1786-4b13-9423-5c4b944e5212_carouselMap.png",
+            "carouselLinkUrl": "www.baidu.com"
+        },
+        {
+            "carouselId": 0,
+            "carouselInstruction": "轮播图2",
+            "carouselImgUrl": "/SSLearningTeam/CarouselMaps/5a74771d-4de9-4342-9f58-6e47fd8dd8ee_carouselMap.png",
+            "carouselLinkUrl": "www.souhu.com"
+        }
+    ]
+}
 ```
 
 #### 17.5 返回参数

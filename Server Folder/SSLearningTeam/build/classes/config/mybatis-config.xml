@@ -27,6 +27,7 @@
 		<mapper resource="cn/net/realloyal/mapper/languageTypeMapper.xml" />
 		<mapper resource="cn/net/realloyal/mapper/rateTypeMapper.xml" />
 		<mapper resource="cn/net/realloyal/mapper/courseMapper.xml" />
+		<mapper resource="cn/net/realloyal/mapper/websiteInfoMapper.xml" />
 	</mappers>
 
 </configuration>  
