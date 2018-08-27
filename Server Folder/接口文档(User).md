@@ -1351,5 +1351,131 @@
 | ----------- | ----------------- | -------------- |
 | carouselMap | List<CarouselMap> | 轮播图对象集合 |
 
+### 18.用户下载听力课程资源 
 
+#### 18.1 功能描述
 
+用户下载听力课程资源
+
+#### 18.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/downloadListeningCourse 
+
+#### 18.3 请求参数
+
+| 字段     | 字段类型 | 字段说明                                   |
+| -------- | -------- | ------------------------------------------ |
+| userId   | int      | 用户ID（如可以传JSESSIONID则不用传userId） |
+| courseId | int      | 课程Id                                     |
+| fileName | string   | 文件url                                    |
+
+#### 18.4 返回结果接收
+
+返回文件
+
+#### 18.5 返回参数
+
+无
+
+### 19.用户查看所有下载的历史 
+
+#### 19.1 功能描述
+
+用户查看所有下载的历史
+
+#### 19.2 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/getDownloadRecordings/{pageNum}  
+>
+> pageNum表示页号
+
+#### 19.3 请求参数
+
+| 字段   | 字段类型 | 字段说明                                           |
+| ------ | -------- | -------------------------------------------------- |
+| userId | int      | 用户Id（如果可以回传JSESSIONID则可以不用传递此值） |
+
+#### 19.4 返回结果接收
+
+```json  
+{
+    "status": true,
+    "info": {
+        "downloadRecordings": [
+            {
+                "downloadRecordingId": 3,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "courseType": "listeningcourse",
+                "course": {
+                    "courseId": 3,
+                    "languageType": null,
+                    "rateType": null,
+                    "courseName": "测试听力2",
+                    "courseEnglishContent": "English",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3",
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png"
+                },
+                "downloadRecordingTime": 1535369123000
+            }
+        ],
+        "totalPage": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 19.5 返回参数
+
+| 字段               | 类型                     | 含义         |
+| ------------------ | ------------------------ | ------------ |
+| downloadRecordings | List< DownloadRecording> | 下载对象集合 |
+| pageNumber         | Integer                  | 总页数       |
+| currentPage        | Integer                  | 当前页号     |
+
+### 20.用户删除指定下载的记录
+
+#### 20.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/user/deleteDownloadRecording 
+
+#### 20.2 请求参数
+
+| 字段                | 类型 | 含义       |
+| ------------------- | ---- | ---------- |
+| downloadRecordingId | int  | 下载记录Id |
+
+#### 20.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 20.4 返回参数
+
+过于简单，不作讲解

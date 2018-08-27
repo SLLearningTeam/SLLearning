@@ -4,6 +4,7 @@ package cn.net.realloyal.action;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.CarouselMap;
+import cn.net.realloyal.model.DownloadRecording;
+import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.WebsiteInfoService;
 
 @Controller
@@ -23,6 +26,8 @@ import cn.net.realloyal.service.WebsiteInfoService;
 public class WebsiteInfoAction {
 	@Autowired
 	private WebsiteInfoService websiteInfoService;
+	
+	HttpSession session;
 	
 	//轮播图相关
 	//获取轮播图上传页面——管理员
@@ -109,6 +114,46 @@ public class WebsiteInfoAction {
 	public BackJsonUtil getCarouselMaps() {
 		return websiteInfoService.getCarouselMaps();
 	}
+	
+	//分页查看所有下载的记录——管理员
+	@RequestMapping("/admin/getDownloadRecordings/{pageNum}")
+	public ModelAndView getDownloadRecordings(@PathVariable("pageNum")Integer pageNum){
+		ModelAndView mv = new ModelAndView("admin/websiteManager/downloadRecording_manage");
+		//显示管理下载列表的Active样式
+		mv.addObject("pageName","downloadRecordingManage");
+		//获取DownloadRecording的总显示页数(10个一页)
+		int allPageNum = websiteInfoService.getDownloadRecordingPageNumber();
+		mv.addObject("pageNumber", allPageNum);
+		//获取当前页号
+		mv.addObject("currentPage",pageNum);
+		List<DownloadRecording> downloadRecordings = websiteInfoService.getDownloadRecordings(pageNum);
+		//获取下载列表
+		mv.addObject("downloadRecordings",downloadRecordings);
+		System.out.println("downloadRecordings:"+downloadRecordings+"\n\npageNumber:"+allPageNum+"\n\ncurrentPage"+pageNum);
+		return mv;
+	}
+	
+	//删除指定用户指定下载的记录——用户
+	//删除指定下载的记录——管理员
+	@ResponseBody
+	@RequestMapping(value= {"/admin/deleteDownloadRecording","/user/deleteDownloadRecording"})
+	public BackJsonUtil deleteDownloadRecording(@RequestParam("downloadRecordingId")Integer downloadRecordingId) {
+		return websiteInfoService.deleteDownloadRecording(downloadRecordingId);
+	}
+
+	//查看指定用户的所有下载的历史——用户
+	@ResponseBody
+	@RequestMapping("/user/getDownloadRecordings/{pageNum}")
+	public BackJsonUtil getDownloadRecordingsByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId == null ) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return websiteInfoService.getDownloadRecordingsByUser(pageNum,userId);
+	}
+	
+	
 	
 	
 	

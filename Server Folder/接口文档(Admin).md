@@ -1178,7 +1178,86 @@ currentPage1
 
 > admin/websiteManager/carouselMap_manage 
 
+<hr/>
 
+## 下载管理相关接口
+
+### 1.查看下载记录（分页）
+
+#### 1.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/getDownloadRecordings/{pageNum} 
+>
+> pageNum表示页号
+
+#### 1.2 请求参数
+
+无
+
+#### 1.3 返回数据
+
+- 样例
+
+```java
+pageName："downloadRecordingManage"
+    
+downloadRecordings:[DownloadRecording [downloadRecordingId=1, user=User [userId=2, userSex=男, userName=Daming, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png, userPhoneNumber=15842685420, userPermission=0], courseType=listeningcourse, course=null, downloadRecordingTime=Mon Aug 27 19:20:56 CST 2018], DownloadRecording [downloadRecordingId=2, user=User [userId=2, userSex=男, userName=Daming, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png, userPhoneNumber=15842685420, userPermission=0], courseType=listeningcourse, course=null, downloadRecordingTime=Mon Aug 27 19:24:29 CST 2018], DownloadRecording [downloadRecordingId=3, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], courseType=listeningcourse, course=Course [courseId=3, languageType=null, rateType=null, courseName=测试听力2, courseEnglishContent=English, courseResourceUrl=/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3, downloadNum=2, instructionImgUrl=/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png], downloadRecordingTime=Mon Aug 27 19:25:23 CST 2018]]
+
+pageNumber:1
+
+currentPage:1
+```
+
+- 数据说明
+
+| 字段               | 类型                     | 含义         |
+| ------------------ | ------------------------ | ------------ |
+| pageName           | string                   | 页面名称     |
+| downloadRecordings | List< DownloadRecording> | 下载对象集合 |
+| pageNumber         | Integer                  | 总页数       |
+| currentPage        | Integer                  | 当前页号     |
+
+#### 1.4 返回页面
+
+> admin/websiteManager/downloadRecording_manage 
+
+### 2.删除指定下载的记录JSON 
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/website/admin/deleteDownloadRecording 
+
+#### 2.2 请求参数
+
+| 字段                | 类型 | 含义       |
+| ------------------- | ---- | ---------- |
+| downloadRecordingId | int  | 下载记录Id |
+
+#### 2.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 2.4 返回参数
+
+过于简单，不作讲解
 
 <hr/>
 

@@ -1,11 +1,22 @@
 package cn.net.realloyal.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +30,10 @@ import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.service.RateTypeService;
+import cn.net.realloyal.service.WebsiteInfoService;
 import cn.net.realloyal.vo.RateTypeForSQL;
 
 @Controller
@@ -30,6 +43,11 @@ public class CourseAction {
 	private CourseService courseService;
 	@Autowired
 	private RateTypeService rateTypeService;
+	@Autowired
+	private WebsiteInfoService websiteInfoService;
+	
+	//设置session
+	HttpSession session;
 	
 	//获取听力课程添加页面——管理员
 	@RequestMapping("/admin/toAddListeningCourse")
@@ -474,4 +492,34 @@ public class CourseAction {
 	public BackJsonUtil getReadingCourses_manageByRateTypeByUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("rateTypeId")Integer rateTypeId) {
 		return courseService.getReadingCourses_manageByRateTypeByUser(pageNum,rateTypeId);
 	}
+	
+	//下载听力课程资源——用户
+	@RequestMapping("/user/downloadListeningCourse")
+	public ResponseEntity<byte[]> download(@RequestParam("fileName")String fileName,@RequestParam(value="courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) throws IOException, ParseException {
+		session = request.getSession();
+		//判断是否传递userId(如果没传递就从session中取)
+		if(userId==null) {
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		//下载记录
+		websiteInfoService.addDownloadRecordingForCourse(userId,"listeningcourse",courseId);
+		//下载文件代码
+		//将字符串的工程名删除
+		String programContext = fileName.substring(16);
+		//得到工程目录
+		String sourceContext = request.getSession().getServletContext().getRealPath(programContext);
+	    File file = new File(sourceContext);
+	    byte[] body = null;
+	    InputStream is = new FileInputStream(file);
+	    body = new byte[is.available()];
+	    is.read(body);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Disposition", "attchement;filename=" + file.getName());
+	    HttpStatus statusCode = HttpStatus.OK;
+	    ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
+	    return entity;
+	}
+	
+	
 }

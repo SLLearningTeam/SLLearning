@@ -39,4 +39,48 @@
 		select * from carouselMap
 	</select>
 	
+	<!-- 在DownloadRecording表中添加一条下载记录 -->
+	<insert id="addDownloadRecordingForCourse" parameterType="DownloadRecordingForSQL">
+		insert into DownloadRecording (downloadRecordingId,userId,courseType,courseId,downloadRecordingTime) values (0,#{userId},#{courseType},#{courseId},#{downloadRecordingTime})
+	</insert>
+	
+	<!-- 修改对应课程的下载个数 -->
+	<update id="addCourseDownloadNum">
+		update ${param1} set downloadNum = downloadNum+1 where courseId = #{param2}
+	</update>
+	
+	<!-- 获得所有的下载记录个数 -->
+	<select id="getDownloadRecordingCount" resultType="Integer">
+		select count(*) from DownloadRecording
+	</select>
+	
+	<!-- 分页获得所有下载记录 -->
+	<select id="getDownloadRecordings" resultMap="DownloadRecordingMap">
+		select * from DownloadRecording limit #{param1},10
+	</select>
+	<resultMap type="DownloadRecording" id="DownloadRecordingMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="downloadRecordingId" property="downloadRecordingId"/>
+		<result column="downloadRecordingTime" property="downloadRecordingTime"/>
+		<result column="courseType" property="courseType"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
+	</resultMap>
+	<select id="getUserById" parameterType="java.lang.Integer" resultType="User">
+		select * from user where userId = #{userId}
+	</select>
+	<select id="getCourse" resultType="course">
+		select * from ${courseType} where courseId = #{courseId}
+	</select>
+	
+	<!-- 根据Id删除指定下载记录 -->
+	<delete id="deleteDownloadRecording">
+		delete from DownloadRecording where downloadRecordingId=#{param1}
+	</delete>
+	
+	<!-- 分页获得指定用户的下载记录 -->
+	<select id="getDownloadRecordingsByUser" resultMap="DownloadRecordingMap">
+		select * from DownloadRecording where userId = #{param2} limit #{param1},10
+	</select>
+	
 </mapper>
