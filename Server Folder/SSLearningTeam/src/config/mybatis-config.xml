@@ -17,6 +17,7 @@
 		<typeAlias alias="OralCourseForSQL" type="cn.net.realloyal.vo.OralCourseForSQL" />
 		<typeAlias alias="ReadingCourseForSQL" type="cn.net.realloyal.vo.ReadingCourseForSQL" />
 		<typeAlias alias="DownloadRecordingForSQL" type="cn.net.realloyal.vo.DownloadRecordingForSQL" />
+		<typeAlias alias="QuestionForSQL" type="cn.net.realloyal.vo.QuestionForSQL" />
 		<typeAlias alias="CarouselMap" type="cn.net.realloyal.model.CarouselMap" />
 		<typeAlias alias="DownloadRecording" type="cn.net.realloyal.model.DownloadRecording" />
 		

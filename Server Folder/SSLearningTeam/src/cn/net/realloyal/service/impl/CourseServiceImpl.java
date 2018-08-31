@@ -26,6 +26,7 @@ import cn.net.realloyal.model.ReadingCourse;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
 
 @Service
@@ -975,6 +976,76 @@ public class CourseServiceImpl implements CourseService {
 			result.put("currentPage", pageNum);
 			result.put("courses", getReadingCourses_manageByRateType(pageNum,rateTypeId));
 			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil addQuestion(QuestionForSQL question) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int i = courseMapper.addQuestion(question);
+		if(i==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("添加失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("添加成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil deleteQuestion(Integer questionId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int i = courseMapper.deleteQuestion(questionId);
+		if(i==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil changeQuestion(QuestionForSQL question) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int i = courseMapper.changeQuestion(question);
+		if(i==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("修改失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("修改成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAllQuestion(String courseType, Integer courseId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		List<QuestionForSQL> questions = courseMapper.getAllQuestion(courseType,courseId);
+		if(questions==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("查询失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(questions);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil toChangeQuestion(Integer questionId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		QuestionForSQL question = courseMapper.getQuestionById(questionId);
+		if(question==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("查询失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(question);
 		}
 		return backJsonUtil;
 	}

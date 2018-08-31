@@ -34,6 +34,7 @@ import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.service.RateTypeService;
 import cn.net.realloyal.service.WebsiteInfoService;
+import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.RateTypeForSQL;
 
 @Controller
@@ -520,6 +521,48 @@ public class CourseAction {
 	    ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
 	    return entity;
 	}
+	
+	//给指定课程添加问题——管理员
+	@ResponseBody
+	@RequestMapping("/admin/addQuestion")
+	public BackJsonUtil addQuestion(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam("questionContent")String questionContent,@RequestParam("answerA")String answerA,@RequestParam("answerB")String answerB,@RequestParam("answerC")String answerC,@RequestParam("answerD")String answerD,@RequestParam("answerReal")Integer answerReal,@RequestParam("answerReason")String answerReason) {
+		QuestionForSQL question = new QuestionForSQL(0, courseType, courseId, questionContent, answerA,
+			answerB, answerC, answerD, answerReal, answerReason);
+		return courseService.addQuestion(question);
+	}
+	
+	//给指定课程删除问题——管理员
+	@ResponseBody
+	@RequestMapping("/admin/deleteQuestion")
+	public BackJsonUtil deleteQuestion(@RequestParam("questionId")Integer questionId) {
+		return courseService.deleteQuestion(questionId);
+	}
+	
+	//修改指定课程的表单回显
+	@ResponseBody
+	@RequestMapping("/admin/toChangeQuestion")
+	public BackJsonUtil toChangeQuestion(@RequestParam("questionId")Integer questionId) {
+		return courseService.toChangeQuestion(questionId);
+	}
+	
+	//修改指定课程的问题——管理员
+	@ResponseBody
+	@RequestMapping("/admin/changeQuestion")
+	public BackJsonUtil changeQuestion(@RequestParam("questionId")Integer questionId,@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam("questionContent")String questionContent,@RequestParam("answerA")String answerA,@RequestParam("answerB")String answerB,@RequestParam("answerC")String answerC,@RequestParam("answerD")String answerD,@RequestParam("answerReal")Integer answerReal,@RequestParam("answerReason")String answerReason) {
+		QuestionForSQL question = new QuestionForSQL(questionId, courseType, courseId, questionContent, answerA,
+				answerB, answerC, answerD, answerReal, answerReason);
+		return courseService.changeQuestion(question);
+	}
+	
+	//查看指定课程的所有问题——管理员/用户
+	@ResponseBody
+	@RequestMapping("/admin/getAllQuestion")
+	public BackJsonUtil getAllQuestion(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId) {
+		return courseService.getAllQuestion(courseType,courseId);
+	}
+	
+	
+	
 	
 	
 }

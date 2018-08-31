@@ -7,6 +7,7 @@ import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
 
 public interface CourseMapper {
@@ -104,5 +105,20 @@ public interface CourseMapper {
 
 	//取阅读课程的总页数——通过种类类别筛选
 	int getReadingCoursesNumByRateType(Integer rateTypeId);
+
+	//给课程添加问题
+	int addQuestion(QuestionForSQL question);
+
+	//删除课程问题
+	int deleteQuestion(Integer questionId);
+
+	//修改课程问题
+	int changeQuestion(QuestionForSQL question);
+
+	//通过ID获得问题
+	QuestionForSQL getQuestionById(Integer questionId);
+
+	//获得该课程的所有问题
+	List<QuestionForSQL> getAllQuestion(String courseType, Integer courseId);
 
 }

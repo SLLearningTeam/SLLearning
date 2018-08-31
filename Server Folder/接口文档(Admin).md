@@ -1261,6 +1261,284 @@ currentPage:1
 
 <hr/>
 
+## 课程问题Question操作接口
+
+### 1.给指定课程添加问题 
+
+#### 1.1 请求说明
+
+> 请求方式：POST
+> 请求URL ：/course/admin/addQuestion 
+
+#### 1.2 请求参数
+
+| 字段            | 类型   | 含义     |
+| --------------- | ------ | -------- |
+| courseType      | string | 课程类型 |
+| courseId        | int    | 课程Id   |
+| questionContent | string | 问题内容 |
+| answerA         | string | A内容    |
+| answerB         | string | B内容    |
+| answerC         | string | C内容    |
+| answerD         | string | D内容    |
+| answerReal      | int    | 真实答案 |
+| answerReason    | string | 答案详解 |
+
+#### 1.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "添加成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "添加失败"
+}
+```
+
+#### 1.4 返回参数
+
+过于简单，不作讲解
+
+### 2.给指定课程删除问题 
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/deleteQuestion 
+
+#### 2.2 请求参数
+
+| 字段       | 类型 | 含义   |
+| ---------- | ---- | ------ |
+| questionId | int  | 问题Id |
+
+#### 2.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 2.4 返回参数
+
+过于简单，不作讲解
+
+### 3.修改指定课程的表单回显 
+
+#### 3.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/toChangeQuestion 
+
+#### 3.2 请求参数
+
+| 字段       | 类型 | 含义   |
+| ---------- | ---- | ------ |
+| questionId | int  | 问题Id |
+
+#### 3.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "questionId": 1,
+        "courseType": "listeningcourse",
+        "courseId": 2,
+        "questionContent": "这是中文课程的问题题目5",
+        "answerA": "答案选项A5",
+        "answerB": "答案选项B5",
+        "answerC": "答案选项C5",
+        "answerD": "答案选项D5",
+        "answerReal": 4,
+        "answerReason": "我觉得选D"
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "查询失败"
+}
+```
+
+#### 3.4 返回参数
+
+过于简单，不作讲解
+
+### 4.修改指定课程的问题 
+
+#### 4.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/changeQuestion 
+
+#### 4.2 请求参数
+
+| questionId      | int    | 问题Id   |
+| --------------- | ------ | -------- |
+| courseType      | string | 课程类型 |
+| courseId        | int    | 课程Id   |
+| questionContent | string | 问题内容 |
+| answerA         | string | A内容    |
+| answerB         | string | B内容    |
+| answerC         | string | C内容    |
+| answerD         | string | D内容    |
+| answerReal      | int    | 真实答案 |
+| answerReason    | string | 答案详解 |
+
+#### 4.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "修改成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "修改失败"
+}
+```
+
+#### 4.4 返回参数
+
+过于简单，不作讲解
+
+### 5.查看指定课程的所有问题 
+
+#### 5.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/getAllQuestion  
+
+#### 5.2 请求参数
+
+| 字段       | 类型   | 含义     |
+| ---------- | ------ | -------- |
+| courseType | string | 课程类型 |
+| courseId   | int    | 课程Id   |
+
+#### 5.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": [
+        {
+            "questionId": 2,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 3,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 4,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目2",
+            "answerA": "答案选项A2",
+            "answerB": "答案选项B2",
+            "answerC": "答案选项C2",
+            "answerD": "答案选项D2",
+            "answerReal": 2,
+            "answerReason": "我觉得选B"
+        },
+        {
+            "questionId": 5,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目3",
+            "answerA": "答案选项A3",
+            "answerB": "答案选项B3",
+            "answerC": "答案选项C3",
+            "answerD": "答案选项D3",
+            "answerReal": 3,
+            "answerReason": "我觉得选C"
+        },
+        {
+            "questionId": 6,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目4",
+            "answerA": "答案选项A4",
+            "answerB": "答案选项B4",
+            "answerC": "答案选项C4",
+            "answerD": "答案选项D4",
+            "answerReal": 4,
+            "answerReason": "我觉得选D"
+        }
+    ]
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "查询失败"
+}
+```
+
+#### 5.4 返回参数
+
+过于简单，不作讲解
+
+<hr/>
+
 ## 追加补充内容
 
 ### 1.语言类别查重接口JSON

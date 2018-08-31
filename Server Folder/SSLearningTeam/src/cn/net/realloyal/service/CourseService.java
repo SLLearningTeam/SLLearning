@@ -13,6 +13,7 @@ import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.vo.QuestionForSQL;
 
 @Service
 public interface CourseService {
@@ -119,5 +120,15 @@ public interface CourseService {
 	BackJsonUtil getOralCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
 
 	BackJsonUtil getReadingCourses_manageByRateTypeByUser(Integer pageNum, Integer rateTypeId);
+
+	BackJsonUtil addQuestion(QuestionForSQL question);
+
+	BackJsonUtil deleteQuestion(Integer questionId);
+
+	BackJsonUtil changeQuestion(QuestionForSQL question);
+
+	BackJsonUtil getAllQuestion(String courseType, Integer courseId);
+
+	BackJsonUtil toChangeQuestion(Integer questionId);
 
 }

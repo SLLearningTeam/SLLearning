@@ -1479,3 +1479,102 @@
 #### 20.4 返回参数
 
 过于简单，不作讲解
+
+### 21.查看指定课程的所有问题 
+
+#### 21.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/getAllQuestion  
+
+#### 21.2 请求参数
+
+| 字段       | 类型   | 含义     |
+| ---------- | ------ | -------- |
+| courseType | string | 课程类型 |
+| courseId   | int    | 课程Id   |
+
+#### 21.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": [
+        {
+            "questionId": 2,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 3,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 4,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目2",
+            "answerA": "答案选项A2",
+            "answerB": "答案选项B2",
+            "answerC": "答案选项C2",
+            "answerD": "答案选项D2",
+            "answerReal": 2,
+            "answerReason": "我觉得选B"
+        },
+        {
+            "questionId": 5,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目3",
+            "answerA": "答案选项A3",
+            "answerB": "答案选项B3",
+            "answerC": "答案选项C3",
+            "answerD": "答案选项D3",
+            "answerReal": 3,
+            "answerReason": "我觉得选C"
+        },
+        {
+            "questionId": 6,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目4",
+            "answerA": "答案选项A4",
+            "answerB": "答案选项B4",
+            "answerC": "答案选项C4",
+            "answerD": "答案选项D4",
+            "answerReal": 4,
+            "answerReason": "我觉得选D"
+        }
+    ]
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "查询失败"
+}
+```
+
+#### 21.4 返回参数
+
+过于简单，不作讲解

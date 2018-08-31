@@ -214,5 +214,24 @@
 		select * from ReadingCourse where rateTypeId=#{param3} limit #{param1},#{param2}
 	</select>
 	
-	
+	<!-- 给课程添加问题 -->
+	<insert id="addQuestion">
+		insert into question values(null,#{courseType},#{courseId},#{questionContent},#{answerA},#{answerB},#{answerC},#{answerD},#{answerReal},#{answerReason});
+	</insert>
+	<!-- 删除课程问题 -->
+	<delete id="deleteQuestion">
+		delete from question where questionId=#{param1};
+	</delete>
+	<!-- 修改课程问题 -->
+	<update id="changeQuestion" parameterType="QuestionForSQL">
+		update question set courseType=#{courseType},courseId=#{courseId},questionContent=#{questionContent},answerA=#{answerA},answerB=#{answerB},answerC=#{answerC},answerD=#{answerD},answerReal=#{answerReal},answerReason=#{answerReason} where questionId=#{questionId}
+	</update>
+	<!-- 通过ID获得问题 -->
+	<select id="getQuestionById" resultType="QuestionForSQL">
+		select * from question where questionId = #{questionId};
+	</select>
+	<!-- 获得该课程的所有问题 -->
+	<select id="getAllQuestion" resultType="QuestionForSQL">
+		select * from question;
+	</select>
 </mapper>
