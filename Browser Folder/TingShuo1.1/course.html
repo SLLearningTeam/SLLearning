@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>course</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <div class="headerBar-noShadow">
+        <div class="header-shadow">
+            <div class="leftArea">
+                <div class="logo">
+                    <a href="index.html">
+                        <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                    </a>
+                </div>
+                <div class="topNav fl">
+                    <ul>
+                        <li class="fl">
+                            <a href="">首页</a>
+                        </li>
+                        <li class="fl">
+                            <a href="classify.html">分类</a>
+                        </li>
+                        <li class="fl">
+                            <a href="">我的天啊</a>
+                        </li>
+                        <li class="fl">
+                            <a href="">这是啥呀</a>
+                        </li>
+                        <li class="fl">
+                            <a href="">真是</a>
+                        </li>
+                        <li style="padding-right: 30px;" class="fl">
+                            <a href="">干啥呀</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rightArea">
+                <div class="user_box fl">
+                    <ul>
+                        <li class="fl dropdown">
+                            <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                            <div class="dropdown-menu">
+                                <img class="download" src="./img/logo.png" alt="下载APP">
+                                <span>扫一扫</span>
+                            </div>
+                        </li>
+                        <li class="fl">
+                            <a href="me.html">登录</a>
+                            /
+                            <a href="">注册</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="search-box">
+                <form class="form-inline search-form" action="" id="search-form">
+                    <input type="text" class="search-content" name="fd" id="search-content">
+                    <button class="search-submit" type="submit" value=""></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--header-->
+    <div class="course-page">
+        <div class="class-box">
+            <div class="class-title-box">
+                <div class="class-title clearfix">
+                    <div class="class-img fl">
+                        <a href="">
+                            <img style="border-radius: 5px; width: 380px; height: 240px;" src="./img/siji.jpg" alt="课程图片">
+                        </a>
+                    </div>
+                    <div class="class-detail">
+                        <div class="class-detail-top clearfix">
+                            <div class="class-name-box fl">
+                                <p id="class_name">这里是课程名字</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="rate-star">
+                                    <img class="star" src="./icon/xing.png" alt="xing">
+                                    <img class="star" src="./icon/xing.png" alt="xing">
+                                    <img class="star" src="./icon/xing.png" alt="xing">
+                                    <img class="star" src="./icon/xing.png" alt="xing">
+                                    <img class="star" src="./icon/xing.png" alt="xing">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="class-detail-mid">
+                            <em>订阅数：&nbsp;这里是数据</em>
+                        </div>
+                        <div class="class-detail-bottom">
+                            <p class="fl">这里是课程简介</p>
+                            <div class="class-menu">
+                                    <a href="">
+                                        <img style="height: 40px;" title="订阅" src="./icon/follow.png" alt="订阅">
+                                    </a>
+                                    <a href="">
+                                        <img style="height: 40px;" title="下载" src="./icon/download.png" alt="下载">
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="class-content">
+                <!--  听力  -->
+                <div class="listen">
+                    <div onclick="playPause()" class="listen-img fl">
+                            <audio src="./audio/111.mp3" id="myaudio" controls="controls" hidden="true"></audio>
+                            <img id="play" style="height: 50px;" src="./icon/play.png" alt="播放、暂停" title="点击播放/暂停">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--本页内容-->
+    <div class="footer-box">
+        <div class="footer">
+            <div class="footer-content">
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+            </div>
+            <div class="footer-copyright">
+                <p>©2018&nbsp;tingshuo.com</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var playAudio=byId('play');
+        var myaudio=byId('myaudio');
+        function playPause(){
+            playAudio.src=(playAudio.getAttribute("src")=='./icon/play.png')?'./icon/pause.png':'./icon/play.png';
+            if(myaudio.paused){
+                myaudio.play();
+            }
+            else{
+                myaudio.pause();
+            }
+        }
+    </script>
+</body>
+
+</html>

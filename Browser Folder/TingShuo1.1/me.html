@@ -13,11 +13,20 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+    <style>
+        .menuAc {
+    color: #1c1f21 !important;
+    font-weight: 500;
+    box-shadow: #cecece 1px 1px 5px;
+    border-radius: 5px;
+}
+    </style>
 
 </head>
 
 <body>
-    <div class="headerBar">
+    <div class="headerBar-noShadow">
         <div class="header-shadow">
             <div class="leftArea">
                 <div class="logo">
@@ -31,7 +40,7 @@
                             <a href="">首页</a>
                         </li>
                         <li class="fl">
-                            <a href="">分类</a>
+                            <a href="classify.html">分类</a>
                         </li>
                         <li class="fl">
                             <a href="">我的天啊</a>
@@ -124,25 +133,25 @@
             <div class="left-menu">
                 <ul>
                     <li>
-                        <a href="">
+                        <a class="menuAc" id="all" onclick="allClass()" href="#">
                             <img class="left-menu-icon" src="./icon/all.png" alt="我的课程菜单">
                             <span>所有课程</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a id="lis" onclick="lisClass()" href="#">
                             <img class="left-menu-icon" src="./icon/listen.png" alt="我的课程菜单">
                             <span>我的听力</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a id="spk" onclick="spkClass()" href="#">
                             <img class="left-menu-icon" src="./icon/speak.png" alt="我的课程菜单">
                             <span>我的口语</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a id="read" onclick="readClass()" href="#">
                             <img class="left-menu-icon" src="./icon/read.png" alt="我的课程菜单">
                             <span>我的阅读</span>
                         </a>
@@ -152,8 +161,8 @@
             <div class="user-course-content">
                 <div class="user-course-title clearfix">
                     <div class="user-course-title-left fl">
-                        <a href="">最近学习</a>
-                        <a href="">我的收藏</a>
+                        <a class="ac" id="neer" onclick="user_course_title_left_l()" href="#">最近学习</a>
+                        <a id="cellection" onclick="user_course_title_left_r()" href="#">我的收藏</a>
                     </div>
                 </div>
                 <div class="user-course">
@@ -166,7 +175,7 @@
                             <ul class="clearfix">
                                 <li class="user-course-item">
                                     <div class="user-course-img-box fl">
-                                        <a href="">
+                                        <a target="_blank" href="">
                                             <img style="height: 113px;width: 200px;" src="./img/kc1.jpg" alt="课程图片">
                                         </a>
                                     </div>
@@ -197,20 +206,63 @@
     <div class="footer-box">
         <div class="footer">
             <div class="footer-content">
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
             </div>
             <div class="footer-copyright">
                 <p>©2018&nbsp;tingshuo.com</p>
             </div>
         </div>
     </div>
+    <script>
+        var all_class = byId('all');
+        var lis_class = byId('lis');
+        var spk_class = byId('spk');
+        var read_class = byId('read');
+        var neer = byId('neer');
+        var cellection = byId('cellection');
+
+        function allClass() {
+            all_class.classList.add('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        function lisClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.add('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        function spkClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.add('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        function readClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.add('menuAc');
+        }
+
+        function user_course_title_left_l() {
+            neer.classList.add("ac");
+            cellection.classList.remove('ac');
+        }
+
+        function user_course_title_left_r() {
+            cellection.classList.add("ac");
+            neer.classList.remove('ac');
+        }
+    </script>
 </body>
 
 </html>
