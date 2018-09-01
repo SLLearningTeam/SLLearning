@@ -45,40 +45,30 @@ label {
 				<!-- 添加阅读课程 -->
 				<div class="row">
 					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+						<div class="card card-info  card-outline">
 							<div class="card-header">
 								<h3 class="card-title">添加阅读课程</h3>
-
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
 							</div>
-							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="tab-pane" id="timeline">
 									<form action="${pageContext.request.contextPath }/course/admin/addReadingCourse" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
+											<label>请选择语言类别：</label>
 											<select name="languageTypeId" id="languageType" onchange="getRateType()">
 						                        <option value="">--请选择--</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
+										<br/><label>请选择类型类别：</label>
 											<select name="rateTypeId" id="rateType">
 												<option value="">--请选择--</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="courseName"/>
-										<br/>请输入中文内容：<textarea name="courseChineseContent" rows="10" cols="30"/></textarea>
-										<br/>请输入英文内容：<textarea name="courseEnglishContent" rows="10" cols="30"/></textarea>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
+										<br/><label>请设置课程名称：</label><input type="text" name="courseName"/>
+										<br/><label>请输入中文内容：</label><textarea name="courseChineseContent" rows="10" cols="30"/></textarea>
+										<br/><label>请输入英文内容：</label><textarea name="courseEnglishContent" rows="10" cols="30"/></textarea>
+										<br/><label>请添加课程图标：</label><input type="file" name="instructionImg"/>
 										<br/><input type="submit" value="提交"/>
 									</form>
-								</div>
+								
 							</div>
 						</div>
 					</div>

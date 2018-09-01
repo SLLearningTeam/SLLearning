@@ -53,7 +53,7 @@ label {
 							<div class="card-body">
 								<div class="tab-pane">
 									<form action="${pageContext.request.contextPath }/course/admin/addOralCourse" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
+										 <label>请选择语言类别：</label>
 											<select name="languageTypeId" id="languageType" onchange="getRateType()">
 						                        <option value="">--请选择--</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
@@ -66,8 +66,8 @@ label {
 											</select>
 										<br/><label>请设置课程名称：</label><input type="text" name="courseName" required="required"/>
 										<br/><label>请输入中文内容：</label><textarea name="courseChineseContent" rows="10" cols="30" required="required"/></textarea>
-										<br/><label>请输入英文内容：</label>请输入英文内容：<textarea name="courseEnglishContent" rows="10" cols="30" required="required"/></textarea>
-										<br/><label>请添加课程图标：<label><input type="file" name="instructionImg" required="required"/>
+										<br/><label>请输入英文内容：</label><textarea name="courseEnglishContent" rows="10" cols="30" required="required"/></textarea>
+										<br/><label>请添加课程图标：</label><input type="file" name="instructionImg" required="required"/>
 										<br/><input type="submit" value="提交"/>
 									</form>
 								</div>

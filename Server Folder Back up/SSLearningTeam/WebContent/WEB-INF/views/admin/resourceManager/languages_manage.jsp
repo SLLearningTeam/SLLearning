@@ -47,9 +47,9 @@
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
+								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
 					</div>
@@ -59,10 +59,10 @@
 		</section>
 	</div>
 	
-	<!--
+
 	<div>${pageName }</div>
 	<div>${languageTypes}</div>
-	  --> 
+
 	<script type="text/javascript">
 		function del(){
 			return confirm("确认要删除该语言类别吗？")

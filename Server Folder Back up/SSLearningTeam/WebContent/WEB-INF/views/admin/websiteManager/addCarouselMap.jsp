@@ -26,16 +26,25 @@ label{ color: #7e0675}
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-			<section class="content  ">
+			<section class="content-header   ">
 				<div class="container-fluid ">
 					<!--添加轮播图 -->
 					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
 						<form action="${pageContext.request.contextPath}/website/admin/addCarouselMap" enctype="multipart/form-data" method="POST">
-							<h3>请添加轮播图</h3>
-							轮播图简介:<input type="text" name="carouselInstruction" />
-							<br/>轮播图链接:<input type="text" name="carouselLinkUrl" />
-							<br/>轮播图图片:<input type="file" name="carouselImg" />
-							<br/><input type="submit" value="提交" />
+							
+							<label>轮播图简介:</label>
+							<input class="form-control" type="text" name="carouselInstruction" />
+							<div class="form-group">
+							<label>轮播图链接:</label>
+							<input class="form-control" type="text" name="carouselLinkUrl" />
+							</div>
+							<div class="form-group">
+							<label>轮播图图片:</label>
+							<input class="form-control" type="file" name="carouselImg" />
+							<div class="col-top">
+							<button type="submit"  class="btn btn-info float-right">提交</button>
+							</div>
+						    </div>
 						</form>
 					</div>
 				</div>

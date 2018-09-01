@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 						<div class="card-header p-2 ">
 							<!-- 添加课程按钮 -->
 							<div class="left">
-								<img src="./img/resource/add.png" height="25" width="25" />
+								<img src="../../../img/resource/add.png" height="25" width="25" />
 							</div>
 							<!-- 课程导航 -->
 							<ul class="nav nav-pills ">
@@ -104,15 +105,15 @@
 									</form>
 								</div>
 								<!-- 分页 -->
-								<div class="card-footer clearfix">
-									<ul class="pagination pagination-sm m-0 float-right">
-										<li class="page-item"><a class="page-link" href="#">«</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">»</a></li>
-									</ul>
-								</div>
+					<div class="card-footer clearfix">
+						<ul class="pagination pagination-sm m-0 float-right">
+							<li class="page-item"><a class="page-link" href="#">«</a></li>
+							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
+								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+							</c:forEach>
+							<li class="page-item"><a class="page-link" href="#">»</a></li>
+						</ul>
+					</div>
 							</div>
 
 							<!-- /.tab-content -->
