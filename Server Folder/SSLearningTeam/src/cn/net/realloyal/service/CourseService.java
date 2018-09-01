@@ -142,4 +142,14 @@ public interface CourseService {
 
 	BackJsonUtil getAllEvaluationOfCourse(Integer pageNum, String courseType, Integer courseId);
 
+	BackJsonUtil getListeningCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil getOralCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil getReadingCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil deleteHistoryRecording(Integer historyRecordingId);
+
+	BackJsonUtil getHistoryRecordingOfUser(Integer pageNum, Integer userId);
+
 }

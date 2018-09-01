@@ -522,6 +522,43 @@ public class CourseAction {
 	    ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
 	    return entity;
 	}
+
+	//查看听力课程详细信息
+	@ResponseBody
+	@RequestMapping("/user/getListeningCourseInfo")
+	public BackJsonUtil getListeningCourseInfo(@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request){
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getListeningCourseInfo(courseId,userId);
+	}
+	
+	//查看口语课程详细信息
+	@ResponseBody
+	@RequestMapping("/user/getOralCourseInfo")
+	public BackJsonUtil getOralCourseInfo(@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request){
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getOralCourseInfo(courseId,userId);
+	}
+	
+	//查看阅读课程详细信息
+	@ResponseBody
+	@RequestMapping("/user/getReadingCourseInfo")
+	public BackJsonUtil getReadingCourseInfo(@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request){
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getReadingCourseInfo(courseId,userId);
+	}
+	
 	
 	//给指定课程添加问题——管理员
 	@ResponseBody
@@ -619,6 +656,25 @@ public class CourseAction {
 		return courseService.getAllEvaluationOfUser(pageNum,userId);
 	}
 	
+	//删除浏览历史——用户
+	//删除浏览历史——管理员
+	@ResponseBody
+	@RequestMapping(value= {"/user/deleteHistoryRecording","/admin/deleteHistoryRecording"})
+	public BackJsonUtil deleteHistoryRecording(@RequestParam("historyRecordingId")Integer historyRecordingId) {
+		return courseService.deleteHistoryRecording(historyRecordingId);
+	}
 	
+	//查看指定用户的浏览历史（分页）——用户
+	//查看指定用户的浏览历史（分页）——管理员
+	@ResponseBody
+	@RequestMapping(value= {"/user/getHistoryRecordingOfUser/{pageNum}","/admin/getHistoryRecordingOfUser/{pageNum}"})
+	public BackJsonUtil getHistoryRecordingOfUser(@PathVariable("pageNum")Integer pageNum,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getHistoryRecordingOfUser(pageNum,userId);
+	}
 	
 }

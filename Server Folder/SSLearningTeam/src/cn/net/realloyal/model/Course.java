@@ -8,6 +8,8 @@ public class Course {
 	private RateType rateType;
 
 	private String courseName;
+	
+	private String courseChineseContent;
 
 	private String courseEnglishContent;
 
@@ -81,29 +83,41 @@ public class Course {
 		this.instructionImgUrl = instructionImgUrl;
 	}
 
+	public String getCourseChineseContent() {
+		return courseChineseContent;
+	}
+
+	public void setCourseChineseContent(String courseChineseContent) {
+		this.courseChineseContent = courseChineseContent;
+	}
+
 	@Override
 	public String toString() {
 		return "Course [courseId=" + courseId + ", languageType=" + languageType + ", rateType=" + rateType
-				+ ", courseName=" + courseName + ", courseEnglishContent=" + courseEnglishContent
-				+ ", courseResourceUrl=" + courseResourceUrl + ", downloadNum=" + downloadNum + ", instructionImgUrl="
-				+ instructionImgUrl + "]";
+				+ ", courseName=" + courseName + ", courseChineseContent=" + courseChineseContent
+				+ ", courseEnglishContent=" + courseEnglishContent + ", courseResourceUrl=" + courseResourceUrl
+				+ ", downloadNum=" + downloadNum + ", instructionImgUrl=" + instructionImgUrl + "]";
+	}
+
+	public Course(int courseId, LanguageType languageType, RateType rateType, String courseName,
+			String courseChineseContent, String courseEnglishContent, String courseResourceUrl, int downloadNum,
+			String instructionImgUrl) {
+		super();
+		this.courseId = courseId;
+		this.languageType = languageType;
+		this.rateType = rateType;
+		this.courseName = courseName;
+		this.courseChineseContent = courseChineseContent;
+		this.courseEnglishContent = courseEnglishContent;
+		this.courseResourceUrl = courseResourceUrl;
+		this.downloadNum = downloadNum;
+		this.instructionImgUrl = instructionImgUrl;
 	}
 
 	public Course() {
 		super();
 	}
 
-	public Course(int courseId, LanguageType languageType, RateType rateType, String courseName,
-			String courseEnglishContent, String courseResourceUrl, int downloadNum, String instructionImgUrl) {
-		super();
-		this.courseId = courseId;
-		this.languageType = languageType;
-		this.rateType = rateType;
-		this.courseName = courseName;
-		this.courseEnglishContent = courseEnglishContent;
-		this.courseResourceUrl = courseResourceUrl;
-		this.downloadNum = downloadNum;
-		this.instructionImgUrl = instructionImgUrl;
-	}
+	
 	
 }

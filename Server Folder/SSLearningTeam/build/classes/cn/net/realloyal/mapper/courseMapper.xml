@@ -261,9 +261,22 @@
 	<select id="getUserById" parameterType="java.lang.Integer" resultType="User">
 		select * from user where userId = #{userId}
 	</select>
-	<select id="getCourse" resultType="Course">
+	<select id="getCourse" resultMap="CourseMap">
 		select * from ${courseType} where courseId = #{courseId}
 	</select>
+	<resultMap type="Course" id="CourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	
+	
 	<!-- 获得指定用户的所有评价个数 -->
 	<select id="getAllEvaluationPageNumberOfUser" resultType="Integer">
 		select count(*) from evaluationform where userId = #{userId}
@@ -276,4 +289,39 @@
 	<select id="getAllEvaluationPageNumberOfCourse" resultType="Integer">
 		select count(*) from evaluationform where courseType = #{param1} and courseId = #{param2}
 	</select>
+	
+	<!-- 检查历史记录是否存在 -->
+	<select id="checkHistoryRecordingExist" resultType="HistoryRecordingForSQL">
+		select * from HistoryRecording where userId=#{param1} and courseType=#{param2} and courseId=#{param3}
+	</select>
+	<!-- 添加历史记录 -->
+	<insert id="addHistoryRecording">
+		insert into HistoryRecording values(null,#{param1},#{param2},#{param3},#{param4},#{param5})
+	</insert>
+	<!-- 修改历史记录 -->
+	<update id="updateHistoryRecording">
+		update HistoryRecording set userId=#{param1},courseType=#{param2},courseId=#{param3},recentRecordingTime=#{param4},viewTimes=#{param5} where historyRecordingId=#{param6}
+	</update>
+	<!-- 删除历史记录 -->
+	<delete id="deleteHistoryRecording">
+		delete from HistoryRecording where historyRecordingId = #{param1}
+	</delete>
+	<!-- 指定用户浏览个数 -->
+	<select id="getHistoryRecordingCountOfUser" resultType="Integer">
+		select count(*) from HistoryRecording where userId = #{param1}
+	</select>
+	<!-- 查看历史记录 -->
+	<select id="getHistoryRecordingOfUser" resultMap="HistoryRecordingMap">
+		select * from HistoryRecording where userId = #{param2} limit #{param1},10
+	</select>
+	<resultMap type="HistoryRecording" id="HistoryRecordingMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="historyRecordingId" property="historyRecordingId"/>
+		<result column="recentRecordingTime" property="recentRecordingTime"/>
+		<result column="viewTimes" property="viewTimes"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
+	</resultMap>
+	
+	
 </mapper>

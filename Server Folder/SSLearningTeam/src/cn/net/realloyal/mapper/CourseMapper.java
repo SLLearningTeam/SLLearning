@@ -3,10 +3,12 @@ package cn.net.realloyal.mapper;
 import java.util.List;
 
 import cn.net.realloyal.model.EvaluationForm;
+import cn.net.realloyal.model.HistoryRecording;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
 import cn.net.realloyal.vo.EvaluationFormForSQL;
+import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
@@ -143,5 +145,23 @@ public interface CourseMapper {
 
 	//获得指定课程的所有评价个数
 	int getAllEvaluationPageNumberOfCourse(String courseType, Integer courseId);
+
+	//添加历史记录
+	int addHistoryRecording(Integer userId, String courseType, Integer courseId, String nowDateTime, int viewTimes);
+
+	//查看是否存在指定课程的历史记录
+	HistoryRecordingForSQL checkHistoryRecordingExist(Integer userId, String string, Integer courseId);
+
+	//修改历史记录
+	void updateHistoryRecording(int userId, String courseType, int courseId, String nowDateTime, int viewTimes,int historyRecordingId);
+
+	//删除历史记录
+	int deleteHistoryRecording(Integer historyRecordingId);
+
+	//指定用户浏览记录
+	List<HistoryRecording> getHistoryRecordingOfUser(int startNum, Integer userId);
+	
+	//指定用户总浏览个数
+	int getHistoryRecordingCountOfUser(Integer userId);
 
 }

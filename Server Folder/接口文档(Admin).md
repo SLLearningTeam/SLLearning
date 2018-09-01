@@ -1669,7 +1669,7 @@ pageName="adminManage"
 #### 1.1 请求说明
 
 > 请求方式：GET
-> 请求URL ：/course/user/deleteEvaluation 
+> 请求URL ：/course/admin/deleteEvaluation 
 
 #### 1.2 请求参数
 
@@ -1706,7 +1706,7 @@ pageName="adminManage"
 #### 2.1 请求说明
 
 > 请求方式：GET
-> 请求URL ：/course/user/getAvgEvaluation 
+> 请求URL ：/course/admin/getAvgEvaluation 
 
 #### 2.2 请求参数
 
@@ -1746,7 +1746,7 @@ pageName="adminManage"
 #### 3.1 请求说明
 
 > 请求方式：GET
-> 请求URL ：/course/user/getAllEvaluationOfCourse/{pageNum} 
+> 请求URL ：/course/admin/getAllEvaluationOfCourse/{pageNum} 
 >
 > pageNum是页号
 
@@ -1927,6 +1927,159 @@ pageName="adminManage"
 | evaluationForms | List<   EvaluationForm > | 评分集合 |
 | pageNumber      | Integer                  | 总页数   |
 | currentPage     | Integer                  | 当前页号 |
+
+<hr/>
+
+## 历史记录操作接口
+
+### 1.删除浏览历史 
+
+#### 1.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/deleteHistoryRecording
+
+#### 1.2 请求参数
+
+| 字段               | 类型 | 含义       |
+| ------------------ | ---- | ---------- |
+| historyRecordingId | int  | 历史记录Id |
+
+#### 1.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 1.4 返回参数
+
+过于简单，不作讲解
+
+### 2.查看指定用户的浏览历史（分页） 
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/admin/getHistoryRecordingOfUser/{pageNum} 
+>
+> pageNum为页号
+
+#### 2.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 2.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "pageNumber": 1,
+        "historyRecordings": [
+            {
+                "historyRecordingId": 3,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                },
+                "recentRecordingTime": 1535766654000,
+                "viewTimes": 1
+            },
+            {
+                "historyRecordingId": 4,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试阅读1s",
+                    "courseChineseContent": "测试s",
+                    "courseEnglishContent": "tests",
+                    "courseResourceUrl": null,
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png"
+                },
+                "recentRecordingTime": 1535766721000,
+                "viewTimes": 2
+            }
+        ],
+        "currentPage": 1
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "您还没有浏览历史"
+}
+```
+
+#### 2.4 返回参数
+
+过于简单，不作讲解
 
 
 
