@@ -76,7 +76,7 @@ public class AdviceServiceImpl implements cn.net.realloyal.service.AdviceService
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
 		Map<String,Object>result = new HashMap<String,Object>();
 		result.put("adviceInfoList",getAllAdviceByUserId(pageNum,userId));
-		result.put("pageNumeber", getAllAdvicePageNumberByUserId(userId));
+		result.put("pageNumber", getAllAdvicePageNumberByUserId(userId));
 		result.put("currentPage",pageNum);
 		backJsonUtil.setStatus(true);
 		backJsonUtil.setInfo(result);

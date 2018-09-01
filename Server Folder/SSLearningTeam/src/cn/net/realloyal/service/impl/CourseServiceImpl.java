@@ -20,10 +20,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.core.util.CalculateStartIndex;
 import cn.net.realloyal.mapper.CourseMapper;
+import cn.net.realloyal.model.EvaluationForm;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
 import cn.net.realloyal.service.CourseService;
+import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
@@ -1046,6 +1048,88 @@ public class CourseServiceImpl implements CourseService {
 		}else {
 			backJsonUtil.setStatus(true);
 			backJsonUtil.setInfo(question);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil addEvaluation(EvaluationFormForSQL evaluationFormForSQL) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(courseMapper.addEvaluation(evaluationFormForSQL)==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("评分失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("评分成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil deleteEvaluation(Integer evaluationId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(courseMapper.deleteEvaluation(evaluationId)==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAvgEvaluation(String courseType, Integer courseId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		Object avgEvaluation = courseMapper.getAvgEvaluation(courseType,courseId);
+		if(avgEvaluation==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("暂无人对该课程进行评价");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(avgEvaluation);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAllEvaluationOfUser(Integer pageNum, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10); 
+		List<EvaluationForm> evaluationForms = courseMapper.getAllEvaluationOfUser(startNum,userId);
+		int evaluationCount = courseMapper.getAllEvaluationPageNumberOfUser(userId);
+		int pageNumber = (int)evaluationCount/10+1;
+		if(evaluationCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您没有对任何课程进行评价");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("evaluationForms",evaluationForms);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAllEvaluationOfCourse(Integer pageNum, String courseType, Integer courseId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10); 
+		List<EvaluationForm> evaluationForms = courseMapper.getAllEvaluationOfCourse(startNum,courseType,courseId);
+		int evaluationCount = courseMapper.getAllEvaluationPageNumberOfCourse(courseType,courseId);
+		int pageNumber = (int)evaluationCount/10+1;
+		if(evaluationCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("暂无人对该课程进行评价");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("evaluationForms",evaluationForms);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
 		}
 		return backJsonUtil;
 	}

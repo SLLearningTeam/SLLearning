@@ -19,9 +19,11 @@
 		<typeAlias alias="DownloadRecordingForSQL" type="cn.net.realloyal.vo.DownloadRecordingForSQL" />
 		<typeAlias alias="QuestionForSQL" type="cn.net.realloyal.vo.QuestionForSQL" />
 		<typeAlias alias="AdviceInfoListForSQL" type="cn.net.realloyal.vo.AdviceInfoListForSQL" />
+		<typeAlias alias="EvaluationFormForSQL" type="cn.net.realloyal.vo.EvaluationFormForSQL" />
 		<typeAlias alias="CarouselMap" type="cn.net.realloyal.model.CarouselMap" />
 		<typeAlias alias="DownloadRecording" type="cn.net.realloyal.model.DownloadRecording" />
 		<typeAlias alias="AdviceInfoList" type="cn.net.realloyal.model.AdviceInfoList" />
+		<typeAlias alias="EvaluationForm" type="cn.net.realloyal.model.EvaluationForm" />
 	</typeAliases>
 
 	<!-- 实体接口映射资源 -->

@@ -234,4 +234,46 @@
 	<select id="getAllQuestion" resultType="QuestionForSQL">
 		select * from question;
 	</select>
+	
+	<!-- 添加评分 -->
+	<insert id="addEvaluation" parameterType="EvaluationFormForSQL">
+		insert into evaluationform values(null,#{courseType},#{courseId},#{userId},#{evaluationLevel})
+	</insert>
+	<!-- 删除评分 -->
+	<delete id="deleteEvaluation">
+		delete from evaluationform where evaluationId = #{param1}
+	</delete>
+	<!-- 获得课程的平均分 -->
+	<select id="getAvgEvaluation" resultType="Object">
+		select avg(evaluationLevel) from evaluationform where courseType=#{param1} and courseId=#{param2}
+	</select>
+	<!-- 获得指定用户的所有评价（分页） -->
+	<select id="getAllEvaluationOfUser" resultMap="EvaluationFormMap">
+		select * from evaluationform where userId = #{param2} limit #{param1},10
+	</select>
+	<resultMap type="EvaluationForm" id="EvaluationFormMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="evaluationId" property="evaluationId"/>
+		<result column="evaluationLevel" property="evaluationLevel"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
+	</resultMap>
+	<select id="getUserById" parameterType="java.lang.Integer" resultType="User">
+		select * from user where userId = #{userId}
+	</select>
+	<select id="getCourse" resultType="Course">
+		select * from ${courseType} where courseId = #{courseId}
+	</select>
+	<!-- 获得指定用户的所有评价个数 -->
+	<select id="getAllEvaluationPageNumberOfUser" resultType="Integer">
+		select count(*) from evaluationform where userId = #{userId}
+	</select>
+	<!-- 获得指定课程的所有评价（分页） -->
+	<select id="getAllEvaluationOfCourse" resultMap="EvaluationFormMap">
+		select * from evaluationform where courseType = #{param2} and courseId = #{param3} limit #{param1},10
+	</select>
+	<!-- 获得指定课程的所有评价个数 -->
+	<select id="getAllEvaluationPageNumberOfCourse" resultType="Integer">
+		select count(*) from evaluationform where courseType = #{param1} and courseId = #{param2}
+	</select>
 </mapper>

@@ -13,6 +13,7 @@ import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 
 @Service
@@ -130,5 +131,15 @@ public interface CourseService {
 	BackJsonUtil getAllQuestion(String courseType, Integer courseId);
 
 	BackJsonUtil toChangeQuestion(Integer questionId);
+
+	BackJsonUtil addEvaluation(EvaluationFormForSQL evaluationFormForSQL);
+
+	BackJsonUtil deleteEvaluation(Integer evaluationId);
+
+	BackJsonUtil getAvgEvaluation(String courseType, Integer courseId);
+
+	BackJsonUtil getAllEvaluationOfUser(Integer pageNum, Integer userId);
+
+	BackJsonUtil getAllEvaluationOfCourse(Integer pageNum, String courseType, Integer courseId);
 
 }

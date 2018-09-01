@@ -34,6 +34,7 @@ import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.service.RateTypeService;
 import cn.net.realloyal.service.WebsiteInfoService;
+import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.RateTypeForSQL;
 
@@ -569,7 +570,54 @@ public class CourseAction {
 	}
 	
 	
+	//添加评分等级——用户
+	@ResponseBody
+	@RequestMapping("/user/addEvaluation")
+	public BackJsonUtil addEvaluation(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,@RequestParam("evaluationLevel")int evaluationLevel,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		EvaluationFormForSQL evaluationFormForSQL = new EvaluationFormForSQL(0,courseType,courseId,userId,evaluationLevel);
+		return courseService.addEvaluation(evaluationFormForSQL);
+	}
 	
+	//删除评分记录——管理员
+	//删除评分记录——用户
+	@ResponseBody
+	@RequestMapping(value= {"/user/deleteEvaluation","/admin/deleteEvaluation"})
+	public BackJsonUtil deleteEvaluation(@RequestParam("evaluationId")Integer evaluationId) {
+		return courseService.deleteEvaluation(evaluationId);
+	}
+	
+	//查看课程的综合评分——管理员
+	//查看课程的综合评分——用户
+	@ResponseBody
+	@RequestMapping(value= {"/user/getAvgEvaluation","/admin/getAvgEvaluation"})
+	public BackJsonUtil getAvgEvaluationByUser(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId) {
+		return courseService.getAvgEvaluation(courseType,courseId);
+	}
+	
+	//查看指定课程的评分列表(分页)——管理员
+	//查看指定课程的评分列表(分页)——用户
+	@ResponseBody
+	@RequestMapping(value= {"/user/getAllEvaluationOfCourse/{pageNum}","/admin/getAllEvaluationOfCourse/{pageNum}"})
+	public BackJsonUtil getAllEvaluationOfCourse(@PathVariable("pageNum")Integer pageNum,@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId) {
+		return courseService.getAllEvaluationOfCourse(pageNum,courseType,courseId);
+	}
+	
+	//查看指定用户的所有评分信息(分页)——用户
+	@ResponseBody
+	@RequestMapping("/user/getAllEvaluationOfUser/{pageNum}")
+	public BackJsonUtil getAllEvaluationOfUser(@PathVariable("pageNum")Integer pageNum,@RequestParam("userId")Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getAllEvaluationOfUser(pageNum,userId);
+	}
 	
 	
 	

@@ -2,9 +2,11 @@ package cn.net.realloyal.mapper;
 
 import java.util.List;
 
+import cn.net.realloyal.model.EvaluationForm;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
@@ -120,5 +122,26 @@ public interface CourseMapper {
 
 	//获得该课程的所有问题
 	List<QuestionForSQL> getAllQuestion(String courseType, Integer courseId);
+
+	//添加评分
+	int addEvaluation(EvaluationFormForSQL evaluationFormForSQL);
+
+	//删除评分
+	int deleteEvaluation(Integer evaluationId);
+
+	//获得课程的平均分
+	Object getAvgEvaluation(String courseType, Integer courseId);
+
+	//获得指定用户的所有评价（分页）
+	List<EvaluationForm> getAllEvaluationOfUser(int startNum, Integer userId);
+
+	//获得指定用户的所有评价个数
+	int getAllEvaluationPageNumberOfUser(Integer userId);
+
+	//获得指定课程的所有评价（分页）
+	List<EvaluationForm> getAllEvaluationOfCourse(int startNum, String courseType, Integer courseId);
+
+	//获得指定课程的所有评价个数
+	int getAllEvaluationPageNumberOfCourse(String courseType, Integer courseId);
 
 }
