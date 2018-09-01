@@ -152,4 +152,10 @@ public interface CourseService {
 
 	BackJsonUtil getHistoryRecordingOfUser(Integer pageNum, Integer userId);
 
+	BackJsonUtil getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId);
+
+	BackJsonUtil addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore);
+
+	BackJsonUtil getAvgOralCourseScoreOfUser(Integer userId);
+
 }

@@ -1,6 +1,7 @@
 package cn.net.realloyal.action;
 
 import java.sql.Time;
+import java.text.ParseException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -140,6 +141,46 @@ public class UserAction {
 			return back;
 		}
 	}
+	
+	
+	//查看指定用户签到的天数——用户
+	//查看指定用户签到的天数——管理员
+	@ResponseBody
+	@RequestMapping(value= {"/user/getUserSignInRecording","/admin/getUserSignInRecording"})
+	public BackJsonUtil getUserSignInRecording(@RequestParam(value = "userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return userService.getUserSignInRecording(userId);
+	}
+	
+	//用户提交签到请求——用户
+	@ResponseBody
+	@RequestMapping("/user/addSignInRecording")
+	public BackJsonUtil addSignInRecording(@RequestParam(value = "userId",required=false)Integer userId,HttpServletRequest request) throws ParseException {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return userService.addSignInRecording(userId);
+	}
+	
+	//修改用户连续签到天数——管理员
+	@ResponseBody
+	@RequestMapping("/admin/updateSignInRecording")
+	public BackJsonUtil updateSignInRecording(@RequestParam(value = "userId",required=false)Integer userId,@RequestParam("totalTimes")Integer totalTimes,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return userService.updateSignInRecording(userId,totalTimes);
+	}
+	
+	
 	
 	//用户信息详情
 	@RequestMapping("/user_info")

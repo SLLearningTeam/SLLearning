@@ -677,4 +677,43 @@ public class CourseAction {
 		return courseService.getHistoryRecordingOfUser(pageNum,userId);
 	}
 	
+	//查看指定用户指定口语课程历史分数——用户
+	@ResponseBody
+	@RequestMapping("/user/getScoreOfUserForOralCourse")
+	public BackJsonUtil getScoreOfUserForOralCourse(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getScoreOfUserForOralCourse(courseType,courseId,userId);
+	}
+	
+	//添加口语课程分数——用户
+	@ResponseBody
+	@RequestMapping("/user/addOralCourseScore")
+	public BackJsonUtil addOralCourseScore(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,@RequestParam("oralScore")Integer oralScore,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.addOralCourseScore(courseType,courseId,userId,oralScore);
+	}
+	
+	//查看指定用户口语课程平均分数——用户
+	//查看指定用户口语课程平均分数——管理员
+	@ResponseBody
+	@RequestMapping(value= {"/user/getAvgOralCourseScoreOfUser","/admin/getAvgOralCourseScoreOfUser"})
+	public BackJsonUtil getAvgOralCourseScoreOfUser(@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getAvgOralCourseScoreOfUser(userId);
+	}
+	
+	
+	
 }
