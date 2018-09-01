@@ -22,11 +22,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.core.util.CalculateStartIndex;
 import cn.net.realloyal.mapper.WebsiteInfoMapper;
+import cn.net.realloyal.model.AdviceInfoList;
 import cn.net.realloyal.model.CarouselMap;
 import cn.net.realloyal.model.DownloadRecording;
 import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.WebsiteInfoService;
+import cn.net.realloyal.vo.AdviceInfoListForSQL;
 import cn.net.realloyal.vo.DownloadRecordingForSQL;
 
 @Service

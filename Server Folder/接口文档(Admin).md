@@ -1539,6 +1539,131 @@ currentPage:1
 
 <hr/>
 
+## 意见反馈相关接口
+
+### 1.删除意见反馈
+
+#### 1.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/advice/admin/deleteAdvice 
+
+#### 1.2 请求参数
+
+| 字段     | 类型 | 含义   |
+| -------- | ---- | ------ |
+| adviceId | int  | 建议Id |
+
+#### 1.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 1.4 返回参数
+
+过于简单，不作讲解
+
+### 2.查看所有意见(分页) 
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/advice/admin/advices_manage/{pageNum} 
+>
+> pageNum表示页号
+
+#### 2.2 请求参数
+
+无
+
+#### 2.3 返回数据
+
+- 样例
+
+```java
+pageNum:1
+
+totalPages:2
+
+adviceInfoLists:[AdviceInfoList [adviceId=1, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:01 CST 2018, adviceInfo=提交建议1], AdviceInfoList [adviceId=2, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:23 CST 2018, adviceInfo=提交建议2], AdviceInfoList [adviceId=3, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:26 CST 2018, adviceInfo=提交建议3], AdviceInfoList [adviceId=4, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:30 CST 2018, adviceInfo=提交建议4], AdviceInfoList [adviceId=5, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:33 CST 2018, adviceInfo=提交建议5], AdviceInfoList [adviceId=6, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:36 CST 2018, adviceInfo=提交建议6], AdviceInfoList [adviceId=7, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:40 CST 2018, adviceInfo=提交建议7], AdviceInfoList [adviceId=8, user=User [userId=4, userSex=男, userName=Sam, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/c6cbcce3-790f-4fdb-962a-4df4470ef58818041168031Avatar.png, userPhoneNumber=18041168031, userPermission=0], adviceSendTime=Sat Sep 01 01:34:50 CST 2018, adviceInfo=提交建议8], AdviceInfoList [adviceId=9, user=User [userId=4, userSex=男, userName=Sam, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/c6cbcce3-790f-4fdb-962a-4df4470ef58818041168031Avatar.png, userPhoneNumber=18041168031, userPermission=0], adviceSendTime=Sat Sep 01 01:34:54 CST 2018, adviceInfo=提交建议9], AdviceInfoList [adviceId=10, user=User [userId=4, userSex=男, userName=Sam, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/c6cbcce3-790f-4fdb-962a-4df4470ef58818041168031Avatar.png, userPhoneNumber=18041168031, userPermission=0], adviceSendTime=Sat Sep 01 01:34:57 CST 2018, adviceInfo=提交建议10]]
+
+pageName="adminManage"
+```
+
+- 数据说明
+
+| 字段            | 类型                    | 含义         |
+| --------------- | ----------------------- | ------------ |
+| pageName        | string                  | 页面名称     |
+| adviceInfoLists | List<  AdviceInfoList > | 意见反馈集合 |
+| pageNumber      | Integer                 | 总页数       |
+| currentPage     | Integer                 | 当前页号     |
+
+#### 2.4 返回页面
+
+> admin/websiteManager/advices_manage 
+
+### 3.根据用户查看意见(分页) 
+
+#### 3.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/advice/admin/advices_manageByUserId/{pageNum} 
+>
+> pageNum表示页号
+
+#### 3.2 请求参数
+
+| 字段   | 类型 | 含义   |
+| ------ | ---- | ------ |
+| userId | int  | 用户Id |
+
+#### 3.3 返回数据
+
+- 样例
+
+```java
+pageNum:1
+
+totalPages:1
+
+adviceInfoLists:[AdviceInfoList [adviceId=1, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:01 CST 2018, adviceInfo=提交建议1], AdviceInfoList [adviceId=2, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:23 CST 2018, adviceInfo=提交建议2], AdviceInfoList [adviceId=3, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:26 CST 2018, adviceInfo=提交建议3], AdviceInfoList [adviceId=4, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:30 CST 2018, adviceInfo=提交建议4], AdviceInfoList [adviceId=5, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:33 CST 2018, adviceInfo=提交建议5], AdviceInfoList [adviceId=6, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:36 CST 2018, adviceInfo=提交建议6], AdviceInfoList [adviceId=7, user=User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], adviceSendTime=Sat Sep 01 01:34:40 CST 2018, adviceInfo=提交建议7]]
+
+pageName="adminManage"
+```
+
+- 数据说明
+
+| 字段            | 类型                    | 含义         |
+| --------------- | ----------------------- | ------------ |
+| pageName        | string                  | 页面名称     |
+| adviceInfoLists | List<  AdviceInfoList > | 意见反馈集合 |
+| pageNumber      | Integer                 | 总页数       |
+| currentPage     | Integer                 | 当前页号     |
+
+#### 3.4 返回页面
+
+> admin/websiteManager/advices_manage 
+
+
+
+<hr/>
+
 ## 追加补充内容
 
 ### 1.语言类别查重接口JSON

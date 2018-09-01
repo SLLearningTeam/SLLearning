@@ -12,10 +12,6 @@ public class AdviceInfoList {
 
 	private String adviceInfo;
 
-	private boolean adviceReviewStatus;
-
-	private int adviceReviewAdminId;
-
 	public int getAdviceId() {
 		return adviceId;
 	}
@@ -48,38 +44,18 @@ public class AdviceInfoList {
 		this.adviceInfo = adviceInfo;
 	}
 
-	public boolean isAdviceReviewStatus() {
-		return adviceReviewStatus;
-	}
-
-	public void setAdviceReviewStatus(boolean adviceReviewStatus) {
-		this.adviceReviewStatus = adviceReviewStatus;
-	}
-
-	public int getAdviceReviewAdminId() {
-		return adviceReviewAdminId;
-	}
-
-	public void setAdviceReviewAdminId(int adviceReviewAdminId) {
-		this.adviceReviewAdminId = adviceReviewAdminId;
-	}
-
-	@Override
-	public String toString() {
-		return "AdviceInfoList [adviceId=" + adviceId + ", user=" + user + ", adviceSendTime=" + adviceSendTime
-				+ ", adviceInfo=" + adviceInfo + ", adviceReviewStatus=" + adviceReviewStatus + ", adviceReviewAdminId="
-				+ adviceReviewAdminId + "]";
-	}
-
-	public AdviceInfoList(int adviceId, User user, Date adviceSendTime, String adviceInfo, boolean adviceReviewStatus,
-			int adviceReviewAdminId) {
+	public AdviceInfoList(int adviceId, User user, Date adviceSendTime, String adviceInfo) {
 		super();
 		this.adviceId = adviceId;
 		this.user = user;
 		this.adviceSendTime = adviceSendTime;
 		this.adviceInfo = adviceInfo;
-		this.adviceReviewStatus = adviceReviewStatus;
-		this.adviceReviewAdminId = adviceReviewAdminId;
+	}
+
+	@Override
+	public String toString() {
+		return "AdviceInfoList [adviceId=" + adviceId + ", user=" + user + ", adviceSendTime=" + adviceSendTime
+				+ ", adviceInfo=" + adviceInfo + "]";
 	}
 
 	public AdviceInfoList() {

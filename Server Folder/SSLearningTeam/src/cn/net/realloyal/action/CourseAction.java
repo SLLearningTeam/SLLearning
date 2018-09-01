@@ -554,12 +554,20 @@ public class CourseAction {
 		return courseService.changeQuestion(question);
 	}
 	
-	//查看指定课程的所有问题——管理员/用户
+	//查看指定课程的所有问题——管理员
 	@ResponseBody
 	@RequestMapping("/admin/getAllQuestion")
 	public BackJsonUtil getAllQuestion(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId) {
 		return courseService.getAllQuestion(courseType,courseId);
 	}
+	
+	//查看指定课程的所有问题——用户
+	@ResponseBody
+	@RequestMapping("/user/getAllQuestion")
+	public BackJsonUtil getAllQuestionByUser(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId) {
+		return courseService.getAllQuestion(courseType,courseId);
+	}
+	
 	
 	
 	

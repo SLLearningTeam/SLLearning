@@ -1,6 +1,9 @@
 package cn.net.realloyal.action;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +19,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.net.realloyal.core.util.BackJsonUtil;
+import cn.net.realloyal.model.AdviceInfoList;
 import cn.net.realloyal.model.CarouselMap;
 import cn.net.realloyal.model.DownloadRecording;
+import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.WebsiteInfoService;
+import cn.net.realloyal.vo.AdviceInfoListForSQL;
 
 @Controller
 @RequestMapping("/website")
@@ -153,13 +159,5 @@ public class WebsiteInfoAction {
 		return websiteInfoService.getDownloadRecordingsByUser(pageNum,userId);
 	}
 	
-	
-	
-	
-	
-	@RequestMapping("/website_monitor")
-	public ModelAndView getWebsiteMonitor() {
-		ModelAndView mv = new ModelAndView("admin/websiteManager/website_monitor");
-		return mv;
-	}
+
 }

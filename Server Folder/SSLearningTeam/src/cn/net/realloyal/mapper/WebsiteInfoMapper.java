@@ -2,8 +2,10 @@ package cn.net.realloyal.mapper;
 
 import java.util.List;
 
+import cn.net.realloyal.model.AdviceInfoList;
 import cn.net.realloyal.model.CarouselMap;
 import cn.net.realloyal.model.DownloadRecording;
+import cn.net.realloyal.vo.AdviceInfoListForSQL;
 import cn.net.realloyal.vo.DownloadRecordingForSQL;
 
 public interface WebsiteInfoMapper {
@@ -35,6 +37,5 @@ public interface WebsiteInfoMapper {
 	int deleteDownloadRecording(Integer downloadRecordingId);
 
 	List<DownloadRecording> getDownloadRecordingsByUser(int startNum, Integer userId);
-
 	
 }

@@ -1485,7 +1485,7 @@
 #### 21.1 请求说明
 
 > 请求方式：GET
-> 请求URL ：/course/admin/getAllQuestion  
+> 请求URL ：/course/user/getAllQuestion  
 
 #### 21.2 请求参数
 
@@ -1576,5 +1576,213 @@
 ```
 
 #### 21.4 返回参数
+
+过于简单，不作讲解
+
+### 22.上传意见反馈
+
+#### 22.1 请求说明
+
+> 请求方式：POST
+> 请求URL ：/advice/user/addAdvice 
+
+#### 22.2 请求参数
+
+| 字段       | 类型   | 含义                               |
+| ---------- | ------ | ---------------------------------- |
+| userId     | int    | 用户Id（如果可以传cookie则不用传） |
+| adviceInfo | string | 建议内容                           |
+
+#### 22.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "添加成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "添加失败"
+}
+```
+
+#### 22.4 返回参数
+
+过于简单，不作讲解
+
+### 23.删除意见反馈
+
+#### 23.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/advice/user/deleteAdvice 
+
+#### 23.2 请求参数
+
+| 字段     | 类型 | 含义   |
+| -------- | ---- | ------ |
+| adviceId | int  | 建议Id |
+
+#### 23.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 23.4 返回参数
+
+过于简单，不作讲解
+
+### 24.根据用户Id查看意见(分页) 
+
+#### 24.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/advice/user/getAdviceByUserId/{pageNum} 
+>
+> pageNum表示当前页号
+
+#### 24.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 24.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "adviceInfoList": [
+            {
+                "adviceId": 1,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736841000,
+                "adviceInfo": "提交建议1"
+            },
+            {
+                "adviceId": 2,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736863000,
+                "adviceInfo": "提交建议2"
+            },
+            {
+                "adviceId": 3,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736866000,
+                "adviceInfo": "提交建议3"
+            },
+            {
+                "adviceId": 4,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736870000,
+                "adviceInfo": "提交建议4"
+            },
+            {
+                "adviceId": 5,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736873000,
+                "adviceInfo": "提交建议5"
+            },
+            {
+                "adviceId": 6,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736876000,
+                "adviceInfo": "提交建议6"
+            },
+            {
+                "adviceId": 7,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "adviceSendTime": 1535736880000,
+                "adviceInfo": "提交建议7"
+            }
+        ],
+        "pageNumeber": 1,
+        "currentPage": 1
+    }
+}
+```
+
+#### 24.4 返回参数
 
 过于简单，不作讲解

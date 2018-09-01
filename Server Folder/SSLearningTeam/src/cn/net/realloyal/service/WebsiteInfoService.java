@@ -10,8 +10,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 import cn.net.realloyal.core.util.BackJsonUtil;
+import cn.net.realloyal.model.AdviceInfoList;
 import cn.net.realloyal.model.CarouselMap;
 import cn.net.realloyal.model.DownloadRecording;
+import cn.net.realloyal.vo.AdviceInfoListForSQL;
 
 @Service
 public interface WebsiteInfoService {
