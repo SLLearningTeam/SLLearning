@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+	
+ -->
+<mapper namespace="cn.net.realloyal.mapper.AdviceMapper">
+	<!-- 添加建议 -->
+	<insert id="addAdvice">
+		insert into adviceinfolist values(null,#{userId},#{adviceSendTime},#{adviceInfo})
+	</insert>
+	<!-- 删除建议 -->
+	<delete id="deleteAdvice">
+		delete from adviceinfolist where adviceId=#{param1}
+	</delete>
+	<!-- 获得所有建议 -->
+	<select id="getAllAdvice" resultMap="AdviceListMap">
+		select * from adviceinfolist limit #{param1},10
+	</select>
+	<resultMap type="AdviceInfoList" id="AdviceListMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="adviceId" property="adviceId"/>
+		<result column="adviceSendTime" property="adviceSendTime"/>
+		<result column="adviceInfo" property="adviceInfo"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+	</resultMap>
+	<select id="getUserById" parameterType="java.lang.Integer" resultType="User">
+		select * from user where userId = #{userId}
+	</select>
+	<!-- 获得所有建议的个数 -->
+	<select id="getAllAdvicePageNumber" resultType="Integer">
+		select count(*)from adviceinfolist
+	</select>
+	<!-- 获得指定用户所有的建议 -->
+	<select id="getAllAdvicePageNumberByUserId" resultType="Integer">
+		select count(*)from adviceinfolist where userId = #{param1}
+	</select>
+	<!-- 获得指定用户所有的建议的个数 -->
+	<select id="getAllAdviceByUserId" resultMap="AdviceListMap">
+		select * from adviceinfolist where userId = #{param2} limit #{param1},10
+	</select>
+</mapper>

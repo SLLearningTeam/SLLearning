@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+	
+ -->
+<mapper namespace="cn.net.realloyal.mapper.CourseMapper">
+
+	<insert id="addListeningCourse" parameterType="ListeningCourseForSQL">
+		insert into ListeningCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,courseResourceUrl,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{courseResourceUrl},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
+	<insert id="addOralCourse" parameterType="OralCourseForSQL">
+		insert into OralCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
+	<insert id="addReadingCourse" parameterType="ReadingCourseForSQL">
+		insert into ReadingCourse (courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImgUrl) values(null,#{languageTypeId},#{rateTypeId},#{courseName},#{courseChineseContent},#{courseEnglishContent},#{downloadNum},#{instructionImgUrl})
+	</insert>
+	
+	<!-- 删除听力课程 -->
+	<delete id="deleteListeningCourse" parameterType="Integer">
+		delete from ListeningCourse where courseId = #{param1}
+	</delete>
+	<!-- 删除口语课程 -->
+	<delete id="deleteOralCourse" parameterType="Integer">
+		delete from OralCourse where courseId = #{param1}
+	</delete>
+	
+	<!-- 删除阅读课程 -->
+	<delete id="deleteReadingCourse" parameterType="Integer">
+		delete from ReadingCourse where courseId = #{param1}
+	</delete>
+	
+	<!-- 根据Id查询听力课程的相关信息,用到嵌套查询 -->
+	<select id="getListeningCourseInfo" parameterType="Integer" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where courseId = #{param1}
+	</select>
+	<resultMap type="ListeningCourse" id="ListeningCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="courseResourceUrl" property="courseResourceUrl"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	<select id="getLanguageType" parameterType="java.lang.Integer" resultType="LanguageType">
+		select * from languageType where languageTypeId = #{languageTypeId}
+	</select>
+	<select id="getRateType" parameterType="java.lang.Integer" resultType="RateType">
+		select * from RateType where rateTypeId = #{rateTypeId}
+	</select>
+	
+	
+	<!-- 根据Id查询口语课程的相关信息,用到嵌套查询 -->
+	<select id="getOralCourseInfo" parameterType="Integer" resultMap="OralCourseMap">
+		select * from OralCourse where courseId = #{param1}
+	</select>
+	<resultMap type="OralCourse" id="OralCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	
+	<!-- 根据Id查询阅读课程的相关信息,用到嵌套查询 -->
+	<select id="getReadingCourseInfo" parameterType="Integer" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where courseId = #{param1}
+	</select>
+	<resultMap type="ReadingCourse" id="ReadingCourseMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="courseId" property="courseId"/>
+		<result column="courseName" property="courseName"/>
+		<result column="courseChineseContent" property="courseChineseContent"/>
+		<result column="courseEnglishContent" property="courseEnglishContent"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="instructionImgUrl" property="instructionImgUrl"/>
+		<collection column="languageTypeId" property="languageType" ofType="LanguageType" select="getLanguageType"/>
+		<collection column="rateTypeId" property="rateType" ofType="RateType" select="getRateType"/>
+	</resultMap>
+	
+	<!-- 更新所有听力信息 -->
+	<update id="updateListeningCourseWithRousourceWithImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},courseResourceUrl=#{courseResourceUrl},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外其他听力信息 -->
+	<update id="updateListeningCourseWithRousourceWithoutImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},courseResourceUrl=#{courseResourceUrl},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新除资源外其他听力信息 -->
+	<update id="updateListeningCourseWithoutRousourceWithImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除资源和图标外其他听力信息 -->
+	<update id="updateListeningCourseWithoutRousourceWithoutImg" parameterType="ListeningCourseForSQL">
+		update ListeningCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新所有口语信息 -->
+	<update id="updateOralCourseWithImg" parameterType="OralCourseForSQL">
+		update oralCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外口语信息 -->
+	<update id="updateOralCourseWithoutImg" parameterType="OralCourseForSQL">
+		update oralCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	<!-- 更新所有阅读信息 -->
+	<update id="updateReadingCourseWithImg" parameterType="ReadingCourseForSQL">
+		update readingCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum},instructionImgUrl=#{instructionImgUrl} where courseId = #{courseId}
+	</update>
+	<!-- 更新除图标外阅读信息 -->
+	<update id="updateReadingCourseWithoutImg" parameterType="ReadingCourseForSQL">
+		update readingCourse set languageTypeId=#{languageTypeId},rateTypeId=#{rateTypeId},courseName=#{courseName},courseChineseContent=#{courseChineseContent},courseEnglishContent=#{courseEnglishContent},downloadNum=#{downloadNum} where courseId = #{courseId}
+	</update>
+	
+	<!-- 获取所有听力课程个数 -->
+	<select id="getListeningCoursesNum" resultType="Integer">
+		select count(*) from ListeningCourse
+	</select>
+	<!-- 获取所有口语课程个数 -->
+	<select id="getOralCoursesNum" resultType="Integer">
+		select count(*) from oralCourse
+	</select>
+	<!-- 获取所有阅读课程个数 -->
+	<select id="getReadingCoursesNum" resultType="Integer">
+		select count(*) from ReadingCourse
+	</select>
+	
+	<!-- 获取指定索引的听力课程 -->
+	<select id="getListeningCourses" resultMap="ListeningCourseMap">
+		select * from ListeningCourse limit #{param1},#{param2}
+	</select>
+	<!-- 获取指定索引的口语课程 -->
+	<select id="getOralCourses" resultMap="OralCourseMap">
+		select * from OralCourse limit #{param1},#{param2}
+	</select>
+	<!-- 获取指定索引的阅读课程 -->
+	<select id="getReadingCourses" resultMap="ReadingCourseMap">
+		select * from ReadingCourse limit #{param1},#{param2}
+	</select>
+	
+	<!-- 通过下载量排序，获取指定索引的听力课程 -->
+	<select id="getListeningCoursesByDownload" resultMap="ListeningCourseMap">
+		select * from ListeningCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	<!-- 通过下载量排序，获取指定索引的口语课程 -->
+	<select id="getOralCoursesByDownload" resultMap="OralCourseMap">
+		select * from OralCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	<!-- 通过下载量排序，获取指定索引的阅读课程 -->
+	<select id="getReadingCoursesByDownload" resultMap="ReadingCourseMap">
+		select * from ReadingCourse order by downloadNum DESC,courseId limit #{param1},#{param2}
+	</select>
+	
+	<!-- 取听力课程的总页数——通过语言类别筛选 -->
+	<select id="getListeningCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from ListeningCourse where languageTypeId=#{param1}
+	</select>
+	<!-- 取口语课程的总页数——通过语言类别筛选 -->
+	<select id="getOralCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from OralCourse where languageTypeId=#{param1}
+	</select>
+	<!-- 取阅读课程的总页数——通过语言类别筛选 -->
+	<select id="getReadingCoursesNumByLanguageType" resultType="Integer">
+		select count(*) from ReadingCourse where languageTypeId=#{param1}
+	</select>
+	
+	<!-- 取听力课程的总页数——通过种类类别筛选 -->
+	<select id="getListeningCoursesNumByRateType" resultType="Integer">
+		select count(*) from ListeningCourse where rateTypeId=#{rateTypeId}
+	</select>
+	<!-- 取口语课程的总页数——通过种类类别筛选 -->
+	<select id="getOralCoursesNumByRateType" resultType="Integer">
+		select count(*) from OralCourse where rateTypeId=#{rateTypeId}
+	</select>
+	<!-- 取阅读课程的总页数——通过种类类别筛选 -->
+	<select id="getReadingCoursesNumByRateType" resultType="Integer">
+		select count(*) from ReadingCourse where rateTypeId=#{rateTypeId}
+	</select>
+	
+	<!-- 通过语言类别，取听力类型课程的内容 -->
+	<select id="getListeningCoursesByLanguageType" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过语言类别，取口语类型课程的内容 -->
+	<select id="getOralCoursesByLanguageType" resultMap="OralCourseMap">
+		select * from OralCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过语言类别，取阅读类型课程的内容 -->
+	<select id="getReadingCoursesByLanguageType" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where languageTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	
+	<!-- 通过种类类别，取听力类型课程的内容 -->
+	<select id="getListeningCoursesByRateType" resultMap="ListeningCourseMap">
+		select * from ListeningCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过种类类别，取口语类型课程的内容 -->
+	<select id="getOralCoursesByRateType" resultMap="OralCourseMap">
+		select * from OralCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	<!-- 通过种类类别，取阅读类型课程的内容 -->
+	<select id="getReadingCoursesByRateType" resultMap="ReadingCourseMap">
+		select * from ReadingCourse where rateTypeId=#{param3} limit #{param1},#{param2}
+	</select>
+	
+	<!-- 给课程添加问题 -->
+	<insert id="addQuestion">
+		insert into question values(null,#{courseType},#{courseId},#{questionContent},#{answerA},#{answerB},#{answerC},#{answerD},#{answerReal},#{answerReason});
+	</insert>
+	<!-- 删除课程问题 -->
+	<delete id="deleteQuestion">
+		delete from question where questionId=#{param1};
+	</delete>
+	<!-- 修改课程问题 -->
+	<update id="changeQuestion" parameterType="QuestionForSQL">
+		update question set courseType=#{courseType},courseId=#{courseId},questionContent=#{questionContent},answerA=#{answerA},answerB=#{answerB},answerC=#{answerC},answerD=#{answerD},answerReal=#{answerReal},answerReason=#{answerReason} where questionId=#{questionId}
+	</update>
+	<!-- 通过ID获得问题 -->
+	<select id="getQuestionById" resultType="QuestionForSQL">
+		select * from question where questionId = #{questionId};
+	</select>
+	<!-- 获得该课程的所有问题 -->
+	<select id="getAllQuestion" resultType="QuestionForSQL">
+		select * from question;
+	</select>
+	
+	<!-- 添加评分 -->
+	<insert id="addEvaluation" parameterType="EvaluationFormForSQL">
+		insert into evaluationform values(null,#{courseType},#{courseId},#{userId},#{evaluationLevel})
+	</insert>
+	<!-- 删除评分 -->
+	<delete id="deleteEvaluation">
+		delete from evaluationform where evaluationId = #{param1}
+	</delete>
+	<!-- 获得课程的平均分 -->
+	<select id="getAvgEvaluation" resultType="Object">
+		select avg(evaluationLevel) from evaluationform where courseType=#{param1} and courseId=#{param2}
+	</select>
+	<!-- 获得指定用户的所有评价（分页） -->
+	<select id="getAllEvaluationOfUser" resultMap="EvaluationFormMap">
+		select * from evaluationform where userId = #{param2} limit #{param1},10
+	</select>
+	<resultMap type="EvaluationForm" id="EvaluationFormMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="evaluationId" property="evaluationId"/>
+		<result column="evaluationLevel" property="evaluationLevel"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
+	</resultMap>
+	<select id="getUserById" parameterType="java.lang.Integer" resultType="User">
+		select * from user where userId = #{userId}
+	</select>
+	<select id="getCourse" resultType="Course">
+		select * from ${courseType} where courseId = #{courseId}
+	</select>
+	<!-- 获得指定用户的所有评价个数 -->
+	<select id="getAllEvaluationPageNumberOfUser" resultType="Integer">
+		select count(*) from evaluationform where userId = #{userId}
+	</select>
+	<!-- 获得指定课程的所有评价（分页） -->
+	<select id="getAllEvaluationOfCourse" resultMap="EvaluationFormMap">
+		select * from evaluationform where courseType = #{param2} and courseId = #{param3} limit #{param1},10
+	</select>
+	<!-- 获得指定课程的所有评价个数 -->
+	<select id="getAllEvaluationPageNumberOfCourse" resultType="Integer">
+		select count(*) from evaluationform where courseType = #{param1} and courseId = #{param2}
+	</select>
+</mapper>
