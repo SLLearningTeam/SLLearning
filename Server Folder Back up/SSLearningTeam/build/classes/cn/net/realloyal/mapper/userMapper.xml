@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+	
+ -->
+<mapper namespace="cn.net.realloyal.mapper.UserMapper">
+	<select id="checkLogin" resultType="User">
+		select * from user where userPhoneNumber=#{param1} and userPassword=#{param2}
+	</select>
+	
+	<select id="checkPhoneIsExist" resultType="User">
+		select * from user where userPhoneNumber=#{param1}
+	</select>
+	
+	<insert id="registerUser" parameterType="User">
+		insert into user (userId,userSex,userName,userPassword,userAvatarUrl,userPhoneNumber,userPermission) values(null,#{userSex},#{userName},#{userPassword},#{userAvatarUrl},#{userPhoneNumber},#{userPermission})
+	</insert>
+</mapper>
