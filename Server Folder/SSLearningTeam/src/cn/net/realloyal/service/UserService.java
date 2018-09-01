@@ -1,5 +1,7 @@
 package cn.net.realloyal.service;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
@@ -20,5 +22,11 @@ public interface UserService {
 	public BackJsonUtil getChaphcha(String userPhoneNumber, int randomChaphcha);
 
 	public User getUser(String userPhoneNumber, String userPassword) throws Exception;
+
+	public BackJsonUtil getUserSignInRecording(Integer userId);
+
+	public BackJsonUtil addSignInRecording(Integer userId) throws ParseException;
+
+	public BackJsonUtil updateSignInRecording(Integer userId, Integer totalTimes);
 	
 }

@@ -33,6 +33,7 @@ import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
 
@@ -1238,5 +1239,56 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return backJsonUtil;
 	}
+
+	@Override
+	public BackJsonUtil getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		OralCourseScoreForSQL oralCourseScoreForSQL = courseMapper.getScoreOfUserForOralCourse(courseType,courseId,userId);
+		if(oralCourseScoreForSQL==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您还没有作答过本题目");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(oralCourseScoreForSQL.getOralScore());
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		OralCourseScoreForSQL oralCourseScoreForSQL = courseMapper.getScoreOfUserForOralCourse(courseType,courseId,userId);
+		int num = 0;
+		if(oralCourseScoreForSQL==null) {
+			num = courseMapper.addOralCourseScore(courseType,courseId,userId,oralScore);
+			
+		}else {
+			num = courseMapper.updateOralCourseScore(courseType,courseId,userId,oralScore,oralCourseScoreForSQL.getOralCourseScoreId());
+		}
+		if(num == 0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("添加失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("添加成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAvgOralCourseScoreOfUser(Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		Object avg = courseMapper.getAvgOralCourseScoreOfUser(userId);
+		if(avg == null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("用户暂未参加口语测评");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(avg);
+		}
+		return backJsonUtil;
+	}
+	
+	
 
 }

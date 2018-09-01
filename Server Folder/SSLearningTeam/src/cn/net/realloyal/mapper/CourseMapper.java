@@ -11,6 +11,7 @@ import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
 
@@ -163,5 +164,18 @@ public interface CourseMapper {
 	
 	//指定用户总浏览个数
 	int getHistoryRecordingCountOfUser(Integer userId);
+
+	//获取指定用户指定课程的口语测评成绩
+	OralCourseScoreForSQL getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId);
+
+	//添加口语测评成绩
+	int addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore);
+
+	//更新口语测评成绩
+	int updateOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore,
+			int oralCourseScoreId);
+
+	//获得指定用户口语测评的平均成绩
+	Object getAvgOralCourseScoreOfUser(Integer userId);
 
 }

@@ -3,6 +3,9 @@ package cn.net.realloyal.service.impl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,6 +23,7 @@ import cn.net.realloyal.core.util.ShaEncryptUtil;
 import cn.net.realloyal.mapper.UserMapper;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.UserService;
+import cn.net.realloyal.vo.SignInRecordingForSQL;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -136,6 +140,74 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		userPhoneNumber = AesEncryptUtil.encrypt(userPhoneNumber);
 		return checkLogin(userPhoneNumber,userPassword);
+	}
+
+	@Override
+	public BackJsonUtil getUserSignInRecording(Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SignInRecordingForSQL signInRecordingForSQL = userDao.getUserSignInRecording(userId);
+		if(signInRecordingForSQL == null) {
+			SignInRecordingForSQL signIn = new SignInRecordingForSQL(0,userId,0,null);
+			userDao.addSignInRecording(signIn);
+			signInRecordingForSQL = userDao.getUserSignInRecording(userId);
+		}
+		backJsonUtil.setStatus(true);
+		backJsonUtil.setInfo(signInRecordingForSQL);
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil addSignInRecording(Integer userId) throws ParseException {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SignInRecordingForSQL signInRecordingForSQL = userDao.getUserSignInRecording(userId);
+		if(signInRecordingForSQL == null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("发生未知错误，请重试");
+		}else {
+			DateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			if(signInRecordingForSQL.getRecentMark()==null) {
+				int num = userDao.updateSignInRecording(signInRecordingForSQL.getUserId(),signInRecordingForSQL.getTotalTimes()+1,date.format(new Date()),signInRecordingForSQL.getSignInId());
+				backJsonUtil.setStatus(true);
+				backJsonUtil.setInfo(userDao.getUserSignInRecording(userId));
+			}else {
+				Date dateRecord = date.parse(signInRecordingForSQL.getRecentMark().substring(0, 19));
+				Date now = new Date();
+				int dateRecordYear = dateRecord.getYear();
+				int dateRecordMonth = dateRecord.getMonth();
+				int dateRecordDate = dateRecord.getDate();
+				int nowYear = now.getYear();
+				int nowMonth = now.getMonth();
+				int nowDate = now.getDate();
+				System.out.println("year:"+nowYear+"  nowMonth:"+nowMonth+"  nowDate:"+nowDate);
+				if(dateRecordYear==nowYear&&dateRecordMonth==nowMonth&&dateRecordDate==nowDate) {
+					backJsonUtil.setStatus(false);
+					backJsonUtil.setInfo("您今日已经签到，请明日再来");
+				}else if(dateRecordYear==nowYear&&dateRecordMonth==nowMonth&&(nowDate-dateRecordDate)==1) {
+					int num = userDao.updateSignInRecording(signInRecordingForSQL.getUserId(),signInRecordingForSQL.getTotalTimes()+1,date.format(now),signInRecordingForSQL.getSignInId());
+					backJsonUtil.setStatus(true);
+					backJsonUtil.setInfo(userDao.getUserSignInRecording(userId));
+				}else {
+					int num = userDao.updateSignInRecording(signInRecordingForSQL.getUserId(),1,date.format(now),signInRecordingForSQL.getSignInId());
+					backJsonUtil.setStatus(true);
+					backJsonUtil.setInfo(userDao.getUserSignInRecording(userId));
+				}
+			}
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil updateSignInRecording(Integer userId, Integer totalTimes) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int num = userDao.updateSignInRecordingForAdmin(userId,totalTimes);
+		if(num == 0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("修改失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("修改成功");
+		}
+		return backJsonUtil;
 	}
 
 

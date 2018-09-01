@@ -323,5 +323,21 @@
 		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
 	</resultMap>
 	
+	<!-- 获取指定用户指定课程的口语测评成绩 -->
+	<select id="getScoreOfUserForOralCourse" resultType="OralCourseScoreForSQL">
+		select * from oralcoursescore where courseType=#{param1} and courseId=#{param2} and userId=#{param3}
+	</select>
+	<!-- 添加口语测评成绩 -->
+	<insert id="addOralCourseScore">
+		insert into oralcoursescore values(null,#{param1},#{param2},#{param3},#{param4})
+	</insert>
+	<!-- 更新口语测评成绩 -->
+	<update id="updateOralCourseScore">
+		update oralcoursescore set courseType = #{param1}, courseId = #{param2},userId = #{param3},oralScore =#{param4} where oralCourseScoreId=#{param5}
+	</update>
+	<!-- 获得指定用户口语测评的平均成绩 -->
+	<select id="getAvgOralCourseScoreOfUser" resultType="Object">
+		select avg(oralScore) from oralcoursescore where userId = #{param1}
+	</select>
 	
 </mapper>
