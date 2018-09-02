@@ -859,6 +859,11 @@
     border-radius: 6px;
     box-shadow: rgb(255, 197, 197) 0 0 10px;
 }
+.classify-menu-item-action{
+    color: #F20D0D !important;
+    border-radius: 6px;
+    box-shadow: rgb(255, 197, 197) 0 0 10px;
+}
 
 .classify-cont ul {
     margin-bottom: 0;
@@ -888,9 +893,6 @@
     position: relative;
     padding-top: 26px;
     padding-bottom: 16px;
-    overflow: hidden;
-    margin-top: -1px;
-    padding-right: 15px;
     font-size: 12px;
 }
 
@@ -902,6 +904,10 @@
     line-height: 16px;
     border-radius: 12px;
     transition: all 0.5s;
+}
+.sort-btn-action{
+    background: #F20D0D;
+    color: #fff;
 }
 
 .text-center a:hover {
@@ -1044,13 +1050,29 @@
 .class-content{
     padding-top: 32px;
 }
-.listen{
+.course-tool{
     background-color: #fff;
     height: 100px;
     box-shadow:0 5px 30px 0 rgba(73, 73, 73, 0.2);
     border-radius: 8px;
 }
-.listen-img{
+.listen-play{
     line-height: 100px;
-    padding-left: 30px;
+    padding-left: 200px;
+}
+.text-box{
+    margin: 30px;
+    font-size: 30px;
+    min-height: 500px;
+}
+.text-open{
+    overflow: visible;
+}
+.text-close{
+    height: 0;
+    overflow: hidden;
+}
+.course-test{
+    line-height: 100px;
+    padding-right: 200px;
 }

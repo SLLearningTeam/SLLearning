@@ -13,6 +13,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
 </head>
 
 <body>
@@ -82,10 +83,10 @@
                     <div class="classify-cont">
                         <ul>
                             <li class="classify-menu-item">
-                                <a href="">全部</a>
+                                <a class="lg-item classify-menu-item-action" onclick="lgItem(this)" href="#">全部</a>
                             </li>
                             <li class="classify-menu-item">
-                                <a href="">英语</a>
+                                <a class="lg-item" onclick="lgItem(this)" href="#">英语</a>
                             </li>
                         </ul>
                     </div>
@@ -96,10 +97,10 @@
                         <div class="classify-cont">
                             <ul>
                                 <li class="classify-menu-item">
-                                    <a href="">全部</a>
+                                    <a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="#">全部</a>
                                 </li>
                                 <li class="classify-menu-item">
-                                    <a href="">四级</a>
+                                    <a class="tp-item" onclick="tpItem(this)" href="#">四级</a>
                                 </li>
                             </ul>
                         </div>
@@ -110,10 +111,10 @@
                     <div class="classify-cont">
                         <ul>
                             <li class="classify-menu-item">
-                                <a href="">全部</a>
+                                <a class="dt-item classify-menu-item-action" onclick="dtItem(this)" href="#">全部</a>
                             </li>
                             <li class="classify-menu-item">
-                                <a href="">听力</a>
+                                <a class="dt-item" onclick="dtItem(this)" href="#">听力</a>
                             </li>
                         </ul>
                     </div>
@@ -123,8 +124,8 @@
         <div class="classify-container">
             <div class="container-nav clearfix">
                 <div class="text-center">
-                    <a href="" class="sort-btn">最热</a>
-                    <a href="" class="sort-btn">最新</a>
+                    <a onclick="classifySort(this)" href="#" class="sort-btn sort-btn-action">最热</a>
+                    <a onclick="classifySort(this)" href="#" class="sort-btn">最新</a>
                 </div>
             </div>
             <div class="classify-course-list-box">
@@ -179,6 +180,52 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var lg_item = byClass('lg-item');
+        var tp_item = byClass('tp-item');
+        var dt_item = byClass('dt-item');
+        var sort_btn = byClass('sort-btn');
+
+        //获取当前元素：1. onclick(this)方法中加this   2.function x(e) e就是当前对象
+        function lgItem(e) {
+            for (var x = 0; x < lg_item.length; x++) {
+                if (lg_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
+                    lg_item[x].classList.remove('classify-menu-item-action');
+                }
+            }
+            e.classList.add('classify-menu-item-action');
+        }
+
+        function tpItem(e) {
+            for (var x = 0; x < tp_item.length; x++) {
+                if (tp_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
+                    tp_item[x].classList.remove('classify-menu-item-action');
+                }
+            }
+            e.classList.add('classify-menu-item-action');
+        }
+
+        function dtItem(e) {
+            for (var x = 0; x < tp_item.length; x++) {
+                if (dt_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
+                    dt_item[x].classList.remove('classify-menu-item-action');
+                }
+            }
+            e.classList.add('classify-menu-item-action');
+        }
+
+        function classifySort(e) {
+            if (e == sort_btn[0]) {
+                    e.classList.add('sort-btn-action');
+                    sort_btn[1].classList.remove('sort-btn-action');
+            }else{
+                    e.classList.add('sort-btn-action');
+                    sort_btn[0].classList.remove('sort-btn-action');
+                
+            }
+        }
+    </script>
 </body>
 
 </html>
