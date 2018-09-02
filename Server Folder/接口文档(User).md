@@ -2739,3 +2739,372 @@
 #### 39.4 返回参数
 
 过于简单，不作讲解
+
+### 40.查看指定用户指定课程是否订阅 
+
+#### 40.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/checkSubscriptionRecordingOfUser 
+
+#### 40.2 请求参数
+
+| 字段       | 类型   | 含义                               |
+| ---------- | ------ | ---------------------------------- |
+| userId     | int    | 用户Id(如果可以传cookie则可以不传) |
+| courseType | string | 课程类型                           |
+| courseId   | int    | 课程ID                             |
+
+#### 40.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "已订阅该课程"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "暂未订阅该课程"
+}
+```
+
+#### 40.4 返回参数
+
+过于简单，不作讲解
+
+### 41.指定用户订阅指定课程 
+
+#### 41.1 请求说明
+
+> 请求方式：POST
+> 请求URL ：/course/user/addSubscriptionRecording 
+
+#### 41.2 请求参数
+
+| 字段       | 类型   | 含义                               |
+| ---------- | ------ | ---------------------------------- |
+| userId     | int    | 用户Id(如果可以传cookie则可以不传) |
+| courseType | string | 课程类型                           |
+| courseId   | int    | 课程ID                             |
+
+#### 41.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "添加成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "添加失败"
+}
+```
+
+#### 41.4 返回参数
+
+过于简单，不作讲解
+
+### 42.指定用户删除订阅指定课程 
+
+#### 42.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/deleteSubscriptionRecording 
+
+#### 42.2 请求参数
+
+| 字段                    | 类型 | 含义   |
+| ----------------------- | ---- | ------ |
+| subscriptionRecordingId | int  | 订阅id |
+
+#### 42.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 42.4 返回参数
+
+过于简单，不作讲解
+
+### 43.查看指定用户订阅的所有课程（分页） 
+
+#### 43.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/getSubscriptionRecordingOfUser/{pageNum} 
+>
+> pageNum为页号
+
+#### 43.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 43.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "subscriptionRecordings": [
+            {
+                "subscriptionRecordingId": 1,
+                "subscriptionTime": 1535835860000,
+                "user": {
+                    "userId": 2,
+                    "userSex": "男",
+                    "userName": "Daming",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+                    "userPhoneNumber": "15842685420",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                }
+            },
+            {
+                "subscriptionRecordingId": 3,
+                "subscriptionTime": 1535835880000,
+                "user": {
+                    "userId": 2,
+                    "userSex": "男",
+                    "userName": "Daming",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+                    "userPhoneNumber": "15842685420",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 3,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力2",
+                    "courseChineseContent": "英文",
+                    "courseEnglishContent": "English",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3",
+                    "downloadNum": 2,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png"
+                }
+            },
+            {
+                "subscriptionRecordingId": 4,
+                "subscriptionTime": 1535835957000,
+                "user": {
+                    "userId": 2,
+                    "userSex": "男",
+                    "userName": "Daming",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+                    "userPhoneNumber": "15842685420",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 4,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力3",
+                    "courseChineseContent": "听力",
+                    "courseEnglishContent": "listening",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9学员网页端.mp3",
+                    "downloadNum": 5,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/417c1422-94c0-4b2d-831e-22fc97bc7020中文.png"
+                }
+            }
+        ],
+        "pageNumber": 1,
+        "currentPage": 1
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户没有订阅任何内容"
+}
+```
+
+#### 43.4 返回参数
+
+过于简单，不作讲解
+
+### 44.查看指定课程订阅的所有用户（分页） 
+
+#### 44.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/getSubscriptionRecordingOfCourse/{pageNum} 
+>
+> pageNum为页号
+
+#### 44.2 请求参数
+
+| 字段       | 类型   | 含义     |
+| ---------- | ------ | -------- |
+| courseType | string | 课程类型 |
+| courseId   | int    | 课程Id   |
+
+#### 44.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "subscriptionRecordings": [
+            {
+                "subscriptionRecordingId": 1,
+                "subscriptionTime": 1535835860000,
+                "user": {
+                    "userId": 2,
+                    "userSex": "男",
+                    "userName": "Daming",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+                    "userPhoneNumber": "15842685420",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                }
+            },
+            {
+                "subscriptionRecordingId": 2,
+                "subscriptionTime": 1535835873000,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                }
+            }
+        ],
+        "pageNumber": 1,
+        "currentPage": 1
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "课程没有被订阅记录"
+}
+```
+
+#### 44.4 返回参数
+
+过于简单，不作讲解
