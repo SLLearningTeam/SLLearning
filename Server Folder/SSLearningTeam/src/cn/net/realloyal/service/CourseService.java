@@ -158,4 +158,14 @@ public interface CourseService {
 
 	BackJsonUtil getAvgOralCourseScoreOfUser(Integer userId);
 
+	BackJsonUtil deleteSubscriptionRecording(Integer subscriptionRecordingId);
+
+	BackJsonUtil addSubscriptionRecording(String courseType, Integer courseId, Integer userId);
+
+	BackJsonUtil getSubscriptionRecordingOfUser(Integer pageNum, Integer userId);
+
+	BackJsonUtil getSubscriptionRecordingOfCourse(Integer pageNum, String courseType, Integer courseId);
+
+	BackJsonUtil checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId);
+
 }

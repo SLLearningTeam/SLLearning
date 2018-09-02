@@ -714,6 +714,57 @@ public class CourseAction {
 		return courseService.getAvgOralCourseScoreOfUser(userId);
 	}
 	
+	//查看指定用户指定课程是否订阅——用户
+	@ResponseBody
+	@RequestMapping("/user/checkSubscriptionRecordingOfUser")
+	public BackJsonUtil checkSubscriptionRecordingOfUser(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.checkSubscriptionRecordingOfUser(courseType,courseId,userId);
+	}
 	
+	//指定用户订阅指定课程——用户
+	@ResponseBody
+	@RequestMapping("/user/addSubscriptionRecording")
+	public BackJsonUtil addSubscriptionRecording(@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.addSubscriptionRecording(courseType,courseId,userId);
+	}
+	
+	//指定用户删除订阅指定课程——用户
+	//指定用户删除订阅指定课程——管理员
+	@ResponseBody
+	@RequestMapping(value={"/user/deleteSubscriptionRecording","/admin/deleteSubscriptionRecording"})
+	public BackJsonUtil deleteSubscriptionRecording(@RequestParam("subscriptionRecordingId")Integer subscriptionRecordingId) {
+		return courseService.deleteSubscriptionRecording(subscriptionRecordingId);
+	}
+	
+	//查看指定用户订阅的所有课程（分页）——用户
+	//查看指定用户订阅的所有课程（分页）——管理员
+	@ResponseBody
+	@RequestMapping(value={"/user/getSubscriptionRecordingOfUser/{pageNum}","/admin/getSubscriptionRecordingOfUser/{pageNum}"})
+	public BackJsonUtil getSubscriptionRecordingOfUser(@PathVariable("pageNum")Integer pageNum,@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return courseService.getSubscriptionRecordingOfUser(pageNum,userId);
+	}
+	
+	//查看指定课程订阅的所有用户（分页）——用户
+	//查看指定课程订阅的所有用户（分页）——管理员
+	@ResponseBody
+	@RequestMapping(value={"/user/getSubscriptionRecordingOfCourse/{pageNum}","/admin/getSubscriptionRecordingOfCourse/{pageNum}"})
+	public BackJsonUtil getSubscriptionRecordingOfCourse(@PathVariable("pageNum")Integer pageNum,@RequestParam("courseType")String courseType,@RequestParam("courseId")Integer courseId,HttpServletRequest request) {
+		return courseService.getSubscriptionRecordingOfCourse(pageNum,courseType,courseId);
+	}
 	
 }

@@ -7,6 +7,7 @@ import cn.net.realloyal.model.HistoryRecording;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.model.SubscriptionRecording;
 import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
@@ -14,6 +15,7 @@ import cn.net.realloyal.vo.OralCourseForSQL;
 import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
+import cn.net.realloyal.vo.SubscriptionRecordingForSQL;
 
 public interface CourseMapper {
 
@@ -177,5 +179,30 @@ public interface CourseMapper {
 
 	//获得指定用户口语测评的平均成绩
 	Object getAvgOralCourseScoreOfUser(Integer userId);
+
+	//获取指定用户的指定课程订阅记录
+	SubscriptionRecordingForSQL checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId);
+
+	//添加订阅记录
+	int addSubscriptionRecording(SubscriptionRecordingForSQL record);
+
+	//更新订阅记录
+	int updateSubscriptionRecording(SubscriptionRecordingForSQL subscriptionRecordingForSQL);
+
+	//删除订阅记录
+	int deleteSubscriptionRecording(Integer subscriptionRecordingId);
+
+	//获得指定用户所有的订阅记录个数
+	int getSubscriptionRecordingCountOfUser(Integer userId);
+
+	//获得指定用户所有的订阅记录
+	List<SubscriptionRecording> getSubscriptionRecordingOfUser(int startNum, Integer userId);
+
+	//获得指定课程所有的被订阅记录个数
+	int getSubscriptionRecordingCountOfCourse(String courseType, Integer courseId);
+
+	//获得指定课程所有的被订阅记录
+	List<SubscriptionRecording> getSubscriptionRecordingOfCourse(int startNum, String courseType, Integer courseId);
+
 
 }

@@ -340,4 +340,43 @@
 		select avg(oralScore) from oralcoursescore where userId = #{param1}
 	</select>
 	
+	
+	<!-- 获取指定用户的指定课程订阅记录 -->
+	<select id="checkSubscriptionRecordingOfUser" resultType="SubscriptionRecordingForSQL">
+		select * from SubscriptionRecording where courseType=#{param1} and courseId=#{param2} and userId=#{param3}
+	</select>
+	<!-- 添加订阅记录 -->
+	<insert id="addSubscriptionRecording" parameterType="SubscriptionRecordingForSQL">
+		insert into SubscriptionRecording values(null,#{subscriptionTime},#{userId},#{courseType},#{courseId})
+	</insert>
+	<!-- 更新订阅记录 -->
+	<update id="updateSubscriptionRecording" parameterType="SubscriptionRecordingForSQL">
+		update SubscriptionRecording set subscriptionTime=#{subscriptionTime},userId=#{userId},courseType=#{courseType},courseId=#{courseId} where subscriptionRecordingId=#{subscriptionRecordingId}
+	</update>
+	<!-- 删除订阅记录 -->
+	<delete id="deleteSubscriptionRecording">
+		delete from SubscriptionRecording where subscriptionRecordingId=#{param1}
+	</delete>
+	<!-- 获得指定用户所有的订阅记录个数 -->
+	<select id="getSubscriptionRecordingCountOfUser" resultType="Integer">
+		select count(*) from SubscriptionRecording where userId = #{param1}
+	</select>
+	<!-- 获得指定用户所有的订阅记录 -->
+	<select id="getSubscriptionRecordingOfUser" resultMap="SubscriptionRecordingMap">
+		select * from SubscriptionRecording where userId = #{param2} limit #{param1},10
+	</select>
+	<resultMap type="SubscriptionRecording" id="SubscriptionRecordingMap">
+		<!-- column为数据库字段，property为实体字段 -->
+		<id column="subscriptionTime" property="subscriptionTime"/>
+		<collection column="userId" property="user" ofType="User" select="getUserById"/>
+		<collection column="{courseType=courseType,courseId=courseId}" property="course" ofType="Course" select="getCourse" />
+	</resultMap>
+	<!-- 获得指定课程所有的被订阅记录个数 -->
+	<select id="getSubscriptionRecordingCountOfCourse" resultType="Integer">
+		select count(*) from SubscriptionRecording where courseType = #{param1} and courseId=#{param2}
+	</select>
+	<!-- 获得指定课程所有的被订阅记录 -->
+	<select id="getSubscriptionRecordingOfCourse" resultMap="SubscriptionRecordingMap">
+		select * from SubscriptionRecording where courseType = #{param2} and courseId = #{param3} limit #{param1},10
+	</select>
 </mapper>

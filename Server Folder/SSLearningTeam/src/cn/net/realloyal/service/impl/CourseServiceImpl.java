@@ -28,6 +28,7 @@ import cn.net.realloyal.model.HistoryRecording;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.model.SubscriptionRecording;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.vo.EvaluationFormForSQL;
 import cn.net.realloyal.vo.HistoryRecordingForSQL;
@@ -36,6 +37,7 @@ import cn.net.realloyal.vo.OralCourseForSQL;
 import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
+import cn.net.realloyal.vo.SubscriptionRecordingForSQL;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -1288,7 +1290,107 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return backJsonUtil;
 	}
+
+	@Override
+	public BackJsonUtil checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SubscriptionRecordingForSQL subscriptionRecordingForSQL = courseMapper.checkSubscriptionRecordingOfUser(courseType,courseId,userId);
+		if(subscriptionRecordingForSQL==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("暂未订阅该课程");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("已订阅该课程");
+		}
+		return backJsonUtil;
+	}
 	
+	@Override
+	public BackJsonUtil addSubscriptionRecording(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SubscriptionRecordingForSQL subscriptionRecordingForSQL = courseMapper.checkSubscriptionRecordingOfUser(courseType,courseId,userId);
+		DateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String nowDate = date.format(new Date());
+		if(subscriptionRecordingForSQL==null) {
+			SubscriptionRecordingForSQL record = new SubscriptionRecordingForSQL(0,nowDate,userId,courseType,courseId);
+			int changeNum = courseMapper.addSubscriptionRecording(record);
+			if(changeNum == 0) {
+				backJsonUtil.setStatus(false);
+				backJsonUtil.setInfo("添加失败");
+			}else {
+				backJsonUtil.setStatus(true);
+				backJsonUtil.setInfo("添加成功");
+			}
+		}else {
+			subscriptionRecordingForSQL.setSubscriptionTime(nowDate);
+			int changeNum = courseMapper.updateSubscriptionRecording(subscriptionRecordingForSQL);
+			if(changeNum == 0) {
+				backJsonUtil.setStatus(false);
+				backJsonUtil.setInfo("添加失败");
+			}else {
+				backJsonUtil.setStatus(true);
+				backJsonUtil.setInfo("添加成功");
+			}
+		}
+		return backJsonUtil;
+		
+		
+	}
 	
+	@Override
+	public BackJsonUtil deleteSubscriptionRecording(Integer subscriptionRecordingId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int changeNum = courseMapper.deleteSubscriptionRecording(subscriptionRecordingId);
+		if(changeNum == 0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getSubscriptionRecordingOfUser(Integer pageNum, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfUser(userId);
+		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfUser(startNum,userId);
+		if(subscriptionRecordingsCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("用户没有订阅任何内容");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("subscriptionRecordings",subscriptionRecordings);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getSubscriptionRecordingOfCourse(Integer pageNum, String courseType, Integer courseId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfCourse(courseType,courseId);
+		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfCourse(startNum,courseType,courseId);
+		if(subscriptionRecordingsCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("课程没有被订阅记录");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("subscriptionRecordings",subscriptionRecordings);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
 
 }
