@@ -2624,7 +2624,7 @@ languageTypes为语言类别集合
 
 #### 5.4显示页面
 
-> 重定向到/train/admin/simulatedtests_manage/1页面 
+> 重定向到/train/admin/simulatedtests_manage/1页面
 
 ### 6.管理员查询模拟套题列表(分页) 
 
@@ -2654,6 +2654,8 @@ pageNum:1
 totalPages:1
 
 simulatedTests:[SimulatedTest [simulatedTestId=1, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力1, instructionImgUrl=/SSLearningTeam/TrainRecourses/7db509c8-992d-4932-8173-966f54e8a607成功.png], SimulatedTest [simulatedTestId=2, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力2, instructionImgUrl=/SSLearningTeam/TrainRecourses/cf72a4ef-8f62-49ba-a277-768400cb6e9e对号2.png], SimulatedTest [simulatedTestId=3, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力3-3, instructionImgUrl=/SSLearningTeam/TrainRecourses/a5548511-9cb8-4382-9c49-99b9d4abed6b5-121204193R0.gif], SimulatedTest [simulatedTestId=4, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力4, instructionImgUrl=/SSLearningTeam/TrainRecourses/ad610287-98aa-40d1-a1f6-1b8db33cc93b对号2 (1).png], SimulatedTest [simulatedTestId=5, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力5, instructionImgUrl=/SSLearningTeam/TrainRecourses/703cd091-ad0a-4f36-b9b4-02d1dacceb41白心.png]]
+
+pageName="trainManage"
 ```
 
 ### 7.管理员根据课程类别查询可添加的课程问题
@@ -2913,15 +2915,162 @@ simulatedTests:[SimulatedTest [simulatedTestId=1, languageType=LanguageType [lan
 
 成功时返回的info为平均分
 
+<hr/>
 
+## 用户管理操作接口
 
+### 1.查看指定用户个人信息
 
+#### 1.1 请求说明
 
+> 请求方式：GET
+> 请求URL ：/user/admin/getUserInfo
 
+#### 1.2 请求参数
 
+| 字段   | 类型 | 含义   |
+| ------ | ---- | ------ |
+| userId | int  | 用户Id |
 
+#### 1.3 返回结果接收
 
+- 返回内容
 
+```json  
+pageName:userInfoManage
+
+user:User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0]
+```
+
+#### 1.4 返回参数
+
+> 跳转到admin/userManager/user_info 
+
+### 2.修改指定用户个人信息
+
+#### 2.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/admin/updateUserInfoByAdmin
+
+#### 2.2 请求参数
+
+| 字段            | 类型   | 含义                 |
+| --------------- | ------ | -------------------- |
+| userName        | string | 用户名               |
+| userSex         | string | 用户性别             |
+| userPhoneNumber | int    | 用户手机号           |
+| chaphcha        | string | 验证码               |
+| userPassword    | string | 用户密码             |
+| userAvatar      | file   | 用户头像(可改可不改) |
+| userId          | int    | 用户Id               |
+
+#### 2.3 返回结果接收
+
+无
+
+#### 2.4 返回参数
+
+> 重定向到/user/admin/userlist_manage/1
+
+### 3.删除用户
+
+#### 3.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/admin/deleteUser
+
+#### 3.2 请求参数
+
+| 字段   | 字段类型 | 字段说明 |
+| ------ | -------- | -------- |
+| userId | int      | 用户Id   |
+
+#### 3.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 3.4 返回参数
+
+过于简单，不作讲解
+
+### 4.查询所有用户列表(分页) 
+
+#### 4.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/admin/userlist_manage/{pageNum} 
+>
+> pageNum为页号
+
+#### 4.2 请求参数
+
+无
+
+#### 4.3 返回结果接收
+
+- 返回内容
+
+```json  
+pageName:userInfoManage
+
+users:[User [userId=1, userSex=男, userName=Jack, userPassword=481f6cc0511143ccdd7e2d1b1b94faf0a700a8b49cd13922a70b5ae28acaa8c5, userAvatarUrl=www.baidu.com, userPhoneNumber=13998434328, userPermission=1], User [userId=2, userSex=男, userName=Daming, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png, userPhoneNumber=15842685420, userPermission=0], User [userId=3, userSex=女, userName=Amy, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png, userPhoneNumber=18041168030, userPermission=0], User [userId=4, userSex=男, userName=Sam, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/c6cbcce3-790f-4fdb-962a-4df4470ef58818041168031Avatar.png, userPhoneNumber=18041168031, userPermission=0], User [userId=5, userSex=男, userName=辛俊桥, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/8d1c8fca-7af1-4457-bfe7-2ad92e6901ef18041168032Avatar.png, userPhoneNumber=18041168032, userPermission=0], User [userId=6, userSex=男, userName=苏凯, userPassword=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92, userAvatarUrl=/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcdcc255-d591-4291-ae86-da0ae493abef18041168033Avatar.png, userPhoneNumber=18041168033, userPermission=0]]
+
+pageNumeber:1
+
+currentPage:1
+```
+
+#### 4.4 返回参数
+
+> 跳转到admin/userManager/user_list 
+
+### 5.用户图表分布页
+
+#### 5.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/admin/toUserChart 
+
+#### 5.2 请求参数
+
+无
+
+#### 5.3 返回结果接收
+
+- 返回内容
+
+```json  
+pageName:userChartManage
+
+sexRate:{manNum=5, womanNum=1}
+
+downloadRate:[DownloadNumAndCount [downloadRecordingTime=2018-08-27 19:25:23.0, count=2], DownloadNumAndCount [downloadRecordingTime=2018-08-28 22:22:23.0, count=1], DownloadNumAndCount [downloadRecordingTime=2018-08-29 21:22:23.0, count=1]]
+
+signInTimeRate:[SignInTimeAndCount [recentMarkTime=2018-09-02 02:13:25.0, count=1], SignInTimeAndCount [recentMarkTime=2018-09-03 03:13:25.0, count=2], SignInTimeAndCount [recentMarkTime=2018-09-04 03:19:25.0, count=1]]
+
+signInTotal:[SignInTotalAndUserName [userName=Amy, totalTimes=1], SignInTotalAndUserName [userName=Daming, totalTimes=4], SignInTotalAndUserName [userName=Sam, totalTimes=2], SignInTotalAndUserName [userName=辛俊桥, totalTimes=2]]
+```
+
+#### 5.4 返回参数
+
+> 跳转到admin/userManager/users_chart
 
 <hr/>
 

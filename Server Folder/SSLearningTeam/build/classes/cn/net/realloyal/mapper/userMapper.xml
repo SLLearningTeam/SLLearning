@@ -35,4 +35,49 @@
 	<update id="updateSignInRecordingForAdmin">
 		update signinrecording set totalTimes=#{param2} where userId=#{param1}
 	</update>
+	
+	<!-- 通过Id获得用户信息 -->
+	<select id="getUserInfoById" resultType="User">
+		select * from user where userId=#{param1}
+	</select>
+	<!-- 通过Id删除用户信息 -->
+	<delete id="deleteUser">
+		delete from user where userId=#{param1}
+	</delete>
+	<!-- 获得用户记录的总个数 -->
+	<select id="getUserCountNum" resultType="Integer">
+		select count(*) from user
+	</select>
+	<!-- 获得用户指定页号的记录信息 -->
+	<select id="getUsersByPageNum" resultType="User">
+		select * from user limit #{param1},10
+	</select>
+	<!-- 获得用户中sex为男的总人数 -->
+	<select id="getManNum" resultType="Integer">
+		select count(*) from user where userSex='男'
+	</select>
+	<!-- 获得用户中sex为女的总人数 -->
+	<select id="getWomanNum" resultType="Integer">
+		select count(*) from user where userSex='女'
+	</select>
+	<!-- 获得所有下载时间与总次数 -->
+	<select id="getDownloadRate" resultType="DownloadNumAndCount">
+		select downloadRecordingTime,count(*) as count from downloadRecording group by downloadRecordingTime
+	</select>
+	<!-- 获得所有签到时间与总次数 -->
+	<select id="getSignInTimeRate" resultType="SignInTimeAndCount">
+		select recentMark as recentMarkTime,count(*) as count from signInRecording group by recentMark
+	</select>
+	<!-- 获得所有用户名和总次数 -->
+	<select id="getSignInTotal" resultType="SignInTotalAndUserName">
+		select userName,totalTimes from signInRecording left join user on signInRecording.userId=user.userId
+	</select>
+	<!-- 更新用户信息带头像 -->
+	<update id="updateUserInfoByAdminWithAvatar" parameterType="User">
+		update user set userSex=#{userSex},userName=#{userName},userPassword=#{userPassword},userAvatarUrl=#{userAvatarUrl},userPhoneNumber=#{userPhoneNumber},userPermission=#{userPermission} where userId=#{userId}
+	</update>
+	<!-- 更新用户信息不带头像 -->
+	<update id="updateUserInfoByAdminWithoutAvatar" parameterType="User">
+		update user set userSex=#{userSex},userName=#{userName},userPassword=#{userPassword},userPhoneNumber=#{userPhoneNumber},userPermission=#{userPermission} where userId=#{userId}
+	</update>
 </mapper>

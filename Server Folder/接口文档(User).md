@@ -3564,3 +3564,259 @@
 
 成功时返回的info为平均分
 
+### 51.移动端用户登录 
+
+#### 51.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/mobile/login 
+
+#### 51.2 请求参数
+
+| 字段            | 类型   | 含义       |
+| --------------- | ------ | ---------- |
+| userPhoneNumber | int    | 用户手机号 |
+| userPassword    | string | 用户密码   |
+
+#### 51.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "userId": 2,
+        "userSex": "男",
+        "userName": "Daming",
+        "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+        "userPhoneNumber": "15842685420",
+        "userPermission": 0
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "您的用户名或密码有误,请重新输入!"
+}
+```
+
+#### 51.4 返回参数
+
+登陆成功返回info为用户对象
+
+### 52.移动端用户注册
+
+#### 52.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/mobile/register
+
+#### 52.2 请求参数
+
+| 字段            | 类型   | 含义       |
+| --------------- | ------ | ---------- |
+| userName        | string | 用户名     |
+| userSex         | string | 用户性别   |
+| userPhoneNumber | int    | 用户手机号 |
+| chaphcha        | string | 验证码     |
+| userPassword    | string | 用户密码   |
+| userAvatar      | file   | 用户 头像  |
+
+#### 52.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "恭喜您，注册成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "遇到未知错误，请稍后再试!"
+}
+```
+
+#### 52.4 返回参数
+
+过于简单，不作讲解
+
+### 53.查看指定用户个人信息
+
+#### 53.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/user/getUserInfo
+
+#### 53.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 53.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "userId": 3,
+        "userSex": "女",
+        "userName": "Amy",
+        "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+        "userPhoneNumber": "18041168030",
+        "userPermission": 0
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户不存在"
+}
+```
+
+#### 53.4 返回参数
+
+过于简单，不作讲解
+
+### 54.查看指定用户个人信息
+
+#### 54.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/user/getUserInfo
+
+#### 54.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 54.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "userId": 3,
+        "userSex": "女",
+        "userName": "Amy",
+        "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+        "userPhoneNumber": "18041168030",
+        "userPermission": 0
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户不存在"
+}
+```
+
+#### 54.4 返回参数
+
+过于简单，不作讲解
+
+### 55.修改用户个人信息
+
+#### 55.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/user/updateUserInfo
+
+#### 55.2 请求参数
+
+| 字段            | 类型   | 含义                 |
+| --------------- | ------ | -------------------- |
+| userName        | string | 用户名               |
+| userSex         | string | 用户性别             |
+| userPhoneNumber | int    | 用户手机号           |
+| chaphcha        | string | 验证码               |
+| userPassword    | string | 用户密码             |
+| userAvatar      | file   | 用户头像(可改可不改) |
+| userId          | int    | 用户Id               |
+
+#### 55.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "修改成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "修改失败"
+}
+```
+
+#### 55.4 返回参数
+
+过于简单，不作讲解
+
+### 56.注销登录 
+
+#### 56.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/user/quitLogin
+
+#### 56.2 请求参数
+
+无
+
+#### 56.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "注销成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "注销失败，您还没有登录"
+}
+```
+
+#### 56.4 返回参数
+
+过于简单，不作讲解
+
