@@ -24,12 +24,18 @@
 		<typeAlias alias="OralCourseScoreForSQL" type="cn.net.realloyal.vo.OralCourseScoreForSQL" />
 		<typeAlias alias="SignInRecordingForSQL" type="cn.net.realloyal.vo.SignInRecordingForSQL" />
 		<typeAlias alias="SubscriptionRecordingForSQL" type="cn.net.realloyal.vo.SubscriptionRecordingForSQL" />
+		<typeAlias alias="SimulatedTestForSQL" type="cn.net.realloyal.vo.SimulatedTestForSQL" />
+		<typeAlias alias="TestQuestionForSQL" type="cn.net.realloyal.vo.TestQuestionForSQL" />
+		<typeAlias alias="TestQuestionResultForSQL" type="cn.net.realloyal.vo.TestQuestionResultForSQL" />
 		<typeAlias alias="CarouselMap" type="cn.net.realloyal.model.CarouselMap" />
 		<typeAlias alias="DownloadRecording" type="cn.net.realloyal.model.DownloadRecording" />
 		<typeAlias alias="AdviceInfoList" type="cn.net.realloyal.model.AdviceInfoList" />
 		<typeAlias alias="EvaluationForm" type="cn.net.realloyal.model.EvaluationForm" />
 		<typeAlias alias="HistoryRecording" type="cn.net.realloyal.model.HistoryRecording" />
 		<typeAlias alias="SubscriptionRecording" type="cn.net.realloyal.model.SubscriptionRecording" />
+		<typeAlias alias="SimulatedTest" type="cn.net.realloyal.model.SimulatedTest" />
+		<typeAlias alias="TestQuestion" type="cn.net.realloyal.model.TestQuestion" />
+		<typeAlias alias="TestQuestionResult" type="cn.net.realloyal.model.TestQuestionResult" />
 	</typeAliases>
 
 	<!-- 实体接口映射资源 -->
@@ -41,6 +47,7 @@
 		<mapper resource="cn/net/realloyal/mapper/courseMapper.xml" />
 		<mapper resource="cn/net/realloyal/mapper/websiteInfoMapper.xml" />
 		<mapper resource="cn/net/realloyal/mapper/adviceMapper.xml" />
+		<mapper resource="cn/net/realloyal/mapper/trainMapper.xml" />
 	</mappers>
 
 </configuration>  
