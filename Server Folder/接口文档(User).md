@@ -3108,3 +3108,459 @@
 #### 44.4 返回参数
 
 过于简单，不作讲解
+
+### 45.查看指定课程订阅的所有用户（分页） 
+
+#### 45.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/course/user/getSubscriptionRecordingOfCourse/{pageNum} 
+>
+> pageNum为页号
+
+#### 45.2 请求参数
+
+| 字段       | 类型   | 含义     |
+| ---------- | ------ | -------- |
+| courseType | string | 课程类型 |
+| courseId   | int    | 课程Id   |
+
+#### 45.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "subscriptionRecordings": [
+            {
+                "subscriptionRecordingId": 1,
+                "subscriptionTime": 1535835860000,
+                "user": {
+                    "userId": 2,
+                    "userSex": "男",
+                    "userName": "Daming",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/fcfb6747-5ef4-47fe-8e7e-ff1b4b6e05c615842685420Avatar.png",
+                    "userPhoneNumber": "15842685420",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                }
+            },
+            {
+                "subscriptionRecordingId": 2,
+                "subscriptionTime": 1535835873000,
+                "user": {
+                    "userId": 3,
+                    "userSex": "女",
+                    "userName": "Amy",
+                    "userPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                    "userAvatarUrl": "/Users/wangzhe/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/SSLearningTeam/AvatarImgs/616b55f8-8df9-49ac-9247-a1bd1780391918041168030Avatar.png",
+                    "userPhoneNumber": "18041168030",
+                    "userPermission": 0
+                },
+                "course": {
+                    "courseId": 2,
+                    "languageType": {
+                        "languageTypeId": 5,
+                        "languageName": "中文",
+                        "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                    },
+                    "rateType": {
+                        "rateTypeId": 2,
+                        "languageType": null,
+                        "rateName": "二级",
+                        "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                    },
+                    "courseName": "测试听力",
+                    "courseChineseContent": "中文",
+                    "courseEnglishContent": "Chinese",
+                    "courseResourceUrl": "/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3",
+                    "downloadNum": 4,
+                    "instructionImgUrl": "/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png"
+                }
+            }
+        ],
+        "pageNumber": 1,
+        "currentPage": 1
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "课程没有被订阅记录"
+}
+```
+
+#### 45.4 返回参数
+
+过于简单，不作讲解
+
+### 46.用户查询模拟套题列表（分页） 
+
+#### 46.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/user/simulatedtests_manage/{pageNum} 
+>
+> pageNum为页号
+
+#### 46.2 请求参数
+
+无
+
+#### 46.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "simulatedTests": [
+            {
+                "simulatedTestId": 1,
+                "languageType": {
+                    "languageTypeId": 5,
+                    "languageName": "中文",
+                    "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                },
+                "rateType": {
+                    "rateTypeId": 2,
+                    "languageType": null,
+                    "rateName": "二级",
+                    "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                },
+                "testName": "测试中文二级能力1",
+                "instructionImgUrl": "/SSLearningTeam/TrainRecourses/7db509c8-992d-4932-8173-966f54e8a607成功.png"
+            },
+            {
+                "simulatedTestId": 2,
+                "languageType": {
+                    "languageTypeId": 5,
+                    "languageName": "中文",
+                    "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                },
+                "rateType": {
+                    "rateTypeId": 2,
+                    "languageType": null,
+                    "rateName": "二级",
+                    "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                },
+                "testName": "测试中文二级能力2",
+                "instructionImgUrl": "/SSLearningTeam/TrainRecourses/cf72a4ef-8f62-49ba-a277-768400cb6e9e对号2.png"
+            },
+            {
+                "simulatedTestId": 3,
+                "languageType": {
+                    "languageTypeId": 5,
+                    "languageName": "中文",
+                    "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                },
+                "rateType": {
+                    "rateTypeId": 2,
+                    "languageType": null,
+                    "rateName": "二级",
+                    "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                },
+                "testName": "测试中文二级能力3-3",
+                "instructionImgUrl": "/SSLearningTeam/TrainRecourses/a5548511-9cb8-4382-9c49-99b9d4abed6b5-121204193R0.gif"
+            },
+            {
+                "simulatedTestId": 4,
+                "languageType": {
+                    "languageTypeId": 5,
+                    "languageName": "中文",
+                    "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+                },
+                "rateType": {
+                    "rateTypeId": 2,
+                    "languageType": null,
+                    "rateName": "二级",
+                    "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+                },
+                "testName": "测试中文二级能力4",
+                "instructionImgUrl": "/SSLearningTeam/TrainRecourses/ad610287-98aa-40d1-a1f6-1b8db33cc93b对号2 (1).png"
+            }
+        ],
+        "totalPages": 1,
+        "currentPage": 1
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "暂时没有模拟套题记录"
+}
+```
+
+#### 46.4 返回参数
+
+过于简单，不作讲解
+
+### 47.用户查询模拟套题信息的详情(套题信息+所有题目信息) 
+
+#### 47.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/user/getAllSimulatedTestById
+
+#### 47.2 请求参数
+
+| 字段            | 类型 | 含义       |
+| --------------- | ---- | ---------- |
+| simulatedTestId | int  | 模拟套题Id |
+
+#### 47.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "questions": [
+            {
+                "questionId": 2,
+                "courseType": "listeningcourse",
+                "courseId": 2,
+                "questionContent": "这是中文课程的问题题目",
+                "answerA": "答案选项A",
+                "answerB": "答案选项B",
+                "answerC": "答案选项C",
+                "answerD": "答案选项D",
+                "answerReal": 1,
+                "answerReason": "我觉得选A"
+            },
+            {
+                "questionId": 3,
+                "courseType": "listeningcourse",
+                "courseId": 2,
+                "questionContent": "这是中文课程的问题题目",
+                "answerA": "答案选项A",
+                "answerB": "答案选项B",
+                "answerC": "答案选项C",
+                "answerD": "答案选项D",
+                "answerReal": 1,
+                "answerReason": "我觉得选A"
+            },
+            {
+                "questionId": 4,
+                "courseType": "listeningcourse",
+                "courseId": 2,
+                "questionContent": "这是中文课程的问题题目2",
+                "answerA": "答案选项A2",
+                "answerB": "答案选项B2",
+                "answerC": "答案选项C2",
+                "answerD": "答案选项D2",
+                "answerReal": 2,
+                "answerReason": "我觉得选B"
+            },
+            {
+                "questionId": 5,
+                "courseType": "listeningcourse",
+                "courseId": 2,
+                "questionContent": "这是中文课程的问题题目3",
+                "answerA": "答案选项A3",
+                "answerB": "答案选项B3",
+                "answerC": "答案选项C3",
+                "answerD": "答案选项D3",
+                "answerReal": 3,
+                "answerReason": "我觉得选C"
+            },
+            {
+                "questionId": 6,
+                "courseType": "listeningcourse",
+                "courseId": 2,
+                "questionContent": "这是中文课程的问题题目4",
+                "answerA": "答案选项A4",
+                "answerB": "答案选项B4",
+                "answerC": "答案选项C4",
+                "answerD": "答案选项D4",
+                "answerReal": 4,
+                "answerReason": "我觉得选D"
+            }
+        ],
+        "simulatedTest": {
+            "simulatedTestId": 2,
+            "languageType": {
+                "languageTypeId": 5,
+                "languageName": "中文",
+                "languageIconUrl": "/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png"
+            },
+            "rateType": {
+                "rateTypeId": 2,
+                "languageType": null,
+                "rateName": "二级",
+                "rateIconUrl": "/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png"
+            },
+            "testName": "测试中文二级能力2",
+            "instructionImgUrl": "/SSLearningTeam/TrainRecourses/cf72a4ef-8f62-49ba-a277-768400cb6e9e对号2.png"
+        }
+    }
+}
+```
+
+- 失败时返回内容
+
+```json
+//输入错误的模拟测试Id
+{
+    "status": false,
+    "info": "模拟测试查询有误"
+}
+//模拟测试没有添加题目
+{
+    "status": false,
+    "info": "该模拟试题暂未添加题目"
+}
+```
+
+#### 47.4 返回参数
+
+过于简单，不作讲解
+
+### 48.添加指定用户指定模拟套题测试结果
+
+### 	[判断之前有没有数据，没有则添加，有则修改] 
+
+#### 48.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/user/addTestQuestionResult
+
+#### 48.2 请求参数
+
+| 字段            | 类型 | 含义                               |
+| --------------- | ---- | ---------------------------------- |
+| simulatedTestId | int  | 模拟套题Id                         |
+| userId          | int  | 用户Id(如果可以传cookie则可以不传) |
+| resultScore     | int  | 测试结果                           |
+
+#### 48.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "添加成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "添加失败"
+}
+```
+
+#### 48.4 返回参数
+
+过于简单，不作讲解
+
+### 49.用户查询指定用户指定模拟套题测试结果
+
+#### 49.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/user/getTestQuestionResultOfUserOnSimulatedTest
+
+#### 49.2 请求参数
+
+| 字段            | 类型 | 含义                               |
+| --------------- | ---- | ---------------------------------- |
+| simulatedTestId | int  | 模拟套题Id                         |
+| userId          | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 49.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": 100
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户没有参与模拟测试"
+}
+```
+
+#### 49.4 返回参数
+
+成功时返回的info为具体分数值
+
+### 50.查询指定用户所有模拟套题测试结果平均分
+
+#### 50.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/user/getAvgTestQuestionResultOfUser
+
+#### 50.2 请求参数
+
+| 字段   | 类型 | 含义                               |
+| ------ | ---- | ---------------------------------- |
+| userId | int  | 用户Id(如果可以传cookie则可以不传) |
+
+#### 50.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": 95
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户没有模拟题测试结果"
+}
+```
+
+#### 50.4 返回参数
+
+成功时返回的info为平均分
+

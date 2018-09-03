@@ -1741,7 +1741,7 @@ pageName="adminManage"
 | ---- | ---------- | ------------------------------------------------ |
 | info | int/string | 当有人评价时为评价的平均分，无人评价时为提示内容 |
 
-### 3.查看指定课程的评分列表(分页)  
+### 3.查看指定课程的评分列表(分页)
 
 #### 3.1 请求说明
 
@@ -2493,6 +2493,435 @@ pageName="adminManage"
 过于简单，不作讲解
 
 <hr/>
+
+## 模拟测试操作接口
+
+### 1.管理员跳转添加模拟套题页面
+
+#### 1.1请求地址
+
+> URL：/train/admin/toAddSimulatedTest 
+
+#### 1.2请求参数
+
+无
+
+#### 1.3响应内容
+
+```json
+pageName="trainManage"
+
+languageTypes为语言类别集合
+```
+
+#### 1.4显示内容
+
+> 跳转到admin/resourceManager/addSimulatedTest 
+
+### 2.管理员添加模拟套题接口
+
+#### 2.1请求地址
+
+> URL：/train/admin/addSimulatedTest 
+
+#### 2.2请求参数
+
+| 字段名称       | 字段类型 |
+| -------------- | -------- |
+| languageTypeId | int      |
+| rateTypeId     | int      |
+| courseName     | string   |
+| instructionImg | file     |
+
+#### 2.3响应内容
+
+无
+
+#### 2.4显示内容
+
+> 重定向到/train/admin/simulatedtests_manage/1页面 
+
+### 3.管理员删除模拟套题信息 
+
+#### 3.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/deleteSimulatedTest
+
+#### 3.2 请求参数
+
+| 字段            | 类型 | 含义     |
+| --------------- | ---- | -------- |
+| simulatedTestId | int  | 模拟测试 |
+
+#### 3.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 3.4 返回参数
+
+过于简单，不作讲解
+
+### 4.管理员查询指定模拟套卷的信息回显到修改模拟套题页面
+
+#### 4.1请求地址
+
+> URL：/train/admin/toUpdateSimulatedTest
+
+#### 4.2请求参数
+
+| 字段名称        | 字段类型 |
+| --------------- | -------- |
+| simulatedTestId | int      |
+
+#### 4.3返回携带内容
+
+| 字段内容      | 字段类型           |
+| ------------- | ------------------ |
+| pageName      | string             |
+| simulatedTest | SimulatedTest      |
+| languageTypes | List<LanguageType> |
+
+#### 4.4显示内容
+
+> 跳转到admin/resourceManager/updateSimulatedTest
+
+### 5.管理员修改模拟套题信息接口
+
+#### 5.1请求地址
+
+> URL：/train/admin/updateSimulatedTest
+
+#### 5.2请求参数
+
+| 字段名称        | 字段类型 |
+| --------------- | -------- |
+| simulatedTestId | int      |
+| languageTypeId  | int      |
+| rateTypeId      | int      |
+| testName        | string   |
+| instructionImg  | file     |
+
+#### 5.3返回携带内容
+
+无
+
+#### 5.4显示页面
+
+> 重定向到/train/admin/simulatedtests_manage/1页面 
+
+### 6.管理员查询模拟套题列表(分页) 
+
+#### 6.1请求地址
+
+> URL：/train/admin/simulatedtests_manage/{pageNum}
+>
+> pageNum表示页号
+
+#### 6.2请求参数
+
+无
+
+#### 6.3返回携带内容
+
+| 字段           | 字段类型 | 字段说明         |
+| -------------- | -------- | ---------------- |
+| totalPages     | Int      | 总页数           |
+| pageNum        | int      | 当前页数         |
+| simulatedTests | Object   | 所有口语课程对象 |
+
+#### 6.4返回包含内容，示例返回演示
+
+```java
+pageNum:1
+
+totalPages:1
+
+simulatedTests:[SimulatedTest [simulatedTestId=1, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力1, instructionImgUrl=/SSLearningTeam/TrainRecourses/7db509c8-992d-4932-8173-966f54e8a607成功.png], SimulatedTest [simulatedTestId=2, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力2, instructionImgUrl=/SSLearningTeam/TrainRecourses/cf72a4ef-8f62-49ba-a277-768400cb6e9e对号2.png], SimulatedTest [simulatedTestId=3, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力3-3, instructionImgUrl=/SSLearningTeam/TrainRecourses/a5548511-9cb8-4382-9c49-99b9d4abed6b5-121204193R0.gif], SimulatedTest [simulatedTestId=4, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力4, instructionImgUrl=/SSLearningTeam/TrainRecourses/ad610287-98aa-40d1-a1f6-1b8db33cc93b对号2 (1).png], SimulatedTest [simulatedTestId=5, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], testName=测试中文二级能力5, instructionImgUrl=/SSLearningTeam/TrainRecourses/703cd091-ad0a-4f36-b9b4-02d1dacceb41白心.png]]
+```
+
+### 7.管理员根据课程类别查询可添加的课程问题
+
+#### 7.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/getAllQuestionByCourseType
+
+#### 7.2 请求参数
+
+| 字段       | 字段类型 | 字段说明 |
+| ---------- | -------- | -------- |
+| courseType | string   | 课程类别 |
+
+#### 7.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": [
+        {
+            "questionId": 2,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 3,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目",
+            "answerA": "答案选项A",
+            "answerB": "答案选项B",
+            "answerC": "答案选项C",
+            "answerD": "答案选项D",
+            "answerReal": 1,
+            "answerReason": "我觉得选A"
+        },
+        {
+            "questionId": 4,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目2",
+            "answerA": "答案选项A2",
+            "answerB": "答案选项B2",
+            "answerC": "答案选项C2",
+            "answerD": "答案选项D2",
+            "answerReal": 2,
+            "answerReason": "我觉得选B"
+        },
+        {
+            "questionId": 5,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目3",
+            "answerA": "答案选项A3",
+            "answerB": "答案选项B3",
+            "answerC": "答案选项C3",
+            "answerD": "答案选项D3",
+            "answerReal": 3,
+            "answerReason": "我觉得选C"
+        },
+        {
+            "questionId": 6,
+            "courseType": "listeningcourse",
+            "courseId": 2,
+            "questionContent": "这是中文课程的问题题目4",
+            "answerA": "答案选项A4",
+            "answerB": "答案选项B4",
+            "answerC": "答案选项C4",
+            "answerD": "答案选项D4",
+            "answerReal": 4,
+            "answerReason": "我觉得选D"
+        }
+    ]
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "该类课程暂没有题库题目"
+}
+```
+
+#### 7.4 返回参数
+
+过于简单，不作讲解
+
+### 8.管理员给指定的模拟套题添加选择的题目 
+
+#### 8.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/addTestQuestion 
+
+#### 8.2 请求参数
+
+| 字段             | 类型   | 含义       |
+| ---------------- | ------ | ---------- |
+| courseType       | string | 课程类型   |
+| courseId         | int    | 课程Id     |
+| testQuestionName | string | 问题别名   |
+| simulatedTestId  | int    | 模拟套题Id |
+
+#### 8.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "添加成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "添加失败"
+}
+```
+
+#### 8.4 返回参数
+
+过于简单，不作讲解
+
+### 9.管理员删除给定模拟套题的题目
+
+#### 9.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/deleteTestQuestion
+
+#### 9.2 请求参数
+
+| 字段           | 类型 | 含义           |
+| -------------- | ---- | -------------- |
+| testQuestionId | int  | 模拟套题的题ID |
+
+#### 9.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": "删除成功"
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "删除失败"
+}
+```
+
+#### 9.4 返回参数
+
+过于简单，不作讲解
+
+### 10.管理员查询给定模拟套题的全部题目
+
+#### 10.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/getAllTestQuestionBySimulatedTest
+
+#### 10.2 请求参数
+
+| 字段            | 类型 | 含义         |
+| --------------- | ---- | ------------ |
+| simulatedTestId | int  | 模拟套题的ID |
+
+#### 10.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": [
+        {
+            "testQuestionId": 4,
+            "testQuestionName": "模拟套题题目2",
+            "simulatedTestId": 2,
+            "courseType": "listeningcourse",
+            "courseId": 2
+        }
+    ]
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "该套模拟题暂没有添加问题"
+}
+```
+
+#### 10.4 返回参数
+
+过于简单，不作讲解
+
+### 11.查询指定用户所有模拟套题测试结果平均分
+
+#### 11.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/train/admin/getAvgTestQuestionResultOfUser
+
+#### 11.2 请求参数
+
+| 字段   | 类型 | 含义   |
+| ------ | ---- | ------ |
+| userId | int  | 用户Id |
+
+#### 11.3 返回结果接收
+
+- 成功时返回内容
+
+```json  
+{
+    "status": true,
+    "info": 95
+}
+```
+
+- 失败时返回内容
+
+```json
+{
+    "status": false,
+    "info": "用户没有模拟题测试结果"
+}
+```
+
+#### 11.4 返回参数
+
+成功时返回的info为平均分
+
+
+
+
+
+
+
+
+
+
 
 <hr/>
 
