@@ -13,6 +13,76 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        $(function(){
+            var carouselTitle = byCLass('carousel-indicators');
+            var carouselNode = byCLass('carousel-inner');
+            var storage = window.localStorage;
+
+            //获取userId
+            $.ajax({
+                type:'get',
+                url:first+'/website/user/getCarouselMaps',
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        
+                    }else{
+                        alert('没有登录或登录失败');
+                    }
+                }
+            });
+
+            //获取轮播图信息
+            $.ajax({
+                type:'get',
+                url:first+'/website/user/getCarouselMaps',
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        //carouselTitle
+                        for(var x=0;x<r.info.length;x++){
+                            if(x==0){
+                                carouselNode.innerHTML='<li data-target="#lunbo" data-slide-to="0" class="active"></li>'
+                            }
+                            else{
+                                carouselNode.innerHTML='<li data-target="#lunbo" data-slide-to="'+x+'"></li>'
+                            }
+                        }
+                        //carouselNode
+                        for(var x=0;x<r.info.length;x++){
+                            if(x==0){
+                                carouselNode.innerHTML=
+                            '<div class="carousel-item active">'+
+                                '<a carouselId="'+r.info[x].carouselId+'" target="_blank" href="'+r.info[x].carouselLinkUrl+'">'+
+                                    '<img src="'+r.info[x].carouselImgUrl+'">'+
+                                '</a>'+
+                                '<div class="carousel-caption">'+
+                                    '<h5>'+r.info[x].carouselInstruction+'</h5>'+
+                                '</div>'+
+                            '</div>'
+                            }
+                            else{
+                                carouselNode.innerHTML=
+                            '<div class="carousel-item">'+
+                                '<a carouselId="'+r.info[x].carouselId+'" target="_blank" href="'+r.info[x].carouselLinkUrl+'">'+
+                                    '<img src="'+r.info[x].carouselImgUrl+'">'+
+                                '</a>'+
+                                '<div class="carousel-caption">'+
+                                    '<h5>'+r.info[x].carouselInstruction+'</h5>'+
+                                '</div>'+
+                            '</div>'
+                            }
+                        }
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+        });
+    </script>
 
 </head>
 
@@ -74,7 +144,8 @@
                 </form>
             </div>
         </div>
-    </div><!--header-->
+    </div>
+    <!--header-->
     <div class="index">
         <div class="lunboBar-w">
             <div class="lunboBar">
@@ -141,30 +212,36 @@
                     <div id="lunbo" class="carousel slide" data-ride="carousel">
                         <!-- 指示符 -->
                         <ul class="carousel-indicators">
-                            <li data-target="#lunbo" data-slide-to="0" class="active"></li>
+                            <!-- <li data-target="#lunbo" data-slide-to="0" class="active"></li>
                             <li data-target="#lunbo" data-slide-to="1"></li>
-                            <li data-target="#lunbo" data-slide-to="2"></li>
+                            <li data-target="#lunbo" data-slide-to="2"></li> -->
                         </ul>
                         <!-- 轮播图片 -->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="./img/lunbo3.png">
+                            <!-- <div class="carousel-item active">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo3.png">
+                                </a>
                                 <div class="carousel-caption">
                                     <h5>第一张图片描述标题</h5>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="./img/lunbo2.png">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo2.png">
+                                </a>
                                 <div class="carousel-caption">
                                     <h5>第二张图片描述标题</h5>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="./img/lunbo1.png">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo1.png">
+                                </a>
                                 <div class="carousel-caption">
                                     <h5>第三张图片描述标题</h5>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- 左右切换按钮 -->
                         <a class="carousel-control-prev" href="#lunbo" data-slide="prev">
@@ -217,33 +294,33 @@
                     <span>
                         <img style="height: 30px;" src="./img/youyezi.png" alt="">
                     </span>
-    
+
                 </h5>
                 <!-- 课程推荐 -->
                 <div class="courseContent clearfix">
                     <div class="course-box">
-                        <a target="_blank" href="./course.html">
+                        <a target="_blank" href="./courseListen.html">
                             <div class="course-img-box">
                                 <img class="course-img" src="./img/siji.jpg" alt="課程">
                             </div>
                             <div class="course-content">
-                                    <h3 class="content-title">这里是课程名字</h3>
-                                    <div class="content-detail">
-                                        <div class="course-type">
-                                            <span>英语</span>
-                                            <span>四级</span>
-                                            <span>听力</span>
-                                        </div>
-                                        <div class="course-rate">
-                                            <span class="rate-star">
-                                                    <img class="star" src="./icon/xing.png" alt="xing">
-                                                    <img class="star" src="./icon/xing.png" alt="xing">
-                                                    <img class="star" src="./icon/xing.png" alt="xing">
-                                                    <img class="star" src="./icon/xing.png" alt="xing">
-                                                    <img class="star" src="./icon/xing.png" alt="xing">
-                                            </span>
-                                        </div>
+                                <h3 class="content-title">这里是课程名字</h3>
+                                <div class="content-detail">
+                                    <div class="course-type">
+                                        <span>英语</span>
+                                        <span>四级</span>
+                                        <span>听力</span>
                                     </div>
+                                    <div class="course-rate">
+                                        <span class="rate-star">
+                                            <img class="star" src="./icon/xing.png" alt="xing">
+                                            <img class="star" src="./icon/xing.png" alt="xing">
+                                            <img class="star" src="./icon/xing.png" alt="xing">
+                                            <img class="star" src="./icon/xing.png" alt="xing">
+                                            <img class="star" src="./icon/xing.png" alt="xing">
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -254,14 +331,14 @@
     <div class="footer-box">
         <div class="footer">
             <div class="footer-content">
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
-                    <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
             </div>
             <div class="footer-copyright">
                 <p>©2018&nbsp;tingshuo.com</p>

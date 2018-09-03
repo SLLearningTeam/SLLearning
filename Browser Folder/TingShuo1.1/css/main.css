@@ -368,6 +368,9 @@
     margin-right: 0;
     line-height: 20px;
     cursor: pointer;
+    font-size: 13px;
+    color: rgb(110, 110, 110);
+    font-weight: 500;
 }
 
 .star {
@@ -558,7 +561,7 @@
     margin-top: 4px;
 }
 
-.set {
+.download-cl {
     padding: 8px 16px;
     border: 1px solid rgba(255, 255, 255, .4);
     border-radius: 18px;
@@ -569,12 +572,12 @@
     transition: all 0.5s;
 }
 
-.set img {
+.download-cl img {
     margin-right: 4px;
     margin-bottom: 3px;
 }
 
-.set:hover {
+.download-cl:hover {
     color: #fff;
     text-decoration: none;
     border-color: #fff;
@@ -1075,4 +1078,22 @@
 .course-test{
     line-height: 100px;
     padding-right: 200px;
+}
+.download-table{
+    background: #fff;
+    width: 960px;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: #cecece 1px 1px 30px;
+    z-index: 1;
+    display: none;
+    position: absolute;
+    transition: all 0.5s;
+}
+.download-table table{
+    width: 960px;
+    text-align: center;
+}
+.download-table table tr{
+    line-height: 40px;
 }
