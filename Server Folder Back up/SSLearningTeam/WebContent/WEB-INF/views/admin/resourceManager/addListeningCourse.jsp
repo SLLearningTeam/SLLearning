@@ -14,6 +14,56 @@
 label {
 	color: #ab0351
 }
+.choose{
+	overflow:auto;
+}
+.choose>.div1{
+	float:left;
+	width:50%;
+	height:100px;
+	padding-left:105px;
+	border:2px solid #DDDDDD;
+}
+.choose>.div2{
+	float:right;
+	width:50%;
+	height:100px;
+	padding-left:155px;
+	border:2px solid #DDDDDD;
+}
+.choose>.div3{
+	float:left;
+	width:50%;
+	height:100px;
+	padding-left:105px;
+	border:2px solid #DDDDDD;
+}
+.choose>.div4{
+	float:left;
+	width:50%;
+	height:100px;
+	padding-left:155px;
+	border:2px solid #DDDDDD;
+}
+.input-detail{
+	height:250px
+}
+.input-detail>.div5{
+	float:left;
+	width:50%;
+	height:250px;
+	paddinf-left:20px;
+}
+.input-detail>.div6{
+	float:right;
+	width:50%;
+	height:250px;
+	padding-left:10px
+}
+.div7{
+	float:right;
+	margin-right:15px
+}
 </style>
 </head>
 <script>
@@ -53,23 +103,42 @@ label {
 							<div class="card-body">
 								<div class="tab-pane" id="timeline">
 									<form action="${pageContext.request.contextPath }/course/admin/addListeningCourse" method="POST" enctype="multipart/form-data">
-											<label>请选择语言类别：</label>
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
-						                        <option value="">--请选择--</option>
-						                        <c:forEach items="${languageTypes}" var="languageType">
-						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
-						                        </c:forEach>
-						                    </select>
-										<label>请选择类型类别：</label>
-											<select name="rateTypeId" id="rateType">
-												<option value="">--请选择--</option>
-											</select>
-										<br/><label>请设置课程名称：</label><input type="text" name="courseName" required="required"/>
-										<br/><label>请输入中文内容：</label><textarea name="courseChineseContent" rows="10" cols="30" required="required"/></textarea>
-										<br/><label>请输入英文内容：</label><textarea name="courseEnglishContent" rows="10" cols="30" required="required"/></textarea>
-										<br/><label>请添加课程资源：</label><input type="file" name="courseResource" required="required"/>
-										<br/><label>请添加课程图标：</label><input type="file" name="instructionImg" required="required"/>
-										<br/><input type="submit" value="提交"/>
+											<div class="choose">
+												   <div class="div1">
+													  <br/><label>请设置课程名称：</label><input type="text" name="courseName" required="required"/>
+												    </div>
+												 	<div class="div2">
+													  <br/><label>请选择语言类别：</label>
+															<select name="languageTypeId" id="languageType" onchange="getRateType()">
+										                        <option value="">--请选择--</option>
+										                        <c:forEach items="${languageTypes}" var="languageType">
+										                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
+										                        </c:forEach>
+										                    </select>
+								                    </div>
+								          </div>
+								          <div class="choose">
+								                    <div class="div3">
+														<br/><label>请添加课程图标：</label><input type="file" name="instructionImg" required="required"/>
+													</div>
+								                    <div class="div4">
+														<br/><label>请选择类型类别：</label>
+															<select name="rateTypeId" id="rateType">
+																<option value="">--请选择--</option>
+															</select>
+													</div>
+											</div>
+											<div class="input-detail">
+													<div class="div5">
+														<br/><label>请输入中文内容：</label><br/><textarea name="courseChineseContent" rows="6" cols="65" required="required"/></textarea>
+													</div>
+													<div  class=div6>
+														<br/><label>请输入英文内容：</label><br/><textarea name="courseEnglishContent" rows="6" cols="65" required="required"/></textarea>
+													</div>
+											</div>
+											<div class="div7">
+														<br/><input type="submit" value="提交"/>
+											</div>
 									</form>
 								</div>
 							</div>
