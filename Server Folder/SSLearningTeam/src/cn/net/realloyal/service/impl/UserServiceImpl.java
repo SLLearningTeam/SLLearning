@@ -335,7 +335,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int getPageNumber() {
 		int userCountNum=userDao.getUserCountNum();
-		int totalPages = (int)(userCountNum)/10+1;
+		int totalPages;
+		if(userCountNum%10==0) {
+			totalPages=userCountNum/10;
+		}else {
+			totalPages=(int)userCountNum/10+1;
+		}
 		return totalPages;
 	}
 
