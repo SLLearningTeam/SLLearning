@@ -321,12 +321,13 @@ public class UserAction {
 	public ModelAndView toUserChart() {
 		ModelAndView mv = new ModelAndView("admin/userManager/users_chart");
 		mv.addObject("pageName","userChartManage");
-		mv.addObject("sexRate", userService.getSexRate());//男女性别比——饼图
-		mv.addObject("downloadRate",userService.getDownloadRate());//下载量比较——柱状图
-		mv.addObject("signInTimeRate",userService.getSignInTimeRate());//每日签到总人数变化图——折线图
-		mv.addObject("signInTotal", userService.getSignInTotal());//签到总数比——柱状图
-		System.out.println("pageName:userChartManage\n\nsexRate:"+userService.getSexRate()+"\n\ndownloadRate:"+userService.getDownloadRate()+"\n\nsignInTimeRate:"+userService.getSignInTimeRate()+"\n\nsignInTotal:"+userService.getSignInTotal());
 		return mv;
+	}
+	//获得图标信息
+	@ResponseBody
+	@RequestMapping("/admin/getUserChart")
+	public BackJsonUtil getUserChart() {
+		return userService.getUserChart();
 	}
 	
 }

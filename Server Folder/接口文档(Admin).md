@@ -3058,19 +3058,88 @@ currentPage:1
 
 ```json  
 pageName:userChartManage
-
-sexRate:{manNum=5, womanNum=1}
-
-downloadRate:[DownloadNumAndCount [downloadRecordingTime=2018-08-27 19:25:23.0, count=2], DownloadNumAndCount [downloadRecordingTime=2018-08-28 22:22:23.0, count=1], DownloadNumAndCount [downloadRecordingTime=2018-08-29 21:22:23.0, count=1]]
-
-signInTimeRate:[SignInTimeAndCount [recentMarkTime=2018-09-02 02:13:25.0, count=1], SignInTimeAndCount [recentMarkTime=2018-09-03 03:13:25.0, count=2], SignInTimeAndCount [recentMarkTime=2018-09-04 03:19:25.0, count=1]]
-
-signInTotal:[SignInTotalAndUserName [userName=Amy, totalTimes=1], SignInTotalAndUserName [userName=Daming, totalTimes=4], SignInTotalAndUserName [userName=Sam, totalTimes=2], SignInTotalAndUserName [userName=辛俊桥, totalTimes=2]]
 ```
 
 #### 5.4 返回参数
 
 > 跳转到admin/userManager/users_chart
+
+### 6.获取用户图表信息
+
+#### 6.1 请求说明
+
+> 请求方式：GET
+> 请求URL ：/user/admin/getUserChart
+
+#### 6.2 请求参数
+
+无
+
+#### 6.3 返回结果接收
+
+- 返回内容
+
+```json  
+{
+    "status": true,
+    "info": {
+        "sexRate": {
+            "manNum": 5,
+            "womanNum": 1
+        },
+        "downloadRate": [
+            {
+                "downloadRecordingTime": "2018-08-27 19:25:23.0",
+                "count": 2
+            },
+            {
+                "downloadRecordingTime": "2018-08-28 22:22:23.0",
+                "count": 1
+            },
+            {
+                "downloadRecordingTime": "2018-08-29 21:22:23.0",
+                "count": 1
+            }
+        ],
+        "signInTimeRate": [
+            {
+                "recentMarkTime": "2018-09-02 02:13:25.0",
+                "count": 1
+            },
+            {
+                "recentMarkTime": "2018-09-03 03:13:25.0",
+                "count": 2
+            },
+            {
+                "recentMarkTime": "2018-09-04 03:19:25.0",
+                "count": 1
+            }
+        ],
+        "signInTotal": [
+            {
+                "userName": "Amy",
+                "totalTimes": 1
+            },
+            {
+                "userName": "Daming",
+                "totalTimes": 4
+            },
+            {
+                "userName": "Sam",
+                "totalTimes": 2
+            },
+            {
+                "userName": "辛俊桥",
+                "totalTimes": 2
+            }
+        ]
+    }
+}
+```
+
+#### 6.4 返回参数
+
+过于简单，不进行解释
 
 <hr/>
 

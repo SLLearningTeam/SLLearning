@@ -60,5 +60,7 @@ public interface UserService {
 
 	BackJsonUtil checkRegisterByUser(User user, CommonsMultipartFile userAvatar, HttpServletRequest request)
 			throws Exception;
+
+	public BackJsonUtil getUserChart();
 	
 }

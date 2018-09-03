@@ -478,5 +478,17 @@ public class UserServiceImpl implements UserService {
 		return signInTotalAndUserName;
 	}
 
+	@Override
+	public BackJsonUtil getUserChart() {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		backJsonUtil.setStatus(true);
+		Map<String,Object> info = new HashMap<String,Object>();
+		info.put("sexRate", getSexRate());
+		info.put("downloadRate", getDownloadRate());
+		info.put("signInTimeRate", getSignInTimeRate());
+		info.put("signInTotal", getSignInTotal());
+		backJsonUtil.setInfo(info);
+		return backJsonUtil;
+	}
 
 }
