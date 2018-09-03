@@ -169,7 +169,12 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- 首页 -->
           <li class="nav-item">
-            <a href="./index.html" class="nav-link active">
+          	<c:if test="${pageName=='indexManage' }">
+          		<a href="./index.html" class="nav-link active">
+          	</c:if>
+            <c:if test="${pageName!='indexManage' }">
+          		<a href="./index.html" class="nav-link">
+          	</c:if>
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 首页
@@ -206,8 +211,14 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          	<c:if test="${(pageName=='languageManage'||pageName=='rateTypeManage'||pageName=='courseManage'||pageName=='trainManage')}">
+          		<li class="nav-item has-treeview menu-open">
+          		<a href="#" class="nav-link active">
+          	</c:if>
+            <c:if test="${(pageName!='languageManage'&&pageName!='rateTypeManage'&&pageName!='courseManage'&&pageName!='trainManage')}">
+          		<li class="nav-item has-treeview">
+          		<a href="#" class="nav-link">
+          	</c:if>
               <i class="nav-icon fa fa-tree"></i>
               <p>
                 资源管理
@@ -215,28 +226,48 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/language/admin/languages_manage/1" class="nav-link">
+            	<li class="nav-item">
+	            <c:if test="${pageName=='languageManage' }">
+	          		<a href="${pageContext.request.contextPath}/language/admin/languages_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='languageManage' }">
+	          		<a href="${pageContext.request.contextPath}/language/admin/languages_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理语言分类</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1" class="nav-link">
+             	<li class="nav-item">
+              	<c:if test="${pageName=='rateTypeManage' }">
+	          		<a href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='rateTypeManage' }">
+	          		<a href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理等级分类</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/course/admin/courses_manage/1" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='courseManage' }">
+	          		<a href="${pageContext.request.contextPath}/course/admin/courses_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='courseManage' }">
+	          		<a href="${pageContext.request.contextPath}/course/admin/courses_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理课程信息</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/train/trains_manage" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='trainManage' }">
+	          		<a href="${pageContext.request.contextPath}/train/admin/simulatedtests_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='trainManage' }">
+	          		<a href="${pageContext.request.contextPath}/train/admin/simulatedtests_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>管理考试内容</p>
+                  <p>管理模拟套题</p>
                 </a>
               </li>
             </ul>
@@ -263,7 +294,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/website/recommend_resources" class="nav-link">
+                <a href="${pageContext.request.contextPath}/website/admin/carouselMap_manage/1" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理推荐资源</p>
                 </a>

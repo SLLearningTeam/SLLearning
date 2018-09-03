@@ -49,8 +49,7 @@ label {
 						<label for="rateIcon">原类别类型图标</label><br> <img
 							src="${rateType.rateIconUrl}" height="30px" width="30px" />
 						<div class="form-group">
-							<label for="rateIcon">类别类型图标</label> <input id="file" type="file"
-								class=" btn  btn-default" style="width: 482px" name="rateIcon" >
+							<label for="rateIcon">类别类型图标</label> <input class="form-control" type="file"  name="rateIcon" >
 							<div class="col-top">
 								<button type="submit" class="btn btn-primary float-right">提交</button>
 							</div>

@@ -16,6 +16,7 @@
 <style type="text/css">
 .left {
 	float: right;
+	margin-bottom:15px;
 }
 </style>
 </head>
@@ -27,10 +28,7 @@
 				<div class="col-xs col-sm col-md">
 					<div class="card ">
 						<div class="card-header p-2 ">
-							<!-- 添加课程按钮 -->
-							<div class="left">
-								<img src="../../../img/resource/add.png" height="25" width="25" />
-							</div>
+							
 							<!-- 课程导航 -->
 							<ul class="nav nav-pills ">
 								<li class="nav-item"><a class="nav-link active"
@@ -44,7 +42,12 @@
 						</div>
 						<!-- 阅读课程列表 -->
 						<div class="card-body">
+						<!-- 添加课程按钮 -->
+							<div class="left">
+								<a style="color:#b61a06" href="${pageContext.request.contextPath}/language/admin/toaddlanguages">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a></div>
 							<div class="tab-content col-xs col-sm col-md">
+							
 								<div class="active tab-pane" id="activity">
 									<form action="#" method="post">
 										<table class="table table-hover table-bordered ">
@@ -53,12 +56,14 @@
 												<th>课程名称</th>
 												<th>语言类别</th>
 												<th>类别类型</th>
+												<th>修改</th>
 											</tr>
 											<tr style="text-align: center">
 												<td>1</td>
 												<td>英语阅读</td>
 												<td>英语</td>
 												<td>四级</td>
+												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
 											</tr>
 
 										</table>
@@ -73,12 +78,15 @@
 												<th>课程名称</th>
 												<th>语言类别</th>
 												<th>类别类型</th>
+												<th>修改</th>
 											</tr>
 											<tr style="text-align: center">
 												<td>1</td>
 												<td>英语听力</td>
 												<td>英语</td>
 												<td>四级</td>
+												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
+											
 											</tr>
 										</table>
 									</form>
@@ -92,6 +100,7 @@
 												<th>课程名称</th>
 												<th>语言类别</th>
 												<th>类别类型</th>
+												<th>修改</th>
 											</tr>
 
 											<tr style="text-align: center">
@@ -99,6 +108,8 @@
 												<td>英语口语</td>
 												<td>英语</td>
 												<td>四级</td>
+												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
+											
 											</tr>
 
 										</table>
@@ -109,16 +120,14 @@
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
 							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
-								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/course/admin/courses_manage${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
 					</div>
-							</div>
-
-							<!-- /.tab-content -->
+							</div>	
 						</div>
-						<!-- /.card-body -->
+						
 					</div>
 				</div>
 			</div>
@@ -176,5 +185,6 @@
 		src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
+	
 </body>
 </html>

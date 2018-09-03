@@ -21,7 +21,7 @@
 	margin-top: 50px;
 
 }
-label{ color: #7e0675}
+label{ color: #970046}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -29,10 +29,15 @@ label{ color: #7e0675}
 			<section class="content-header  ">
 				<div class="container-fluid ">
 					<!--添加轮播图 -->
-					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
+					<div class=" card-warning  card-outline  ">
+					<div class="card-header ">
+					
+								<h3 class="card-title">修改轮播图信息</h3>
+					</div>
+							<div class="col-sm col-xs col-md-6 col-center-block">
 						<form action="${pageContext.request.contextPath}/website/admin/updateCarouselMap" enctype="multipart/form-data" method="POST">
-							<h3>请修改轮播图信息</h3>
-							<input type="hidden" name="carouselId" value="${carouselMap.carouselId }"/>
+							
+							<input type="hidden" name="carouselId" value="${carouselMap.carouselId}"/>
 							<label>轮播图简介:</label>
 							<input class="form-control" type="text" name="carouselInstruction" value="${carouselMap.carouselInstruction }"/>
 							<div class="form-group">
@@ -51,9 +56,11 @@ label{ color: #7e0675}
 						</div>
 						</div>
 						</form>
+						</div>
 					</div>
 				</div>
 			</section>
 		</div>
+		
 </body>
 </html>

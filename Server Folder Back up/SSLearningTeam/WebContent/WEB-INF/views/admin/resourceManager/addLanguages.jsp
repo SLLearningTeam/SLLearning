@@ -38,7 +38,7 @@ color: #138496
 						<input type="text" class="form-control" id="languageName" placeholder="请填写语言类型名称" name="languageName" required="required">
 						<div class="form-group">
 							<label for="languageIcon">语言类型图标</label>
-						   <input id="file" type="file" class=" btn  btn-default" style="width:482px" name="languageIcon" required="required">
+						   <input class="form-control" type="file" name="languageIcon" required="required">
 				           <div class="col-top">
 							<button type="submit"  class="btn btn-info float-right">提交</button>
 						    </div>

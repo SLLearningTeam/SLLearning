@@ -33,14 +33,14 @@ label{ color: #7e0675}
 						<form action="${pageContext.request.contextPath}/website/admin/addCarouselMap" enctype="multipart/form-data" method="POST">
 							
 							<label>轮播图简介:</label>
-							<input class="form-control" type="text" name="carouselInstruction" />
+							<input class="form-control" type="text" name="carouselInstruction" required="required" />
 							<div class="form-group">
 							<label>轮播图链接:</label>
-							<input class="form-control" type="text" name="carouselLinkUrl" />
+							<input class="form-control" type="text" name="carouselLinkUrl" required="required"/>
 							</div>
 							<div class="form-group">
 							<label>轮播图图片:</label>
-							<input class="form-control" type="file" name="carouselImg" />
+							<input class="form-control" type="file" name="carouselImg" required="required"/>
 							<div class="col-top">
 							<button type="submit"  class="btn btn-info float-right">提交</button>
 							</div>

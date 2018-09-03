@@ -16,50 +16,67 @@
 	<div class="content-wrapper">
 		<section class="content">
 			<div class="container-fluid">
-				<!-- 语言分类列表 -->
-				<div class="card-body">
-					<table id="example1" class="table table-bordered table-striped">
-						<thead>
-							<tr style="text-align: center; color: #7b5b05">
+				<div class="card">
+			<div class="card-header">
+			<a style="color:#a4042a" href="${pageContext.request.contextPath}/website/admin/toAddCarouselMap">
+               <img  src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;&nbsp;添加轮播内容</a>
+           </div>
+					<div class="card-body">
+					<table class="table table-bordered  table-hover">
+							<tr style="text-align: center; color: #8b0481">
 								<th>轮播图编号</th>
 								<th>轮播图简介</th>
 								<th>轮播图链接地址</th>
 								<th>轮播图图片</th>
 								<th colspan="2" style="text-align: center;">操作</th>
 							</tr>
-						</thead>
-						<tbody>
+						
 							<c:forEach var="carouselMaps" items="${carouselMaps}" varStatus="status">
 								<tr style="text-align: center">
 									<td>${status.count}</td>
 									<td>${carouselMaps.carouselInstruction}</td>
 									<td><a href="${carouselMaps.carouselLinkUrl }">${carouselMaps.carouselLinkUrl }</a></td>
 									<td><img src="${carouselMaps.carouselImgUrl}" height="40" width="60" /></td>
-									<td><a href="${pageContext.request.contextPath}/website/admin/toUpdateCarouselMap?carouselId=${carouselMap.carouselId}">修改</a></td>																	 
-									<td><a href="${pageContext.request.contextPath}/website/admin/deleteCarouselMap?carouselId=${carouselMap.carouselId}" onclick="return del()">删除</a></td>
+									<td><a href="${pageContext.request.contextPath}/website/admin/toUpdateCarouselMap?carouselId=${carouselMaps.carouselId}">修改</a></td>																	 
+									<td><a href="javascript:void(0)" onclick="return del(${carouselMaps.carouselId})">删除</a></td>
 								</tr>
 							</c:forEach>
 					</table>
+					</div>
 					<!-- 分页 -->
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
 							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
-								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/website/admin/carouselMap_manage/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+			
 		</section>
 	</div>
-	<div>${pageName }</div>
-	<div>${languageTypes}</div>
 	<script type="text/javascript">
-		function del(){
-			return confirm("确认要删除该语言类别吗？")
+		function del(id){
+			var info = confirm("确认要删除该语言类别吗？");
+			if(info){
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/website/admin/deleteCarouselMap?carouselId="+id,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  location.href="${pageContext.request.contextPath}/website/admin/carouselMap_manage/1";
+						  }else{
+							alert(result.info);
+						  }
+					  }
+					});
+			}
 		}
-		</script>
+		
+		 </script>
 </body>
 </html>

@@ -38,10 +38,10 @@ label {
 				<input type="hidden" name="languageTypeId" value="${languageType.languageTypeId}">
 					<label for="languageName">语言类型名称</label> 
 					<input type="text" class="form-control" name="languageName" value="${languageType.languageName}" required="required">
-					<label for="rateIcon">原语言类型图标</label><br>
-					<img src="${languageType.languageIconUrl}" height="30px" width="30px"/>
+					<label >原语言类型图标:</label>
+					<img src="${languageType.languageIconUrl}" height="40px" width="60px"/>
 					<div class="form-group">
-						<label for="languageIcon">语言类型图标</label>
+						<label for="languageIcon">修改语言类型图标:</label>
 						<div class="input-group">
 						<input id="file" type="file" class=" btn btn-default" style="width:482px" name="languageIcon" >
 				        

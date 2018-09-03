@@ -18,4 +18,21 @@
 	<insert id="registerUser" parameterType="User">
 		insert into user (userId,userSex,userName,userPassword,userAvatarUrl,userPhoneNumber,userPermission) values(null,#{userSex},#{userName},#{userPassword},#{userAvatarUrl},#{userPhoneNumber},#{userPermission})
 	</insert>
+	
+	<!-- 获得用户签到记录 -->
+	<select id="getUserSignInRecording" resultType="SignInRecordingForSQL">
+		select * from signinrecording where userId= #{param1}
+	</select>
+	<!-- 添加用户签到记录 -->
+	<insert id="addSignInRecording" parameterType="SignInRecordingForSQL">
+		insert into signinrecording values(null,#{userId},#{totalTimes},#{recentMark})
+	</insert>
+	<!-- 用户点击签到触发的修改签到记录 -->
+	<update id="updateSignInRecording">
+		update signinrecording set userId=#{param1},totalTimes=#{param2},recentMark=#{param3} where signInId=#{param4}
+	</update>
+	<!-- 管理员直接修改签到记录 -->
+	<update id="updateSignInRecordingForAdmin">
+		update signinrecording set totalTimes=#{param2} where userId=#{param1}
+	</update>
 </mapper>

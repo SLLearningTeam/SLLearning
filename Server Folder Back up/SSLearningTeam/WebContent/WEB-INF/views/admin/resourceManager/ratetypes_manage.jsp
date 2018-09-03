@@ -24,7 +24,7 @@
                <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;&nbsp;添加类别类型</a>
               </div>
 				<div class="card-body table-responsive p-0">
-					<table class="table table-hover">
+					<table class="table table-hover table-bordered">
 						<tr style="text-align: center; color: #570250">
 							<th>类别类型编号</th>
 							<th>语言类别</th>
@@ -41,7 +41,7 @@
 										src="${rateType.rateIconUrl}"
 										alt="picture" width=“25px” height="25px"> </span></td>
 								<td><a href="${pageContext.request.contextPath}/ratetype/admin/toupdateratetypes?rateTypeId=${rateType.rateTypeId}">修改</a></td>
-								<td><a href="${pageContext.request.contextPath}/ratetype/admin/deleteratetype?rateTypeId=${rateType.rateTypeId}" onclick="return del()">删除</a></td>
+								<td><a href="javascript:void(0)" onclick="return del(${rateType.rateTypeId})">删除</a></td>
 								</tr>
 						</c:forEach>
 					</table>
@@ -51,7 +51,7 @@
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
 							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
-								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
@@ -61,9 +61,23 @@
 		</section>
 	</div>
 	<script type="text/javascript">
-		function del(){
-			return confirm("确认要删除该类别类型吗？")
+	function del(id){
+		var info = confirm("确认要删除该语言类别吗？");
+		if(info){
+			$.ajax({
+				  type: 'get',
+				  url: "${pageContext.request.contextPath}/ratetype/admin/deleteratetype?rateTypeId="+id,
+				  success: function(result){
+					  if(result.status){
+						  alert(result.info);
+						  location.href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1";
+					  }else{
+						alert(result.info);
+					  }
+				  }
+				});
 		}
+	}
 		</script>
 </body>
 </html>

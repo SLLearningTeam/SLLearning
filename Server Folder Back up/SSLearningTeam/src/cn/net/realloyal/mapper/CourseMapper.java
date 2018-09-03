@@ -3,14 +3,19 @@ package cn.net.realloyal.mapper;
 import java.util.List;
 
 import cn.net.realloyal.model.EvaluationForm;
+import cn.net.realloyal.model.HistoryRecording;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.model.SubscriptionRecording;
 import cn.net.realloyal.vo.EvaluationFormForSQL;
+import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
+import cn.net.realloyal.vo.SubscriptionRecordingForSQL;
 
 public interface CourseMapper {
 
@@ -143,5 +148,61 @@ public interface CourseMapper {
 
 	//获得指定课程的所有评价个数
 	int getAllEvaluationPageNumberOfCourse(String courseType, Integer courseId);
+
+	//添加历史记录
+	int addHistoryRecording(Integer userId, String courseType, Integer courseId, String nowDateTime, int viewTimes);
+
+	//查看是否存在指定课程的历史记录
+	HistoryRecordingForSQL checkHistoryRecordingExist(Integer userId, String string, Integer courseId);
+
+	//修改历史记录
+	void updateHistoryRecording(int userId, String courseType, int courseId, String nowDateTime, int viewTimes,int historyRecordingId);
+
+	//删除历史记录
+	int deleteHistoryRecording(Integer historyRecordingId);
+
+	//指定用户浏览记录
+	List<HistoryRecording> getHistoryRecordingOfUser(int startNum, Integer userId);
+	
+	//指定用户总浏览个数
+	int getHistoryRecordingCountOfUser(Integer userId);
+
+	//获取指定用户指定课程的口语测评成绩
+	OralCourseScoreForSQL getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId);
+
+	//添加口语测评成绩
+	int addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore);
+
+	//更新口语测评成绩
+	int updateOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore,
+			int oralCourseScoreId);
+
+	//获得指定用户口语测评的平均成绩
+	Object getAvgOralCourseScoreOfUser(Integer userId);
+
+	//获取指定用户的指定课程订阅记录
+	SubscriptionRecordingForSQL checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId);
+
+	//添加订阅记录
+	int addSubscriptionRecording(SubscriptionRecordingForSQL record);
+
+	//更新订阅记录
+	int updateSubscriptionRecording(SubscriptionRecordingForSQL subscriptionRecordingForSQL);
+
+	//删除订阅记录
+	int deleteSubscriptionRecording(Integer subscriptionRecordingId);
+
+	//获得指定用户所有的订阅记录个数
+	int getSubscriptionRecordingCountOfUser(Integer userId);
+
+	//获得指定用户所有的订阅记录
+	List<SubscriptionRecording> getSubscriptionRecordingOfUser(int startNum, Integer userId);
+
+	//获得指定课程所有的被订阅记录个数
+	int getSubscriptionRecordingCountOfCourse(String courseType, Integer courseId);
+
+	//获得指定课程所有的被订阅记录
+	List<SubscriptionRecording> getSubscriptionRecordingOfCourse(int startNum, String courseType, Integer courseId);
+
 
 }

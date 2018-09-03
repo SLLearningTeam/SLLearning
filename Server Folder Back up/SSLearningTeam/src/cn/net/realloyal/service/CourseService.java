@@ -142,4 +142,30 @@ public interface CourseService {
 
 	BackJsonUtil getAllEvaluationOfCourse(Integer pageNum, String courseType, Integer courseId);
 
+	BackJsonUtil getListeningCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil getOralCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil getReadingCourseInfo(Integer courseId, Integer userId);
+
+	BackJsonUtil deleteHistoryRecording(Integer historyRecordingId);
+
+	BackJsonUtil getHistoryRecordingOfUser(Integer pageNum, Integer userId);
+
+	BackJsonUtil getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId);
+
+	BackJsonUtil addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore);
+
+	BackJsonUtil getAvgOralCourseScoreOfUser(Integer userId);
+
+	BackJsonUtil deleteSubscriptionRecording(Integer subscriptionRecordingId);
+
+	BackJsonUtil addSubscriptionRecording(String courseType, Integer courseId, Integer userId);
+
+	BackJsonUtil getSubscriptionRecordingOfUser(Integer pageNum, Integer userId);
+
+	BackJsonUtil getSubscriptionRecordingOfCourse(Integer pageNum, String courseType, Integer courseId);
+
+	BackJsonUtil checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId);
+
 }

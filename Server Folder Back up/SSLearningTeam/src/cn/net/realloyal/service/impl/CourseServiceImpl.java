@@ -3,7 +3,10 @@ package cn.net.realloyal.service.impl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +24,20 @@ import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.core.util.CalculateStartIndex;
 import cn.net.realloyal.mapper.CourseMapper;
 import cn.net.realloyal.model.EvaluationForm;
+import cn.net.realloyal.model.HistoryRecording;
 import cn.net.realloyal.model.ListeningCourse;
 import cn.net.realloyal.model.OralCourse;
 import cn.net.realloyal.model.ReadingCourse;
+import cn.net.realloyal.model.SubscriptionRecording;
 import cn.net.realloyal.service.CourseService;
 import cn.net.realloyal.vo.EvaluationFormForSQL;
+import cn.net.realloyal.vo.HistoryRecordingForSQL;
 import cn.net.realloyal.vo.ListeningCourseForSQL;
 import cn.net.realloyal.vo.OralCourseForSQL;
+import cn.net.realloyal.vo.OralCourseScoreForSQL;
 import cn.net.realloyal.vo.QuestionForSQL;
 import cn.net.realloyal.vo.ReadingCourseForSQL;
+import cn.net.realloyal.vo.SubscriptionRecordingForSQL;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -1127,6 +1135,257 @@ public class CourseServiceImpl implements CourseService {
 			backJsonUtil.setStatus(true);
 			Map<String,Object>result = new HashMap<String,Object>();
 			result.put("evaluationForms",evaluationForms);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getListeningCourseInfo(Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		ListeningCourse listeningCourse = getListeningCourseInfo(courseId);
+		if(listeningCourse==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您查询的课程不存在");
+		}else {
+			HistoryRecordingForSQL historyRecordingForSQL = courseMapper.checkHistoryRecordingExist(userId,"listeningcourse",courseId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+			String nowDateTime = dateFormat.format(new Date());
+			if(historyRecordingForSQL == null) {
+				courseMapper.addHistoryRecording(userId,"listeningcourse",courseId,nowDateTime,1);
+			}else {
+				courseMapper.updateHistoryRecording(historyRecordingForSQL.getUserId(),historyRecordingForSQL.getCourseType(),historyRecordingForSQL.getCourseId(),nowDateTime,historyRecordingForSQL.getViewTimes()+1,historyRecordingForSQL.getHistoryRecordingId());
+			}
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(listeningCourse);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getOralCourseInfo(Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		OralCourse oralCourse = getOralCourseInfo(courseId);
+		if(oralCourse==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您查询的课程不存在");
+		}else {
+			HistoryRecordingForSQL historyRecordingForSQL = courseMapper.checkHistoryRecordingExist(userId,"oralcourse",courseId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+			String nowDateTime = dateFormat.format(new Date());
+			if(historyRecordingForSQL == null) {
+				courseMapper.addHistoryRecording(userId,"oralcourse",courseId,nowDateTime,1);
+			}else {
+				courseMapper.updateHistoryRecording(historyRecordingForSQL.getUserId(),historyRecordingForSQL.getCourseType(),historyRecordingForSQL.getCourseId(),nowDateTime,historyRecordingForSQL.getViewTimes()+1,historyRecordingForSQL.getHistoryRecordingId());
+			}
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(oralCourse);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getReadingCourseInfo(Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		ReadingCourse readingCourse = getReadingCourseInfo(courseId);
+		if(readingCourse==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您查询的课程不存在");
+		}else {
+			HistoryRecordingForSQL historyRecordingForSQL = courseMapper.checkHistoryRecordingExist(userId,"readingcourse",courseId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+			String nowDateTime = dateFormat.format(new Date());
+			if(historyRecordingForSQL == null) {
+				courseMapper.addHistoryRecording(userId,"readingcourse",courseId,nowDateTime,1);
+			}else {
+				courseMapper.updateHistoryRecording(historyRecordingForSQL.getUserId(),historyRecordingForSQL.getCourseType(),historyRecordingForSQL.getCourseId(),nowDateTime,historyRecordingForSQL.getViewTimes()+1,historyRecordingForSQL.getHistoryRecordingId());
+			}
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(readingCourse);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil deleteHistoryRecording(Integer historyRecordingId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		if(courseMapper.deleteHistoryRecording(historyRecordingId)==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getHistoryRecordingOfUser(Integer pageNum, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int advicesCount = courseMapper.getHistoryRecordingCountOfUser(userId);
+		int pageNumber = (int)advicesCount/10+1;
+		if(advicesCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您还没有浏览历史");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object> result = new HashMap<String,Object>();
+			int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+			List<HistoryRecording> historyRecordings = courseMapper.getHistoryRecordingOfUser(startNum,userId);
+			result.put("historyRecordings", historyRecordings);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage", pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getScoreOfUserForOralCourse(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		OralCourseScoreForSQL oralCourseScoreForSQL = courseMapper.getScoreOfUserForOralCourse(courseType,courseId,userId);
+		if(oralCourseScoreForSQL==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("您还没有作答过本题目");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(oralCourseScoreForSQL.getOralScore());
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil addOralCourseScore(String courseType, Integer courseId, Integer userId, Integer oralScore) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		OralCourseScoreForSQL oralCourseScoreForSQL = courseMapper.getScoreOfUserForOralCourse(courseType,courseId,userId);
+		int num = 0;
+		if(oralCourseScoreForSQL==null) {
+			num = courseMapper.addOralCourseScore(courseType,courseId,userId,oralScore);
+			
+		}else {
+			num = courseMapper.updateOralCourseScore(courseType,courseId,userId,oralScore,oralCourseScoreForSQL.getOralCourseScoreId());
+		}
+		if(num == 0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("添加失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("添加成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getAvgOralCourseScoreOfUser(Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		Object avg = courseMapper.getAvgOralCourseScoreOfUser(userId);
+		if(avg == null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("用户暂未参加口语测评");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo(avg);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil checkSubscriptionRecordingOfUser(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SubscriptionRecordingForSQL subscriptionRecordingForSQL = courseMapper.checkSubscriptionRecordingOfUser(courseType,courseId,userId);
+		if(subscriptionRecordingForSQL==null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("暂未订阅该课程");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("已订阅该课程");
+		}
+		return backJsonUtil;
+	}
+	
+	@Override
+	public BackJsonUtil addSubscriptionRecording(String courseType, Integer courseId, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		SubscriptionRecordingForSQL subscriptionRecordingForSQL = courseMapper.checkSubscriptionRecordingOfUser(courseType,courseId,userId);
+		DateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String nowDate = date.format(new Date());
+		if(subscriptionRecordingForSQL==null) {
+			SubscriptionRecordingForSQL record = new SubscriptionRecordingForSQL(0,nowDate,userId,courseType,courseId);
+			int changeNum = courseMapper.addSubscriptionRecording(record);
+			if(changeNum == 0) {
+				backJsonUtil.setStatus(false);
+				backJsonUtil.setInfo("添加失败");
+			}else {
+				backJsonUtil.setStatus(true);
+				backJsonUtil.setInfo("添加成功");
+			}
+		}else {
+			subscriptionRecordingForSQL.setSubscriptionTime(nowDate);
+			int changeNum = courseMapper.updateSubscriptionRecording(subscriptionRecordingForSQL);
+			if(changeNum == 0) {
+				backJsonUtil.setStatus(false);
+				backJsonUtil.setInfo("添加失败");
+			}else {
+				backJsonUtil.setStatus(true);
+				backJsonUtil.setInfo("添加成功");
+			}
+		}
+		return backJsonUtil;
+		
+		
+	}
+	
+	@Override
+	public BackJsonUtil deleteSubscriptionRecording(Integer subscriptionRecordingId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int changeNum = courseMapper.deleteSubscriptionRecording(subscriptionRecordingId);
+		if(changeNum == 0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("删除失败");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("删除成功");
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getSubscriptionRecordingOfUser(Integer pageNum, Integer userId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfUser(userId);
+		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfUser(startNum,userId);
+		if(subscriptionRecordingsCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("用户没有订阅任何内容");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("subscriptionRecordings",subscriptionRecordings);
+			result.put("pageNumber", pageNumber);
+			result.put("currentPage",pageNum);
+			backJsonUtil.setInfo(result);
+		}
+		return backJsonUtil;
+	}
+
+	@Override
+	public BackJsonUtil getSubscriptionRecordingOfCourse(Integer pageNum, String courseType, Integer courseId) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
+		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfCourse(courseType,courseId);
+		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfCourse(startNum,courseType,courseId);
+		if(subscriptionRecordingsCount==0) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("课程没有被订阅记录");
+		}else {
+			backJsonUtil.setStatus(true);
+			Map<String,Object>result = new HashMap<String,Object>();
+			result.put("subscriptionRecordings",subscriptionRecordings);
 			result.put("pageNumber", pageNumber);
 			result.put("currentPage",pageNum);
 			backJsonUtil.setInfo(result);

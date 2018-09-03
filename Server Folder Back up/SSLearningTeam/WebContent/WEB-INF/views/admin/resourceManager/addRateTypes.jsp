@@ -34,6 +34,7 @@ label{ color: #007BFF}
 					<form action="${pageContext.request.contextPath}/ratetype/admin/addratetypes" enctype="multipart/form-data" method="POST">
 						<label>请选择语言类别</label> 
 						<select class="form-control" name="languageTypeId" >
+						<option>--请选择--</option>
 							<c:forEach items="${languageTypes}" var="language">
 								<option value="${language.languageTypeId }" >${language.languageName }</option>
 							</c:forEach>
@@ -42,7 +43,7 @@ label{ color: #007BFF}
 						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称" name="rateName" required="required">
 						<div class="form-group">
 							<label for="rateIconUrl">添加类别类型图标</label>
-							<input id="file" type="file" class=" btn  btn-default" style="width:482px" name="rateIcon" required="required">
+							<input class="form-control" type="file" name="rateIcon" required="required">
 				           
                              <div class="col-top">
 							<button type="submit" class="btn btn-primary float-right">提交</button>

@@ -128,10 +128,10 @@ label {
 											</div>
 											<div class="input-detail">
 													<div class="div5">
-														<br/><label>请输入中文内容：</label><br/><textarea name="courseChineseContent" rows="6" cols="65" required="required"/></textarea>
+														<br/><label>请输入中文内容：</label><br/><textarea name="courseChineseContent" rows="6" cols="60" required="required"/></textarea>
 													</div>
 													<div  class=div6>
-														<br/><label>请输入英文内容：</label><br/><textarea name="courseEnglishContent" rows="6" cols="65" required="required"/></textarea>
+														<br/><label>请输入英文内容：</label><br/><textarea name="courseEnglishContent" rows="6" cols="60" required="required"/></textarea>
 													</div>
 											</div>
 											<div class="div7">
