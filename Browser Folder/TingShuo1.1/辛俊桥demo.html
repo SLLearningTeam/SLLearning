@@ -16,7 +16,7 @@
         $("#getButton").click(function(){
             $.ajax({  
                 type:"get",
-                url:"http://localhost:8080/TestAPI/test",
+                url:first+"/language/user/getlanguages/1",
                 dataType:'json',
                 success:function(result){
                     alert("收到了get数据:"+result.name);

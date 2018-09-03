@@ -13,15 +13,8 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
     <script src="./js/main.js"></script>
-    <style>
-        .menuAc {
-    color: #1c1f21 !important;
-    font-weight: 500;
-    box-shadow: #cecece 1px 1px 5px;
-    border-radius: 5px;
-}
-    </style>
 
 </head>
 
@@ -120,9 +113,7 @@
                         </div>
                     </div>
                     <div class="study-info-item">
-                        <a class="set" href="">
-                            <img src="./icon/set.png" alt="设置"> 个人设置
-                        </a>
+                        <a onclick="checkLog(this)" class="download-cl" href="javascript:void(0)">下载记录</a>
                     </div>
                 </div>
                 <!--打卡天数，学习时长-->
@@ -159,6 +150,19 @@
                 </ul>
             </div>
             <div class="user-course-content">
+                <div class="download-table">
+                    <table>
+                        <tr style="font-weight:500">
+                            <th>课程名字</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>aaa</td>
+                            <td onclick="deleteLog(this)">sc</td>
+                        </tr>
+                        
+                    </table>
+                </div>
                 <div class="user-course-title clearfix">
                     <div class="user-course-title-left fl">
                         <a class="ac" id="neer" onclick="user_course_title_left_l()" href="#">最近学习</a>
@@ -227,25 +231,72 @@
         var read_class = byId('read');
         var neer = byId('neer');
         var cellection = byId('cellection');
+        var dl_tb = byClass('download-table');
 
+        //查看下载记录
+        function checkLog(e) {
+            if(e.innerText=='下载记录'){
+                e.innerText = '返回';
+                dl_tb[0].style.display='block';
+
+                $.ajax({
+                type: 'get',
+                url: first + '/user/getDownloadRecordings/' + thisPage + "'", //可能有问题
+                dataType: 'json',
+                success: function (r) {
+                    if (r.status == true) {
+                        for (var x = 0; x < r.info.downloadRecordings.length; x++) {
+                            $('table').append('<tr><td>'+r.info.downloadRecordings.course.courseName+'</td><td downloadRecordingId="'+r.info.downloadRecordings.downloadRecordingId+'" onclick="deleteLog(this)" style="cursor: pointer;">删除</td></tr>');
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+            }else{
+                e.innerText='下载记录';
+                dl_tb[0].style.display='none';
+            }
+        }
+        //删除记录
+        function deleteLog(e) {
+            $(e).parent().remove();
+            $.ajax({
+                type: 'get',
+                url: first + '/website/user/deleteDownloadRecording',
+                dataType: 'json',
+                data: {'downloadRecordingId' : $(e).downloadRecordingId},
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('删除成功！')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+        //所有课程
         function allClass() {
             all_class.classList.add('menuAc');
             lis_class.classList.remove('menuAc');
             spk_class.classList.remove('menuAc');
             read_class.classList.remove('menuAc');
         }
+        //听力课程
         function lisClass() {
             all_class.classList.remove('menuAc');
             lis_class.classList.add('menuAc');
             spk_class.classList.remove('menuAc');
             read_class.classList.remove('menuAc');
         }
+        //口语课程
         function spkClass() {
             all_class.classList.remove('menuAc');
             lis_class.classList.remove('menuAc');
             spk_class.classList.add('menuAc');
             read_class.classList.remove('menuAc');
         }
+        //阅读课程
         function readClass() {
             all_class.classList.remove('menuAc');
             lis_class.classList.remove('menuAc');

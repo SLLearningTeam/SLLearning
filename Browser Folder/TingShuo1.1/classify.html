@@ -13,7 +13,130 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+        var menu_item = byId('classify-menu-item');
+        var course_box = byId('course-box');
+        var thisPage = 1;
+
+        $(function(){
+            //列出所有语言
+            $.ajax({
+                type:'get',
+                url:first+'/language/user/getlanguages/'+thisPage+"'",//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        for(var x=0;x<r.info.length;x++){
+                            menu_item.innerHTML='<li class="classify-menu-item"><a languageTypeId="'+r.info[x].languageTypeId+'" class="lg-item" onclick="lgItem(this)" href="javascript:void(0)">'+r.info[x].languageName+'</a></li>'
+                        }
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+            //显示全部rate
+            /*$.ajax({
+                type:'get',
+                url:first+'/language/user/getratetypes/'+thisPage+"'",//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        for(var x=0;x<r.info.length;x++){
+                            item_li_a.innerHTML='<li class="classify-menu-item"><a rateTypeId="'+r.info[x].rateTypeId+'" class="tp-item" onclick="tpItem(this)" href="javascript:void(0)">'+r.info[x].rateName+'</a></li>'
+                        }
+                    }
+                }
+            });*/
+
+            //展示所有课程
+            $.ajax({
+                type:'get',
+                url:first+'/language/user/courses_manage/'+thisPage+"'",//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        //Listening
+                            for(var y=0;y<r.info.courses.listeningCourses.length;y++){
+                                course_box.innerHTML=
+                            '<div class="course-box">'+
+                                '<a courseId="'+r.info.courses.listeningCourses[y].courseId+'" target="_blank" href="./courseListen.html?courseId='+r.info.courses.listeningCourses[y].courseId+'">'+
+                                    '<div class="course-img-box">'+
+                                        '<img class="course-img" src="'+r.info.courses.listeningCourses[y].instructionImgUrl+'" alt="課程">'+
+                                    '</div>'+
+                                    '<div class="course-content">'+
+                                        '<h3 class="content-title">'+r.info.courses.listeningCourses[y].courseName+'</h3>'+
+                                        '<div class="content-detail">'+
+                                            '<div class="course-type">'+
+                                                '<p class="classify-course-state">'+r.info.courses.listeningCourses[y].courseChineseContent+'</p>'+
+                                            '</div>'+
+                                            '<div class="course-rate">'+
+                                                '<span class="rate-star">'+
+                                                    '热度：'+r.info.courses.listeningCourses[y].downloadNum+
+                                                '</span>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</a>'+
+                            '</div>'
+                            }
+                            //Speaking
+                            for(var y=0;y<r.info.courses.oralCourses.length;y++){
+                                course_box.innerHTML=
+                            '<div class="course-box">'+
+                                '<a courseId="'+r.info.courses.oralCourses[y].courseId+'" target="_blank" href="./courseSpeaking.html?courseId='+r.info.courses.oralCourses[y].courseId+'">'+
+                                    '<div class="course-img-box">'+
+                                        '<img class="course-img" src="'+r.info.courses.oralCourses[y].instructionImgUrl+'" alt="課程">'+
+                                    '</div>'+
+                                    '<div class="course-content">'+
+                                        '<h3 class="content-title">'+r.info.courses.oralCourses[y].courseName+'</h3>'+
+                                        '<div class="content-detail">'+
+                                            '<div class="course-type">'+
+                                                '<p class="classify-course-state">'+r.info.courses.oralCourses[y].courseChineseContent+'</p>'+
+                                            '</div>'+
+                                            '<div class="course-rate">'+
+                                                '<span class="rate-star">'+
+                                                    '热度：'+r.info.courses.oralCourses[y].downloadNum+
+                                                '</span>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</a>'+
+                            '</div>'
+                            }
+                            //Reading
+                            for(var y=0;y<r.info.courses.readingCourses.length;y++){
+                                course_box.innerHTML=
+                            '<div class="course-box">'+
+                                '<a courseId="'+r.info.courses.readingCourses[y].courseId+'" target="_blank" href="./courseRead.html?courseId='+r.info.courses.readingCourses[y].courseId+'">'+
+                                    '<div class="course-img-box">'+
+                                        '<img class="course-img" src="'+r.info.courses.readingCourses[y].instructionImgUrl+'" alt="課程">'+
+                                    '</div>'+
+                                    '<div class="course-content">'+
+                                        '<h3 class="content-title">'+r.info.courses.readingCourses[y].courseName+'</h3>'+
+                                        '<div class="content-detail">'+
+                                            '<div class="course-type">'+
+                                                '<p class="classify-course-state">'+r.info.courses.readingCourses[y].courseChineseContent+'</p>'+
+                                            '</div>'+
+                                            '<div class="course-rate">'+
+                                                '<span class="rate-star">'+
+                                                    '热度：'+r.info.courses.readingCourses[y].downloadNum+
+                                                '</span>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</a>'+
+                            '</div>'
+                            }
+                        
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -81,12 +204,9 @@
                 <div class="classify-menu-row clearfix">
                     <span class="classify-title fl">语言：</span>
                     <div class="classify-cont">
-                        <ul>
+                        <ul id="classify-menu-item">
                             <li class="classify-menu-item">
-                                <a class="lg-item classify-menu-item-action" onclick="lgItem(this)" href="#">全部</a>
-                            </li>
-                            <li class="classify-menu-item">
-                                <a class="lg-item" onclick="lgItem(this)" href="#">英语</a>
+                                <a class="lg-item classify-menu-item-action" onclick="lgItem(this)" href="javascript:void(0)">全部</a>
                             </li>
                         </ul>
                     </div>
@@ -97,10 +217,7 @@
                         <div class="classify-cont">
                             <ul>
                                 <li class="classify-menu-item">
-                                    <a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="#">全部</a>
-                                </li>
-                                <li class="classify-menu-item">
-                                    <a class="tp-item" onclick="tpItem(this)" href="#">四级</a>
+                                    <a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="javascript:void(0)">全部</a>
                                 </li>
                             </ul>
                         </div>
@@ -111,11 +228,18 @@
                     <div class="classify-cont">
                         <ul>
                             <li class="classify-menu-item">
-                                <a class="dt-item classify-menu-item-action" onclick="dtItem(this)" href="#">全部</a>
+                                <a class="dt-item classify-menu-item-action" onclick="dtItem(this)" href="javascript:void(0)">全部</a>
                             </li>
                             <li class="classify-menu-item">
-                                <a class="dt-item" onclick="dtItem(this)" href="#">听力</a>
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">听力</a>
                             </li>
+                            <li class="classify-menu-item">
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">口语</a>
+                            </li>
+                            <li class="classify-menu-item">
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">阅读</a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -124,37 +248,14 @@
         <div class="classify-container">
             <div class="container-nav clearfix">
                 <div class="text-center">
-                    <a onclick="classifySort(this)" href="#" class="sort-btn sort-btn-action">最热</a>
+                    <a onclick="classifySort(this)" href="#" class="sort-btn">最热</a>
                     <a onclick="classifySort(this)" href="#" class="sort-btn">最新</a>
                 </div>
             </div>
             <div class="classify-course-list-box">
                 <div class="courseContent" style="margin-top: 0;">
-                    <div class="clearfix">
-                        <div class="course-box">
-                            <a target="_blank" href="">
-                                <div class="course-img-box">
-                                    <img class="course-img" src="./img/siji.jpg" alt="課程">
-                                </div>
-                                <div class="course-content">
-                                    <h3 class="content-title">这里是课程名字</h3>
-                                    <div class="content-detail">
-                                        <div class="course-type">
-                                            <p class="classify-course-state">这里是课程简介这里是课程简介这里是课程简介这里是课程简介</p>
-                                        </div>
-                                        <div class="course-rate">
-                                            <span class="rate-star">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                    <div id="course-box" class="clearfix">
+
                     </div>
                 </div>
                 <div class="page">
@@ -188,6 +289,7 @@
         var sort_btn = byClass('sort-btn');
 
         //获取当前元素：1. onclick(this)方法中加this   2.function x(e) e就是当前对象
+        //点击语言显示等级
         function lgItem(e) {
             for (var x = 0; x < lg_item.length; x++) {
                 if (lg_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
@@ -195,6 +297,26 @@
                 }
             }
             e.classList.add('classify-menu-item-action');
+            var cont = e.languageTypeId;
+            $.ajax({
+                type: 'get',
+                url: first + '/language/user/getratetypes/' + thisPage + "'", //可能有问题
+                dataType: 'json',
+                data: {
+                    "languageTypeId": cont
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        for (var x = 0; x < r.info.length; x++) {
+                            item_li_a.innerHTML = '<li class="classify-menu-item"><a rateTypeId="' + r.info[x].rateTypeId +
+                                '" class="tp-item" onclick="tpItem(this)" href="javascript:void(0)">' + r.info[
+                                    x].rateName + '</a></li>'
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
         }
 
         function tpItem(e) {
@@ -207,22 +329,657 @@
         }
 
         function dtItem(e) {
-            for (var x = 0; x < tp_item.length; x++) {
+            for (var x = 0; x < dt_item.length; x++) {
                 if (dt_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
                     dt_item[x].classList.remove('classify-menu-item-action');
                 }
             }
             e.classList.add('classify-menu-item-action');
+            for (var x = 0; x < 2; x++) {
+                sort_btn[x].classList.remove('sort-btn-action');
+            }
+            //点击的是听力
+            if (e.innerText == '听力') {
+                //是否选择语言
+                for (var z = 0; z < lg_item.length; z++) {
+                    if (lg_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                        var lg_item_ac = lg_item[z];
+                        return lg_item_ac;
+                    }
+                    var lg_id=lg_item_ac.languageTypeId;
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    //是否选择类别
+                    for (var z = 0; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                            return tp_item_ac;
+                        }
+                        var rt_id = tp_item_ac.rateTypeId;
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表
+                    if (tp_item_ac != undefined) {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/listeningCourses_manageByRateType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'rateTypeId':rt_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.listeningCourses[y].courseId +
+                                            '" target="_blank" href="./courseListen.html?courseId=' + r.info
+                                            .courses
+                                            .listeningCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.listeningCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.listeningCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.listeningCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.listeningCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //没有选类别
+                    else {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/listeningCourses_manageByLanguageType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'languageTypeId':lg_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.listeningCourses[y].courseId +
+                                            '" target="_blank" href="./courseListen.html?courseId=' + r.info
+                                            .courses
+                                            .listeningCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.listeningCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.listeningCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.listeningCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.listeningCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/listeningCourses_manage/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.listeningCourses[y].courseId +
+                                        '" target="_blank" href="./courseListen.html?courseId=' + r.info.courses
+                                        .listeningCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.listeningCourses[y]
+                                        .instructionImgUrl +
+                                        '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.listeningCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.listeningCourses[
+                                            y]
+                                        .courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.listeningCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+            } else if (e.innerText == '口语') {
+                //是否选择语言
+                for (var z = 0; z < lg_item.length; z++) {
+                    if (lg_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                        var lg_item_ac = lg_item[z];
+                        return lg_item_ac;
+                    }
+                    var lg_id=lg_item_ac.languageTypeId;
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    //是否选择类别
+                    for (var z = 0; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                            return tp_item_ac;
+                        }
+                        var rt_id = tp_item_ac.rateTypeId;
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的口语课程列表
+                    if (tp_item_ac != undefined) {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/oralCourses_manageByRateType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'rateTypeId':rt_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //oral
+                                    for (var y = 0; y < r.info.courses.oralingCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.oralingCourses[y].courseId +
+                                            '" target="_blank" href="./courseSpeak.html?courseId=' + r.info
+                                            .courses
+                                            .oralCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.oralCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.oralCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.oralCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.oralCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //没有选类别
+                    else {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/oralCourses_manageByLanguageType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'languageTypeId':lg_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //oral
+                                    for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.oralCourses[y].courseId +
+                                            '" target="_blank" href="./courseSpeak.html?courseId=' + r.info
+                                            .courses
+                                            .oralCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.oralCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.oralCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.oralCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.oralCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/oralCourses_manage/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //oral
+                                for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.oralCourses[y].courseId +
+                                        '" target="_blank" href="./courseSpeak.html?courseId=' + r.info.courses
+                                        .oralCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.oralCourses[y]
+                                        .instructionImgUrl +
+                                        '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.oralCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.oralCourses[
+                                            y]
+                                        .courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.oralCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+            } else if (e.innerText == '阅读') {
+                //是否选择语言
+                for (var z = 0; z < lg_item.length; z++) {
+                    if (lg_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                        var lg_item_ac = lg_item[z];
+                        return lg_item_ac;
+                    }
+                    var lg_id=lg_item_ac.languageTypeId;
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    //是否选择类别
+                    for (var z = 0; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                            return tp_item_ac;
+                        }
+                        var rt_id = tp_item_ac.rateTypeId;
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表
+                    if (tp_item_ac != undefined) {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/readingCourses_manageByRateType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'rateTypeId':rt_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //readingCourses
+                                    for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.readingCourses[y].courseId +
+                                            '" target="_blank" href="./courseRead.html?courseId=' + r.info
+                                            .courses
+                                            .readingCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.readingCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.readingCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.readingCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.readingCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //没有选类别
+                    else {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/language/user/readingCourses_manageByLanguageType/' + thisPage +
+                                "'", //可能有问题
+                            dataType: 'json',
+                            data:{'languageTypeId':lg_id},
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //readingCourses
+                                    for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                        course_box.innerHTML =
+                                            '<div class="course-box">' +
+                                            '<a courseId="' + r.info.courses.readingCourses[y].courseId +
+                                            '" target="_blank" href="./courseRead.html?courseId=' + r.info
+                                            .courses
+                                            .readingCourses[y].courseId + '">' +
+                                            '<div class="course-img-box">' +
+                                            '<img class="course-img" src="' + r.info.courses.readingCourses[
+                                                y].instructionImgUrl +
+                                            '" alt="課程">' +
+                                            '</div>' +
+                                            '<div class="course-content">' +
+                                            '<h3 class="content-title">' + r.info.courses.readingCourses[
+                                                y].courseName +
+                                            '</h3>' +
+                                            '<div class="content-detail">' +
+                                            '<div class="course-type">' +
+                                            '<p class="classify-course-state">' + r.info.courses.readingCourses[
+                                                y]
+                                            .courseChineseContent + '</p>' +
+                                            '</div>' +
+                                            '<div class="course-rate">' +
+                                            '<span class="rate-star">' +
+                                            '热度：' + r.info.courses.readingCourses[y].downloadNum +
+                                            '</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>' +
+                                            '</div>'
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/readingCourses_manage/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //readingCourses
+                                for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.readingCourses[y].courseId +
+                                        '" target="_blank" href="./courseRead.html?courseId=' + r.info.courses
+                                        .readingCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.readingCourses[y]
+                                        .instructionImgUrl +
+                                        '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.readingCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.readingCourses[
+                                            y]
+                                        .courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.readingCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+            }
         }
 
         function classifySort(e) {
+            //是否选择听力，口语或阅读
+            for (var x = 0; x < dt_item.length; x++) {
+                if (dt_item[x].className.indexOf('classify-menu-item-action') > -1) {
+                    var dt_item_ac = dt_item[x];
+                }
+            }
+            //如果当前是“最热”
             if (e == sort_btn[0]) {
-                    e.classList.add('sort-btn-action');
-                    sort_btn[1].classList.remove('sort-btn-action');
-            }else{
-                    e.classList.add('sort-btn-action');
-                    sort_btn[0].classList.remove('sort-btn-action');
-                
+                e.classList.add('sort-btn-action');
+                sort_btn[1].classList.remove('sort-btn-action');
+
+                //听力
+                if (dt_item_ac.innerText == '听力') {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/listeningCourses_manageByDownload/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.listeningCourses[y].courseId +
+                                        '" target="_blank" href="./courseListen.html?courseId=' + r.info.courses
+                                        .listeningCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.listeningCourses[y]
+                                        .instructionImgUrl + '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.listeningCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.listeningCourses[
+                                            y].courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.listeningCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+                //口语
+                else if (dt_item_ac.innerText == '口语') {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/oralCourses_manageByDownload/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Speaking
+                                for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.oralCourses[y].courseId +
+                                        '" target="_blank" href="./courseSpeaking.html?courseId=' + r.info.courses
+                                        .oralCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.oralCourses[y].instructionImgUrl +
+                                        '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.oralCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.oralCourses[y]
+                                        .courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.oralCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+                //阅读
+                else if (dt_item_ac.innerText == '阅读') {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/language/user/readCourses_manageByDownload/' + thisPage + "'", //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Reading
+                                for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                    course_box.innerHTML =
+                                        '<div class="course-box">' +
+                                        '<a courseId="' + r.info.courses.readingCourses[y].courseId +
+                                        '" target="_blank" href="./courseRead.html?courseId=' + r.info.courses
+                                        .readingCourses[y].courseId + '">' +
+                                        '<div class="course-img-box">' +
+                                        '<img class="course-img" src="' + r.info.courses.readingCourses[y].instructionImgUrl +
+                                        '" alt="課程">' +
+                                        '</div>' +
+                                        '<div class="course-content">' +
+                                        '<h3 class="content-title">' + r.info.courses.readingCourses[y].courseName +
+                                        '</h3>' +
+                                        '<div class="content-detail">' +
+                                        '<div class="course-type">' +
+                                        '<p class="classify-course-state">' + r.info.courses.readingCourses[
+                                            y].courseChineseContent + '</p>' +
+                                        '</div>' +
+                                        '<div class="course-rate">' +
+                                        '<span class="rate-star">' +
+                                        '热度：' + r.info.courses.readingCourses[y].downloadNum +
+                                        '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>' +
+                                        '</div>'
+                                }
+
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                } else {
+                    alert('先选择听力，口语或阅读');
+                }
+
+            } else {
+                e.classList.add('sort-btn-action');
+                sort_btn[0].classList.remove('sort-btn-action');
             }
         }
     </script>
