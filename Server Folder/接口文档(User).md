@@ -54,7 +54,7 @@
 #### 2.2 请求说明
 
 > 请求方式：GET
-> 请求URL ：/language/user/getratetypes/{pageNum} 
+> 请求URL ：/ratetype/user/getratetypes/{pageNum} 
 >
 > URL参数含义：pageNum表示当前页号
 
