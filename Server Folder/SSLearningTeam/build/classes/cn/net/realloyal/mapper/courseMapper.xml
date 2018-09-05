@@ -232,7 +232,7 @@
 	</select>
 	<!-- 获得该课程的所有问题 -->
 	<select id="getAllQuestion" resultType="QuestionForSQL">
-		select * from question;
+		select * from question where courseType=#{param1} and courseId=#{param2};
 	</select>
 	
 	<!-- 添加评分 -->
