@@ -9,18 +9,48 @@
 	  <!-- Tell the browser to be responsive to screen width -->
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
       <jsp:include page="../leftNavigation.jsp"></jsp:include>
+      
+      <style>
+	      .chart{
+	      	width:0;
+	      	-webkit-box-flex: 1;
+	      	-moz-box-flex: 1;
+	      	-webkit-flex: 1;
+	      	-ms-flex: 1;
+	      	flex: 1;
+	      }
+	      .flex{
+	      	display: -webkit-box;
+	      	display: -moz-box;
+	      	display: -ms-flexbox;
+	      	display: -webkit-flex;
+	      	display: flex;
+	      }
+      </style>
 	</head>
 	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
 	<body class="hold-transition sidebar-mini">
 		<div class="content-wrapper">
-			 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		    <div id="main1" style="height:400px"></div>
-		     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		    <div id="main2" style="height:400px"></div>
-		     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		    <div id="main3" style="height:400px"></div>
-		     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		    <div id="main4" style="height:400px"></div>
+			<div class="flex">
+				<div class="chart">
+					 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				    <div id="main1" style="height:400px;width:550px;"></div>
+				</div>
+				<div class="chart">
+					<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				    <div id="main2" style="height:400px;width:550px;"></div>
+				</div>
+			</div>
+			<div class="flex">
+			  	<div class="chart">
+				     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				    <div id="main3" style="height:400px;width:550px;"></div>
+				</div>
+				<div class="chart">
+				     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				    <div id="main4" style="height:400px;width:550px;"></div>
+			    </div>
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -57,7 +87,7 @@
                 		var option = {
                        title: {
                            text: '用户男女比例分布',
-                           x: 'center',
+                           x: '25%',
                            y: 'top'
                        },
                        tooltip: {
@@ -66,8 +96,8 @@
                        },
                        legend: {
                            orient: 'vertical',
-                           x: 'right',
-                           y: 'center',
+                           x: '85%',
+                           y: '39%',
                            data: [{value:6,name:"男"},{value:1,name:"女"}]
                        },
                        toolbox: {
@@ -81,8 +111,10 @@
                        },
                        calculable: true,
                        series: [
-                           {
-                               name: '性别',
+                           {	
+                        	   radius:'60%',
+                        	   center:['40%','45%'],
+                        	   name: '性别',
                                type: 'pie',
                                data:  [{value:6,name:"男"},{value:1,name:"女"}]
                            }
@@ -97,14 +129,14 @@
 	                		var option = {
 	                		    title: {
 	                		        text: '下载量比例对比图',
-	                		        x: 'center',
-	                            y: 'top'
+	                		        x: '50%',
+	                            	y: 'top'
 	                		    },
 	                		    tooltip: {},
 	                		    legend: {
-	                		    		orient: 'vertical',
-	                             x: 'right',
-	                             y: 'center',
+	                		    	orient: 'vertical',
+		                            x: '10%',
+		                            y: '42%',
 	                		        data:['下载量']
 	                		    },
 	                		    xAxis: {
@@ -120,6 +152,12 @@
 	                                    saveAsImage: true
 	                                }
 	                            },
+                		    	grid:{
+	                		        top:'20%',
+	                		        x:'90%',
+	                		        x2:'70%',
+	                		        y2:'30%',
+                		    	},
 	                         calculable: true,
 	                		    series: [{
 	                		        name: '下载量',
@@ -127,10 +165,10 @@
 	                		        data: downloadRecordingTimeCounts,
 	                		        itemStyle:{
 	                                    normal:{
-	                                        color:'#b9d5d5'
+	                                        color:'#b9d5d5',
 	                                    }
 	                                },
-	                		    }]
+	                		    }],
 	                		};
 	                		// 使用刚指定的配置项和数据显示图表。
 	                		main2.setOption(option);
@@ -141,14 +179,14 @@
 	                		var option = {
 	                		    title: {
 	                		        text: '每日签到对比图',
-	                		        x: 'center',
+	                		        x: '30%',
 	                            y: 'top'
 	                		    },
 	                		    tooltip: {},
 	                		    legend: {
 	                		    		orient: 'vertical',
-	                                x: 'right',
-	                                y: 'center',
+	                                x: '78%',
+	                                y: '40%',
 	                		        data:['签到总数量']
 	                		    },
 	                		    xAxis: {
@@ -164,6 +202,12 @@
 	                                    saveAsImage: true
 	                                }
 	                            },
+                		    	grid:{
+	                		        top:'20%',
+	                		        x:'70%',
+	                		        x2:'85%',
+	                		        y2:'30%',
+                		    	},
 	                            calculable: true,
 	                		    series: [{
 	                		        name: '签到总数量',
@@ -171,7 +215,7 @@
 	                		        data: recentMarkTimesCounts,
 	                		        itemStyle:{
 	                                    normal:{
-	                                        color:'#fbebd0'
+	                                        color:'red'
 	                                    }
 	                                },
 	                		    }]
@@ -185,14 +229,14 @@
 	                		var option = {
 	                		    title: {
 	                		        text: '签到总次数比例对比图',
-	                		        x: 'center',
+	                		        x: '47%',
 	                                y: 'top'
 	                		    },
 	                		    tooltip: {},
 	                		    legend: {
 	                		    		orient: 'vertical',
-	                                x: 'right',
-	                                y: 'center',
+	                                x: '10%',
+	                                y: '40%',
 	                		        data:['签到次数']
 	                		    },
 	                		    xAxis: {
@@ -208,6 +252,12 @@
 	                                    saveAsImage: true
 	                                }
 	                            },
+	                            grid:{
+	                		        top:'20%',
+	                		        x:'90%',
+	                		        x2:'70%',
+	                		        y2:'30%',
+                		    	},
 	                            calculable: true,
 	                		    series: [{
 	                		        name: '签到次数',

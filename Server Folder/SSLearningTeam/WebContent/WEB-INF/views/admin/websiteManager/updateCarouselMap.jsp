@@ -21,27 +21,46 @@
 	margin-top: 50px;
 
 }
-label{ color: #7e0675}
+label{ color: #970046}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-			<section class="content  ">
+			<section class="content-header  ">
 				<div class="container-fluid ">
 					<!--添加轮播图 -->
-					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
+					<div class=" card-warning  card-outline  ">
+					<div class="card-header ">
+					
+								<h3 class="card-title">修改轮播图信息</h3>
+					</div>
+							<div class="col-sm col-xs col-md-6 col-center-block">
 						<form action="${pageContext.request.contextPath}/website/admin/updateCarouselMap" enctype="multipart/form-data" method="POST">
-							<h3>请修改轮播图信息</h3>
-							<input type="hidden" name="carouselId" value="${carouselMap.carouselId }"/>
-							轮播图简介:<input type="text" name="carouselInstruction" value="${carouselMap.carouselInstruction }"/>
-							<br/>轮播图链接:<input type="text" name="carouselLinkUrl" value="${carouselMap.carouselLinkUrl }"/>
-							<br/>轮播图原始图片:<img src="${carouselMap.carouselImgUrl }" height="40" width="100"/>
-							<br/>轮播图修改图片:<input type="file" name="carouselImg" />
-							<br/><input type="submit" value="提交" />
+							
+							<input type="hidden" name="carouselId" value="${carouselMap.carouselId}"/>
+							<label>轮播图简介:</label>
+							<input class="form-control" type="text" name="carouselInstruction" value="${carouselMap.carouselInstruction }"/>
+							<div class="form-group">
+							<label>轮播图链接:</label>
+							<input class="form-control" type="text" name="carouselLinkUrl" value="${carouselMap.carouselLinkUrl }"/>
+							</div>
+							<div class="form-group">
+							<label>轮播图原始图片:</label>
+							<img src="${carouselMap.carouselImgUrl }" height="40" width="80"/>
+							</div>
+							<div class="form-group">
+							<label>轮播图修改图片:</label>
+							<input class="form-control" type="file" name="carouselImg" />
+							<div class="col-top ">
+							<button type="submit" class="btn btn-warning float-right">提交</button>
+						</div>
+						</div>
 						</form>
+						</div>
 					</div>
 				</div>
 			</section>
 		</div>
+		
 </body>
 </html>

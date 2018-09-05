@@ -17,33 +17,39 @@
 		<section class="content">
 			<div class="container-fluid">
 				<!-- 语言分类列表 -->
+				<div class="card">
+              <div class="card-header">
+               <a style="color:#b61a06" href="${pageContext.request.contextPath}/language/admin/toaddlanguages">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp; 添加语言类型</a>
+              </div>
 				<div class="card-body">
-					<table id="example1" class="table table-bordered table-striped">
-						<thead>
-							<tr style="text-align: center; color: #f71f83">
+					<table  class="table table-bordered table-hover">
+						
+							<tr style="text-align: center; color: #490570">
 								<th>语言类型编号</th>
 								<th>语言名称</th>
 								<th>图标</th>
 								<th colspan="2" style="text-align: center;">操作</th>
 							</tr>
-						</thead>
-						<tbody>
+						
 							<c:forEach var="languageType" items="${languageTypes}" varStatus="status">
 								<tr style="text-align: center">
 									<td>${status.count}</td>
 									<td>${languageType.languageName}</td>
-									<td><img src="${languageType.languageIconUrl}" height="20" width="20" /></td>
-									<td><a href="#">修改</a></td>
-									<td><a href="#">删除</a></td>
+									<td><img src="${languageType.languageIconUrl}" height="25px" width="25px" /></td>
+									<td><a href="${pageContext.request.contextPath}/language/admin/toupdatelanguages?languageTypeId=${languageType.languageTypeId}">修改</a></td>
+									<td><a href="javascript:void(0)" onclick="return del(${languageType.languageTypeId})">删除</a></td>
 								</tr>
 							</c:forEach>
 					</table>
-					<!-- 分页 -->
+					
+				</div>
+				<!-- 分页 -->
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
-								<li class="page-item"><a class="page-link" href="#">${count.index}</a></li>
+							<c:forEach varStatus="count" begin="1" end="${pageNumeber}" step="1">
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/language/admin/languages_manage/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
@@ -52,7 +58,27 @@
 			</div>
 		</section>
 	</div>
-	<div>${pageName }</div>
-	<div>${languageTypes}</div>
+
+	<script type="text/javascript">
+		function del(id){
+			var info = confirm("确认要删除该语言类别吗？");
+			if(info){
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/language/admin/deletelanguage?languageTypeId="+id,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  location.href="${pageContext.request.contextPath}/language/admin/languages_manage/1";
+						  }else{
+							alert(result.info);
+						  }
+					  }
+					});
+			}
+		}
+		
+		 </script>
+		
 </body>
 </html>

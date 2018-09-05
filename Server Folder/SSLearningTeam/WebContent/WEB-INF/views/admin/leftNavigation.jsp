@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	    
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,8 +168,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- 首页 -->
-          <li class="nav-item">
-            <a href="./index.html" class="nav-link active">
+          	<c:if test="${pageName=='indexPage'}">
+            <li class="nav-item">
+          		<a href="${pageContext.request.contextPath }/user/init" class="nav-link active">
+          	</c:if>	
+          	<c:if test="${pageName!='indexPage'}">
+            <li class="nav-item">
+          		<a href="${pageContext.request.contextPath }/user/init" class="nav-link">
+          	</c:if>	
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 首页
@@ -176,8 +183,15 @@
             </a>
           </li>
           <!-- 用户管理 -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <c:if test="${(pageName=='userListManage'||pageName=='userChartManage')}">
+          		
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active" >
+            	</c:if>
+            <c:if test="${(pageName!='userListManage'&&pageName!='userChartManage')}">
+            <li class="nav-item has-treeview">
+          		<a href="#" class="nav-link">
+          	</c:if>	
               <i class="nav-icon fa fa-edit"></i>
               <p>
                 用户管理
@@ -185,28 +199,39 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/user/user_info" class="nav-link">
+              <li class="nav-item active">
+               <c:if test="${pageName=='userListManage' }">
+                <a href="${pageContext.request.contextPath}/user/admin/userlist_manage/1" class="nav-link active">
+               </c:if>
+               <c:if test="${pageName!='userListManage' }">
+               <a href="${pageContext.request.contextPath}/user/admin/userlist_manage/1" class="nav-link">
+               </c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看用户列表</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/user/user_list" class="nav-link">
+              <li class="nav-item active">
+              <c:if test="${pageName=='userChartManage' }">
+                <a href="${pageContext.request.contextPath}/user/admin/toUserChart" class="nav-link active">
+                </c:if>
+                 <c:if test="${pageName!='userChartManage' }">
+                  <a href="${pageContext.request.contextPath}/user/admin/toUserChart" class="nav-link ">
+                </c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>查看用户详情</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/user/users_chart" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>总览用户信息</p>
+                  <p>查看用户分布</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <!-- 资源管理 -->
+          	<c:if test="${(pageName=='languageManage'||pageName=='rateTypeManage'||pageName=='courseManage'||pageName=='trainManage')}">
+          		<li class="nav-item has-treeview menu-open">
+          		<a href="#" class="nav-link active">
+          	</c:if>
+            <c:if test="${(pageName!='languageManage'&&pageName!='rateTypeManage'&&pageName!='courseManage'&&pageName!='trainManage')}">
+          		<li class="nav-item has-treeview">
+          		<a href="#" class="nav-link">
+          	</c:if>
               <i class="nav-icon fa fa-tree"></i>
               <p>
                 资源管理
@@ -214,66 +239,113 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/language/languages_manage" class="nav-link">
+            	<li class="nav-item">
+	            <c:if test="${pageName=='languageManage' }">
+	          		<a href="${pageContext.request.contextPath}/language/admin/languages_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='languageManage' }">
+	          		<a href="${pageContext.request.contextPath}/language/admin/languages_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理语言分类</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/ratetype/ratetypes_manage" class="nav-link">
+             	<li class="nav-item">
+              	<c:if test="${pageName=='rateTypeManage' }">
+	          		<a href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='rateTypeManage' }">
+	          		<a href="${pageContext.request.contextPath}/ratetype/admin/ratetypes_manages/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理等级分类</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/course/courses_manage" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='courseManage' }">
+	          		<a href="${pageContext.request.contextPath}/course/admin/courses_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='courseManage' }">
+	          		<a href="${pageContext.request.contextPath}/course/admin/courses_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>管理课程信息</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/train/trains_manage" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='trainManage' }">
+	          		<a href="${pageContext.request.contextPath}/train/admin/simulatedtests_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='trainManage' }">
+	          		<a href="${pageContext.request.contextPath}/train/admin/simulatedtests_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>管理考试内容</p>
+                  <p>管理模拟套题</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+
+          <!-- 网站管理 -->
+          <c:if test="${(pageName=='adminManage'||pageName=='downloadRecordingManage'||pageName=='recommendManage')}">
+          		<li class="nav-item has-treeview menu-open">
+          		<a href="#" class="nav-link active">
+          	</c:if>
+            <c:if test="${(pageName!='adminManage'&&pageName!='downloadRecordingManage'&&pageName!='recommendManage')}">
+          		<li class="nav-item has-treeview">
+          		<a href="#" class="nav-link">
+          	</c:if>
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                网站管理
+                 网站管理
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/advice/ideas_feedback" class="nav-link">
+            	<li class="nav-item">
+	            <c:if test="${pageName=='adminManage' }">
+	          		<a href="${pageContext.request.contextPath}/advice/admin/advices_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='adminManage' }">
+	          		<a href="${pageContext.request.contextPath}/advice/admin/advices_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>查看意见反馈</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/website/website_monitor" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='downloadRecordingManage' }">
+	          		<a href="${pageContext.request.contextPath}/website/admin/getDownloadRecordings/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='downloadRecordingManage' }">
+	          		<a href="${pageContext.request.contextPath}/website/admin/getDownloadRecordings/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>查看访问监控</p>
+                  <p>管理下载记录</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/website/recommend_resources" class="nav-link">
+              	<li class="nav-item active">
+              	<c:if test="${pageName=='recommendManage' }">
+	          		<a href="${pageContext.request.contextPath}/website/admin/carouselMap_manage/1" class="nav-link active">
+	          	</c:if>
+	            <c:if test="${pageName!='recommendManage' }">
+	          		<a href="${pageContext.request.contextPath}/website/admin/carouselMap_manage/1" class="nav-link">
+	          	</c:if>
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>管理推荐资源</p>
+                  <p>管理轮播资源</p>
                 </a>
               </li>
             </ul>
           </li>
          </ul>
+         
       </nav>
-      <!-- /.sidebar-menu -->
+      <!-- 
+      <c:if test="${not empty info}">
+	 ${pageName}
+	  </c:if>
+       -->
     </div>
-    <!-- /.sidebar -->
   </aside>
 </div>
 <!-- ./wrapper -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,31 +29,32 @@ label {
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-		<section class="content  ">
+		<section class="content-header">
 			<div class="container-fluid ">
 				<!--添加语言类别 -->
 				<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
-					<label>请选择语言类别</label> <select class="form-control">
-						<option>英语</option>
-						<option>日语</option>
-						<option>俄语</option>
-						<option>法语</option>
-						<option>泰语</option>
-						<option>德语</option>
-					</select> <label for="rateName">类别类型名称</label> <input type="text"
-						class="form-control" id="rateName" value="${rateType.rateName }">
-					<div class="form-group">
-						<label for="rateIconUrl">类别类型图标</label>
-						<div class="input-group">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="rateIconUrl">
-								<label class="custom-file-label" for="rateIconUrl"></label>
+					<form
+						action="${pageContext.request.contextPath}/ratetype/admin/updateratetype"
+						enctype="multipart/form-data" method="POST">
+						<input type="hidden" name="rateTypeId" value="${rateType.rateTypeId}"> 
+						<label>请选择语言类别</label> 
+							<select class="form-control" name="languageTypeId">
+							<option value="${rateType.languageType.languageTypeId}">${rateType.languageType.languageName }</option>
+							<c:forEach items="${languageTypes}" var="languageType">
+								<option value="${languageType.languageTypeId}">${languageType.languageName }</option>
+							</c:forEach>
+						</select> 
+						<label for="rateName">类别类型名称</label> <input type="text"
+							class="form-control" name="rateName" value="${rateType.rateName}" required="required">
+						<label for="rateIcon">原类别类型图标</label><br> <img
+							src="${rateType.rateIconUrl}" height="30px" width="30px" />
+						<div class="form-group">
+							<label for="rateIcon">类别类型图标</label> <input class="form-control" type="file"  name="rateIcon" >
+							<div class="col-top">
+								<button type="submit" class="btn btn-primary float-right">提交</button>
 							</div>
 						</div>
-						<div class="col-top">
-							<button type="submit" class="btn btn-primary float-right">提交</button>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</section>

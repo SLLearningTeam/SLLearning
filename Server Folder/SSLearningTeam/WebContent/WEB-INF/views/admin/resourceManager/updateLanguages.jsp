@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 }
 
 .col-top {
-	margin-top: 50px;
+	margin-top: 60px;
 }
 
 label {
@@ -29,24 +30,27 @@ label {
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-		<section class="content  ">
+		<section class="content-header  ">
 			<div class="container-fluid ">
 				<!--添加语言类别 -->
 				<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
-					<label for="rateName">语言类型名称</label> <input type="text"
-						class="form-control" id="rateName">
+				<form action="${pageContext.request.contextPath}/language/admin/updatelanguage" enctype="multipart/form-data" method="POST">
+				<input type="hidden" name="languageTypeId" value="${languageType.languageTypeId}">
+					<label for="languageName">语言类型名称</label> 
+					<input type="text" class="form-control" name="languageName" value="${languageType.languageName}" required="required">
+					<label >原语言类型图标:</label>
+					<img src="${languageType.languageIconUrl}" height="40px" width="60px"/>
 					<div class="form-group">
-						<label for="rateIconUrl">语言类型图标</label>
+						<label for="languageIcon">修改语言类型图标:</label>
 						<div class="input-group">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="rateIconUrl">
-								<label class="custom-file-label" for="rateIconUrl"></label>
-							</div>
+						<input id="file" type="file" class=" btn btn-default" style="width:482px" name="languageIcon" >
+				        
 						</div>
 						<div class="col-top ">
 							<button type="submit" class="btn btn-warning float-right">提交</button>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</section>

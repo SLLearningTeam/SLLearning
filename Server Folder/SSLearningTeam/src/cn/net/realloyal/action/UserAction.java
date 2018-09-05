@@ -71,6 +71,7 @@ public class UserAction {
 		User user = (User) session.getAttribute("user");
 		if(user.getUserPermission()==1) {
 			mv.addObject("admin",user);
+			mv.addObject("pageName","indexPage");
 			mv.setViewName("admin/index");
 		}else {
 			mv.addObject("user",user);

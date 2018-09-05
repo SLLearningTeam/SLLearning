@@ -1,24 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>听说在线学习平台 | 用户列表页</title>
-<!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap4.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-	rel="stylesheet">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -29,73 +18,50 @@
 					<div class="card">
 						<div class="card-body">
 							<table id="example1" class="table table-bordered table-striped">
-								<thead>
-									<tr>
+								
+									<tr style="text-align: center; color: #aa1603">
 										<th>用户编号</th>
 										<th>用户名</th>
 										<th>性别</th>
 										<th>密码</th>
 										<th>头像</th>
 										<th>手机号码</th>
-										<th>最近登录</th>
-										<th>用户权限</th>
+										
+										<th colspan="2" style="text-align: center;">查看详情</th>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><a>1</a></td>
-										<td>SLLearing</td>
-										<td>女</td>
-										<td>******</td>
-										<td><img alt="pic"
-											src="http://img5.duitang.com/uploads/item/201611/13/20161113110506_ScT45.thumb.700_0.jpeg"
-											width="25px" height="25px"></td>
-										<td>18342208888</td>
-										<td>2018.8.8</td>
-										<td>上传</td>
-									</tr>
-								</tbody>
+								
+								<c:forEach var="user" items="${users}" varStatus="status">
+								<tr style="text-align: center ">
+									<td>${status.count}</td>
+									<td>${user.userName}</td>
+									<td>${user.userSex }</td>
+									<td>${user.userPassword }</td>
+									<td><img src="${user.userAvatarUrl}" height="25px" width="25px" /></td>
+									<td>${user.userPhoneNumber}</td>
+									
+									<td><a href="${pageContext.request.contextPath}/user/admin/getUserInfo?userId=${user.userId}">
+									<img src="../../../img/resource/see.png" height="28" width="28" />
+									</a></td>
+									
+								</tr>
+							</c:forEach>			
 							</table>
 						</div>
+						<!-- 分页 -->
+					<div class="card-footer clearfix">
+						<ul class="pagination pagination-sm m-0 float-right">
+							<li class="page-item"><a class="page-link" href="#">«</a></li>
+							<c:forEach varStatus="count" begin="1" end="${pageNumeber}" step="1">
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/user/admin/userlist_manage/${count.index}">${count.index}</a></li>
+							</c:forEach>
+							<li class="page-item"><a class="page-link" href="#">»</a></li>
+						</ul>
+					</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
-	<!-- Bootstrap 4 -->
-	<script
-		src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- DataTables -->
-	<script
-		src="${pageContext.request.contextPath}/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-	<!-- SlimScroll -->
-	<script
-		src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script
-		src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script
-		src="${pageContext.request.contextPath}/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
-	<!-- page script -->
-	<script>
-    $(function () {
-      $("#example1").DataTable();
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false
-      });
-    });
-</script>
+
 </body>
 </html>

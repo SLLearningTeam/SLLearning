@@ -22,32 +22,29 @@
 	margin-top: 50px;
 
 }
-label{ color: #7e0675}
+label{ color: #007BFF}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-			<section class="content  ">
+			<section class="content-header">
 				<div class="container-fluid ">
 					<!--添加语言类别 -->
 					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
 					<form action="${pageContext.request.contextPath}/ratetype/admin/addratetypes" enctype="multipart/form-data" method="POST">
 						<label>请选择语言类别</label> 
-						<select class="form-control" name="languageTypeId">
+						<select class="form-control" name="languageTypeId" >
+						<option>--请选择--</option>
 							<c:forEach items="${languageTypes}" var="language">
-								<option value="${language.languageTypeId }">${language.languageName }</option>
+								<option value="${language.languageTypeId }" >${language.languageName }</option>
 							</c:forEach>
 						</select> 
 						<label for="rateName">类别类型名称</label>
-						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称" name="rateName">
+						 <input type="text" class="form-control" id="rateName" placeholder="请填写类别类型名称" name="rateName" required="required">
 						<div class="form-group">
 							<label for="rateIconUrl">添加类别类型图标</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="rateIconUrl" name="rateIcon">
-									<label class="custom-file-label" for="rateIconUrl">请选择图标</label>
-								</div>
-							</div>
+							<input class="form-control" type="file" name="rateIcon" required="required">
+				           
                              <div class="col-top">
 							<button type="submit" class="btn btn-primary float-right">提交</button>
 						    </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,36 +20,37 @@
 }
 .col-top {
 	margin-top: 50px;
-
 }
-label{ color: #7e0675}
+label{ 
+color: #138496
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
-			<section class="content  ">
+			<section class="content-header  ">
 				<div class="container-fluid ">
 					<!--添加语言类别 -->
-					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
+					<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top ">
 						<form action="${pageContext.request.contextPath}/language/admin/addlanguage" enctype="multipart/form-data" method="POST">
-						<label for="languageName">语言类型名称</label>
-						<input type="text" class="form-control" id="languageName" placeholder="请填写类别类型名称" name="languageName">
+						
+						<label for="languageName" >语言类型名称</label>
+						<input type="text" class="form-control" id="languageName" placeholder="请填写语言类型名称" name="languageName" required="required">
 						<div class="form-group">
 							<label for="languageIcon">语言类型图标</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="languageIcon" name="languageIcon">
-									<label class="custom-file-label" for="rateIconUrl">请选择图标</label>
-								</div>
-							</div>
-                             <div class="col-top">
-							<button type="submit" class="btn btn-primary float-right">提交</button>
+						   <input class="form-control" type="file" name="languageIcon" required="required">
+				           <div class="col-top">
+							<button type="submit"  class="btn btn-info float-right">提交</button>
 						    </div>
 						</div>
+						<c:if test="${not empty info}">
+		                    ${info}
+	                    </c:if>
 						</form>
 					</div>
 				</div>
 			</section>
 		</div>
+		
 </body>
 </html>
