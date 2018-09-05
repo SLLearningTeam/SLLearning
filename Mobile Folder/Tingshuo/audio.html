@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+
+	<div onclick="playPause()" style="position: absolute;top: 10px;left: 10px;width: 50px;height: 50px;border-radius: 100px;">
+                        <audio src="http://101.200.51.53:8080//SSLearningTeam//ListeningCourseResource//521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9_listeningresource_6.mp3" id="myaudio" controls="controls" hidden="true"></audio>
+                        <img id="play" style="height: 45px;border-radius: 100px;background-color: green" src="../imgs/play.png" alt="播放、暂停" title="点击播放/暂停">
+    </div>
+  <script>
+  	var playAudio = document.getElementById('play')
+
+	function playPause() {
+            playAudio.src = (playAudio.getAttribute("src") == '../imgs/play.png') ? '../imgs/pause.png' :
+                '../imgs/play.png';
+            if (myaudio.paused) {
+                myaudio.play();
+            } else {
+                myaudio.pause();
+            }
+        }
+
+</script>
+	</body>
+</html>
