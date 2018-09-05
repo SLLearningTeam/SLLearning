@@ -27,6 +27,9 @@
 		<typeAlias alias="SimulatedTestForSQL" type="cn.net.realloyal.vo.SimulatedTestForSQL" />
 		<typeAlias alias="TestQuestionForSQL" type="cn.net.realloyal.vo.TestQuestionForSQL" />
 		<typeAlias alias="TestQuestionResultForSQL" type="cn.net.realloyal.vo.TestQuestionResultForSQL" />
+		<typeAlias alias="DownloadNumAndCount" type="cn.net.realloyal.vo.DownloadNumAndCount" />
+		<typeAlias alias="SignInTimeAndCount" type="cn.net.realloyal.vo.SignInTimeAndCount" />
+		<typeAlias alias="SignInTotalAndUserName" type="cn.net.realloyal.vo.SignInTotalAndUserName" />
 		<typeAlias alias="CarouselMap" type="cn.net.realloyal.model.CarouselMap" />
 		<typeAlias alias="DownloadRecording" type="cn.net.realloyal.model.DownloadRecording" />
 		<typeAlias alias="AdviceInfoList" type="cn.net.realloyal.model.AdviceInfoList" />

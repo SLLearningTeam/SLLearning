@@ -9,7 +9,12 @@
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<script>
+	var storage=window.localStorage;
+	storage.userId = ${user.userId};
+	
+	location.href="/SSLearningTeam/userpages/test1.html"
+</script>
 <body>
-这是用户首页
 </body>
 </html>

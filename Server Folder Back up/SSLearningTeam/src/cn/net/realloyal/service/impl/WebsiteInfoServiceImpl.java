@@ -127,7 +127,12 @@ public class WebsiteInfoServiceImpl implements WebsiteInfoService {
 	@Override
 	public int getPageNumber() {
 		int carouselMapCount = websiteInfoMapper.getCarouselMapCount();
-		int pageNumber = (int)carouselMapCount/10+1;
+		int pageNumber;
+		if(carouselMapCount%10==0) {
+			pageNumber=carouselMapCount/10;
+		}else {
+			pageNumber=(int)carouselMapCount/10+1;
+		}
 		return pageNumber;
 	}
 
@@ -170,7 +175,12 @@ public class WebsiteInfoServiceImpl implements WebsiteInfoService {
 	@Override
 	public int getDownloadRecordingPageNumber() {
 		int downloadRecordingCount = websiteInfoMapper.getDownloadRecordingCount();
-		int pageNumber = (int)downloadRecordingCount/10+1;
+		int pageNumber;
+		if(downloadRecordingCount%10==0) {
+			pageNumber=downloadRecordingCount/10;
+		}else {
+			pageNumber=(int)downloadRecordingCount/10+1;
+		}
 		return pageNumber;
 	}
 

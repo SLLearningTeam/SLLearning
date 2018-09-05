@@ -136,7 +136,12 @@ public class TrainServiceImpl implements TrainService {
 	@Override
 	public int allSimulatedTestTotalPages() {
 		int simulatedTestNum=trainMapper.getAllSimulatedTestTotalPagesNum();
-		int totalPages = (int)(simulatedTestNum)/10+1;
+		int totalPages;
+		if(simulatedTestNum%10==0) {
+			totalPages=simulatedTestNum/10;
+		}else {
+			totalPages=(int)simulatedTestNum/10+1;
+		}
 		return totalPages;
 	}
 
@@ -272,7 +277,12 @@ public class TrainServiceImpl implements TrainService {
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
 		List<SimulatedTest> simulatedTests = getAllSimulatedTest(pageNum);
 		int simulatedTestNum=trainMapper.getAllSimulatedTestTotalPagesNum();
-		int totalPages = (int)(simulatedTestNum)/10+1;
+		int totalPages;
+		if(simulatedTestNum%10==0) {
+			totalPages=simulatedTestNum/10;
+		}else {
+			totalPages=(int)simulatedTestNum/10+1;
+		}
 		if(simulatedTestNum == 0) {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("暂时没有模拟套题记录");

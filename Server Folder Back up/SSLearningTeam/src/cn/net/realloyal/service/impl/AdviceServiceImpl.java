@@ -54,14 +54,24 @@ public class AdviceServiceImpl implements cn.net.realloyal.service.AdviceService
 	@Override
 	public int getAllAdvicePageNumber() {
 		int advicesCount = adviceMapper.getAllAdvicePageNumber();
-		int pageNumber = (int)advicesCount/10+1;
+		int pageNumber;
+		if(advicesCount%10==0) {
+			pageNumber=advicesCount/10;
+		}else {
+			pageNumber=(int)advicesCount/10+1;
+		}
 		return pageNumber;
 	}
 
 	@Override
 	public int getAllAdvicePageNumberByUserId(Integer userId) {
 		int advicesCount = adviceMapper.getAllAdvicePageNumberByUserId(userId);
-		int pageNumber = (int)advicesCount/10+1;
+		int pageNumber;
+		if(advicesCount%10==0) {
+			pageNumber=advicesCount/10;
+		}else {
+			pageNumber=(int)advicesCount/10+1;
+		}
 		return pageNumber;
 	}
 

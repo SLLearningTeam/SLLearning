@@ -133,7 +133,12 @@ public class LanguageTypeServiceImpl implements LanguageTypeService {
 	@Override
 	public int getPageNumber() {
 		int languagesCount = languageTypeMapper.getLanguagesCount();
-		int pageNumber = (int)languagesCount/10+1;
+		int pageNumber;
+		if(languagesCount%10==0) {
+			pageNumber=languagesCount/10;
+		}else {
+			pageNumber=(int)languagesCount/10+1;
+		}
 		return pageNumber;
 	}
 

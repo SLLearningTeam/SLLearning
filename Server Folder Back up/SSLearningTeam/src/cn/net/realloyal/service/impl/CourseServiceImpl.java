@@ -449,7 +449,12 @@ public class CourseServiceImpl implements CourseService {
 		int listeningCoursesNum=courseMapper.getListeningCoursesNum();
 		int oralCoursesNum=courseMapper.getOralCoursesNum();
 		int readingCoursesNum=courseMapper.getReadingCoursesNum();
-		int totalPages = (int)(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10+1;
+		int totalPages;
+		if((listeningCoursesNum+oralCoursesNum+readingCoursesNum)%10==0) {
+			totalPages=(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10;
+		}else {
+			totalPages=(int)(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10+1;
+		}
 		return totalPages;
 	}
 
@@ -460,7 +465,12 @@ public class CourseServiceImpl implements CourseService {
 		int listeningCoursesNum=courseMapper.getListeningCoursesNum();
 		int oralCoursesNum=courseMapper.getOralCoursesNum();
 		int readingCoursesNum=courseMapper.getReadingCoursesNum();
-		int totalPages = (int)(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10+1;
+		int totalPages;
+		if((listeningCoursesNum+oralCoursesNum+readingCoursesNum)%10==0) {
+			totalPages=(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10;
+		}else {
+			totalPages=(int)(listeningCoursesNum+oralCoursesNum+readingCoursesNum)/10+1;
+		}
 		if(pageNum>totalPages) {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("您的访问页数有误，请重新选择!");
@@ -526,7 +536,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getListeningCoursesTotalPages() {
 		int listeningCoursesNum=courseMapper.getListeningCoursesNum();
-		return (int)(listeningCoursesNum)/10+1;
+		int totalPages;
+		if(listeningCoursesNum%10==0) {
+			totalPages=listeningCoursesNum/10;
+		}else {
+			totalPages=(int)listeningCoursesNum/10+1;
+		}
+		return totalPages;
 	}
 
 	//获得听力课程列表JSON——用户
@@ -599,7 +615,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getListeningCoursesTotalPagesByLanguageType(Integer languageTypeId) {
 		int listeningCoursesNumByLanguageType=courseMapper.getListeningCoursesNumByLanguageType(languageTypeId);
-		int totalPages = (int)(listeningCoursesNumByLanguageType)/10+1;
+		int totalPages;
+		if(listeningCoursesNumByLanguageType%10==0) {
+			totalPages=listeningCoursesNumByLanguageType/10;
+		}else {
+			totalPages=(int)listeningCoursesNumByLanguageType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -622,7 +643,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getListeningCoursesTotalPagesByRateType(Integer rateTypeId) {
 		int listeningCoursesNumByRateType=courseMapper.getListeningCoursesNumByRateType(rateTypeId);
-		int totalPages = (int)(listeningCoursesNumByRateType)/10+1;
+		int totalPages;
+		if(listeningCoursesNumByRateType%10==0) {
+			totalPages=listeningCoursesNumByRateType/10;
+		}else {
+			totalPages=(int)listeningCoursesNumByRateType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -685,7 +711,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getOralCoursesTotalPages() {
 		int oralCoursesNum=courseMapper.getOralCoursesNum();
-		return (int)(oralCoursesNum)/10+1;
+		int totalPages;
+		if(oralCoursesNum%10==0) {
+			totalPages=oralCoursesNum/10;
+		}else {
+			totalPages=(int)oralCoursesNum/10+1;
+		}
+		return totalPages;
 	}
 	
 	//取阅读类型课程的内容
@@ -707,7 +739,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getReadingCoursesTotalPages() {
 		int readingCoursesNum=courseMapper.getReadingCoursesNum();
-		return (int)(readingCoursesNum)/10+1;
+		int totalPages;
+		if(readingCoursesNum%10==0) {
+			totalPages=readingCoursesNum/10;
+		}else {
+			totalPages=(int)readingCoursesNum/10+1;
+		}
+		return totalPages;
 	}
 	
 	//获得口语课程列表JSON——用户
@@ -837,7 +875,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getOralCoursesTotalPagesByLanguageType(Integer languageTypeId) {
 		int oralCoursesNumByLanguageType=courseMapper.getOralCoursesNumByLanguageType(languageTypeId);
-		int totalPages = (int)(oralCoursesNumByLanguageType)/10+1;
+		int totalPages;
+		if(oralCoursesNumByLanguageType%10==0) {
+			totalPages=oralCoursesNumByLanguageType/10;
+		}else {
+			totalPages=(int)oralCoursesNumByLanguageType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -860,7 +903,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getReadingCoursesTotalPagesByLanguageType(Integer languageTypeId) {
 		int readingCoursesNumByLanguageType=courseMapper.getReadingCoursesNumByLanguageType(languageTypeId);
-		int totalPages = (int)(readingCoursesNumByLanguageType)/10+1;
+		int totalPages;
+		if(readingCoursesNumByLanguageType%10==0) {
+			totalPages=readingCoursesNumByLanguageType/10;
+		}else {
+			totalPages=(int)readingCoursesNumByLanguageType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -923,7 +971,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getOralCoursesTotalPagesByRateType(Integer rateTypeId) {
 		int oralCoursesNumByRateType=courseMapper.getOralCoursesNumByRateType(rateTypeId);
-		int totalPages = (int)(oralCoursesNumByRateType)/10+1;
+		int totalPages;
+		if(oralCoursesNumByRateType%10==0) {
+			totalPages=oralCoursesNumByRateType/10;
+		}else {
+			totalPages=(int)oralCoursesNumByRateType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -946,7 +999,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public int getReadingCoursesTotalPagesByRateType(Integer rateTypeId) {
 		int readingCoursesNumByRateType=courseMapper.getReadingCoursesNumByRateType(rateTypeId);
-		int totalPages = (int)(readingCoursesNumByRateType)/10+1;
+		int totalPages;
+		if(readingCoursesNumByRateType%10==0) {
+			totalPages=readingCoursesNumByRateType/10;
+		}else {
+			totalPages=(int)readingCoursesNumByRateType/10+1;
+		}
 		return totalPages;
 	}
 	
@@ -1106,7 +1164,12 @@ public class CourseServiceImpl implements CourseService {
 		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10); 
 		List<EvaluationForm> evaluationForms = courseMapper.getAllEvaluationOfUser(startNum,userId);
 		int evaluationCount = courseMapper.getAllEvaluationPageNumberOfUser(userId);
-		int pageNumber = (int)evaluationCount/10+1;
+		int pageNumber;
+		if(evaluationCount%10==0) {
+			pageNumber=evaluationCount/10;
+		}else {
+			pageNumber=(int)evaluationCount/10+1;
+		}
 		if(evaluationCount==0) {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("您没有对任何课程进行评价");
@@ -1127,7 +1190,12 @@ public class CourseServiceImpl implements CourseService {
 		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10); 
 		List<EvaluationForm> evaluationForms = courseMapper.getAllEvaluationOfCourse(startNum,courseType,courseId);
 		int evaluationCount = courseMapper.getAllEvaluationPageNumberOfCourse(courseType,courseId);
-		int pageNumber = (int)evaluationCount/10+1;
+		int pageNumber;
+		if(evaluationCount%10==0) {
+			pageNumber=evaluationCount/10;
+		}else {
+			pageNumber=(int)evaluationCount/10+1;
+		}
 		if(evaluationCount==0) {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("暂无人对该课程进行评价");
@@ -1225,7 +1293,12 @@ public class CourseServiceImpl implements CourseService {
 	public BackJsonUtil getHistoryRecordingOfUser(Integer pageNum, Integer userId) {
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
 		int advicesCount = courseMapper.getHistoryRecordingCountOfUser(userId);
-		int pageNumber = (int)advicesCount/10+1;
+		int pageNumber;
+		if(advicesCount%10==0) {
+			pageNumber=advicesCount/10;
+		}else {
+			pageNumber=(int)advicesCount/10+1;
+		}
 		if(advicesCount==0) {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("您还没有浏览历史");
@@ -1356,7 +1429,12 @@ public class CourseServiceImpl implements CourseService {
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
 		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
 		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfUser(userId);
-		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		int pageNumber;
+		if(subscriptionRecordingsCount%10==0) {
+			pageNumber=subscriptionRecordingsCount/10;
+		}else {
+			pageNumber=(int)subscriptionRecordingsCount/10+1;
+		}
 		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfUser(startNum,userId);
 		if(subscriptionRecordingsCount==0) {
 			backJsonUtil.setStatus(false);
@@ -1377,7 +1455,12 @@ public class CourseServiceImpl implements CourseService {
 		BackJsonUtil backJsonUtil = new BackJsonUtil();
 		int startNum = CalculateStartIndex.getStartIndex(pageNum, 10);
 		int subscriptionRecordingsCount = courseMapper.getSubscriptionRecordingCountOfCourse(courseType,courseId);
-		int pageNumber = (int)subscriptionRecordingsCount/10+1;
+		int pageNumber;
+		if(subscriptionRecordingsCount%10==0) {
+			pageNumber=subscriptionRecordingsCount/10;
+		}else {
+			pageNumber=(int)subscriptionRecordingsCount/10+1;
+		}
 		List<SubscriptionRecording> subscriptionRecordings=courseMapper.getSubscriptionRecordingOfCourse(startNum,courseType,courseId);
 		if(subscriptionRecordingsCount==0) {
 			backJsonUtil.setStatus(false);

@@ -2,6 +2,7 @@ package cn.net.realloyal.action;
 
 import java.sql.Time;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.net.realloyal.core.util.BackJsonUtil;
 import cn.net.realloyal.core.util.CheckUtil;
 import cn.net.realloyal.core.util.chaphcha.IndustrySMS;
+import cn.net.realloyal.model.LanguageType;
 import cn.net.realloyal.model.User;
 import cn.net.realloyal.service.UserService;
 import net.sf.json.JSONObject;
@@ -181,52 +184,150 @@ public class UserAction {
 	}
 	
 	//移动端用户登录
-	
-	//移动端用户注册
-	
-	//查看指定用户个人信息——用户
-	//查看指定用户个人信息——管理员
-	
-	//修改指定用户个人信息——用户
-	//查看指定用户个人信息——管理员
-	
-	//删除用户——管理员
-	
-	//注销登录——用户
-	
-	//查询所有用户列表(分页)——管理员
-	
-	//用户图表分布页——管理员
-	
-	
-	
-	//用户信息详情
-	@RequestMapping("/user_info")
-	public ModelAndView getUserInfo() {
-		ModelAndView mv = new ModelAndView("admin/userManager/user_info");
-		return mv;
-	}
-	
-	//用户列表
-	@RequestMapping("/user_list")
-	public ModelAndView getUserList() {
-		ModelAndView mv = new ModelAndView("admin/userManager/user_list");
-		return mv;
-	}
-	
-	//用户图表
-	@RequestMapping("/users_chart")
-	public ModelAndView getUsersChart() {
-		ModelAndView mv = new ModelAndView("admin/userManager/users_chart");
-		return mv;
-	}
-	
 	@ResponseBody
 	@RequestMapping("/mobile/login")
-	public BackJsonUtil mobileLogin() {
-		BackJsonUtil back = new BackJsonUtil(true,new User());
+	public BackJsonUtil checkLoginOnMobile(String userPhoneNumber,String userPassword,HttpServletRequest request) throws Exception {
+		User user = userService.checkLoginByUser(userPhoneNumber, userPassword);
+		session = request.getSession();
+		BackJsonUtil back = new BackJsonUtil();
+		if(user!=null) {
+			session.setAttribute("user",user);
+			back.setStatus(true);
+			back.setInfo(user);
+		}else {
+			back.setStatus(false);
+			back.setInfo("您的用户名或密码有误,请重新输入!");
+		}
 		return back;
 	}
 	
+	//移动端用户注册
+	@ResponseBody
+	@RequestMapping("/mobile/register")
+	public BackJsonUtil checkRegisterOnMobile(String userName,String userSex,String userPhoneNumber,String chaphcha,String userPassword,@RequestParam(required=false) CommonsMultipartFile userAvatar,HttpServletRequest request) throws Exception {
+		session = request.getSession();
+		if(userPhoneNumber.equals(session.getAttribute("userPhoneNumber"))&&chaphcha.equals(session.getAttribute("chaphcha"))) {
+//			return registerResult;
+			User user = new User();
+			user.setUserName(userName);
+			user.setUserPassword(userPassword);
+			user.setUserPermission(0);
+			user.setUserPhoneNumber(userPhoneNumber);
+			user.setUserSex(userSex);
+			BackJsonUtil registerResult = userService.checkRegisterByUser(user,userAvatar,request);
+			User session_user = userService.getUser(userPhoneNumber, userPassword);
+			System.out.println(session_user);
+			session.setAttribute("user",session_user);
+			return registerResult;
+		}
+		else {
+			BackJsonUtil chaphchaWrong = new BackJsonUtil(false,"验证码有误，请重新输入!");
+			return chaphchaWrong;
+		}
+	}
+	
+	//查看指定用户个人信息——用户
+	@ResponseBody
+	@RequestMapping("/user/getUserInfo")
+	public BackJsonUtil getUserInfoByIdByUser(@RequestParam(value="userId",required=false)Integer userId,HttpServletRequest request) {
+		if(userId==null) {
+			session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		return userService.getUserInfoById(userId);
+	}
+	
+	//查看指定用户个人信息——管理员
+	@RequestMapping("/admin/getUserInfo")
+	public ModelAndView getUserInfoById(@RequestParam(value="userId")Integer userId) {
+		ModelAndView mv = new ModelAndView("admin/userManager/user_info");
+		mv.addObject("pageName","userInfoManage");
+		User user= userService.getUserInfo(userId);
+		mv.addObject("user",user);
+		System.out.println("pageName:userInfoManage"+"\n\nuser:"+user);
+		return mv;
+	}
+	
+	//修改指定用户个人信息——用户
+	@ResponseBody
+	@RequestMapping("/user/updateUserInfo")
+	public BackJsonUtil updateUserInfo(@RequestParam(value="userId",required=false)Integer userId,@RequestParam("userName")String userName,@RequestParam("userSex")String userSex,@RequestParam("userPhoneNumber")String userPhoneNumber,@RequestParam("userPassword")String userPassword,@RequestParam(value="userAvatar",required=false) CommonsMultipartFile userAvatar,HttpServletRequest request) throws Exception {
+		session = request.getSession();
+		if(userId==null) {
+			User user = (User)session.getAttribute("user");
+			userId = user.getUserId();
+		}
+		BackJsonUtil backJsonUtil = userService.updateUserInfo(userId,userName,userSex,userPhoneNumber,userPassword,userAvatar,request);
+		if(backJsonUtil.getStatus()) {
+			User user = userService.getUser(userPhoneNumber, userPassword);
+			session.setAttribute("user",user);
+		}
+		return backJsonUtil;	
+	}
+	
+	//修改指定用户个人信息——管理员
+	@RequestMapping("/admin/updateUserInfoByAdmin")
+	public String updateUserInfoByAdmin(@RequestParam("userId")Integer userId,@RequestParam("userName")String userName,@RequestParam("userSex")String userSex,@RequestParam("userPhoneNumber")String userPhoneNumber,@RequestParam("userPassword")String userPassword,@RequestParam(value="userAvatar",required=false) CommonsMultipartFile userAvatar,HttpServletRequest request) throws Exception {
+		int change = userService.updateUserInfoByAdmin(userId,userName,userSex,userPhoneNumber,userPassword,userAvatar,request);
+		if(change != 0) {
+			User user = userService.getUser(userPhoneNumber, userPassword);
+			session = request.getSession();
+			session.setAttribute("user",user);
+		}
+		return "redirect:/user/admin/userlist_manage/1";	
+	}
+	
+	//删除用户——管理员
+	@ResponseBody
+	@RequestMapping("/admin/deleteUser")
+	public BackJsonUtil deleteUser(@RequestParam(value="userId")Integer userId) {
+		return userService.deleteUser(userId);
+	}
+	
+	//注销登录——用户
+	@ResponseBody
+	@RequestMapping("/user/quitLogin")
+	public BackJsonUtil quitLogin(HttpServletRequest request) {
+		BackJsonUtil backJsonUtil = new BackJsonUtil();
+		session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if(user == null) {
+			backJsonUtil.setStatus(false);
+			backJsonUtil.setInfo("注销失败，您还没有登录");
+		}else {
+			backJsonUtil.setStatus(true);
+			backJsonUtil.setInfo("注销成功");
+		}
+		return backJsonUtil;
+	}
+	
+	//查询所有用户列表(分页)——管理员
+	@RequestMapping("/admin/userlist_manage/{pageNum}")
+	public ModelAndView getUserList(@PathVariable("pageNum")Integer pageNum) {
+		ModelAndView mv = new ModelAndView("admin/userManager/user_list");
+		mv.addObject("pageName", "userListManage");
+		List<User> users = userService.getUsersByPageNum(pageNum);
+		mv.addObject("users", users);
+		int pageNumeber = userService.getPageNumber();//获得所有user页数
+		mv.addObject("pageNumeber", pageNumeber);
+		mv.addObject("currentPage", pageNum);
+		System.out.println("pageName:userInfoManage"+"\n\nusers:"+users+"\n\npageNumeber:"+pageNumeber+"\n\ncurrentPage:"+pageNum);
+		return mv;
+	}
+	
+	//用户图表分布页——管理员
+	@RequestMapping("/admin/toUserChart")
+	public ModelAndView toUserChart() {
+		ModelAndView mv = new ModelAndView("admin/userManager/users_chart");
+		mv.addObject("pageName","userChartManage");
+		return mv;
+	}
+	//获得图标信息
+	@ResponseBody
+	@RequestMapping("/admin/getUserChart")
+	public BackJsonUtil getUserChart() {
+		return userService.getUserChart();
+	}
 	
 }

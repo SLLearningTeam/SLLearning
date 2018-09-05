@@ -9,6 +9,7 @@
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>	
+
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="content-wrapper">
@@ -25,24 +26,23 @@
 											<!-- 用户信息详情 -->
 											<div class="card card-primary card-outline">
 												<div class="card-body box-profile">
+												<input type="hidden" name="userId" value="${user.userId}">
 													<div class="text-center">
 														<img class="profile-user-img img-fluid img-circle"
-															src="http://img5.duitang.com/uploads/item/201611/13/20161113110506_ScT45.thumb.700_0.jpeg"
-															alt="User profile picture">
+															src="${user.userAvatarUrl}">
 													</div>
-													<h3 class="profile-username text-center">SLLearning</h3>
+													<h3 class="profile-username text-center">${user.userName}</h3>
 													<ul class="list-group list-group-unbordered mb-3">
 														<li class="list-group-item"><b>性别</b> <a
-															class="float-right" >女</a></li>
+															class="float-right" >${user.userSex }</a></li>
 														<li class="list-group-item"><b>手机号</b> <a
-															class="float-right" >18342208888</a>
+															class="float-right" >${user.userPhoneNumber}</a>
 														</li>
-														<li class="list-group-item"><b>权限</b> <a
-															class="float-right">下载</a></li>
-														<li class="list-group-item"><b>最近登录</b> <a
-															class="float-right">2018.3.31</a></li>
+														
+														<li class="list-group-item"><b>密码</b> <a
+															class="float-right" style="width:140px">${user.userPassword }</a></li>
 													</ul>
-													<a href="#" class="btn btn-primary btn-block"><b>删除</b></a>
+													<td><a class="btn btn-primary btn-block" href="javascript:void(0)" onclick="return del(${user.userId})">删除</a></td>
 												</div>
 											</div>
 										</div>
@@ -132,47 +132,49 @@
 														</div>
 														<!--修改用户信息-->
 														<div class="tab-pane" id="settings">
-															<form class="form-horizontal">
+															<form class="form-horizontal" action="${pageContext.request.contextPath}/user/admin/updateUserInfoByAdmin" enctype="multipart/form-data" method="POST">
 																<div class="form-group">
-																	<label for="inputName" class="col-sm-2 control-label">用户名</label>
-
-																	<div class="col-sm-10">
-																		<input type="email" class="form-control"
-																			id="inputName" name="userName">
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label for="inputEmail" class="col-sm-2 control-label">性别</label>
-
-																	<div class="col-sm-10">
-																		<input type="email" class="form-control"
-																			id="inputEmail" name="userSex">
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label for="inputName2" class="col-sm-2 control-label">用户手机号</label>
+																<input type="hidden" name="userId" value="${user.userId}">
+					
+																	<label class="col-sm-2 control-label">用户名</label>
 
 																	<div class="col-sm-10">
 																		<input type="text" class="form-control"
-																			id="inputName2" name="userPhoneNumber">
+																			 name="userName" value="${user.userName}">
 																	</div>
 																</div>
 																<div class="form-group">
-																	<label for="inputName2" class="col-sm-2 control-label">用户权限</label>
+																	<label class="col-sm-2 control-label">性别</label>
 
 																	<div class="col-sm-10">
 																		<input type="text" class="form-control"
-																			id="inputName2" name="userPhoneNumber">
+																			 name="userSex" value="${user.userSex }">
 																	</div>
 																</div>
+																<div class="form-group">
+																	<label  class="col-sm-2 control-label">用户手机号</label>
+
+																	<div class="col-sm-10">
+																		<input type="text" class="form-control"
+																			 name="userPhoneNumber" value="${user.userPhoneNumber }">
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label  class="col-sm-2 control-label"  >用户密码</label>
+
+																	<div class="col-sm-10">
+																		<input type="text" class="form-control"
+																			 name="userPassword" value="${user.userPassword}">
+																	</div>
+																</div>
+																<label >原头像:</label>
+					                                           <img src="${user.userAvatarUrl}" height="40px" width="60px"/>
 																<div class="form-group">
 																	<label for="exampleInputFile"
 																		class="col-sm-2 control-label">用户头像</label>
 																	<div class="input-group">
 																		<div class="custom-file col-sm-10">
-																			<input type="file" class=" custom-file-input"
-																				id="exampleInputFile" name="userAvatar"> <label
-																				class="custom-file-label " for="exampleInputFile"></label>
+																			<input class="form-control" type="file"  name="userAvatar" >
 																		</div>
 																	</div>
 																</div>
@@ -227,5 +229,24 @@
       });
     });
 </script>
+<script type="text/javascript">
+		function del(id){
+			var info = confirm("确认要删除该语言类别吗？");
+			if(info){
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/user/admin/deleteUser?userId="+id,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  location.href="${pageContext.request.contextPath}/user/admin/userlist_manage/1";
+						  }else{
+							alert(result.info);
+						  }
+					  }
+					});
+			}
+		}
+		 </script>
 </body>
 </html>

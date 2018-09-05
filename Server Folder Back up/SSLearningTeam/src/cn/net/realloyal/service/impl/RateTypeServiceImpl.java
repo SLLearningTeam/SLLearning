@@ -156,7 +156,12 @@ public class RateTypeServiceImpl implements RateTypeService {
 	@Override
 	public int getPageNumber() {
 		int rateTypesCount = rateTypeMapper.getRateTypesCount();
-		int pageNumber = (int)rateTypesCount/10+1;
+		int pageNumber;
+		if(rateTypesCount%10==0) {
+			pageNumber=rateTypesCount/10;
+		}else {
+			pageNumber=(int)rateTypesCount/10+1;
+		}
 		return pageNumber;
 	}
 

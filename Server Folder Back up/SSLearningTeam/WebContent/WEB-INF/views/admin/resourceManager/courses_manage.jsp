@@ -44,8 +44,10 @@
 						<div class="card-body">
 						<!-- 添加课程按钮 -->
 							<div class="left">
-								<a style="color:#b61a06" href="${pageContext.request.contextPath}/language/admin/toaddlanguages">
-               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a></div>
+							<a href="https://www.baidu.com/"></a>
+								<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddReadingCourse">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
+               </div>
 							<div class="tab-content col-xs col-sm col-md">
 							
 								<div class="active tab-pane" id="activity">

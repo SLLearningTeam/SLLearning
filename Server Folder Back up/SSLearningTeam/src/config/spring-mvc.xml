@@ -48,7 +48,8 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/plugins/**" location="/plugins/" />
 	<mvc:resources mapping="/dist/**" location="/dist/" />
-
+	<mvc:resources mapping="/userpages/**" location="/userpages/" />
+	
 	<!--  
 		default-servlet-handler 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler,
 		它会对进入 DispatcherServlet 的请求进行筛查, 如果发现是没有经过映射的请求, 就将该请求交由 WEB 应用服务器默认的 
