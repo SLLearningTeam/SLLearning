@@ -31,98 +31,85 @@
 							
 							<!-- 课程导航 -->
 							<ul class="nav nav-pills ">
-								<li class="nav-item"><a class="nav-link active"
-									href="#activity" data-toggle="tab">阅读课程列表</a></li>
-								<li class="nav-item"><a class="nav-link" href="#timeline"
-									data-toggle="tab">听力课程列表</a></li>
-								<li class="nav-item"><a class="nav-link" href="#settings"
-									data-toggle="tab">口语课程列表</a></li>
+								<li class="nav-item">
+										<a class="nav-link active" href="${pageContext.request.contextPath}/course/admin/courses_manage/1" >
+										综合课程列表
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="${pageContext.request.contextPath}/course/admin/readingCourses_manage/1" >
+										阅读课程列表
+									</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link" href="${pageContext.request.contextPath}/course/admin/listeningCourses_manage/1">
+										听力课程列表
+									</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link" href="${pageContext.request.contextPath}/course/admin/oralCourses_manage/1">
+										口语课程列表
+									</a>
+								</li>
 							</ul>
 
 						</div>
 						<!-- 阅读课程列表 -->
 						<div class="card-body">
 						<!-- 添加课程按钮 -->
-							<div class="left">
-							<a href="https://www.baidu.com/"></a>
-								<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddReadingCourse">
-               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
-               </div>
 							<div class="tab-content col-xs col-sm col-md">
-							
-								<div class="active tab-pane" id="activity">
-									<form action="#" method="post">
+								<div class="active tab-pane" id="activity"> 
 										<table class="table table-hover table-bordered ">
 											<tr style="text-align: center; color: #903d04">
 												<th>课程编号</th>
 												<th>课程名称</th>
 												<th>语言类别</th>
 												<th>类别类型</th>
-												<th>修改</th>
+												<th colspan="2">操作</th>
 											</tr>
-											<tr style="text-align: center">
-												<td>1</td>
-												<td>英语阅读</td>
-												<td>英语</td>
-												<td>四级</td>
-												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
-											</tr>
-
+											<%request.setAttribute("number",1); %>
+											<c:forEach var="readingcourse" items="${courses.readingCourses}" varStatus="status">
+												<tr style="text-align: center">
+													<td>${number}</td>
+													<%request.setAttribute("number",((int)request.getAttribute("number")+1)); %>
+													<td>${readingcourse.courseName}</td>
+													<td>${readingcourse.languageType.languageName}</td>
+													<td>${readingcourse.rateType.rateName}</td>
+													<td><a href="${pageContext.request.contextPath}/course/admin/toUpdateReadingCourse?courseId=${readingcourse.courseId}" class="btn btn-warning">修改</a></td>
+													<td><a href="javascript:void(0)" onclick="delCourse('readingcourse',${readingcourse.courseId},this)" class="btn btn-danger">删除</a></td>
+												</tr>
+                                           	</c:forEach>
+                                           	<c:forEach var="listeningcourse" items="${courses.listeningCourses}">
+												<tr style="text-align: center">
+													<td>${number}</td>
+													<%request.setAttribute("number",((int)request.getAttribute("number")+1)); %>
+													<td>${listeningcourse.courseName}</td>
+													<td>${listeningcourse.languageType.languageName}</td>
+													<td>${listeningcourse.rateType.rateName}</td>
+													<td><a href="${pageContext.request.contextPath}/course/admin/toUpdateListeningCourse?courseId=${listeningcourse.courseId}" class="btn btn-warning">修改</a></td>
+													<td><a href="javascript:void(0)" onclick="delCourse('listeningcourse',${listeningcourse.courseId},this)" class="btn btn-danger">删除</a></td>
+												</tr>
+                                           	</c:forEach>
+                                           	<c:forEach var="oralcourse" items="${courses.oralCourses}">
+												<tr style="text-align: center">
+													<td>${number}</td>
+													<%request.setAttribute("number",((int)request.getAttribute("number")+1)); %>
+													<td>${oralcourse.courseName}</td>
+													<td>${oralcourse.languageType.languageName}</td>
+													<td>${oralcourse.rateType.rateName}</td>
+													<td><a href="${pageContext.request.contextPath}/course/admin/toUpdateOralCourse?courseId=${oralcourse.courseId}" class="btn btn-warning">修改</a></td>
+													<td><a href="javascript:void(0)" onclick="delCourse('oralcourse',${oralcourse.courseId},this)" class="btn btn-danger">删除</a></td>
+												</tr>
+                                           	</c:forEach>
 										</table>
-									</form>
 								</div>
-								<!-- 听力课程列表-->
-								<div class="tab-pane" id="timeline">
-									<form action="#" method="post">
-										<table class="table table-hover table-bordered">
-											<tr style="text-align: center; color: #8a0480">
-												<th>课程编号</th>
-												<th>课程名称</th>
-												<th>语言类别</th>
-												<th>类别类型</th>
-												<th>修改</th>
-											</tr>
-											<tr style="text-align: center">
-												<td>1</td>
-												<td>英语听力</td>
-												<td>英语</td>
-												<td>四级</td>
-												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
-											
-											</tr>
-										</table>
-									</form>
-								</div>
-								<!-- 口语课程列表 -->
-								<div class="tab-pane" id="settings">
-									<form action="#" method="post">
-										<table class="table table-hover table-bordered">
-											<tr style="text-align: center; color: #04746e">
-												<th>课程编号</th>
-												<th>课程名称</th>
-												<th>语言类别</th>
-												<th>类别类型</th>
-												<th>修改</th>
-											</tr>
-
-											<tr style="text-align: center">
-												<td>1</td>
-												<td>英语口语</td>
-												<td>英语</td>
-												<td>四级</td>
-												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
-											
-											</tr>
-
-										</table>
-									</form>
-								</div>
+							</div>
 								<!-- 分页 -->
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
-								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/course/admin/courses_manage${count.index}">${count.index}</a></li>
+							<c:forEach varStatus="count" begin="1" end="${totalPages}" step="1">
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/course/admin/courses_manage/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
 						</ul>
@@ -135,6 +122,58 @@
 			</div>
 		</section>
 	</div>
+	<script>
+	function delCourse(courseType,courseId,dom){
+		var info = confirm("确认要删除该课程吗？");
+		if(info){
+			if(courseType=='listeningcourse'){
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/course/admin/deleteListeningCourse?courseId="+courseId,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  $(dom).parent().parent().remove();
+						  }else{
+							alert("删除失败");
+						  }
+					  }
+					});
+			}
+			else if(courseType=='oralcourse'){
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/course/admin/deleteOralCourse?courseId="+courseId,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  $(dom).parent().parent().remove();
+						  }else{
+							alert("删除失败");
+						  }
+					  }
+					});
+			}
+			else{
+				$.ajax({
+					  type: 'get',
+					  url: "${pageContext.request.contextPath}/course/admin/deleteReadingCourse?courseId="+courseId,
+					  success: function(result){
+						  if(result.status){
+							  alert(result.info);
+							  $(dom).parent().parent().remove();
+						  }else{
+							alert("删除失败");
+						  }
+					  }
+					});
+			}
+			
+		}else{
+			alert("删除失败");
+		}
+	}
+	</script>
 	<!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>

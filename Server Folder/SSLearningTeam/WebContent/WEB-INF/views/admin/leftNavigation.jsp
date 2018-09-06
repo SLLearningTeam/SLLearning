@@ -211,7 +211,7 @@
                 </a>
               </li>
               <li class="nav-item active">
-              <c:if test="${pageName=='userChartManage' }">
+              <c:if test="${pageName=='userChartManage'}">
                 <a href="${pageContext.request.contextPath}/user/admin/toUserChart" class="nav-link active">
                 </c:if>
                  <c:if test="${pageName!='userChartManage' }">

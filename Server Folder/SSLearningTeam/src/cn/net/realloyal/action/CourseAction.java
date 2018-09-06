@@ -199,6 +199,8 @@ public class CourseAction {
 		mv.addObject("totalPages", totalPages);
 		//返回当前页面页号
 		mv.addObject("pageNum", pageNum);
+		//返回提醒前端为综合课程列表
+		mv.addObject("courseListStatus","allType");
 		return mv;
 	}
 	
@@ -212,7 +214,7 @@ public class CourseAction {
 	//获取听力课程列表——管理员
 	@RequestMapping("/admin/listeningCourses_manage/{pageNum}")
 	public ModelAndView getListeningCourses_manage(@PathVariable("pageNum")Integer pageNum) {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		ModelAndView mv = new ModelAndView("admin/resourceManager/listeningcourses_manage");
 		mv.addObject("pageName","courseManage");
 		//返回听力课程信息
 		Map<String,List>listeningCourses = courseService.getListeningCourses(pageNum);
@@ -222,6 +224,8 @@ public class CourseAction {
 		mv.addObject("totalPages", totalPages);
 		//返回当前页面页号
 		mv.addObject("pageNum", pageNum);
+		//返回提醒前端为听力课程列表
+		mv.addObject("courseListStatus","listeningType");
 		return mv;
 	}
 	
@@ -306,7 +310,7 @@ public class CourseAction {
 	//获得口语课程列表——管理员
 	@RequestMapping("/admin/oralCourses_manage/{pageNum}")
 	public ModelAndView getOralCourses_manage(@PathVariable("pageNum")Integer pageNum) {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		ModelAndView mv = new ModelAndView("admin/resourceManager/oralcourses_manage");
 		mv.addObject("pageName","courseManage");
 		//返回口语课程信息
 		Map<String,List>oralCourses = courseService.getOralCourses(pageNum);
@@ -317,6 +321,8 @@ public class CourseAction {
 		//返回当前页面页号
 		mv.addObject("pageNum", pageNum);
 		//System.out.println("OralCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+oralCourses);
+		//返回提醒前端为口语课程列表
+		mv.addObject("courseListStatus","oralType");
 		return mv;
 	}
 	
@@ -402,7 +408,7 @@ public class CourseAction {
 	//获得阅读课程列表——管理员
 	@RequestMapping("/admin/readingCourses_manage/{pageNum}")
 	public ModelAndView getReadingCourses_manage(@PathVariable("pageNum")Integer pageNum) {
-		ModelAndView mv = new ModelAndView("admin/resourceManager/courses_manage");
+		ModelAndView mv = new ModelAndView("admin/resourceManager/readingcourses_manage");
 		mv.addObject("pageName","courseManage");
 		//返回阅读课程信息
 		Map<String,List>readingCourses = courseService.getReadingCourses(pageNum);
@@ -413,6 +419,8 @@ public class CourseAction {
 		//返回当前页面页号
 		mv.addObject("pageNum", pageNum);
 		//System.out.println("ReadingCourses\npageNum:"+pageNum+"\n\ntotalPages:"+totalPages+"\n\ncourses:"+readingCourses);
+		//返回提醒前端为阅读课程列表
+		mv.addObject("courseListStatus","readingType");
 		return mv;
 	}
 	

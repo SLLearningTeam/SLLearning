@@ -43,9 +43,7 @@ color: #138496
 							<button type="submit"  class="btn btn-info float-right">提交</button>
 						    </div>
 						</div>
-						<c:if test="${not empty info}">
-		                    ${info}
-	                    </c:if>
+						
 						</form>
 					</div>
 				</div>

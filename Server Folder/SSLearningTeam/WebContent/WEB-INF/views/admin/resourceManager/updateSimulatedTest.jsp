@@ -6,11 +6,18 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 模拟套题修改</title>
+<title>听说在线学习平台 | 模拟套题信息修改</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
+.col-center-block {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 label {
 	color: #ab0351
 }
@@ -44,37 +51,33 @@ label {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+						<div class=" card-info card-outline">
 							<div class="card-header">
-								<h3 class="card-title">修改模拟套题课程</h3>
-
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
+								<h3 class="card-title">修改模拟套题信息</h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="tab-pane" id="timeline">
+								<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
 									<form action="${pageContext.request.contextPath }/train/admin/updateSimulatedTest" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
-						                        <option value="${simulatedTest.languageType.languageTypeId}">${simulatedTest.languageType.languageName }</option>
+										<input type="hidden" name="simulatedTestId" value="${simulatedTest.simulatedTestId}"/>
+											<label>请选择语言类别：</label>
+											<select name="languageTypeId" class="form-control"  onchange="getRateType()">
+						                        <option value="${simulatedTest.languageType.languageTypeId}">${simulatedTest.languageType.languageName}</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
-											<select name="rateTypeId" id="rateType">
+										<label>请选择类型类别：</label>
+											<select name="rateTypeId" class="form-control" id="rateTypeId">
 												<option value="${simulatedTest.rateType.rateTypeId}">${simulatedTest.rateType.rateName}</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="testName" value="${simulatedTest.testName}"/>
-										<br/>原课程图标：<img src="${simulatedTest.instructionImgUrl }" height="30px" width="30px"/>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
-										<input type="hidden" name="simulatedTestId" value="${simulatedTest.simulatedTestId}"/>
+										<label>请修改课程名称：</label>
+										<input type="text" class="form-control" name="testName" value="${simulatedTest.testName}"/>
+										<label>原课程图标：</label>
+										<img src="${simulatedTest.instructionImgUrl }" height="30px" width="30px"/><br/>
+										<label>请选择课程图标：</label>
+										<input class="form-control" type="file" name="instructionImg"/>
+									
 										<br/><input type="submit" value="提交"/>
 									</form>
 								</div>

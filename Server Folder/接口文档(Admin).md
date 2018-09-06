@@ -523,6 +523,8 @@ totalPages:1
 pageNum:1
     
 pageName:"courseManage"
+    
+courseListStatus:"allType"
 ```
 
 #### 显示页面
@@ -560,6 +562,8 @@ totalPages:1
 courses:{readingCourses=[], oralCourses=[], listeningCourses=[ListeningCourse [courseId=2, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试听力, courseChineseContent=中文, courseEnglishContent=Chinese, courseResourceUrl=/SSLearningTeam/ListeningCourseResource/38693414-c968-4c78-8b84-3c219dc8d79a学员网页端.mp3, downloadNum=0, instructionImgUrl=/SSLearningTeam/ListeningCourseResource/22e3b1a2-0075-494b-850b-67cd18ac57c7中文.png], ListeningCourse [courseId=3, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试听力2, courseChineseContent=英文, courseEnglishContent=English, courseResourceUrl=/SSLearningTeam/ListeningCourseResource/e1f53648-64a0-4b7b-af59-4cee36b8149f学员网页端.mp3, downloadNum=0, instructionImgUrl=/SSLearningTeam/ListeningCourseResource/bed0730d-5012-4e17-8923-a2f952c63bcb英文.png], ListeningCourse [courseId=4, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试听力3, courseChineseContent=听力, courseEnglishContent=listening, courseResourceUrl=/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9学员网页端.mp3, downloadNum=0, instructionImgUrl=/SSLearningTeam/ListeningCourseResource/417c1422-94c0-4b2d-831e-22fc97bc7020中文.png], ListeningCourse [courseId=5, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试听力99s, courseChineseContent=啦啦a99ss, courseEnglishContent=lalaa99ss, courseResourceUrl=/SSLearningTeam/ListeningCourseResource/c020b6f7-676a-4650-94bf-9cb660306280学员网页端.mp3, downloadNum=3, instructionImgUrl=/SSLearningTeam/ListeningCourseResource/10520d9e-06c2-46bc-a218-2d42382ea384java.jpeg]]}
     
 pageName:"courseManage"
+    
+courseListStatus:"listeningType"
 ```
 
 ### 25.管理员获取听力课程列表页面（按照下载量排序顺序）
@@ -696,6 +700,8 @@ totalPages:1
 courses:{readingCourses=[], oralCourses=[OralCourse [courseId=2, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试口语1, courseChineseContent=测试s, courseEnglishContent=tests, downloadNum=3, instructionImgUrl=/SSLearningTeam/OralCourseResource/e428d718-73cb-411a-9fe9-2e7a3b3f5013成功.png]], listeningCourses=[]}
     
 pageName:"courseManage"
+    
+courseListStatus:"readingType"
 ```
 
 ### 29.管理员获取口语课程列表页面（按照下载量排序顺序）
@@ -832,6 +838,8 @@ totalPages:1
 courses:{readingCourses=[ReadingCourse [courseId=2, languageType=LanguageType [languageTypeId=5, languageName=中文, languageIconUrl=/SSLearningTeam/Languages/987a7e8a-7815-4b46-82ab-c870eeaf7510_language.png], rateType=RateType [rateTypeId=2, languageType=null, rateName=二级, rateIconUrl=/SSLearningTeam/Ratetypes/28b165d6-7441-4af4-beb0-916939e90614_ratetype.png], courseName=测试阅读1s, courseChineseContent=测试s, courseEnglishContent=tests, downloadNum=2, instructionImgUrl=/SSLearningTeam/ReadingCourseResource/43edaca2-f178-4b6e-baee-d82adaa5d2d11.png]], oralCourses=[], listeningCourses=[]}
     
 pageName:"courseManage"
+    
+courseListStatus:"readingType"
 ```
 
 ### 33.管理员获取阅读课程列表页面（按照下载量排序顺序）
