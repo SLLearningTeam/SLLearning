@@ -6,13 +6,16 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 课程添加</title>
+<title>听说在线学习平台 | 课程修改</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
 label {
 	color: #ab0351
+}
+.col-top {
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -42,51 +45,43 @@ label {
 	<div class="content-wrapper">
 		<section class="content">
 			<div class="container-fluid">
-				<!-- 添加阅读课程 -->
-				<div class="row">
-					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+				<!-- 修改听力课程 -->
+				
+						<div class=" card-danger  card-outline">
 							<div class="card-header">
-								<h3 class="card-title">添加听力课程</h3>
+								<h3 class="card-title">修改听力课程</h3>
 
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
+								
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<div class="tab-pane" id="timeline">
 									<form action="${pageContext.request.contextPath }/course/admin/updateListeningCourse" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
+											<input type="hidden" name="courseId" value="${listeningCourse.courseId}"/>
+											<label>请选择语言类别：</label>
+											<select name="languageTypeId" id="languageType" onchange="getRateType()" class="form-control">
 						                        <option value="${listeningCourse.languageType.languageTypeId}">${listeningCourse.languageType.languageName }</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
-											<select name="rateTypeId" id="rateType">
+										<label>请选择类型类别：</label>
+											<select name="rateTypeId" id="rateType" class="form-control">
 												<option value="${listeningCourse.rateType.rateTypeId}">${listeningCourse.rateType.rateName}</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="courseName" value="${listeningCourse.courseName}"/>
-										<br/>请输入中文内容：<textarea name="courseChineseContent" rows="10" cols="30"/>${listeningCourse.courseChineseContent}</textarea>
-										<br/>请输入英文内容：<textarea name="courseEnglishContent" rows="10" cols="30"/>${listeningCourse.courseEnglishContent}</textarea>
-										<br/>下载量：<input type="text" name="downloadNum" value="${listeningCourse.downloadNum}"/>
-										<br/>原课程资源：<audio src="${listeningCourse.courseResourceUrl }" controls>无法显示</audio>
-										<br/>请添加课程资源：<input type="file" name="courseResource"/>
-										<br/>原课程图标：<img src="${listeningCourse.instructionImgUrl }" height="30px" width="30px"/>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
-										<input type="hidden" name="courseId" value="${listeningCourse.courseId}"/>
-										<br/><input type="submit" value="提交"/>
+										<label>请设置课程名称：</label><input type="text"  class="form-control" name="courseName" value="${listeningCourse.courseName}" />
+										<label>请输入中文内容：</label><textarea class="form-control" name="courseChineseContent" rows="10" cols="30">${listeningCourse.courseChineseContent}</textarea>
+										<label>请输入英文内容：</label><textarea class="form-control" name="courseEnglishContent" rows="10" cols="30">${listeningCourse.courseEnglishContent}</textarea>
+										<label>下载量：</label><input type="text" class="form-control" name="downloadNum" value="${listeningCourse.downloadNum}"/>
+										<label>原课程资源：</label><audio src="${listeningCourse.courseResourceUrl }" controls>无法显示</audio><br/>
+										<label>请添加课程资源：</label><input type="file" name="courseResource" class="form-control"/>
+									    <label>原课程图标：</label><img src="${listeningCourse.instructionImgUrl }" height="30px" width="30px"/><br/>
+										<label>请添加课程图标：</label><input type="file" name="instructionImg" class="form-control"/>
+										
+										<button type="submit" class="btn btn-warning float-right col-top">提交</button>
 									</form>
 								</div>
 							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>

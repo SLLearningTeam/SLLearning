@@ -14,6 +14,9 @@
 label {
 	color: #ab0351
 }
+.col-top {
+	margin-top: 20px;
+}
 </style>
 </head>
 <script>
@@ -42,50 +45,38 @@ label {
 	<div class="content-wrapper">
 		<section class="content">
 			<div class="container-fluid">
-				<!-- 添加阅读课程 -->
-				<div class="row">
-					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+				<!-- 修改口语课程 -->
+						<div class=" card-success  card-outline">
 							<div class="card-header">
-								<h3 class="card-title">添加口语课程</h3>
-
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
+								<h3 class="card-title">修改口语课程</h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<div class="tab-pane" id="timeline">
 									<form action="${pageContext.request.contextPath }/course/admin/updateOralCourse" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
+											<label>请选择语言类别：</label>
+											<select name="languageTypeId"  class="form-control"id="languageType" onchange="getRateType()">
 						                        <option value="${oralCourse.languageType.languageTypeId}">${oralCourse.languageType.languageName }</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
-											<select name="rateTypeId" id="rateType">
+										<label>请选择类型类别：</label>
+											<select name="rateTypeId" class="form-control" id="rateType">
 												<option value="${oralCourse.rateType.rateTypeId}">${oralCourse.rateType.rateName}</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="courseName" value="${oralCourse.courseName}"/>
-										<br/>请输入中文内容：<textarea name="courseChineseContent" rows="10" cols="30"/>${oralCourse.courseChineseContent}</textarea>
-										<br/>请输入英文内容：<textarea name="courseEnglishContent" rows="10" cols="30"/>${oralCourse.courseEnglishContent}</textarea>
-										<br/>下载量：<input type="text" name="downloadNum" value="${oralCourse.downloadNum}"/>
-										<br/>原课程图标：<img src="${oralCourse.instructionImgUrl }" height="30px" width="30px"/>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
+										<label>请设置课程名称：</label><input type="text" class="form-control" name="courseName" value="${oralCourse.courseName}"/>
+										<label>请输入中文内容：</label><textarea class="form-control" name="courseChineseContent" rows="10" cols="30">${oralCourse.courseChineseContent}</textarea>
+										<label>请输入英文内容：</label><textarea  class="form-control" name="courseEnglishContent" rows="10" cols="30">${oralCourse.courseEnglishContent}</textarea>
+										<label>下载量：</label><input type="text" class="form-control" name="downloadNum" value="${oralCourse.downloadNum}"/>
+										<label>原课程图标：</label><img src="${oralCourse.instructionImgUrl }" height="30px" width="30px"/>
+										<label>请添加课程图标：</label><input type="file" class="form-control" name="instructionImg"/>
 										<input type="hidden" name="courseId" value="${oralCourse.courseId}"/>
-										<br/><input type="submit" value="提交"/>
+										<br/><button type="submit" class="btn btn-warning float-right col-top">提交</button>
 									</form>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 	</div>

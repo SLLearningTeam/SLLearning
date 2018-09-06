@@ -11,8 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
+
 label {
 	color: #ab0351
+}
+.col-top {
+	margin-top: 30px;
 }
 </style>
 </head>
@@ -43,47 +47,36 @@ label {
 		<section class="content">
 			<div class="container-fluid">
 				<!-- 添加阅读课程 -->
-				<div class="row">
-					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+				
+						<div class="card-warning card-outline">
 							<div class="card-header">
-								<h3 class="card-title">添加阅读课程</h3>
-
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
+								<h3 class="card-title">修改阅读课程</h3>
 							</div>
-							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="tab-pane" id="timeline">
 									<form action="${pageContext.request.contextPath }/course/admin/updateReadingCourse" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
+																					<input type="hidden" name="courseId" value="${readingCourse.courseId}"/>
+											<label>请选择语言类别：</label>
+											<select name="languageTypeId" class="form-control"  id="languageType" onchange="getRateType()">
 						                        <option value="${readingCourse.languageType.languageTypeId}">${readingCourse.languageType.languageName }</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
-											<select name="rateTypeId" id="rateType">
+										<label></label>请选择类型类别：
+											<select name="rateTypeId" class="form-control" id="rateType">
 												<option value="${readingCourse.rateType.rateTypeId}">${readingCourse.rateType.rateName}</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="courseName" value="${readingCourse.courseName}"/>
-										<br/>请输入中文内容：<textarea name="courseChineseContent" rows="10" cols="30"/>${readingCourse.courseChineseContent}</textarea>
-										<br/>请输入英文内容：<textarea name="courseEnglishContent" rows="10" cols="30"/>${readingCourse.courseEnglishContent}</textarea>
-										<br/>下载量：<input type="text" name="downloadNum" value="${readingCourse.downloadNum}"/>
-										<br/>原课程图标：<img src="${readingCourse.instructionImgUrl }" height="30px" width="30px"/>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
-										<input type="hidden" name="courseId" value="${readingCourse.courseId}"/>
-										<br/><input type="submit" value="提交"/>
+										<label>请设置课程名称：</label><input type="text" class="form-control" name="courseName" value="${readingCourse.courseName}"/>
+										<label>请输入中文内容：</label><textarea class="form-control" name="courseChineseContent" rows="10" cols="30">${readingCourse.courseChineseContent}</textarea>
+										<label>请输入英文内容：</label><textarea class="form-control" name="courseEnglishContent" rows="10" cols="30">${readingCourse.courseEnglishContent}</textarea>
+										<label>下载量：</label><input type="text" class="form-control" name="downloadNum" value="${readingCourse.downloadNum}"/>
+										<label>原课程图标：</label><img src="${readingCourse.instructionImgUrl }" height="30px" width="30px"/><br/>
+										<label>请添加课程图标：</label><input type="file" class="form-control"  name="instructionImg"/>
+
+										<button type="submit" class="btn btn-warning float-right col-top">提交</button>
 									</form>
-								</div>
-							</div>
-						</div>
+								
+							
 					</div>
 				</div>
 			</div>

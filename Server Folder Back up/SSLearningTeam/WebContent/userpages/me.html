@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>me</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="./js/main.js"></script>
+
+</head>
+
+<body>
+        <div class="headerBar">
+                <div class="header-shadow">
+                    <div class="leftArea">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                            </a>
+                        </div>
+                        <div class="topNav fl">
+                            <ul>
+                                <li class="fl">
+                                    <a href="./index.html">首页</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="classify.html">分类</a>
+                                </li>
+                                <li class="fl">
+                                    <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="#">这是啥呀</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="#">真是</a>
+                                </li>
+                                <li style="padding-right: 30px;" class="fl">
+                                    <a href="#">干啥呀</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="rightArea">
+                        <div class="user_box fl">
+                            <ul>
+                                <li class="fl dropdown">
+                                    <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                    <div class="dropdown-menu">
+                                        <img class="download" src="./img/logo.png" alt="下载APP">
+                                        <span>扫一扫</span>
+                                    </div>
+                                </li>
+                                <li id="login" class="fl">
+                                    <a href="me.html">登录</a>
+                                    /
+                                    <a href="#">注册</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="search-box">
+                        <form class="form-inline search-form" action="" id="search-form">
+                            <input type="text" class="search-content" name="fd" id="search-content">
+                            <button class="search-submit" type="submit" value=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    <div class="main">
+        <div class="user-info-box">
+            <div class="user-info clearfix">
+                <div class="user-pic">
+                    <div class="user-pic-bg">
+                        <img id="user-img" src="./img/user-pic.jpg" alt="头像">
+                    </div>
+                </div>
+                <div class="user-info-right">
+                    <h3 class="user-name clearfix">
+                        <span id="user-name">听说</span>
+                    </h3>
+                    <p class="user-showinfo">
+                        <span id="user-sex">性别</span>
+                        <span>学生</span>
+                        <!--<a class="more-info" href="">
+                            <img src="./icon/more.png" alt="更多">
+                            更多信息
+                        </a>-->
+                    </p>
+                </div>
+                <!--用户头像，基本信息-->
+                <div class="study-info clearfix">
+
+                    <div class="study-info-item">
+                        <div class="learn">
+                            <em>2h</em>
+                            <span>学习时长</span>
+                        </div>
+                    </div>
+                    <div class="study-info-item">
+                        <div class="learn">
+                            <em id="daka"></em>
+                            <span>打卡天数</span>
+                        </div>
+                    </div>
+                    <div style="padding-right:50px;" class="study-info-item">
+                        <div class="learn">
+                            <em id="daka-neer"></em>
+                            <span>最近打卡</span>
+                        </div>
+                    </div>
+                    <div class="study-info-item">
+                        <a onclick="checkLog(this)" class="download-cl" href="javascript:void(0)">下载记录</a>
+                    </div>
+                    <div class="study-info-item">
+                        <a onclick="checkHistory(this)" class="download-cl" href="javascript:void(0)">查看历史</a>
+                    </div>
+                    <div class="study-info-item">
+                        <a onclick="logout(this)" class="logout" href="javascript:void(0)">退出登录</a>
+                    </div>
+                </div>
+                <!--打卡天数，学习时长-->
+            </div>
+        </div>
+        <!--  我的课程-->
+        <div class="user-course-box">
+            <div class="left-menu">
+                <ul>
+                    <li>
+                        <a class="menuAc" id="all" onclick="allClass()" href="#">
+                            <img class="left-menu-icon" src="./icon/all.png" alt="我的课程菜单">
+                            <span>所有课程</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="lis" onclick="lisClass()" href="#">
+                            <img class="left-menu-icon" src="./icon/listen.png" alt="我的课程菜单">
+                            <span>我的听力</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="spk" onclick="spkClass()" href="#">
+                            <img class="left-menu-icon" src="./icon/speak.png" alt="我的课程菜单">
+                            <span>我的口语</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="read" onclick="readClass()" href="#">
+                            <img class="left-menu-icon" src="./icon/read.png" alt="我的课程菜单">
+                            <span>我的阅读</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-course-content">
+                <div class="download-table">
+                    <table>
+                        <tr style="font-weight:500">
+                            <th>课程名字</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>aaa</td>
+                            <td onclick="deleteLog(this)"><button type="button" class="btn btn-danger">删除</button></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="checkHistory">
+                    <table>
+                        <tr style="font-weight:500">
+                            <th>课程名字</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>aaa</td>
+                            <td onclick="deleteLog(this)"><button type="button" class="btn btn-danger">删除</button></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="user-course-title clearfix">
+                    <div class="user-course-title-left fl">
+                        <a class="ac" id="neer" onclick="user_course_title_left_l()" href="#">最近学习</a>
+                        <a id="cellection" onclick="user_course_title_left_r()" href="#">我的收藏</a>
+                    </div>
+                </div>
+                <div class="user-course">
+                    <div class="clearfix course-log">
+                        <span class="time">
+                            <b>2018</b>
+                            <em>8月15日</em>
+                        </span>
+                        <div class="course-list">
+                            <ul class="clearfix">
+                                <li class="user-course-item">
+                                    <div class="user-course-img-box fl">
+                                        <a target="_blank" href="">
+                                            <img style="height: 113px;width: 200px;" src="./img/kc1.jpg" alt="课程图片">
+                                        </a>
+                                    </div>
+                                    <div class="user-course-cont">
+                                        <h3 class="course-name">
+                                            <a href="">课程名字</a>
+                                            <span class="rate-star">
+                                                <img class="star" src="./icon/xing.png" alt="xing">
+                                                <img class="star" src="./icon/xing.png" alt="xing">
+                                                <img class="star" src="./icon/xing.png" alt="xing">
+                                                <img class="star" src="./icon/xing.png" alt="xing">
+                                                <img class="star" src="./icon/xing.png" alt="xing">
+                                            </span>
+                                        </h3>
+                                        <div class="course-state">
+                                            <span class="state-cont">这里是课程简介</span>
+                                            <a class="continue-study" href="" target="_blank">继续学习</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-box">
+        <div class="footer">
+            <div class="footer-content">
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+            </div>
+            <div class="footer-copyright">
+                <p>©2018&nbsp;tingshuo.com</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var thisPage = 1;
+        var all_class = byId('all');
+        var lis_class = byId('lis');
+        var spk_class = byId('spk');
+        var read_class = byId('read');
+        var neer = byId('neer');
+        var cellection = byId('cellection');
+        var dl_tb = byClass('download-table');
+        var ck_his = byClass('checkHistory');
+
+        $(function () {
+            var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_name = user.getItem('userName');
+            var user_sex = user.getItem('userSex');
+            var user_img = user.getItem('userAvatarUrl');
+
+            if(user_id==null){
+                console.log('未登录')
+            }else{
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                
+            }
+
+            //user info
+            $('#user-img').attr('src', user_img);
+            $('#user-name').html(user_name);
+            $('#user-sex').html(user_sex);
+
+            $.ajax({
+                type: 'get',
+                url: first + '/user/user/getUserSignInRecording/',
+                dataType: 'json',
+                success: function (r) {
+                    if (r.status == true) {
+                        $('#daka').html(r.info.totalTimes);
+                        if (r.info.recentMark != null) {
+                            $('#daka-neer').html(r.info.recentMark.substring(0, 10));
+                        } else {
+                            $('#daka-neer').html('null');
+                        }
+
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+
+        });
+        //退出登录
+        function logout(e) {
+            $.ajax({
+                type: 'get',
+                url: first + '/user/user/quitLogin',
+                dataType: 'json',
+                success: function (r) {
+                    if (r.status == true) {
+                        alert(r.info)
+                    } else {
+                        alert('还没有登录！')
+                    }
+                }
+            });
+        }
+
+        //查看下载记录
+        function checkLog(e) {
+            if (e.innerText == '下载记录') {
+                e.innerText = '返回';
+                dl_tb[0].style.display = 'block';
+
+                $.ajax({
+                    type: 'get',
+                    url: first + '/user/getDownloadRecordings/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    success: function (r) {
+                        if (r.status == true) {
+                            for (var x = 0; x < r.info.downloadRecordings.length; x++) {
+                                $('table').append('<tr><td>' + r.info.downloadRecordings.course.courseName +
+                                    '</td><td downloadRecordingId="' + r.info.downloadRecordings.downloadRecordingId +
+                                    '" onclick="deleteLog(this)" style="cursor: pointer;">删除</td></tr>'
+                                );
+                            }
+                        } else {
+                            alert('请求错误！')
+                        }
+                    }
+                });
+            } else {
+                e.innerText = '下载记录';
+                dl_tb[0].style.display = 'none';
+            }
+        }
+        //查看历史
+        function checkHistory(e) {
+            if (e.innerText == '查看历史') {
+                e.innerText = '返回';
+                ck_his[0].style.display = 'block';
+
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/getHistoryRecordingOfUser/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    success: function (r) {
+                        if (r.status == true) {
+                            for (var x = 0; x < r.info.historyRecordings.length; x++) {
+                                $('table').append('<tr><td>' + r.info.historyRecordings.course.courseName +
+                                    '</td><td downloadRecordingId="' + r.info.historyRecordings.historyRecordingId +
+                                    '" onclick="deleteLog(this)" style="cursor: pointer;">删除</td></tr>'
+                                );
+                            }
+                        } else {
+                            alert('请求错误！')
+                        }
+                    }
+                });
+            } else {
+                e.innerText = '查看历史';
+                ck_his[0].style.display = 'none';
+            }
+        }
+        //删除记录
+        function deleteLog(e) {
+            $(e).parent().remove();
+            $.ajax({
+                type: 'get',
+                url: first + '/website/user/deleteDownloadRecording',
+                dataType: 'json',
+                data: {
+                    'downloadRecordingId': $(e).downloadRecordingId
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('删除成功！')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+        //所有课程
+        function allClass() {
+            all_class.classList.add('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        //听力课程
+        function lisClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.add('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        //口语课程
+        function spkClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.add('menuAc');
+            read_class.classList.remove('menuAc');
+        }
+        //阅读课程
+        function readClass() {
+            all_class.classList.remove('menuAc');
+            lis_class.classList.remove('menuAc');
+            spk_class.classList.remove('menuAc');
+            read_class.classList.add('menuAc');
+        }
+
+        function user_course_title_left_l() {
+            neer.classList.add("ac");
+            cellection.classList.remove('ac');
+        }
+
+        function user_course_title_left_r() {
+            cellection.classList.add("ac");
+            neer.classList.remove('ac');
+        }
+    </script>
+</body>
+
+</html>
