@@ -11,6 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
+.col-center-block {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 label {
 	color: #ab0351
 }
@@ -47,27 +54,30 @@ label {
 						<div class=" card-info card-outline">
 							<div class="card-header">
 								<h3 class="card-title">修改模拟套题课程</h3>
-
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="tab-pane" id="timeline">
+								<div class="col-sm-6 col-xs-6 col-md-6 col-center-block col-top">
 									<form action="${pageContext.request.contextPath }/train/admin/updateSimulatedTest" method="POST" enctype="multipart/form-data">
-											请选择语言类别：
-											<select name="languageTypeId" id="languageType" onchange="getRateType()">
-						                        <option value="${simulatedTest.languageType.languageTypeId}">${simulatedTest.languageType.languageName }</option>
+										<input type="hidden" name="simulatedTestId" value="${simulatedTest.simulatedTestId}"/>
+											<label>请选择语言类别：</label>
+											<select name="languageTypeId" class="form-control"  onchange="getRateType()">
+						                        <option value="${simulatedTests.languageType.languageTypeId}">${simulatedTests.languageType.languageName}</option>
 						                        <c:forEach items="${languageTypes}" var="languageType">
 						                        		<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 						                        </c:forEach>
 						                    </select>
-										<br/>请选择类型类别：
-											<select name="rateTypeId" id="rateType">
-												<option value="${simulatedTest.rateType.rateTypeId}">${simulatedTest.rateType.rateName}</option>
+										<label>请选择类型类别：</label>
+											<select name="rateTypeId" class="form-control" >
+												<option value="${simulatedTests.rateType.rateTypeId}">${simulatedTests.rateType.rateName}</option>
 											</select>
-										<br/>请设置课程名称：<input type="text" name="testName" value="${simulatedTest.testName}"/>
-										<br/>原课程图标：<img src="${simulatedTest.instructionImgUrl }" height="30px" width="30px"/>
-										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
-										<input type="hidden" name="simulatedTestId" value="${simulatedTest.simulatedTestId}"/>
+										<label>请修改课程名称：</label>
+										<input type="text" class="form-control" name="testName" value="${simulatedTests.testName}"/>
+										<label>原课程图标：</label>
+										<img src="${simulatedTests.instructionImgUrl }" height="30px" width="30px"/><br/>
+										<label>请选择课程图标：</label>
+										<input class="form-control" type="file" name="instructionImgUrl"/>
+									
 										<br/><input type="submit" value="提交"/>
 									</form>
 								</div>

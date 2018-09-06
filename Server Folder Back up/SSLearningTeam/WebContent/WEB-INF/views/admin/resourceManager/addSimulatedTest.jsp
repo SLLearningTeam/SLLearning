@@ -11,6 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
 <style type="text/css">
+.col-center-block {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.col-top {
+	margin-top: 30px;
+
+}
 label {
 	color: #ab0351
 }
@@ -50,43 +60,39 @@ label {
 		<section class="content-header">
 			<div class="container-fluid">
 				<!-- 添加模拟测试套题课程 -->
-				<div class="row">
-					<div class="col-md">
-						<div class="card card-info  card-outline">
+				
+						<div class="card card-danger  card-outline">
 							<div class="card-header">
 								<h3 class="card-title">添加模拟测试套题课程</h3>
 							</div>
-
-							
-								<form
-									action="${pageContext.request.contextPath }/train/admin/addSimulatedTest"
+							<div class="col-sm col-xs col-md-6 col-center-block">
+								<form action="${pageContext.request.contextPath }/train/admin/addSimulatedTest"
 									method="POST" enctype="multipart/form-data">
-									<label>请选择语言类别：</label> <select name="languageTypeId"
+									<label>请选择语言类别：</label> <select class="form-control" name="languageTypeId"
 										id="languageType" onchange="getRateType()">
 										<option value="">--请选择--</option>
 										<c:forEach items="${languageTypes}" var="languageType">
 											<option value="${languageType.languageTypeId}">${languageType.languageName}</option>
 										</c:forEach>
-									</select><br/> <label>请选择类型类别：</label> <select name="rateTypeId"
-										id="rateType">
+									</select><br/> 
+									<label>请选择类型类别：</label> 
+									<select class="form-control" name="rateTypeId">
 										<option value="">--请选择--</option>
 									</select>
-									<div class="form-group">
-										<label>请设置课程名称：</label> <input type="text" name="testName" />
-									</div>
+									
+										<label>请设置课程名称：</label> 
+										<input class="form-control" type="text" name="testName" />
+
 									<div class="form-group">
 							                <label>请添加课程图标：</label>
-							                <input type="file" name="instructionImg" />
+							                <input type="file" class="form-control" name="instructionImgUrl" />
 										<div class="col-top">
-											<input type="submit" value="提交" />
+											<button type="submit" class="btn  float-right col-top">提交</button>
 										</div>
 									</div>
 								</form>
-						
-
+								</div>
 						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 	</div>

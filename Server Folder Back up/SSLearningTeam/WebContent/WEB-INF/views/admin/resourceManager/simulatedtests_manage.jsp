@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -56,13 +57,13 @@
 						<c:forEach var="simulatedTests" items="${simulatedTests}" varStatus="status">
 							<tr style="text-align: center">
 								<td>${status.count}</td>
-								<td>${languageType.languageName }</td>
-								<td>${rateType.rateTypeId }</td>
-								<td>${simulatedTest.testName }</td>
+								<td>${simulatedTests.languageType.languageName }</td>
+								<td>${simulatedTests.rateType.rateTypeId }</td>
+								<td>${simulatedTests.testName }</td>
 								<td><span class="tag tag-success">
-								<img src="${SimulatedTest.instructionImgUrl}" alt="picture" width=“25px” height="25px"> </span></td>
+								<img src="${simulatedTests.instructionImgUrl}" height="25px" width="25px" /> </span></td>
 								<td><a href="${pageContext.request.contextPath}/train/admin/toUpdateSimulatedTest?simulatedTestId=${simulatedTest.simulatedTestId}">修改</a></td>
-								<td><a href="javascript:void(0)" onclick="return del(${simulatedTest.simulatedTestId})">删除</a></td>
+								<td><a href="javascript:void(0)" onclick="return del(${simulatedTests.simulatedTestId})">删除</a></td>
 								</tr>
 						</c:forEach>
 					</table>
@@ -71,7 +72,7 @@
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
+							<c:forEach varStatus="count" begin="1" end="${pageNum}" step="1">
 								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/train/admin/simulatedtests_manage/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
@@ -83,7 +84,7 @@
 	</div>
 	<script type="text/javascript">
 	function del(id){
-		var info = confirm("确认要删除该语言类别吗？");
+		var info = confirm("确认要删除该模拟套题吗？");
 		if(info){
 			$.ajax({
 				  type: 'get',

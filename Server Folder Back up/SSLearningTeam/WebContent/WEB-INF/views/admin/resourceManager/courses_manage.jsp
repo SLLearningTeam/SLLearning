@@ -49,7 +49,7 @@
 							<div class="tab-content col-xs col-sm col-md">
 							
 								<div class="active tab-pane" id="activity">
-									<form action="#" method="post">
+								
 									<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddReadingCourse">
                <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
 										<table class="table table-hover table-bordered ">
@@ -60,17 +60,17 @@
 												<th>类别类型</th>
 												<th>修改</th>
 											</tr>
-											<c:forEach var="readingCourses" items="${readingCourses}" varStatus="status">
+											<c:forEach var="courses" items="${allTypeCourses}" varStatus="status">
 											<tr style="text-align: center">
 												<td>${status.count}</td>
-												<td>${readingCourses.courseName }</td>
-												<td>${readingCourses.languageType.languageName }</td>
-												<td>${readingCourses.rateType.rateName }</td>
+												<td>${courses.readingCourses.courseName}</td>
+												<td>${courses.readingCourses.languageType.languageName}</td>
+												<td>${courses.readingCourses.rateType.rateName}</td>
 												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
 											</tr>
                                            </c:forEach>
 										</table>
-									</form>
+								
 								</div>
 								<!-- 听力课程列表-->
 								<div class="tab-pane" id="timeline">
@@ -85,14 +85,14 @@
 												<th>类别类型</th>
 												<th>修改</th>
 											</tr>
-											<c:forEach var="listeningCourses" items="${listeningCourses}" varStatus="status">
+											<c:forEach var="courses" items="${allTypeCourses}" varStatus="status">
 											<tr style="text-align: center">
 												<td>${status.count}</td>
-												<td>${listeningCourses.courseName}</td>
-												<td>${listeningCourses.languageType.languageName }</td>
-												<td>${listeningCourses.rateType.rateName}</td>
+												<td>${courses.listeningCourses.courseName}</td>
+												<td>${courses.listeningCourses.languageType.languageName }</td>
+												<td>${courses.listeningCourses.rateType.rateName}</td>
 												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
-											
+								
 											</tr>
 											</c:forEach>
 										</table>
@@ -128,7 +128,7 @@
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
+							<c:forEach varStatus="count" begin="1" end="${pageNum}" step="1">
 								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/course/admin/courses_manage${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
