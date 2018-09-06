@@ -44,17 +44,10 @@ label {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md">
-						<div class="card card-info collapsed-card card-outline">
+						<div class=" card-info card-outline">
 							<div class="card-header">
 								<h3 class="card-title">修改模拟套题课程</h3>
 
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool"
-										data-widget="collapse">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<!-- /.card-tools -->
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">

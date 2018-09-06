@@ -32,13 +32,13 @@
 								<th colspan="2" style="text-align: center;">操作</th>
 							</tr>
 						
-							<c:forEach var="adviceinfolist" items="${adviceinfolists}" varStatus="status">
+							<c:forEach var="adviceInfoLists" items="${adviceInfoLists}" varStatus="status">
 								<tr style="text-align: center">
 									<td>${status.count}</td>
-									<td>${adviceinfolist. }</td>
-									<td>太好啦</td>
-									<td>2018-9-2</td>																	 
-									<td><a href="javascript:void(0)" onclick="return del(${adviceinfolist.adviceId})">删除</a></td>
+									<td>${adviceInfoLists.user.userName }</td>
+									<td>${adviceInfoLists.adviceInfo}</td>
+									<td>${adviceInfoLists.adviceSendTime}</td>																	 
+									<td><a href="javascript:void(0)" onclick="return del(${adviceInfoLists.adviceId})">删除</a></td>
 								</tr>
 							</c:forEach>
 					</table>
@@ -47,7 +47,7 @@
 					<div class="card-footer clearfix">
 						<ul class="pagination pagination-sm m-0 float-right">
 							<li class="page-item"><a class="page-link" href="#">«</a></li>
-							<c:forEach varStatus="count" begin="1" end="${pageNumber}" step="1">
+							<c:forEach varStatus="count" begin="1" end="${pageNumeber}" step="1">
 								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/advice/admin/advices_manage/${count.index}">${count.index}</a></li>
 							</c:forEach>
 							<li class="page-item"><a class="page-link" href="#">»</a></li>
@@ -64,7 +64,7 @@
 			if(info){
 				$.ajax({
 					  type: 'get',
-					  url: "${pageContext.request.contextPath}/advice/admin/deleteAdvice?carouselId="+id,
+					  url: "${pageContext.request.contextPath}/advice/admin/deleteAdvice?adviceId="+id,
 					  success: function(result){
 						  if(result.status){
 							  alert(result.info);
@@ -78,5 +78,6 @@
 		}
 		
 		 </script>
+		 
 </body>
 </html>

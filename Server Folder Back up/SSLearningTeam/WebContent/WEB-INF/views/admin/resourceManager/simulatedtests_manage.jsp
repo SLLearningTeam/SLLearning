@@ -53,10 +53,10 @@
 							<th>课程图标</th>
 							<th colspan="2">操作</th>
 						</tr>
-						<c:forEach var="simulatedTest" items="${simulatedTests}" varStatus="status">
+						<c:forEach var="simulatedTests" items="${simulatedTests}" varStatus="status">
 							<tr style="text-align: center">
 								<td>${status.count}</td>
-								<td>${languageType.languageTypeId }</td>
+								<td>${languageType.languageName }</td>
 								<td>${rateType.rateTypeId }</td>
 								<td>${simulatedTest.testName }</td>
 								<td><span class="tag tag-success">

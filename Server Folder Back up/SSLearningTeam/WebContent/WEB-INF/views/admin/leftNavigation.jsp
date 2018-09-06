@@ -168,8 +168,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- 首页 -->
-          <li class="nav-item">
+          	<c:if test="${pageName=='indexPage'}">
+            <li class="nav-item">
+          		<a href="${pageContext.request.contextPath }/user/init" class="nav-link active">
+          	</c:if>	
+          	<c:if test="${pageName!='indexPage'}">
+            <li class="nav-item">
           		<a href="${pageContext.request.contextPath }/user/init" class="nav-link">
+          	</c:if>	
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 首页

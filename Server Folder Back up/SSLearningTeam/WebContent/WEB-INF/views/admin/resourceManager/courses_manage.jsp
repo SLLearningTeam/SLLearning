@@ -43,15 +43,15 @@
 						<!-- 阅读课程列表 -->
 						<div class="card-body">
 						<!-- 添加课程按钮 -->
-							<div class="left">
-							<a href="https://www.baidu.com/"></a>
-								<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddReadingCourse">
-               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
-               </div>
+						
+								
+         
 							<div class="tab-content col-xs col-sm col-md">
 							
 								<div class="active tab-pane" id="activity">
 									<form action="#" method="post">
+									<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddReadingCourse">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
 										<table class="table table-hover table-bordered ">
 											<tr style="text-align: center; color: #903d04">
 												<th>课程编号</th>
@@ -60,20 +60,23 @@
 												<th>类别类型</th>
 												<th>修改</th>
 											</tr>
+											<c:forEach var="readingCourses" items="${readingCourses}" varStatus="status">
 											<tr style="text-align: center">
-												<td>1</td>
-												<td>英语阅读</td>
-												<td>英语</td>
-												<td>四级</td>
+												<td>${status.count}</td>
+												<td>${readingCourses.courseName }</td>
+												<td>${readingCourses.languageType.languageName }</td>
+												<td>${readingCourses.rateType.rateName }</td>
 												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
 											</tr>
-
+                                           </c:forEach>
 										</table>
 									</form>
 								</div>
 								<!-- 听力课程列表-->
 								<div class="tab-pane" id="timeline">
 									<form action="#" method="post">
+									<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddListeningCourse">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
 										<table class="table table-hover table-bordered">
 											<tr style="text-align: center; color: #8a0480">
 												<th>课程编号</th>
@@ -82,20 +85,24 @@
 												<th>类别类型</th>
 												<th>修改</th>
 											</tr>
+											<c:forEach var="listeningCourses" items="${listeningCourses}" varStatus="status">
 											<tr style="text-align: center">
-												<td>1</td>
-												<td>英语听力</td>
-												<td>英语</td>
-												<td>四级</td>
+												<td>${status.count}</td>
+												<td>${listeningCourses.courseName}</td>
+												<td>${listeningCourses.languageType.languageName }</td>
+												<td>${listeningCourses.rateType.rateName}</td>
 												<td><a href=""><img src="../../../img/resource/update.png" height="28" width="28" /></a></td>
 											
 											</tr>
+											</c:forEach>
 										</table>
 									</form>
 								</div>
 								<!-- 口语课程列表 -->
 								<div class="tab-pane" id="settings">
 									<form action="#" method="post">
+									<a style="color:#b61a06" href="${pageContext.request.contextPath}/course/admin/toAddOralCourse">
+               <img alt="" src="../../../img/resource/add.png" width="24px" height="24px">&nbsp;添加课程</a>
 										<table class="table table-hover table-bordered">
 											<tr style="text-align: center; color: #04746e">
 												<th>课程编号</th>
