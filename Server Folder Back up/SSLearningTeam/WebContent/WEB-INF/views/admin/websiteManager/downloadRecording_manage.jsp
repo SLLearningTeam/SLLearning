@@ -59,7 +59,7 @@
 			if(info){
 				$.ajax({
 					  type: 'get',
-					  url: "${pageContext.request.contextPath}/website/admin/deleteDownloadRecording?languageTypeId="+id,
+					  url: "${pageContext.request.contextPath}/website/admin/deleteDownloadRecording?downloadRecordingId="+id,
 					  success: function(result){
 						  if(result.status){
 							  alert(result.info);

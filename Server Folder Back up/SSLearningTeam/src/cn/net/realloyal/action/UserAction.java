@@ -123,18 +123,18 @@ public class UserAction {
 			if(userService.checkPhoneIsExist(userPhoneNumber)) {
 				int randomChaphcha = (int)(100000+Math.random()*900000);
 				System.out.println("随机验证码为:"+randomChaphcha);
-//				IndustrySMS.execute(userPhoneNumber,randomChaphcha);
-//				BackJsonUtil chaphchaResult = userService.getChaphcha(userPhoneNumber,randomChaphcha);
-//				if(chaphchaResult.getStatus()) {
-//					session.setAttribute("userPhoneNumber", userPhoneNumber);
-//					session.setAttribute("chaphcha", randomChaphcha+"");
-//				}
-//				return chaphchaResult;			
+				IndustrySMS.execute(userPhoneNumber,randomChaphcha);
+				BackJsonUtil chaphchaResult = userService.getChaphcha(userPhoneNumber,randomChaphcha);
+				if(chaphchaResult.getStatus()) {
+					session.setAttribute("userPhoneNumber", userPhoneNumber);
+					session.setAttribute("chaphcha", randomChaphcha+"");
+				}
+				return chaphchaResult;			
 				
 				//测试
-				session.setAttribute("userPhoneNumber", userPhoneNumber);
-				session.setAttribute("chaphcha", randomChaphcha+"");	
-				return new BackJsonUtil(true,"成功");
+//				session.setAttribute("userPhoneNumber", userPhoneNumber);
+//				session.setAttribute("chaphcha", randomChaphcha+"");	
+//				return new BackJsonUtil(true,"成功");
 				
 			}else {
 				BackJsonUtil back = new BackJsonUtil(false,"您已注册，请登录!");
