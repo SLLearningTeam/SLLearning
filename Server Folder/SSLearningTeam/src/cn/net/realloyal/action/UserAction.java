@@ -77,7 +77,7 @@ public class UserAction {
 			mv.addObject("user",user);
 			mv.setViewName("user/index");
 		}
-		return mv;		
+		return mv;
 	}
 	
 	//跳转注册界面

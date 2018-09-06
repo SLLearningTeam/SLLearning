@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        
+        $(function(){
+            var thisPage = 1;
+            var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_img = user.getItem('userAvatarUrl');
+            
+            
+            if(user_id==null){
+                console.log('未登录')
+            }else{
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                
+            }
+
+
+            //获取轮播图信息
+            $.ajax({
+                type:'get',
+                url:first+'/website/user/getCarouselMaps',
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        //carouselTitle
+                        for(var x=0;x<r.info.length;x++){
+                            if(x==0){
+                                $('#carousel-indicators').append('<li data-target="#lunbo" data-slide-to="0" class="active"></li>');
+                            }
+                            else{
+                                $('#carousel-indicators').append('<li data-target="#lunbo" data-slide-to="'+x+'"></li>');
+                            }
+                        }
+                        //carouselNode
+                        for(var x=0;x<r.info.length;x++){
+                            if(x==0){
+                                $('#carousel-inner').append('<div class="carousel-item active">'+
+                                '<a carouselId="'+r.info[x].carouselId+'" target="_blank" href="'+r.info[x].carouselLinkUrl+'">'+
+                                    '<img style="height:476px;width:936px;" src="'+r.info[x].carouselImgUrl+'">'+
+                                '</a>'+
+                                '<div class="carousel-caption">'+
+                                    '<h5>'+r.info[x].carouselInstruction+'</h5>'+
+                                '</div>'+
+                            '</div>')
+                            
+                            }
+                            else{
+                                $('#carousel-inner').append(
+                            '<div class="carousel-item">'+
+                                '<a carouselId="'+r.info[x].carouselId+'" target="_blank" href="'+r.info[x].carouselLinkUrl+'">'+
+                                    '<img style="height:476px;width:936px;" src="'+r.info[x].carouselImgUrl+'">'+
+                                '</a>'+
+                                '<div class="carousel-caption">'+
+                                    '<h5>'+r.info[x].carouselInstruction+'</h5>'+
+                                '</div>'+
+                            '</div>')
+                            }
+                        }
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+            //获取推荐课程
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/courses_manage/'+thisPage,//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        //Listening
+                            for(var y=0;y<r.info.courses.listeningCourses.length;y++){
+                                courseListen(r,y);
+                            }
+                            //Speaking
+                            for(var y=0;y<r.info.courses.oralCourses.length;y++){
+                                courseSpeak(r,y);
+                            }
+                            //Reading
+                            for(var y=0;y<r.info.courses.readingCourses.length;y++){
+                                courseRead(r,y);
+                            }
+                        
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+        });
+
+        function checkin() {
+                $.ajax({
+                type:'get',
+                url:first+'/user/user/addSignInRecording',
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        alert('签到成功');
+                    }else{
+                        alert('您今日已经签到，请明日再来');
+                    }
+                }
+            });
+            }
+
+        function sub() {
+            $.ajax({
+                type:'post',
+                url:first+'/advice/user/addAdvice',
+                dataType:'json',
+                date:{'adviceInfo' : $('#ad-text').val()},
+                success:function(r){
+                    if(r.status==true){
+                        alert('提交成功')
+                    }else{
+                        alert('提交失败！')
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="headerBar">
+        <div class="header-shadow">
+            <div class="leftArea">
+                <div class="logo">
+                    <a href="index.html">
+                        <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                    </a>
+                </div>
+                <div class="topNav fl">
+                    <ul>
+                        <li class="fl">
+                            <a href="./index.html">首页</a>
+                        </li>
+                        <li class="fl">
+                            <a href="classify.html">分类</a>
+                        </li>
+                        <li class="fl">
+                            <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                        </li>
+                        <li class="fl">
+                            <a href="#">这是啥呀</a>
+                        </li>
+                        <li class="fl">
+                            <a href="#">真是</a>
+                        </li>
+                        <li style="padding-right: 30px;" class="fl">
+                            <a href="#">干啥呀</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rightArea">
+                <div class="user_box fl">
+                    <ul>
+                        <li class="fl dropdown">
+                            <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                            <div class="dropdown-menu">
+                                <img class="download" src="./img/logo.png" alt="下载APP">
+                                <span>扫一扫</span>
+                            </div>
+                        </li>
+                        <li id="login" class="fl">
+                            <a href="me.html">登录</a>
+                            /
+                            <a href="#">注册</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="search-box">
+                <form class="form-inline search-form" action="" id="search-form">
+                    <input type="text" class="search-content" name="fd" id="search-content">
+                    <button class="search-submit" type="submit" value=""></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--header-->
+    <div class="index">
+        <div class="lunboBar-w">
+            <div class="lunboBar">
+                <div class="lunboMenu">
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                英语听力 / 能力考 / 新闻
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                英语口语 / 雅思 / 托福
+
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                英语阅读 / 新闻 / 能力考
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                日语听力 / 入门 / 能力考
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                日语口语 / 能力考 / 标日
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                日语阅读 / 能力考 / 新闻
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                    <div class="menuContent">
+                        <a href="./classify.html">
+                            <span class="menuGroup">
+                                多语种 / 韩语 / 法语
+                            </span>
+                            <img src="./icon/kuozhan.png" alt="更多">
+                        </a>
+                    </div>
+                </div>
+                <div class="lunboImg">
+                    <div id="lunbo" class="carousel slide" data-ride="carousel">
+                        <!-- 指示符 -->
+                        <ul id="carousel-indicators" class="carousel-indicators">
+                            <!-- <li data-target="#lunbo" data-slide-to="0" class="active"></li>
+                            <li data-target="#lunbo" data-slide-to="1"></li>
+                            <li data-target="#lunbo" data-slide-to="2"></li>
+                            <li data-target="#lunbo" data-slide-to="3"></li>
+                            <li data-target="#lunbo" data-slide-to="4"></li> -->
+                        </ul>
+                        <!-- 轮播图片 -->
+                        <div id="carousel-inner" class="carousel-inner">
+                            <!-- <div class="carousel-item active">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo3.png">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h5>第一张图片描述标题</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo2.png">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h5>第二张图片描述标题</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a target="_blank" href="#">
+                                    <img src="./img/lunbo1.png">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h5>第三张图片描述标题</h5>
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- 左右切换按钮 -->
+                        <a class="carousel-control-prev" href="#lunbo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#lunbo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                <!-- <div class="menuKuoZhan">
+                    <div class="innerBox">
+                        <div class="innerBox-content">
+                            <div class="innerBox-content-top">
+                                <div class="box-title">
+                                    <span>英语听力</span>
+                                </div>
+                                <div class="box-content">
+
+                                </div>
+                            </div>
+                            <div class="innerBox-content-down">
+
+                                </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+        <div class="tuijian-box">
+            <div class="tuijian">
+                <h5 class="tuijianTitle">
+                    <span>
+                        <img style="height: 30px;" src="./img/zuoyezi.png" alt="">
+                    </span>
+                    <span>
+                        <img style="height: 40px;" src="./img/hua.png" alt="">
+                    </span>
+                    <span style="margin-left: 20px;">好</span>
+                    /
+                    <span>课</span>
+                    /
+                    <span>推</span>
+                    /
+                    <span style="margin-right: 20px;">荐</span>
+                    <span>
+                        <img style="height: 40px;" src="./img/hua.png" alt="">
+                    </span>
+                    <span>
+                        <img style="height: 30px;" src="./img/youyezi.png" alt="">
+                    </span>
+
+                </h5>
+                <!-- 课程推荐 -->
+                <div id="course-box" class="courseContent clearfix">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-box">
+        <div class="footer">
+            <div class="footer-content">
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" target="_blank">意见反馈</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <!--模态框-->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">
+                                    意见反馈
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <textarea id="ad-text" class="ad-text" placeholder="在此处输入您的意见或建议 . . ." cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button onclick="sub()" type="button" class="btn btn-primary">
+                                    提交
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>©2018&nbsp;tingshuo.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

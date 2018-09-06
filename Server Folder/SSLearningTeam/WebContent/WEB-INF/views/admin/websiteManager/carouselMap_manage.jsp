@@ -60,7 +60,7 @@
 	</div>
 	<script type="text/javascript">
 		function del(id){
-			var info = confirm("确认要删除该语言类别吗？");
+			var info = confirm("确认要删除该轮播资源吗？");
 			if(info){
 				$.ajax({
 					  type: 'get',
