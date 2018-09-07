@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 课程添加</title>
+<title>听说在线学习平台 | 课程修改</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
@@ -47,7 +47,7 @@ label {
 					<div class="col-md">
 						<div class="card card-info collapsed-card card-outline">
 							<div class="card-header">
-								<h3 class="card-title">添加听力课程</h3>
+								<h3 class="card-title">修改听力课程</h3>
 
 								<div class="card-tools">
 									<button type="button" class="btn btn-tool"
@@ -81,7 +81,7 @@ label {
 										<br/>原课程图标：<img src="${listeningCourse.instructionImgUrl }" height="30px" width="30px"/>
 										<br/>请添加课程图标：<input type="file" name="instructionImg"/>
 										<input type="hidden" name="courseId" value="${listeningCourse.courseId}"/>
-										<br/><input type="submit" value="提交"/>
+										<br/><input type="submit" class="btn btn-primary" value="提交"/>
 									</form>
 								</div>
 							</div>

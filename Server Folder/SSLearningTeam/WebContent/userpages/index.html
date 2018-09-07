@@ -16,18 +16,18 @@
     <script src="./jquery-3.3.1.js"></script>
     <script src="./js/main.js"></script>
     <script>
-        
-        $(function(){
-            var thisPage = 1;
+        var thisPage = 1;
             var user = window.localStorage;
             var user_id = user.getItem('userId');
             var user_img = user.getItem('userAvatarUrl');
+        $(function(){
+            
             
             
             if(user_id==null){
                 console.log('未登录')
             }else{
-                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+window.localStorage.getItem('userAvatarUrl')+'" alt="头像"></a></div>')
                 
             }
 
@@ -110,6 +110,9 @@
                 type:'get',
                 url:first+'/user/user/addSignInRecording',
                 dataType:'json',
+                data:{
+                    'userId':user_id
+                },
                 success:function(r){
                     if(r.status==true){
                         alert('签到成功');
@@ -120,12 +123,16 @@
             });
             }
 
-        function sub() {
+        function sub() { //这里提交不了
+            alert($('#ad-text').val())
             $.ajax({
-                type:'post',
+                type:'get',
                 url:first+'/advice/user/addAdvice',
                 dataType:'json',
-                date:{'adviceInfo' : $('#ad-text').val()},
+                data:{
+                    'userId' : user_id,
+                    'adviceInfo' : $('#ad-text').val()
+                },
                 success:function(r){
                     if(r.status==true){
                         alert('提交成功')
@@ -160,7 +167,7 @@
                             <a onclick="checkin()" href="javascript:void(0)">打卡</a>
                         </li>
                         <li class="fl">
-                            <a href="#">这是啥呀</a>
+                            <a href="./test.html">模拟练习</a>
                         </li>
                         <li class="fl">
                             <a href="#">真是</a>

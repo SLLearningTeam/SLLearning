@@ -26,10 +26,33 @@
     <script>
         var course_id=GetRequest().courseId;
             var courseType = 'listeningcourse';
-        $(function () {
             var user = window.localStorage;
             var user_id = user.getItem('userId');
             var user_img = user.getItem('userAvatarUrl');
+
+
+        $(function () {
+
+            //订阅
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/checkSubscriptionRecordingOfUser',
+                dataType:'json',
+                data:{
+                    'userId': user_id,
+                    'courseType' : courseType,
+                    'courseId' : course_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="已订阅"src="./icon/follow-yes.png" alt="订阅">')
+                    }else{
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="订阅"src="./icon/follow.png" alt="订阅">')
+                    }
+                }
+            });
+        
+            
             
             
             if(user_id==null){
@@ -63,7 +86,7 @@
                 dataType:'json',
                 data:{
                     'courseId' : course_id,
-                    'userId':window.localStorage.getItem("userId")
+                    'userId':user_id
                 },
                 success:function(r){
                     if(r.status==true){
@@ -75,10 +98,11 @@
                         var course_mp3 = r.info.courseResourceUrl;
                         
                         $('#class_name').html(course_name);
-                        $('#download-num').html(download_num);
+                        $('#download-num').append(download_num);
                         $('#course-state').html(content_cn);
                         $('#course-img').attr('src',course_img);
                         $('#course-mp3').attr('src',course_mp3);
+                        $('#xiazai').attr(course_mp3);
                         $('#text-cn').html(content_cn);
                         $('#text-en').html(content_en);
                     }else{
@@ -87,12 +111,36 @@
                 }
             });
         })
+        function followBtn() {
+            if ($('#class-menu').children().eq(0).children().attr('src')=='./icon/follow.png') {
+                $('#class-menu').children().eq(0).children().remove();
+                $.ajax({
+                type:'get',
+                url:first+'/course/user/addSubscriptionRecording',
+                dataType:'json',
+                data:{
+                    'userId': user_id,
+                    'courseType' : courseType,
+                    'courseId' : course_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="已订阅"src="./icon/follow-yes.png" alt="订阅">')
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+            } else {
+                alert('您已经订阅了~')
+            }
+        }
     </script>
 </head>
 
 <body>
-        <div class="headerBar">
-                <div class="header-shadow">
+    <div class="headerBar-noshadow">
+            <div class="header-shadow">
                     <div class="leftArea">
                         <div class="logo">
                             <a href="index.html">
@@ -111,7 +159,7 @@
                                     <a onclick="checkin()" href="javascript:void(0)">打卡</a>
                                 </li>
                                 <li class="fl">
-                                    <a href="#">这是啥呀</a>
+                                    <a href="./test.html">模拟练习</a>
                                 </li>
                                 <li class="fl">
                                     <a href="#">真是</a>
@@ -148,7 +196,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+    </div>
     <!--header-->
     <div class="course-page">
         <div class="class-box">
@@ -166,13 +214,12 @@
                             <div style="line-height:30px">
                                 <p id="course_evl" class="fl">评分：</p>
                                 <img data-toggle="modal" data-target="#myModal" class="star" src="./icon/edit.png" alt="评价">
-                                <div class="class-menu">
+                                <div id="class-menu" class="class-menu">
                                     <a href="javascript:void(0)">
-                                        <img id="follow-btn" onclick="followBtn(this)" style="height: 30px;" title="订阅"
-                                            src="./icon/follow.png" alt="订阅">
+
                                     </a>
                                     <a href="javascript:void(0)">
-                                        <img onclick="download_ls()" style="height: 30px;" title="下载" src="./icon/download.png"
+                                        <img id="xiazai" onclick="download()" style="height: 30px;" title="下载" src="./icon/download.png"
                                             alt="下载">
                                     </a>
                                 </div>
@@ -256,22 +303,8 @@
                                             课程测试
                                         </h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <h5 id="question">zheshisadasd</h5>
-                                        <label><input name="option" type="radio" value="1" />A: <span class="op-cont"></span></label><br>
-                                        <label><input name="option" type="radio" value="2" />B: <span class="op-cont"></span></label><br>
-                                        <label><input name="option" type="radio" value="3" />C: <span class="op-cont"></span></label><br>
-                                        <label><input name="option" type="radio" value="4" />D: <span class="op-cont"></span></label><br>
-                                        <button id="sub_test" onclick="subTest()" type="button" class="btn btn-primary">
-                                            提交
-                                        </button>
-                                        <button id="next_test" onclick="nextTest()" disabled="disabled" type="button"
-                                            class="btn btn-success fr">
-                                            下一题
-                                        </button>
-                                        <div id="reason" class="reason">
-                                            sssss
-                                        </div>
+                                    <div id="test-box" class="modal-body">
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -293,7 +326,7 @@
                         <div id="text-cn" class="text-open">
                             对方的时光都会给福建和故事告诉对方过后的发生噶地方干哈的复合肥大黄蜂大唐官府搭噶地方噶地方官阿斯蒂芬噶所多过付多过付大过哈或或或或或或或或或或或或或
                         </div>
-                        <div  id="text-en" class="text-close">
+                        <div id="text-en" class="text-close">
                             对方的时光都会给福建和故事告诉对方过后的发生噶地方干哈的复合肥大黄蜂大唐官府搭噶地方噶地方官阿斯蒂芬噶所多过付多过付大过哈或或或或或或或或或或或或或
                         </div>
                     </div>
@@ -354,32 +387,11 @@
 
         //下载
         function download() {
-            $.ajax({
-                type: 'get',
-                url: first + '/course/user/downloadListeningCourse',
-                dataType: 'json',
-                data: {
-                    'courseType': courseType,
-                    'courseId': course_id,
-                    'fileName': course_mp3
-                },
-                success: function (r) {
-                    if (r.status == true) {
-                        $('#question').html(r.info[0].questionContent);
-                        $('.op-cont').eq(0).append(r.info[0].answerA);
-                        $('.op-cont').eq(1).append(r.info[0].answerB);
-                        $('.op-cont').eq(2).append(r.info[0].answerC);
-                        $('.op-cont').eq(3).append(r.info[0].answerD);
-                        $('#sub-test').attr('answerReal', r.info[0].answerReal);
-                        $('#reason').html(r.info[0].answerReason);
-                    } else {
-                        alert('请求错误！')
-                    }
-                }
-            });
+            console.log($('audio').attr('src'));
+            location.href=first + '/course/user/downloadListeningCourse?userId='+user_id+'&&courseId='+course_id+"&&fileName=/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9_listeningresource_1.mp3";
         }
 
-        //开始听力测试
+        //开始听力测试（目前只有口语好用）
         function startTest() {
             $.ajax({
                 type: 'get',
@@ -390,14 +402,61 @@
                     'courseId': course_id
                 },
                 success: function (r) {
-                    if (r.status == true) {
-                        $('#question').html(r.info[0].questionContent);
-                        $('.op-cont').eq(0).append(r.info[0].answerA);
-                        $('.op-cont').eq(1).append(r.info[0].answerB);
-                        $('.op-cont').eq(2).append(r.info[0].answerC);
-                        $('.op-cont').eq(3).append(r.info[0].answerD);
-                        $('#sub-test').attr('answerReal', r.info[0].answerReal);
-                        $('#reason').html(r.info[0].answerReason);
+                    if (r.status == true) {  //有问题
+                        //如果只有一道题
+                        if(r.info.length==1){
+                            alert(1)
+                            var chengji = Math.floor(Math.random()*40)+50;
+                            $('#test-box').append('<h5 id="question">' + r.info[0].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[0].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[0].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[0].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[0].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[0].answerReal+'<br>' + r.info[0].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                        }
+                        else{
+                            for (var x = 0; x < r.info.length; x++) {
+                            if(x==r.info.length-1){
+                                alert(r.info.length-1)
+                                var chengji = Math.floor(Math.random()*40)+50;
+                                $('#test-box').append('<h5 id="question">' + r.info[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[x].answerReal+'<br>' + r.info[x].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                            }else{
+                                $('#test-box').append('<h5 id="question">' + r.info[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[x].answerReal+'<br>' + r.info[x].answerReason+'</div>')
+                            }
+                        }
+                        }
+                        var yiti = 100 / r.info.length;
+
                     } else {
                         alert('请求错误！')
                     }
@@ -405,48 +464,33 @@
             });
         }
         //提交测试
-        function subTest() {
-            $('#next_test').removeAttr('disabled');
-            $('.reason').show();
+        function subTest(e) {
+            alert(courseType)
+            e.nextSibling.style.display='block';
             $('#sub_test').attr('disabled', 'disabled');
-        }
-        //下一题   需要刷新元素
-        var question_item = 1;
-
-        function nextTest() {
-            $('#next_test').attr('disabled', 'disabled');
-            $('#sub_test').removeAttr('disabled');
-            $('.reason').hide();
-
-            $.ajax({
-                type: 'get',
-                url: first + '/course/user/getAllQuestion',
+            if(e.hasAttribute("chengji")){
+                $.ajax({
+                type: 'post',
+                url: first + '/course/user/addOralCourseScore',
                 dataType: 'json',
                 data: {
                     'courseType': courseType,
-                    'courseId': course_id
+                    'courseId': course_id,
+                    'oralScore': e.getAttribute('chengji'),
+                    'userId':user_id
                 },
                 success: function (r) {
                     if (r.status == true) {
-
-                        if (question_item < r.info.length) {
-                            $('#question').html(r.info[question_item].questionContent);
-                            $('.op-cont').eq(0).html(r.info[question_item].answerA);
-                            $('.op-cont').eq(1).html(r.info[question_item].answerB);
-                            $('.op-cont').eq(2).html(r.info[question_item].answerC);
-                            $('.op-cont').eq(3).html(r.info[question_item].answerD);
-                            $('#sub-test').attr('answerReal', r.info[question_item].answerReal);
-                            $('#reason').html(r.info[question_item].answerReason);
-                            question_item++;
-                        } else {
-                            alert('你已做完本课程全部练习 ~ ~')
-                        }
+                        alert('提交成功')
                     } else {
                         alert('请求错误！')
                     }
                 }
             });
+            }
         }
+        //下一题   需要刷新元素
+
         //评价
         function subEvla() {
             $.ajax({
@@ -454,6 +498,7 @@
                 url: first + '/course/user/addEvaluation',
                 dataType: 'json',
                 data: {
+                    'userId': user_id,
                     'courseType': courseType,
                     'courseId': course_id,
                     'evaluationLevel': evaluationLevel
@@ -469,32 +514,25 @@
         }
         //下载音频
         function download_ls() {
+            alert($('audio').attr('src'))
             $.ajax({
                 type: 'get',
                 url: first + '/course/user/downloadListeningCourse',
                 dataType: 'json',
                 data: {
                     'courseId': course_id,
-                    'fileName': 是什么
+                    'fileName': $('audio').attr('src')
                 },
                 success: function (r) {
                     if (r.status == true) {
-                        返回什么文件
+                        console.log('下载听力')
                     } else {
                         alert('请求错误！')
                     }
                 }
             });
         }
-        //订阅
-        function followBtn(e) {
-            if (e.getAttribute('src') == './icon/follow.png') {
-                e.src = './icon/follow-yes.png';
-                e.title = '已订阅';
-            } else {
-                alert('您已经订阅了~~')
-            }
-        }
+
         //音频播放
         function playPause() {
             playAudio.src = (playAudio.getAttribute("src") == './icon/play.png') ? './icon/pause.png' :

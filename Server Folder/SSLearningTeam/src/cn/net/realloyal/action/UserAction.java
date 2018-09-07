@@ -297,8 +297,9 @@ public class UserAction {
 			backJsonUtil.setStatus(false);
 			backJsonUtil.setInfo("注销失败，您还没有登录");
 		}else {
+			session.removeAttribute("user");
 			backJsonUtil.setStatus(true);
-			backJsonUtil.setInfo("注销成功");
+			backJsonUtil.setInfo("注销成功");	
 		}
 		return backJsonUtil;
 	}

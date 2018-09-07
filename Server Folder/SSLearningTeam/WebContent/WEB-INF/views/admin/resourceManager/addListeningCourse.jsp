@@ -128,6 +128,11 @@ label {
 															</select>
 													</div>
 											</div>
+											<div class="choose">
+								                    <div class="div3">
+														<br/><label>请选择课程资源：</label><input type="file" name="courseResource" required="required"/>
+													</div>
+											</div>
 											<div class="input-detail">
 													<div class="div5">
 														<br/><label>请输入中文内容：</label><br/><textarea name="courseChineseContent" rows="6" cols="60" required="required"/></textarea>
@@ -137,7 +142,7 @@ label {
 													</div>
 											</div>
 											<div class="div7">
-														<br/><input type="submit" value="提交"/>
+														<br/><input type="submit" class="btn btn-primary" value="提交"/>
 											</div>
 									</form>
 								</div>

@@ -85,21 +85,21 @@ public class CourseAction {
 	@RequestMapping("/admin/addListeningCourse")
 	public String addListeningCourse(@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("courseResource")CommonsMultipartFile courseResource,@RequestParam("instructionImg")CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.addListeningCourse(languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,courseResource,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//添加口语课程接口
 	@RequestMapping("/admin/addOralCourse")
 	public String addOralCourse(@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("instructionImg")CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.addOralCourse(languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//添加阅读课程接口
 	@RequestMapping("/admin/addReadingCourse")
 	public String addReadingCourse(@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("instructionImg")CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.addReadingCourse(languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//删除听力课程接口
@@ -169,21 +169,21 @@ public class CourseAction {
 	@RequestMapping("/admin/updateListeningCourse")
 	public String updateListeningCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam(value="courseResource",required=false)CommonsMultipartFile courseResource,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.updateListeningCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,courseResource,downloadNum,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//修改口语课程信息接口
 	@RequestMapping("/admin/updateOralCourse")
 	public String updateOralCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.updateOralCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//修改阅读课程信息接口
 	@RequestMapping("/admin/updateReadingCourse")
 	public String updateReadingCourse(@RequestParam("courseId")Integer courseId,@RequestParam("languageTypeId")Integer languageTypeId,@RequestParam("rateTypeId")Integer rateTypeId,@RequestParam("courseName")String courseName,@RequestParam("courseChineseContent")String courseChineseContent,@RequestParam("courseEnglishContent")String courseEnglishContent,@RequestParam("downloadNum")Integer downloadNum,@RequestParam(value="instructionImg",required=false)CommonsMultipartFile instructionImg,HttpServletRequest request) {
 		courseService.updateReadingCourse(courseId,languageTypeId,rateTypeId,courseName,courseChineseContent,courseEnglishContent,downloadNum,instructionImg,request);
-		return "redirect:/course/admin/courses_manage";
+		return "redirect:/course/admin/courses_manage/1";
 	}
 	
 	//获取综合课程列表——管理员

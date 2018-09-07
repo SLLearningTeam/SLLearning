@@ -19,63 +19,63 @@
 </head>
 
 <body>
-        <div class="headerBar">
+        <div class="headerBar-noShadow">
                 <div class="header-shadow">
-                    <div class="leftArea">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
-                            </a>
+                        <div class="leftArea">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                                </a>
+                            </div>
+                            <div class="topNav fl">
+                                <ul>
+                                    <li class="fl">
+                                        <a href="./index.html">首页</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="classify.html">分类</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="./test.html">模拟练习</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="#">真是</a>
+                                    </li>
+                                    <li style="padding-right: 30px;" class="fl">
+                                        <a href="#">干啥呀</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="topNav fl">
-                            <ul>
-                                <li class="fl">
-                                    <a href="./index.html">首页</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="classify.html">分类</a>
-                                </li>
-                                <li class="fl">
-                                    <a onclick="checkin()" href="javascript:void(0)">打卡</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="#">这是啥呀</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="#">真是</a>
-                                </li>
-                                <li style="padding-right: 30px;" class="fl">
-                                    <a href="#">干啥呀</a>
-                                </li>
-                            </ul>
+            
+                        <div class="rightArea">
+                            <div class="user_box fl">
+                                <ul>
+                                    <li class="fl dropdown">
+                                        <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                        <div class="dropdown-menu">
+                                            <img class="download" src="./img/logo.png" alt="下载APP">
+                                            <span>扫一扫</span>
+                                        </div>
+                                    </li>
+                                    <li id="login" class="fl">
+                                        <a href="me.html">登录</a>
+                                        /
+                                        <a href="#">注册</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-box">
+                            <form class="form-inline search-form" action="" id="search-form">
+                                <input type="text" class="search-content" name="fd" id="search-content">
+                                <button class="search-submit" type="submit" value=""></button>
+                            </form>
                         </div>
                     </div>
-        
-                    <div class="rightArea">
-                        <div class="user_box fl">
-                            <ul>
-                                <li class="fl dropdown">
-                                    <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
-                                    <div class="dropdown-menu">
-                                        <img class="download" src="./img/logo.png" alt="下载APP">
-                                        <span>扫一扫</span>
-                                    </div>
-                                </li>
-                                <li id="login" class="fl">
-                                    <a href="me.html">登录</a>
-                                    /
-                                    <a href="#">注册</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="search-box">
-                        <form class="form-inline search-form" action="" id="search-form">
-                            <input type="text" class="search-content" name="fd" id="search-content">
-                            <button class="search-submit" type="submit" value=""></button>
-                        </form>
-                    </div>
-                </div>
             </div>
     <div class="main">
         <div class="user-info-box">
@@ -123,7 +123,7 @@
                         <a onclick="checkLog(this)" class="download-cl" href="javascript:void(0)">下载记录</a>
                     </div>
                     <div class="study-info-item">
-                        <a onclick="checkHistory(this)" class="download-cl" href="javascript:void(0)">查看历史</a>
+                        <a onclick="checkHistory(this)" class="download-cl" href="javascript:void(0)">我的分数</a>
                     </div>
                     <div class="study-info-item">
                         <a onclick="logout(this)" class="logout" href="javascript:void(0)">退出登录</a>
@@ -170,8 +170,7 @@
                             <th>操作</th>
                         </tr>
                         <tr>
-                            <td>aaa</td>
-                            <td onclick="deleteLog(this)"><button type="button" class="btn btn-danger">删除</button></td>
+                            
                         </tr>
 
                     </table>
@@ -183,8 +182,6 @@
                             <th>操作</th>
                         </tr>
                         <tr>
-                            <td>aaa</td>
-                            <td onclick="deleteLog(this)"><button type="button" class="btn btn-danger">删除</button></td>
                         </tr>
 
                     </table>
@@ -202,30 +199,8 @@
                             <em>8月15日</em>
                         </span>
                         <div class="course-list">
-                            <ul class="clearfix">
-                                <li class="user-course-item">
-                                    <div class="user-course-img-box fl">
-                                        <a target="_blank" href="">
-                                            <img style="height: 113px;width: 200px;" src="./img/kc1.jpg" alt="课程图片">
-                                        </a>
-                                    </div>
-                                    <div class="user-course-cont">
-                                        <h3 class="course-name">
-                                            <a href="">课程名字</a>
-                                            <span class="rate-star">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                                <img class="star" src="./icon/xing.png" alt="xing">
-                                            </span>
-                                        </h3>
-                                        <div class="course-state">
-                                            <span class="state-cont">这里是课程简介</span>
-                                            <a class="continue-study" href="" target="_blank">继续学习</a>
-                                        </div>
-                                    </div>
-                                </li>
+                            <ul id="course_box" class="clearfix">
+                                
                             </ul>
                         </div>
                     </div>
@@ -251,6 +226,11 @@
         </div>
     </div>
     <script>
+        var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_name = user.getItem('userName');
+            var user_sex = user.getItem('userSex');
+            var user_img = user.getItem('userAvatarUrl');
         var thisPage = 1;
         var all_class = byId('all');
         var lis_class = byId('lis');
@@ -261,12 +241,29 @@
         var dl_tb = byClass('download-table');
         var ck_his = byClass('checkHistory');
 
+        //取消订阅
+        function quxiaodingyue(e) {
+            var sb_id=e.getAttribute('subscriptionRecordingId')
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/deleteSubscriptionRecording',
+                dataType: 'json',
+                data:{
+                    'userId' : user_id,
+                    'subscriptionRecordingId':sb_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('删除成功!');
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+
         $(function () {
-            var user = window.localStorage;
-            var user_id = user.getItem('userId');
-            var user_name = user.getItem('userName');
-            var user_sex = user.getItem('userSex');
-            var user_img = user.getItem('userAvatarUrl');
+            
 
             if(user_id==null){
                 console.log('未登录')
@@ -274,6 +271,41 @@
                 $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
                 
             }
+
+            //查看课程的历史
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/getHistoryRecordingOfUser/'+thisPage,
+                dataType: 'json',
+                data:{
+                    'userId':user_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        for(var x=0;x<r.info.historyRecordings.length;x++){
+                            $('#course_box').append('<li class="user-course-item">'+
+                                    '<div class="user-course-img-box fl">'+
+                                        '<a target="_blank" href="'+r.info.historyRecordings[x].courseResourceUrl+'">'+
+                                            '<img style="height: 113px;width: 200px;" src="'+r.info.historyRecordings[x].instructionImgUrl+'" alt="课程图片">'+
+                                        '</a>'+
+                                    '</div>'+
+                                    '<div class="user-course-cont">'+
+                                        '<h3 class="course-name">'+
+                                            '<a href="">'+r.info.historyRecordings[x].course.courseName+'</a>'+
+                                            '<span class="rate-star"><span style="padding-right:20px;">下载量：'+r.info.historyRecordings[x].course.downloadNum+'</span></span>'+
+                                        '</h3>'+
+                                        '<div class="course-state">'+
+                                            '<span class="state-cont">'+r.info.historyRecordings[x].course.courseChineseContent+'</span>'+
+                                            '<a class="continue-study" href="'+r.info.historyRecordings[x].courseResourceUrl+'" target="_blank">继续学习</a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</li>')
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
 
             //user info
             $('#user-img').attr('src', user_img);
@@ -284,6 +316,9 @@
                 type: 'get',
                 url: first + '/user/user/getUserSignInRecording/',
                 dataType: 'json',
+                data:{
+                    'userId' : user_id,
+                },
                 success: function (r) {
                     if (r.status == true) {
                         $('#daka').html(r.info.totalTimes);
@@ -306,9 +341,13 @@
                 type: 'get',
                 url: first + '/user/user/quitLogin',
                 dataType: 'json',
+                data:{
+                    'userId' : user_id
+                },
                 success: function (r) {
                     if (r.status == true) {
-                        alert(r.info)
+                        alert('退出登录！')
+                        location.href=first
                     } else {
                         alert('还没有登录！')
                     }
@@ -324,14 +363,19 @@
 
                 $.ajax({
                     type: 'get',
-                    url: first + '/user/getDownloadRecordings/' + thisPage, //可能有问题
+                    url: first + '/website/user/getDownloadRecordings/' + thisPage, //可能有问题
                     dataType: 'json',
+                    data:{
+                        'userId': user_id
+                    },
                     success: function (r) {
                         if (r.status == true) {
+                            $('table').children().remove();
                             for (var x = 0; x < r.info.downloadRecordings.length; x++) {
-                                $('table').append('<tr><td>' + r.info.downloadRecordings.course.courseName +
-                                    '</td><td downloadRecordingId="' + r.info.downloadRecordings.downloadRecordingId +
-                                    '" onclick="deleteLog(this)" style="cursor: pointer;">删除</td></tr>'
+                                $('table').append('<tr><td>' + r.info.downloadRecordings[x].course.courseName +
+                                    '</td><td downloadRecordingId="' + r.info.downloadRecordings[x].downloadRecordingId +'" onclick="deleteLog(this)"><button type="button" class="btn btn-danger">删除</button></td>'
+                                    
+                                    
                                 );
                             }
                         } else {
@@ -342,34 +386,35 @@
             } else {
                 e.innerText = '下载记录';
                 dl_tb[0].style.display = 'none';
+                $('table').children().remove()
             }
         }
-        //查看历史
+        //我的分数
         function checkHistory(e) {
-            if (e.innerText == '查看历史') {
+            if (e.innerText == '我的分数') {
+                $('table').children().remove();
                 e.innerText = '返回';
                 ck_his[0].style.display = 'block';
 
                 $.ajax({
                     type: 'get',
-                    url: first + '/course/user/getHistoryRecordingOfUser/' + thisPage, //可能有问题
+                    url: first + '/course/user/getAvgOralCourseScoreOfUser', //可能有问题
                     dataType: 'json',
+                    data:{
+                        'userId' : user_id
+                    },
                     success: function (r) {
                         if (r.status == true) {
-                            for (var x = 0; x < r.info.historyRecordings.length; x++) {
-                                $('table').append('<tr><td>' + r.info.historyRecordings.course.courseName +
-                                    '</td><td downloadRecordingId="' + r.info.historyRecordings.historyRecordingId +
-                                    '" onclick="deleteLog(this)" style="cursor: pointer;">删除</td></tr>'
-                                );
-                            }
+                            $('table').append('<tr><td>您的口语课程平均分： ' + r.info +'</td>')
                         } else {
                             alert('请求错误！')
                         }
                     }
                 });
             } else {
-                e.innerText = '查看历史';
+                e.innerText = '我的分数';
                 ck_his[0].style.display = 'none';
+                $('table').children().remove();
             }
         }
         //删除记录
@@ -380,6 +425,7 @@
                 url: first + '/website/user/deleteDownloadRecording',
                 dataType: 'json',
                 data: {
+                    'userId' : user_id,
                     'downloadRecordingId': $(e).downloadRecordingId
                 },
                 success: function (r) {
@@ -423,11 +469,81 @@
         function user_course_title_left_l() {
             neer.classList.add("ac");
             cellection.classList.remove('ac');
+            $('#course_box').children().remove();
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/getHistoryRecordingOfUser/'+thisPage,
+                dataType: 'json',
+                data:{
+                    'userId':user_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        for(var x=0;x<r.info.historyRecordings.length;x++){
+                            $('#course_box').append('<li class="user-course-item">'+
+                                    '<div class="user-course-img-box fl">'+
+                                        '<a target="_blank" href="'+r.info.historyRecordings[x].courseResourceUrl+'">'+
+                                            '<img style="height: 113px;width: 200px;" src="'+r.info.historyRecordings[x].instructionImgUrl+'" alt="课程图片">'+
+                                        '</a>'+
+                                    '</div>'+
+                                    '<div class="user-course-cont">'+
+                                        '<h3 class="course-name">'+
+                                            '<a href="">'+r.info.historyRecordings[x].course.courseName+'</a>'+
+                                            '<span class="rate-star"><span style="padding-right:20px;">下载量：'+r.info.historyRecordings[x].course.downloadNum+'</span></span>'+
+                                        '</h3>'+
+                                        '<div class="course-state">'+
+                                            '<span class="state-cont">'+r.info.historyRecordings[x].course.courseChineseContent+'</span>'+
+                                            '<a class="continue-study" href="'+r.info.historyRecordings[x].courseResourceUrl+'" target="_blank">继续学习</a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</li>')
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+            
         }
 
         function user_course_title_left_r() {
             cellection.classList.add("ac");
             neer.classList.remove('ac');
+            $('#course_box').children().remove();
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/getSubscriptionRecordingOfUser/'+thisPage,
+                dataType: 'json',
+                data:{
+                    'userId':user_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        for(var x=0;x<r.info.subscriptionRecordings.length;x++){
+                            $('#course_box').append('<li class="user-course-item">'+
+                                    '<div class="user-course-img-box fl">'+
+                                        '<a target="_blank" href="'+r.info.subscriptionRecordings[x].courseResourceUrl+'">'+
+                                            '<img style="height: 113px;width: 200px;" src="'+r.info.subscriptionRecordings[x].instructionImgUrl+'" alt="课程图片">'+
+                                        '</a>'+
+                                    '</div>'+
+                                    '<div class="user-course-cont">'+
+                                        '<h3 class="course-name">'+
+                                            '<a href="">'+r.info.subscriptionRecordings[x].course.courseName+'</a>'+
+                                            '<button onclick="quxiaodingyue(this)" subscriptionRecordingId="'+r.info.subscriptionRecordings[x].subscriptionRecordingId+'" class="btn btn-light">取消订阅</button>'+
+                                            '<span class="rate-star"><span style="padding-right:20px;">下载量：'+r.info.subscriptionRecordings[x].course.downloadNum+'</span></span>'+
+                                        '</h3>'+
+                                        '<div class="course-state">'+
+                                            '<span class="state-cont">'+r.info.subscriptionRecordings[x].course.courseChineseContent+'</span>'+
+                                            '<a class="continue-study" href="'+r.info.subscriptionRecordings[x].courseResourceUrl+'" target="_blank">继续学习</a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</li>')
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
         }
     </script>
 </body>
