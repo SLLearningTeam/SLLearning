@@ -18,7 +18,39 @@
     <script>
 
         var thisPage = 1;
-        var totalPage = 0;
+        //语言——全部——分页
+        function chengePage(e) {
+            thisPage = e.innerText;
+            $('#course-box').children().remove();
+            $('#page').children().remove();
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/courses_manage/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Listening
+                            for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                courseListen(r, y);
+                            }
+                            //Speaking
+                            for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                courseSpeak(r, y);
+                            }
+                            //Reading
+                            for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                courseRead(r, y);
+                            }
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
+                            }
+
+                        } else {
+                            alert('请求错误！')
+                        }
+                    }
+                });
+        }
 
         $(function(){
             var user = window.localStorage;
@@ -27,6 +59,8 @@
             var menu_item = byId('classify-menu-item');
             var course_box = byId('course-box');
 
+            //分页
+            
 
             if(user_id!=null){
                 $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
@@ -83,8 +117,9 @@
                             for(var y=0;y<r.info.courses.readingCourses.length;y++){
                                 courseRead(r,y);
                             }
-                            totalPage = r.info.courses.readingCourses.totalPages;
-                            thisPage = r.info.courses.readingCourses.totalPagescurrentPage;
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
+                            }
                         
                     }else{
                         alert('请求错误！')
@@ -96,63 +131,63 @@
 </head>
 
 <body>
-        <div class="headerBar">
+        <div class="headerBar-noShadow">
                 <div class="header-shadow">
-                    <div class="leftArea">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
-                            </a>
+                        <div class="leftArea">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                                </a>
+                            </div>
+                            <div class="topNav fl">
+                                <ul>
+                                    <li class="fl">
+                                        <a href="./index.html">首页</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="classify.html">分类</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="./test.html">模拟练习</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="#">真是</a>
+                                    </li>
+                                    <li style="padding-right: 30px;" class="fl">
+                                        <a href="#">干啥呀</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="topNav fl">
-                            <ul>
-                                <li class="fl">
-                                    <a href="./index.html">首页</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="classify.html">分类</a>
-                                </li>
-                                <li class="fl">
-                                    <a onclick="checkin()" href="javascript:void(0)">打卡</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="#">这是啥呀</a>
-                                </li>
-                                <li class="fl">
-                                    <a href="#">真是</a>
-                                </li>
-                                <li style="padding-right: 30px;" class="fl">
-                                    <a href="#">干啥呀</a>
-                                </li>
-                            </ul>
+            
+                        <div class="rightArea">
+                            <div class="user_box fl">
+                                <ul>
+                                    <li class="fl dropdown">
+                                        <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                        <div class="dropdown-menu">
+                                            <img class="download" src="./img/logo.png" alt="下载APP">
+                                            <span>扫一扫</span>
+                                        </div>
+                                    </li>
+                                    <li id="login" class="fl">
+                                        <a href="me.html">登录</a>
+                                        /
+                                        <a href="#">注册</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-box">
+                            <form class="form-inline search-form" action="" id="search-form">
+                                <input type="text" class="search-content" name="fd" id="search-content">
+                                <button class="search-submit" type="submit" value=""></button>
+                            </form>
                         </div>
                     </div>
-        
-                    <div class="rightArea">
-                        <div class="user_box fl">
-                            <ul>
-                                <li class="fl dropdown">
-                                    <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
-                                    <div class="dropdown-menu">
-                                        <img class="download" src="./img/logo.png" alt="下载APP">
-                                        <span>扫一扫</span>
-                                    </div>
-                                </li>
-                                <li id="login" class="fl">
-                                    <a href="me.html">登录</a>
-                                    /
-                                    <a href="#">注册</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="search-box">
-                        <form class="form-inline search-form" action="" id="search-form">
-                            <input type="text" class="search-content" name="fd" id="search-content">
-                            <button class="search-submit" type="submit" value=""></button>
-                        </form>
-                    </div>
-                </div>
             </div>
     <div class="classify-main">
         <div class="classify-top-box">
@@ -214,29 +249,52 @@
 
                     </div>
                 </div>
-                <div id="page">
-                    
+                <div id="page" class="text-center">
+                   
                 </div>
             </div>
         </div>
     </div>
     <div class="footer-box">
-        <div class="footer">
-            <div class="footer-content">
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-                <a href="" target="_blank">企业合作</a>
-            </div>
-            <div class="footer-copyright">
-                <p>?2018&nbsp;tingshuo.com</p>
+            <div class="footer">
+                <div class="footer-content">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" target="_blank">意见反馈</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <!--模态框-->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        意见反馈
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="ad-text" class="ad-text" placeholder="在此处输入您的意见或建议 . . ." cols="30" rows="5"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                    </button>
+                                    <button onclick="sub()" type="button" class="btn btn-primary">
+                                        提交
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <p>©2018&nbsp;tingshuo.com</p>
+                </div>
             </div>
         </div>
-    </div>
 
     <script>
         var lg_item = byClass('classify-menu-item');
@@ -257,6 +315,7 @@
             $('#fx-type').children().eq(0).children().addClass('classify-menu-item-action');
             e.classList.add('classify-menu-item-action');
             var cont = e.getAttribute('languageTypeId');
+            $('#page').children().remove();
             if (e.innerText == '全部') {
                 $('#course-box').children().remove();
                 $.ajax({
@@ -276,6 +335,9 @@
                             //Reading
                             for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
                                 courseRead(r, y);
+                            }
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
                             }
 
                         } else {
@@ -464,7 +526,7 @@
                 if (lg_item_ac != undefined) {
                     var lg_id = lg_item_ac.attr('languageTypeId');
                     //是否选择类别
-                    for (var z = 0; z < tp_item.length; z++) {
+                    for (var z = 1; z < tp_item.length; z++) {
                         if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
                             var tp_item_ac = tp_item[z];
                         }
@@ -494,7 +556,6 @@
                     }
                     //选了语言没有选类别
                     else {
-                        alert(lg_id)
                         $.ajax({
                             type: 'get',
                             url: first + '/course/user/listeningCourses_manageByLanguageType/' + thisPage, //可能有问题
@@ -509,7 +570,7 @@
                                         courseListen(r, y);
                                     }
                                 } else {
-                                    alert('请求错误！')
+                                    alert('请求错误sss！')
                                 }
                             }
                         });

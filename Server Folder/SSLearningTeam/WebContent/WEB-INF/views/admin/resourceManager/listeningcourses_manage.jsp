@@ -71,7 +71,7 @@
 												<th>课程名称</th>
 												<th>语言类别</th>
 												<th>类别类型</th>
-												<th colspan="2">操作</th>
+												<th colspan="4">操作</th>
 											</tr>
 											<%request.setAttribute("number",1); %>
                                            	<c:forEach var="listeningcourse" items="${courses.listeningCourses}">
@@ -81,6 +81,8 @@
 													<td>${listeningcourse.courseName}</td>
 													<td>${listeningcourse.languageType.languageName}</td>
 													<td>${listeningcourse.rateType.rateName}</td>
+													<td><a href="javascript:void(0)" onclick="showAddCourseQuestion('listeningcourse',${listeningcourse.courseId},this)" class="btn btn-success">添加问题</a></td>
+													<td><a href="javascript:void(0)" onclick="showAllCourseQuestion('listeningcourse',${listeningcourse.courseId},this)" class="btn btn-primary">查看问题</a></td>
 													<td><a href="${pageContext.request.contextPath}/course/admin/toUpdateListeningCourse?courseId=${listeningcourse.courseId}" class="btn btn-warning">修改</a></td>
 													<td><a href="javascript:void(0)" onclick="delCourse('listeningcourse',${listeningcourse.courseId},this)" class="btn btn-danger">删除</a></td>
 												</tr>
@@ -106,6 +108,84 @@
 			</div>
 		</section>
 	</div>
+	<!-- 添加模态框（Modal） -->
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						请添加问题
+					</h4>
+				</div>
+				<div class="modal-body" id="coursesInfo">
+					<input type="hidden" id="courseTypeModel" name="courseType">
+					<input type="hidden" id="courseIdModel" name="courseId">
+					请添加问题名称<input type="text" class="form-control" name="questionContent" id="questionContentModel"/>
+					请添加问题A<input type="text" class="form-control" name="answerA" id="answerAModel"/>
+					请添加问题B<input type="text" class="form-control" name="answerB" id="answerBModel"/>
+					请添加问题C<input type="text" class="form-control" name="answerC" id="answerCModel"/>
+					请添加问题D<input type="text" class="form-control" name="answerD" id="answerDModel"/>
+					请选择准确答案<input type="radio" name="answerReal" value="1"/>&nbsp;A&nbsp;<input type="radio" name="answerReal" value="2"/>&nbsp;B&nbsp;<input type="radio" name="answerReal" value="3"/>&nbsp;C&nbsp;<input type="radio" name="answerReal" value="4"/>&nbsp;D&nbsp;<br/>
+					请添加答案详解<input type="text" class="form-control" name="answerReason" id="answerReasonModel"/>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="addQuestionToCourse()">
+						添加问题
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>	
+	
+	<!-- 添加模态框（Modal） -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						课程全部问题
+					</h4>
+				</div>
+				<div class="modal-body" id="courseQuestionList">
+					    本课程暂未添加课程问题
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>	
+	<!-- 添加模态框（Modal） -->
+	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel3">
+						请修改问题
+					</h4>
+				</div>
+				<div class="modal-body" id="coursesInfo3">
+					<input type="hidden" id="questionIdModel3" name="questionId">
+					<input type="hidden" id="courseTypeModel3" name="courseType">
+					<input type="hidden" id="courseIdModel3" name="courseId">
+					请添加问题名称<input type="text" class="form-control" name="questionContent" id="questionContentModel3"/>
+					请添加问题A<input type="text" class="form-control" name="answerA" id="answerAModel3"/>
+					请添加问题B<input type="text" class="form-control" name="answerB" id="answerBModel3"/>
+					请添加问题C<input type="text" class="form-control" name="answerC" id="answerCModel3"/>
+					请添加问题D<input type="text" class="form-control" name="answerD" id="answerDModel3"/>
+					请选择准确答案<input type="radio" name="answerReal" value="1"/>&nbsp;A&nbsp;<input type="radio" name="answerReal" value="2"/>&nbsp;B&nbsp;<input type="radio" name="answerReal" value="3"/>&nbsp;C&nbsp;<input type="radio" name="answerReal" value="4"/>&nbsp;D&nbsp;<br/>
+					请添加答案详解<input type="text" class="form-control" name="answerReason" id="answerReasonModel3"/>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="changeQuestionToCourse()">
+						修改问题
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>	
 	<script>
 	function delCourse(courseType,courseId,dom){
 		var info = confirm("确认要删除该课程吗？");
@@ -156,6 +236,160 @@
 		}else{
 			alert("删除失败");
 		}
+	}
+	
+
+	function showAddCourseQuestion(courseType,courseId){
+		$('#courseTypeModel').val(courseType);
+		$('#courseIdModel').val(courseId);
+		$('#myModal1').modal('show');
+	}
+	
+	function showAllCourseQuestion(courseType,courseId){
+		$.ajax({
+	  		  type: 'get',
+	  		  url: "${pageContext.request.contextPath}/course/admin/getAllQuestion",
+	  		  data:{
+	  		  	  "courseType":courseType,
+	  		  	  "courseId":courseId
+	  		  },
+	  		  success: function(result){
+	  			  if(result.status){
+	  				    var infoQuestionListDiv="";
+	  				  	for(var i=0;i<result.info.length;i++){
+	  				  		infoQuestionListDiv+=createQuestionListDIV(result.info[i].questionId,result.info[i].questionContent);
+	  				  	}
+	  				  	console.log(infoQuestionListDiv)
+	  					$("#courseQuestionList").html(infoQuestionListDiv);
+	  					$('#myModal2').modal('show'); 
+	  			  }else{
+	  					$("#courseQuestionList").html("本课程暂未添加课程问题");
+	  					$('#myModal2').modal('show'); 
+	  			  }
+	  		  }
+	  		});
+	}
+	
+	function addQuestionToCourse(){
+		var courseType = $('#courseTypeModel').val();
+		var courseId = $('#courseIdModel').val();
+		var questionContent = $('#questionContentModel').val();
+		var answerA = $('#answerAModel').val();
+		var answerB = $('#answerBModel').val();
+		var answerC = $('#answerCModel').val();
+		var answerD = $('#answerDModel').val();
+		var answerReal = $('input[name="answerReal"]:checked').val();
+		var answerReason = $('#answerReasonModel').val();
+		$.ajax({
+	  		  type: 'get',
+	  		  url: "${pageContext.request.contextPath}/course/admin/addQuestion",
+	  		  data:{
+	  			"courseType":courseType,
+	  			"courseId":courseId,
+	  			"questionContent":questionContent,
+	  			"answerA":answerA,
+	  			"answerB":answerB,
+	  			"answerC":answerC,
+	  			"answerD":answerD,
+	  			"answerReal":answerReal,
+	  			"answerReason":answerReason
+	  		  },
+	  		  success: function(result){
+	  			  if(result.status){
+	  				alert(result.info);
+	  				$('#myModal1').modal('hide'); 
+	  			  }else{
+	  				alert(result.info)
+	  			  }
+	  		  }
+	  		});
+	}
+	
+	function createQuestionListDIV(questionId,questionContent){
+		var info = "<div style='margin:10px'><input type='button' class='btn btn-warning' onclick='changeTestQuestion(this,"+questionId+")' value='查看问题'/><input type='button' class='btn btn-danger' style='margin-left:10px;' onclick='deleteTestQuestion(this,"+questionId+")' value='移除问题'/><label style='padding-left:10px;color:#307df6'>"+questionContent+"</label></div>";
+		return info;
+	}
+	
+	function deleteTestQuestion(button,questionId){
+	   $.ajax({
+  		  type: 'get',
+  		  url: "${pageContext.request.contextPath}/course/admin/deleteQuestion",
+  		  data:{
+  		  	  "questionId":questionId
+  		  },
+  		  success: function(result){
+  			  if(result.status){
+  				$(button).parent().remove();
+  			  }else{
+  				alert(result.info);
+  			  }
+  		  }
+  		}); 
+	}
+	
+	function changeTestQuestion(button,questionId){
+		$.ajax({
+	  		  type: 'get',
+	  		  url: "${pageContext.request.contextPath}/course/admin/toChangeQuestion",
+	  		  data:{
+	  			"questionId":questionId
+	  		  },
+	  		  success: function(result){
+	  			  if(result.status){
+	  				$('#questionIdModel3').val(result.info.questionId);
+	  				$('#courseTypeModel3').val(result.info.courseType);
+	  				$('#courseIdModel3').val(result.info.courseId);
+	  				$('#questionContentModel3').val(result.info.questionContent);
+	  				$('#answerAModel3').val(result.info.answerA);
+	  				$('#answerBModel3').val(result.info.answerB);
+	  				$('#answerCModel3').val(result.info.answerC);
+	  				$('#answerDModel3').val(result.info.answerD);
+	  				var num = result.info.answerReal-1;
+	  				$('#myModal3 input[name="answerReal"]').eq(num).attr("checked", true);
+	  				$('#answerReasonModel3').val(result.info.answerReason);
+	  				$('#myModal3').modal('show'); 
+	  			  }else{
+	  				alert(result.info)
+	  			  }
+	  		  }
+	  		});
+	}
+	
+	function changeQuestionToCourse(){
+		var questionId = $('#questionIdModel3').val();
+		var courseType = $('#courseTypeModel3').val();
+		var courseId = $('#courseIdModel3').val();
+		var questionContent = $('#questionContentModel3').val();
+		var answerA = $('#answerAModel3').val();
+		var answerB = $('#answerBModel3').val();
+		var answerC = $('#answerCModel3').val();
+		var answerD = $('#answerDModel3').val();
+		var answerReal = $('#myModal3 input[name="answerReal"]:checked').val();
+		var answerReason = $('#answerReasonModel3').val();
+		$.ajax({
+	  		  type: 'get',
+	  		  url: "${pageContext.request.contextPath}/course/admin/changeQuestion",
+	  		  data:{
+	  			"questionId":questionId,
+	  			"courseType":courseType,
+	  			"courseId":courseId,
+	  			"questionContent":questionContent,
+	  			"answerA":answerA,
+	  			"answerB":answerB,
+	  			"answerC":answerC,
+	  			"answerD":answerD,
+	  			"answerReal":answerReal,
+	  			"answerReason":answerReason
+	  		  },
+	  		  success: function(result){
+	  			  if(result.status){
+	  				alert(result.info);
+	  				$('#myModal3').modal('hide'); 
+	  			  }else{
+	  				alert(result.info)
+	  			  }
+	  		  }
+	  		});
 	}
 	</script>
 	<!-- jQuery -->

@@ -91,3 +91,25 @@ function courseRead(r,y) {
             '</a>'+
         '</div>')
 }
+
+function courseTest(r,y) {
+    $('#course-box').append(
+        '<div class="course-box">'+
+            '<a courseId="'+r.info.simulatedTests[y].simulatedTestId+'" target="_blank" href="./testTest.html?simulatedTestId='+r.info.simulatedTests[y].simulatedTestId+'">'+
+                '<div class="course-img-box">'+
+                    '<img class="course-img" src="'+r.info.simulatedTests[y].instructionImgUrl+'" alt="課程">'+
+                '</div>'+
+                '<div class="course-content">'+
+                    '<h3 class="content-title">'+r.info.simulatedTests[y].testName+'</h3>'+
+                    '<div class="content-detail">'+
+                        '<div class="course-type">'+
+                            '<p class="classify-course-state">'+r.info.simulatedTests[y].languageName+'$nbsp;'+r.info.simulatedTests[y].rateName+'</p>'+
+                        '</div>'+
+                        '<div class="course-rate">'+
+                            
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</a>'+
+        '</div>')
+}

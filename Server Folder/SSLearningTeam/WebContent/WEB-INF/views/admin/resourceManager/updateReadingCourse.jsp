@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>听说在线学习平台 | 课程添加</title>
+<title>听说在线学习平台 | 课程修改</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../leftNavigation.jsp"></jsp:include>
@@ -47,7 +47,7 @@ label {
 					<div class="col-md">
 						<div class="card card-info collapsed-card card-outline">
 							<div class="card-header">
-								<h3 class="card-title">添加阅读课程</h3>
+								<h3 class="card-title">修改阅读课程</h3>
 
 								<div class="card-tools">
 									<button type="button" class="btn btn-tool"
