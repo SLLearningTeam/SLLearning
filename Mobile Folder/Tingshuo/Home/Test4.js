@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View,Image} from "react-native";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const REQUEST_URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
@@ -87,9 +87,20 @@ class FlatListExample extends Component {
     renderItemView({item}) {
         return (
             <View>
-                <Text style={styles.title}>name: {item.value.name} ({item.value.stargazers_count}
-                    stars)</Text>
-                <Text style={styles.content}>description: {item.value.description}</Text>
+               <View style={{borderWidth:1,height:120,flexDirection:'row'}}>
+                  <View>
+                     <Image source={require('../imgs/logo.png')} style={styles.logo}/>
+                  </View>
+                  <View style={{marginTop:10}}>
+                     <Text style={styles.title}>课程名: {item.value.name} ({item.value.id})
+                     </Text>
+                        <View style={{flexDirection:'row'}}>
+                            <Image source={require('../imgs/bofangliang.png')} style={styles.img}/>
+                            <Text style={styles.number}>:{item.value.id}</Text>
+                        </View>
+                     <Text style={styles.content}>课程简介: {item.value.name}</Text>
+                  </View>
+               </View>
             </View>
         );
     }
@@ -97,9 +108,7 @@ class FlatListExample extends Component {
     renderData() {
         return (
             <ScrollView >
-                <Text >
-                    Data:
-                </Text>
+            
                 <AnimatedFlatList
                     data={this.state.dataArray}
                     renderItem={this.renderItemView}
@@ -130,12 +139,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     title: {
-        fontSize: 15,
+        fontSize: 20,
         color: 'blue',
     },
     content: {
         fontSize: 15,
         color: 'black',
+    },
+    number:{
+        fontSize:20,
+        color:'black',
+    },
+    logo:{
+        width:80,
+        height:80,
+        borderRadius:20,
+        margin:10
+    },
+    img:{
+        width:30,
+        height:30,
+
     }
 
 });

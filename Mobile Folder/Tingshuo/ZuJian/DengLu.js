@@ -18,56 +18,45 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
-import YanZhengMa from './YanZhengMa'
- function getRequest(url){
-    var opts={
-        method:"GET"
-    }
-    fetch(url,opts)
-    .then((response)=>{
-        return response.text();
-    })
-    .then((responseText)=>{
-        alert(responseText)
-    })
-    .catch((error)=>{
-        alert(error);
-    })
-  }
-  function postRequest(url){
-  let formData = new FormData();
-  formData.append("id",this.state.inputText,);
-  formData.append("password",this.state.text1,);
-  var opts={
-    method:"POST",
-    body:formData
-  }
-fetch(url,opts)
-.then((response)=>{
-    return response.text();
-})
-.then((responseText)=>{
-    alert(responseText);
-})
-.catch((error)=>{
-    alert(error);
-})
-}
-
+import Home from '../Home/Home'
 import ZhuCe from './ZhuCe'
+import Course from './Course'
 export default class DengLu extends Component {
     constructor(props) {
     super(props);
     this.state = {
-     
-
-    };  
-
-  
+          id:"11",
+          password:"11",
+    };   
   }
+   
+   Post () {
+    const url = `http://101.200.51.53:8080/SSLearningTeam/user/mobile/login?userPhoneNumber=${this.state.id}&userPassword=${this.state.password}`
+    fetch(url)
+      .then((response)=>{return response.json();})
+      .then((responseData)=>{
+        var data = responseData.status;
+        var name = responseData.info.userName;
+        
+        var touxiang = responseData.info.userAvatarUrl;
+          alert("欢迎登陆"+name);
+          const navigator =this.props.navigator;
+          navigator.push({
+            component:Home,
+            params:{
+              aa:name
+             
+            }
+          })
+      })
+      .catch((error)=>{
+          alert(error);
+      })
+  }
+
   render() {
       return (
-        <ImageBackground style={{height:680,width:420}} source={require('../imgs/beijing.jpg')}>
+      <ImageBackground style={{height:680,width:420}} source={require('../imgs/beijing.jpg')}>
       <View style={{flex:1}} >
     
       <View style={{flex:0.1,}}>
@@ -81,30 +70,24 @@ export default class DengLu extends Component {
       <View>
       <View style={{flexDirection:'row'}}>
      <View style={{padding:10,width:420}}>
-    <TextInput
-    
+    <TextInput 
+    onChangeText={(id)=>this.setState({id})}
     placeholder="请输入手机号:"
     keyboardType="numeric"
     selectionColor="white"
-    style={{textAlign:'center'}}                      
-    clearButtonMode={'always'}
-    //清除输入
-    onChangeText={(text) => {this.setState({inputText:text})}}
-    value = {this.state.inputText}
-    clearButtonMode="while-editing"
-     //清除输入
+    style={{textAlign:'center'}}                    
     
     />
      </View> 
      <View style={{width:20,height:20,marginLeft:-50,marginTop:26}}>
-     <TouchableOpacity onPress={this.qingchu.bind(this)}>
+     <TouchableOpacity >
      <Image style={{width:20,height:20,}} source ={require('../imgs/qingchu.png')} />
      </TouchableOpacity>
      </View>
      </View>
      <View>
-   <TextInput  
-    onChangeText={(text1) => this.setState({text1})}
+     <TextInput  
+      onChangeText={(password)=>this.setState({password})}
       placeholder="请输入密码:"
       secureTextEntry={true}
       selectionColor="black"
@@ -112,11 +95,9 @@ export default class DengLu extends Component {
     />
     </View>
     
-    <View style={{width:410,}}>
-    <YanZhengMa />
-    </View>
+    
 
-    <TouchableOpacity onPress={postRequest.bind(this,"http://172.19.186.76:8080/SSLearningTeam/user/testlogin")}>
+    <TouchableOpacity onPress={()=>this.Post()}>
     <View style={styles.btn}>
     <Text style={styles.loginText}>登   陆</Text>
     </View>
@@ -142,10 +123,6 @@ export default class DengLu extends Component {
         component:ZhuCe,
       })
     }
-    qingchu(){
-    this.setState({inputText:' '});
-    }
-
   }
 
 

@@ -15,22 +15,17 @@ import {
   TouchableOpacity
   }from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components';
-import Home from './Home'
+
 /*导入外部组件类*/
 export default class App extends Component<Props> {
+
+
   render() {  
     return (
-      <View>
-        <Text>这是测试页</Text>
-        <TouchableOpacity onPress={this.fanhui.bind(this)}>
-        <Text>点击返回</Text>
-        </TouchableOpacity>
-      </View>
+     <View>
+                <Text>{this.props.k}</Text>
+     </View>
     );
-  }
-  fanhui(){
-    const navigator=this.props.navigator;
-    navigator.pop()
   }
 }
 

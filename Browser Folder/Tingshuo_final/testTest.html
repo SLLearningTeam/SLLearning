@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习题</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        var simulatedTest_id=GetRequest().simulatedTestId;
+        var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_img = user.getItem('userAvatarUrl');
+            var menu_item = byId('classify-menu-item');
+            var course_box = byId('course-box');
+        $(function(){
+            
+            
+
+            $.ajax({
+                type: 'post',
+                url: first + '/train/user/getTestQuestionResultOfUserOnSimulatedTest',
+                dataType: 'json',
+                data: {
+                    'userId': user_id,
+                    'simulatedTestId': simulatedTest_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('您此前成绩为：'+r.info)
+                    } else {
+                        alert('你还没有做过此题')
+                    }
+                }
+            });
+
+            if(user_id!=null){
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                
+            }else{
+                console.log('未登录')
+                
+            }
+            $.ajax({
+                type: 'get',
+                url: first + '/train/user/getAllSimulatedTestById',
+                dataType: 'json',
+                data: {
+                    'simulatedTestId': simulatedTest_id
+                },
+                success: function (r) {
+                    if (r.status == true) {  //有问题
+                        //如果只有一道题
+                        if(r.info.questions.length==1){
+                            var chengji = 100;
+                            $('#tests-box').append('<h5 id="question">' + r.info.questions[0].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info.questions[0].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info.questions[0].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info.questions[0].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info.questions[0].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info.questions[0].answerReal+'<br>' + r.info.questions[0].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                        }
+                        else{
+                            for (var x = 0; x < r.info.questions.length; x++) {
+                            if(x==r.info.questions.length-1){
+                                alert(r.info.questions.length)
+                                var chengji = Math.floor(Math.random()*40)+50;
+                                $('#tests-box').append('<h5 id="question">' + r.info.questions[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info.questions[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info.questions[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info.questions[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info.questions[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info.questions[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info.questions[x].answerReal+'<br>' + r.info.questions[x].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                            }else{
+                                $('#tests-box').append('<h5 id="question">' + r.info.questions[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info.questions[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info.questions[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info.questions[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info.questions[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info.questions[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info.questions[x].answerReal+'<br>' + r.info.questions[x].answerReason+'</div>')
+                            }
+                        }
+                        }
+
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+
+            
+        });
+
+        //提交测试
+        function subTest(e) {
+            e.nextSibling.style.display='block';
+            $('#sub_test').attr('disabled', 'disabled');
+            if(e.hasAttribute("chengji")){
+                $.ajax({
+                type: 'post',
+                url: first + '/train/user/addTestQuestionResult',
+                dataType: 'json',
+                data: {
+                    'userId': user_id,
+                    'simulatedTestId': simulatedTest_id,
+                    'resultScore': e.getAttribute('chengji')
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('提交成功')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+            }
+        }
+    </script>
+</head>
+<body>
+        <div class="headerBar-noShadow">
+                <div class="header-shadow">
+                        <div class="leftArea">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                                </a>
+                            </div>
+                            <div class="topNav fl">
+                                <ul>
+                                    <li class="fl">
+                                        <a href="./index.html">首页</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="classify.html">分类</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="./test.html">模拟练习</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="#">真是</a>
+                                    </li>
+                                    <li style="padding-right: 30px;" class="fl">
+                                        <a href="#">干啥呀</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+            
+                        <div class="rightArea">
+                            <div class="user_box fl">
+                                <ul>
+                                    <li class="fl dropdown">
+                                        <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                        <div class="dropdown-menu">
+                                            <img class="download" src="./img/logo.png" alt="下载APP">
+                                            <span>扫一扫</span>
+                                        </div>
+                                    </li>
+                                    <li id="login" class="fl">
+                                        <a href="me.html">登录</a>
+                                        /
+                                        <a href="#">注册</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-box">
+                            <form class="form-inline search-form" action="" id="search-form">
+                                <input type="text" class="search-content" name="fd" id="search-content">
+                                <button class="search-submit" type="submit" value=""></button>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+            <div class="course-page">
+                    <div class="class-box">
+                        <div class="class-title-box">
+                            <div class="class-title clearfix">
+                                <div class="class-img fl">
+                                    <img id="course-img" style="border-radius: 5px; width: 380px; height: 240px;" src="./img/siji.jpg"
+                                        alt="课程图片">
+                                </div>
+                                <div class="class-detail">
+                                    <div class="class-detail-top clearfix">
+                                        <div class="class-name-box">
+                                            <p id="class_name">这里是课程名字</p>
+                                        </div>
+                                        <div style="line-height:30px">
+                                            <p id="course_evl" class="fl">评分：</p>
+                                            <img data-toggle="modal" data-target="#myModal" class="star" src="./icon/edit.png" alt="评价">
+                                            <div id="class-menu" class="class-menu">
+                                                <a href="javascript:void(0)">
+            
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <img id="xiazai" onclick="download()" style="height: 30px;" title="下载" src="./icon/download.png"
+                                                        alt="下载">
+                                                </a>
+                                            </div>
+                                            <!--模态框-->
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content" style="width:700px;">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="myModalLabel">
+                                                                课程评分
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="col-md-5 p-lg-5 mx-auto my-5">
+                                                                <div class="rating-stars block">
+                                                                    <input type="number" hidden="hidden" readonly="readonly" class="form-control rating-value"
+                                                                        name="rating-stars-value" id="rating-stars-value">
+                                                                    <div class="rating-stars-container">
+                                                                        <div class="rating-star">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </div>
+                                                                        <div class="rating-star">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </div>
+                                                                        <div class="rating-star">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </div>
+                                                                        <div class="rating-star">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </div>
+                                                                        <div class="rating-star">
+                                                                            <i class="fa fa-star"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                                            </button>
+                                                            <button onclick="subEvla()" type="button" class="btn btn-primary">
+                                                                提交
+                                                            </button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="class-detail-mid">
+                                        <em id="download-num">下载量：&nbsp;</em>
+                                    </div>
+                                    <div class="class-detail-bottom">
+                                        <p id="course-state" class="fl">这里是课程简介</p>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="class-content">
+                            <!--  听力  -->
+                            <div id="tests-box" class="text-center">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</body>
+</html>

@@ -19,10 +19,11 @@ import {
 } from 'react-native';
 import TitleBar from './TitleBar'
 import FaXianPage from './faXianPage'
-import Sort from '../Classify/Sort'
-import Course from '../Course/Course'
-import ShiTi from '../ZuJian/ShiTi'
+import FenLeiPage from './fenLeiPage'
+import KeChengPage from './keChengPage'
+
 import WoDe from '../ZuJian/WoDe'
+import ShouSuo from '../ZuJian/ShouSuo'
 import SideMenu from 'react-native-side-menu';
 import {Navigator} from 'react-native-deprecated-custom-components';
 const {width, heihgt} = Dimensions.get('window');
@@ -74,10 +75,10 @@ export default class DaoHang extends Component<Props> {
       <Image style={styles.image} source={require('../imgs/list.png')}></Image>
       </TouchableOpacity>
       <Image style={styles.image} source={require('../imgs/search.png')}></Image>
-      <TextInput style={{width:'80%'}}
-      placeholder = {'搜索课程、教材、试题'}
-      >
-      </TextInput>
+      <TouchableOpacity onPress={this.ShouSuo.bind(this)}>
+      <Text style={{fontSize:20,fontWeight:'bold',marginTop:15}}>搜索电影</Text>
+      </TouchableOpacity>
+      <Text style={{fontSize:16,marginTop:18,marginLeft:90}}>当前用户：{this.props.aa}</Text>
       </View>
       <TitleBar 
        onSelectItem = {this.onSelectItem.bind(this)}
@@ -95,10 +96,10 @@ export default class DaoHang extends Component<Props> {
      <FaXianPage navigator={this.props.navigator}/>
      </View>
      <View>
-     <Sort navigator={this.props.navigator}/>
+     <FenLeiPage navigator={this.props.navigator}/>
      </View>
      <View>
-     <Course navigator={this.props.navigator}/>
+     <KeChengPage navigator={this.props.navigator}/>
      </View>
      </ViewPagerAndroid>
      <View>
@@ -122,6 +123,12 @@ export default class DaoHang extends Component<Props> {
        this.refs.ViewPager.setPage(2)
       break;
     }
+  }
+  ShouSuo(){
+    const navigator = this.props.navigator;
+    navigator.push({
+      component:ShouSuo
+    })
   }
 }
 
