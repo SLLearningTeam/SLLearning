@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>course</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome core CSS -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script src="js/jquery.rating-stars.min.js"></script>
+    <script>
+        var course_id=GetRequest().courseId;
+            var courseType = 'listeningcourse';
+            var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_img = user.getItem('userAvatarUrl');
+
+
+        $(function () {
+
+            //订阅
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/checkSubscriptionRecordingOfUser',
+                dataType:'json',
+                data:{
+                    'userId': user_id,
+                    'courseType' : courseType,
+                    'courseId' : course_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="已订阅"src="./icon/follow-yes.png" alt="订阅">')
+                    }else{
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="订阅"src="./icon/follow.png" alt="订阅">')
+                    }
+                }
+            });
+        
+            
+            
+            
+            if(user_id==null){
+                console.log('未登录')
+            }else{
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                
+            }
+            
+            //获取课程评分
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/getAvgEvaluation',
+                dataType:'json',
+                data:{
+                    'courseType' : courseType,
+                    'courseId' : course_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        $('#course_evl').append(r.info);
+                    }else{
+                        $('#course_evl').html('暂无人对该课程进行评价');
+                    }
+                }
+            });
+            //获取听力课程信息
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/getListeningCourseInfo',
+                dataType:'json',
+                data:{
+                    'courseId' : course_id,
+                    'userId':user_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        var course_name = r.info.courseName;
+                        var download_num = r.info.downloadNum;
+                        var content_en = r.info.courseEnglishContent;
+                        var content_cn = r.info.courseChineseContent;
+                        var course_img = r.info.instructionImgUrl;
+                        var course_mp3 = r.info.courseResourceUrl;
+                        
+                        $('#class_name').html(course_name);
+                        $('#download-num').append(download_num);
+                        $('#course-state').html(content_cn);
+                        $('#course-img').attr('src',course_img);
+                        $('#course-mp3').attr('src',course_mp3);
+                        $('#xiazai').attr(course_mp3);
+                        $('#text-cn').html(content_cn);
+                        $('#text-en').html(content_en);
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+        })
+        function followBtn() {
+            if ($('#class-menu').children().eq(0).children().attr('src')=='./icon/follow.png') {
+                $('#class-menu').children().eq(0).children().remove();
+                $.ajax({
+                type:'get',
+                url:first+'/course/user/addSubscriptionRecording',
+                dataType:'json',
+                data:{
+                    'userId': user_id,
+                    'courseType' : courseType,
+                    'courseId' : course_id
+                },
+                success:function(r){
+                    if(r.status==true){
+                        $('#class-menu').children().eq(0).append('<img id="follow-btn" onclick="followBtn()" style="height: 30px;" title="已订阅"src="./icon/follow-yes.png" alt="订阅">')
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+            } else {
+                alert('您已经订阅了~')
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="headerBar-noshadow">
+            <div class="header-shadow">
+                    <div class="leftArea">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                            </a>
+                        </div>
+                        <div class="topNav fl">
+                            <ul>
+                                <li class="fl">
+                                    <a href="./index.html">首页</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="classify.html">分类</a>
+                                </li>
+                                <li class="fl">
+                                    <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="./test.html">模拟练习</a>
+                                </li>
+                                <li class="fl">
+                                    <a href="#">真是</a>
+                                </li>
+                                <li style="padding-right: 30px;" class="fl">
+                                    <a href="#">干啥呀</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="rightArea">
+                        <div class="user_box fl">
+                            <ul>
+                                <li class="fl dropdown">
+                                    <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                    <div class="dropdown-menu">
+                                        <img class="download" src="./img/logo.png" alt="下载APP">
+                                        <span>扫一扫</span>
+                                    </div>
+                                </li>
+                                <li id="login" class="fl">
+                                    <a href="me.html">登录</a>
+                                    /
+                                    <a href="#">注册</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="search-box">
+                        <form class="form-inline search-form" action="" id="search-form">
+                            <input type="text" class="search-content" name="fd" id="search-content">
+                            <button class="search-submit" type="submit" value=""></button>
+                        </form>
+                    </div>
+                </div>
+    </div>
+    <!--header-->
+    <div class="course-page">
+        <div class="class-box">
+            <div class="class-title-box">
+                <div class="class-title clearfix">
+                    <div class="class-img fl">
+                        <img id="course-img" style="border-radius: 5px; width: 380px; height: 240px;" src="./img/siji.jpg"
+                            alt="课程图片">
+                    </div>
+                    <div class="class-detail">
+                        <div class="class-detail-top clearfix">
+                            <div class="class-name-box">
+                                <p id="class_name">这里是课程名字</p>
+                            </div>
+                            <div style="line-height:30px">
+                                <p id="course_evl" class="fl">评分：</p>
+                                <img data-toggle="modal" data-target="#myModal" class="star" src="./icon/edit.png" alt="评价">
+                                <div id="class-menu" class="class-menu">
+                                    <a href="javascript:void(0)">
+
+                                    </a>
+                                    <a href="javascript:void(0)">
+                                        <img id="xiazai" onclick="download()" style="height: 30px;" title="下载" src="./icon/download.png"
+                                            alt="下载">
+                                    </a>
+                                </div>
+                                <!--模态框-->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" style="width:700px;">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    课程评分
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-md-5 p-lg-5 mx-auto my-5">
+                                                    <div class="rating-stars block">
+                                                        <input type="number" hidden="hidden" readonly="readonly" class="form-control rating-value"
+                                                            name="rating-stars-value" id="rating-stars-value">
+                                                        <div class="rating-stars-container">
+                                                            <div class="rating-star">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <div class="rating-star">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <div class="rating-star">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <div class="rating-star">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <div class="rating-star">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                                </button>
+                                                <button onclick="subEvla()" type="button" class="btn btn-primary">
+                                                    提交
+                                                </button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="class-detail-mid">
+                            <em id="download-num">下载量：&nbsp;</em>
+                        </div>
+                        <div class="class-detail-bottom">
+                            <p id="course-state" class="fl">这里是课程简介</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="class-content">
+                <!--  听力  -->
+                <div class="course-tool">
+                    <div class="listen-play fl">
+                        <audio src="./audio/111.mp3" id="course-mp3" controls="controls" hidden="true"></audio>
+                        <img onclick="playPause()" id="play" style="height: 30px;" src="./icon/play.png" alt="播放、暂停"
+                            title="点击播放/暂停">
+                    </div>
+                    <div class="course-test fr">
+                        <img onclick="startTest()" data-toggle="modal" data-target="#test" style="height:30px;" src="./icon/test.png"
+                            alt="测试" title="点击进入测试">
+                        <!--模态框-->
+                        <div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="testLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="testLabel">
+                                            课程测试
+                                        </h4>
+                                    </div>
+                                    <div id="test-box" class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </div>
+                </div>
+                <div class="content-text">
+                    <div class="container-nav">
+                        <div class="text-center">
+                            <a onclick="lauguage(this)" href="javascript:void(0)" class="sort-btn sort-btn-action">中文</a>
+                            <a onclick="lauguage(this)" href="javascript:void(0)" class="sort-btn">英文</a>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <div id="text-cn" class="text-open">
+                            对方的时光都会给福建和故事告诉对方过后的发生噶地方干哈的复合肥大黄蜂大唐官府搭噶地方噶地方官阿斯蒂芬噶所多过付多过付大过哈或或或或或或或或或或或或或
+                        </div>
+                        <div id="text-en" class="text-close">
+                            对方的时光都会给福建和故事告诉对方过后的发生噶地方干哈的复合肥大黄蜂大唐官府搭噶地方噶地方官阿斯蒂芬噶所多过付多过付大过哈或或或或或或或或或或或或或
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--本页内容-->
+    <div class="footer-box">
+        <div class="footer">
+            <div class="footer-content">
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+                <a href="" target="_blank">企业合作</a>
+            </div>
+            <div class="footer-copyright">
+                <p>©2018&nbsp;tingshuo.com</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //评价
+        var ratingOptions = {
+            selectors: {
+                starsSelector: '.rating-stars',
+                starSelector: '.rating-star',
+                starActiveClass: 'is--active',
+                starHoverClass: 'is--hover',
+                starNoHoverClass: 'is--no-hover',
+                targetFormElementSelector: '.rating-value'
+            }
+        };
+
+        $(".rating-stars").ratingStars(ratingOptions);
+
+        $(".rating-stars").on("ratingChanged", function (ev, data) {
+            $("#ratingChanged").html(data.ratingValue);
+            var evaluationLevel = $("#rating-stars-value").val();
+        });
+    </script>
+    <script>
+        var playAudio = byId('play');
+        var course_mc = byId('course-mp3');
+        var cnEn = byClass('sort-btn');
+        var text_cn = byId('text-cn');
+        var text_en = byId('text-en');
+        var follow_btn = byId('follow-btn');
+        var op_cont = byClass('op-cont');
+        var user = window.localStorage;
+        var user_id = user.getItem('userId');
+        var user_img = user.getItem('userAvatarUrl');
+
+        //下载
+        function download() {
+            console.log($('audio').attr('src'));
+            location.href=first + '/course/user/downloadListeningCourse?userId='+user_id+'&&courseId='+course_id+"&&fileName=/SSLearningTeam/ListeningCourseResource/521bc7f2-c9c5-41b6-96a5-fe6b2c7839f9_listeningresource_1.mp3";
+        }
+
+        //开始听力测试（目前只有口语好用）
+        function startTest() {
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/getAllQuestion',
+                dataType: 'json',
+                data: {
+                    'courseType': courseType,
+                    'courseId': course_id
+                },
+                success: function (r) {
+                    if (r.status == true) {  //有问题
+                        //如果只有一道题
+                        if(r.info.length==1){
+                            alert(1)
+                            var chengji = Math.floor(Math.random()*40)+50;
+                            $('#test-box').append('<h5 id="question">' + r.info[0].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[0].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[0].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[0].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[0].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[0].answerReal+'<br>' + r.info[0].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                        }
+                        else{
+                            for (var x = 0; x < r.info.length; x++) {
+                            if(x==r.info.length-1){
+                                alert(r.info.length-1)
+                                var chengji = Math.floor(Math.random()*40)+50;
+                                $('#test-box').append('<h5 id="question">' + r.info[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" chengji="'+chengji+'" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[x].answerReal+'<br>' + r.info[x].answerReason + '<br>本次得分： '+chengji+' 分</div>')
+                            }else{
+                                $('#test-box').append('<h5 id="question">' + r.info[x].questionContent +
+                                '</h5>' +
+                                '<label><input name="option" type="radio" value="1" />A: <span class="op-cont">' +
+                                r.info[x].answerA + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="2" />B: <span class="op-cont">' +
+                                r.info[x].answerB + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="3" />C: <span class="op-cont">' +
+                                r.info[x].answerC + '</span></label><br>' +
+                                '<label><input name="option" type="radio" value="4" />D: <span class="op-cont">' +
+                                r.info[x].answerD + '</span></label><br>' +
+                                '<button id="sub_test" onclick="subTest(this)" type="button" class="btn btn-primary" "answerReal"="' +
+                                r.info[x].answerReal + '">提交</button>' +
+                                '<div id="reason" class="reason">正确答案： '+r.info[x].answerReal+'<br>' + r.info[x].answerReason+'</div>')
+                            }
+                        }
+                        }
+                        var yiti = 100 / r.info.length;
+
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+        //提交测试
+        function subTest(e) {
+            alert(courseType)
+            e.nextSibling.style.display='block';
+            $('#sub_test').attr('disabled', 'disabled');
+            if(e.hasAttribute("chengji")){
+                $.ajax({
+                type: 'post',
+                url: first + '/course/user/addOralCourseScore',
+                dataType: 'json',
+                data: {
+                    'courseType': courseType,
+                    'courseId': course_id,
+                    'oralScore': e.getAttribute('chengji'),
+                    'userId':user_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('提交成功')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+            }
+        }
+        //下一题   需要刷新元素
+
+        //评价
+        function subEvla() {
+            $.ajax({
+                type: 'post',
+                url: first + '/course/user/addEvaluation',
+                dataType: 'json',
+                data: {
+                    'userId': user_id,
+                    'courseType': courseType,
+                    'courseId': course_id,
+                    'evaluationLevel': evaluationLevel
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        alert('评价成功！')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+        //下载音频
+        function download_ls() {
+            alert($('audio').attr('src'))
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/downloadListeningCourse',
+                dataType: 'json',
+                data: {
+                    'courseId': course_id,
+                    'fileName': $('audio').attr('src')
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        console.log('下载听力')
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+
+        //音频播放
+        function playPause() {
+            playAudio.src = (playAudio.getAttribute("src") == './icon/play.png') ? './icon/pause.png' :
+                './icon/play.png';
+            if (course_mc.paused) {
+                course_mc.play();
+            } else {
+                course_mc.pause();
+            }
+        }
+        //中英文切换
+        function lauguage(e) {
+            if (e == cnEn[0]) {
+                if (e.className.indexOf('sort-btn-action') > -1) {
+                    e.classList.remove('sort-btn-action');
+                    text_cn.className = 'text-close';
+                } else {
+                    e.classList.add('sort-btn-action');
+                    text_cn.className = 'text-open';
+                }
+            } else {
+                if (e.className.indexOf('sort-btn-action') > -1) {
+                    e.classList.remove('sort-btn-action');
+                    text_en.className = 'text-close';
+                } else {
+                    e.classList.add('sort-btn-action');
+                    text_en.className = 'text-open';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

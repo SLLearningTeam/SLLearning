@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>classify</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+
+        var thisPage = 1;
+        //语言——全部——分页
+        function chengePage(e) {
+            thisPage = e.innerText;
+            $('#course-box').children().remove();
+            $('#page').children().remove();
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/courses_manage/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Listening
+                            for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                courseListen(r, y);
+                            }
+                            //Speaking
+                            for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                courseSpeak(r, y);
+                            }
+                            //Reading
+                            for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                courseRead(r, y);
+                            }
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
+                            }
+
+                        } else {
+                            alert('请求错误！')
+                        }
+                    }
+                });
+        }
+
+        $(function(){
+            var user = window.localStorage;
+            var user_id = user.getItem('userId');
+            var user_img = user.getItem('userAvatarUrl');
+            var menu_item = byId('classify-menu-item');
+            var course_box = byId('course-box');
+
+            //分页
+            
+
+            if(user_id!=null){
+                $('#login').html('<div class="user-img-g"><a href="./me.html"><img src="'+user_img+'" alt="头像"></a></div>')
+                
+            }else{
+                console.log('未登录')
+                
+            }
+            //列出所有语言
+            $.ajax({
+                type:'get',
+                url:first+'/language/user/getlanguages/'+thisPage,//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        for(var x=0;x<r.info.length;x++){
+                            $('#lg-type').append('<li class="classify-menu-item"><a languageTypeId="'+r.info[x].languageTypeId+'" class="lg-item" onclick="lgItem(this)" href="javascript:void(0)">'+r.info[x].languageName+'</a></li>');
+                        }
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+            //显示全部rate
+            /*$.ajax({
+                type:'get',
+                url:first+'/language/user/getratetypes/'+thisPage,//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        for(var x=0;x<r.info.length;x++){
+                            item_li_a.innerHTML='<li class="classify-menu-item"><a rateTypeId="'+r.info[x].rateTypeId+'" class="tp-item" onclick="tpItem(this)" href="javascript:void(0)">'+r.info[x].rateName+'</a></li>'
+                        }
+                    }
+                }
+            });*/
+
+            //展示所有课程
+            $.ajax({
+                type:'get',
+                url:first+'/course/user/courses_manage/'+thisPage,//可能有问题
+                dataType:'json',
+                success:function(r){
+                    if(r.status==true){
+                        //Listening
+                            for(var y=0;y<r.info.courses.listeningCourses.length;y++){
+                                courseListen(r,y);
+                            }
+                            //Speaking
+                            for(var y=0;y<r.info.courses.oralCourses.length;y++){
+                                courseSpeak(r,y);
+                            }
+                            //Reading
+                            for(var y=0;y<r.info.courses.readingCourses.length;y++){
+                                courseRead(r,y);
+                            }
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
+                            }
+                        
+                    }else{
+                        alert('请求错误！')
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+        <div class="headerBar-noShadow">
+                <div class="header-shadow">
+                        <div class="leftArea">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img style="height: 72px;" src="./img/weblogo.png" alt="听说网">
+                                </a>
+                            </div>
+                            <div class="topNav fl">
+                                <ul>
+                                    <li class="fl">
+                                        <a href="./index.html">首页</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="classify.html">分类</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a onclick="checkin()" href="javascript:void(0)">打卡</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="./test.html">模拟练习</a>
+                                    </li>
+                                    <li class="fl">
+                                        <a href="#">真是</a>
+                                    </li>
+                                    <li style="padding-right: 30px;" class="fl">
+                                        <a href="#">干啥呀</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+            
+                        <div class="rightArea">
+                            <div class="user_box fl">
+                                <ul>
+                                    <li class="fl dropdown">
+                                        <a href="" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">下载APP</a>
+                                        <div class="dropdown-menu">
+                                            <img class="download" src="./img/logo.png" alt="下载APP">
+                                            <span>扫一扫</span>
+                                        </div>
+                                    </li>
+                                    <li id="login" class="fl">
+                                        <a href="me.html">登录</a>
+                                        /
+                                        <a href="#">注册</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-box">
+                            <form class="form-inline search-form" action="" id="search-form">
+                                <input type="text" class="search-content" name="fd" id="search-content">
+                                <button class="search-submit" type="submit" value=""></button>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+    <div class="classify-main">
+        <div class="classify-top-box">
+            <div class="classify-top">
+                <div class="classify-menu-row clearfix">
+                    <span class="classify-title fl">语言：</span>
+                    <div class="classify-cont">
+                        <ul id="lg-type">
+                            <li class="classify-menu-item">
+                                <a class="lg-item classify-menu-item-action" onclick="lgItem(this)" href="javascript:void(0)">全部</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="classify-menu-row clearfix">
+                    <div class="type-box">
+                        <span class="classify-title fl">类别：</span>
+                        <div class="classify-cont">
+                            <ul id="rt-type">
+                                <li class="classify-menu-item">
+                                    <a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="javascript:void(0)">全部</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="classify-menu-row clearfix border-bottom-none">
+                    <span class="classify-title fl">方向：</span>
+                    <div class="classify-cont">
+                        <ul id="fx-type">
+                            <li class="classify-menu-item">
+                                <a class="dt-item classify-menu-item-action" onclick="dtItem(this)" href="javascript:void(0)">全部</a>
+                            </li>
+                            <li class="classify-menu-item">
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">听力</a>
+                            </li>
+                            <li class="classify-menu-item">
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">口语</a>
+                            </li>
+                            <li class="classify-menu-item">
+                                <a class="dt-item" onclick="dtItem(this)" href="javascript:void(0)">阅读</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="classify-container">
+            <div class="container-nav clearfix">
+                <div class="text-center">
+                    <a onclick="classifySort(this)" href="#" class="sort-btn">最热</a>
+                    <a onclick="classifySort(this)" href="#" class="sort-btn">最新</a>
+                </div>
+            </div>
+            <div class="classify-course-list-box">
+                <div class="courseContent" style="margin-top: 0;">
+                    <div id="course-box" class="clearfix">
+
+                    </div>
+                </div>
+                <div id="page" class="text-center">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-box">
+            <div class="footer">
+                <div class="footer-content">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" target="_blank">意见反馈</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <a href="" target="_blank">企业合作</a>
+                    <!--模态框-->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        意见反馈
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="ad-text" class="ad-text" placeholder="在此处输入您的意见或建议 . . ." cols="30" rows="5"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                    </button>
+                                    <button onclick="sub()" type="button" class="btn btn-primary">
+                                        提交
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <p>©2018&nbsp;tingshuo.com</p>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        var lg_item = byClass('classify-menu-item');
+        var tp_item = byClass('tp-item');
+        var dt_item = byClass('dt-item');
+        var sort_btn = byClass('sort-btn');
+
+        //获取当前元素：1. onclick(this)方法中加this   2.function x(e) e就是当前对象
+        //点击语言显示等级
+        function lgItem(e) {
+            //删除所有a标签class
+            $('#lg-type').children().children().removeClass('classify-menu-item-action');
+            $('#rt-type').children().remove();
+            $('#rt-type').append(
+                '<li class="classify-menu-item"><a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="javascript:void(0)">全部</a></li>'
+            );
+            $('#fx-type').children().children().removeClass('classify-menu-item-action');
+            $('#fx-type').children().eq(0).children().addClass('classify-menu-item-action');
+            e.classList.add('classify-menu-item-action');
+            var cont = e.getAttribute('languageTypeId');
+            $('#page').children().remove();
+            if (e.innerText == '全部') {
+                $('#course-box').children().remove();
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/courses_manage/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Listening
+                            for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                courseListen(r, y);
+                            }
+                            //Speaking
+                            for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                courseSpeak(r, y);
+                            }
+                            //Reading
+                            for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                courseRead(r, y);
+                            }
+                            for(var y=1;y<=r.info.totalPages;y++){
+                                $('#page').append('<button style="margin:30px 20px;" onclick="chengePage(this)" class="btn btn-light">'+y+'</button>');
+                            }
+
+                        } else {
+                            alert('请求错误！')
+                        }
+                    }
+                });
+            } else {
+                $('#course-box').children().remove();
+                //听力
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/listeningCourses_manageByLanguageType/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    data: {
+                        'languageTypeId': cont
+                    },
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Listening
+                            for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                courseListen(r, y);
+                            }
+
+                        } else {
+                            console.log('请求错误！')
+                        }
+                    }
+                });
+                //口语
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/oralCourses_manageByLanguageType/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    data: {
+                        'languageTypeId': cont
+                    },
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Speaking
+                            for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                courseSpeak(r, y);
+                            }
+
+                        } else {
+                            console.log('请求错误！')
+                        }
+                    }
+                });
+                //阅读
+                $.ajax({
+                    type: 'get',
+                    url: first + '/course/user/readingCourses_manageByLanguageType/' + thisPage, //可能有问题
+                    dataType: 'json',
+                    data: {
+                        'languageTypeId': cont
+                    },
+                    success: function (r) {
+                        if (r.status == true) {
+                            //Reading
+                            for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                courseRead(r, y);
+                            }
+
+                        } else {
+                            console.log('请求错误！')
+                        }
+                    }
+                });
+            }
+
+            $.ajax({
+                type: 'get',
+                url: first + '/ratetype/user/getratetypebylanguagetypeid',
+                dataType: 'json',
+                data: {
+                    "languageTypeId": cont
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        for (var x = 0; x < r.info.length; x++) {
+                            $('#rt-type').append('<li class="classify-menu-item"><a rateTypeId="' + r.info[
+                                    x].rateTypeId +
+                                '" class="tp-item" onclick="tpItem(this)" href="javascript:void(0)">' +
+                                r.info[
+                                    x].rateName + '</a></li>')
+                        }
+                    } else {
+                        alert('请求错误！')
+                    }
+                }
+            });
+        }
+
+        function tpItem(e) {
+            var tp_id = e.getAttribute('rateTypeId');
+            $('#rt-type').children().children().removeClass('classify-menu-item-action');
+            e.classList.add('classify-menu-item-action');
+
+            $('#fx-type').children().children().removeClass('classify-menu-item-action');
+            $('#fx-type').children().eq(0).children().addClass('classify-menu-item-action');
+
+            $('#course-box').children().remove();
+            //听力
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/listeningCourses_manageByRateType/' + thisPage, //可能有问题
+                dataType: 'json',
+                data: {
+                    'rateTypeId': tp_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        //Listening
+                        for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                            courseListen(r, y);
+                        }
+
+                    } else {
+                        console.log('请求错误！')
+                    }
+                }
+            });
+            //口语
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/oralCourses_manageByRateType/' + thisPage, //可能有问题
+                dataType: 'json',
+                data: {
+                    'rateTypeId': tp_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        //Speaking
+                        for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                            courseSpeak(r, y);
+                        }
+
+                    } else {
+                        console.log('请求错误！')
+                    }
+                }
+            });
+            //阅读
+            $.ajax({
+                type: 'get',
+                url: first + '/course/user/readingCourses_manageByRateType/' + thisPage, //可能有问题
+                dataType: 'json',
+                data: {
+                    'rateTypeId': tp_id
+                },
+                success: function (r) {
+                    if (r.status == true) {
+                        //Reading
+                        for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                            courseRead(r, y);
+                        }
+
+                    } else {
+                        console.log('请求错误！')
+                    }
+                }
+            });
+        }
+
+        function dtItem(e) {
+            $('#course-box').children().remove();
+            for (var x = 0; x < dt_item.length; x++) {
+                if (dt_item[x].className.indexOf('classify-menu-item-action') > -1) { //判断元素的class中是否包含这个class
+                    dt_item[x].classList.remove('classify-menu-item-action');
+                }
+            }
+            e.classList.add('classify-menu-item-action');
+            for (var x = 0; x < 2; x++) {
+                sort_btn[x].classList.remove('sort-btn-action');
+            }
+            //点击的是听力
+            if (e.innerText == '听力') {
+                //是否选择语言
+                for (var z = 0; z < $('#lg-type').children().length; z++) {
+                    if ($('#lg-type').children().eq(z).children().hasClass('classify-menu-item-action')) {
+                        var lg_item_ac = $('#lg-type').children().eq(z).children();
+                    }
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    var lg_id = lg_item_ac.attr('languageTypeId');
+                    //是否选择类别
+                    for (var z = 1; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                        }
+
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表
+                    if (tp_item_ac != undefined) {
+                        var rt_id = tp_item_ac.getAttribute('rateTypeId');
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/listeningCourses_manageByRateType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'rateTypeId': rt_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                        courseListen(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //选了语言没有选类别
+                    else {
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/listeningCourses_manageByLanguageType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'languageTypeId': lg_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                        courseListen(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误sss！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/listeningCourses_manage/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                    courseListen(r, y);
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+                //   fx选择口语
+            } else if (e.innerText == '口语') {
+                //是否选择语言
+                for (var z = 0; z < $('#lg-type').children().length; z++) {
+                    if ($('#lg-type').children().eq(z).children().hasClass('classify-menu-item-action')) {
+                        var lg_item_ac = $('#lg-type').children().eq(z).children();
+                    }
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    var lg_id = lg_item_ac.attr('languageTypeId');
+                    //是否选择类别
+                    for (var z = 0; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                        }
+
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表
+                    if (tp_item_ac != undefined) {
+                        var rt_id = tp_item_ac.getAttribute('rateTypeId');
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/oralCourses_manageByRateType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'rateTypeId': rt_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                        courseSpeak(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //选了语言没有选类别
+                    else {
+                        alert(lg_id)
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/oralCourses_manageByLanguageType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'languageTypeId': lg_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                        courseSpeak(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/oralCourses_manage/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                    courseSpeak(r, y);
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+            } else if (e.innerText == '阅读') {
+                //是否选择语言
+                for (var z = 0; z < $('#lg-type').children().length; z++) {
+                    if ($('#lg-type').children().eq(z).children().hasClass('classify-menu-item-action')) {
+                        var lg_item_ac = $('#lg-type').children().eq(z).children();
+                    }
+                }
+                //如果选择了语言
+                if (lg_item_ac != undefined) {
+                    var lg_id = lg_item_ac.attr('languageTypeId');
+                    //是否选择类别
+                    for (var z = 0; z < tp_item.length; z++) {
+                        if (tp_item[z].className.indexOf('classify-menu-item-action') > -1) {
+                            var tp_item_ac = tp_item[z];
+                        }
+
+                    }
+                    //如果选择了类别   用户获取筛选指定种类类别(种类类别已经确定了语言类别)的听力课程列表
+                    if (tp_item_ac != undefined) {
+                        var rt_id = tp_item_ac.getAttribute('rateTypeId');
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/readingCourses_manageByRateType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'rateTypeId': rt_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                        courseRead(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                    //选了语言没有选类别
+                    else {
+                        alert(lg_id)
+                        $.ajax({
+                            type: 'get',
+                            url: first + '/course/user/readingCourses_manageByLanguageType/' + thisPage, //可能有问题
+                            dataType: 'json',
+                            data: {
+                                'languageTypeId': lg_id
+                            },
+                            success: function (r) {
+                                if (r.status == true) {
+                                    //Listening
+                                    for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                        courseRead(r, y);
+                                    }
+                                } else {
+                                    alert('请求错误！')
+                                }
+                            }
+                        });
+                    }
+                }
+                //没有选择语言
+                else {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/readingCourses_manage/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                    courseRead(r, y);
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        function classifySort(e) {
+            //是否选择听力，口语或阅读
+            for (var x = 0; x < dt_item.length; x++) {
+                if (dt_item[x].className.indexOf('classify-menu-item-action') > -1) {
+                    var dt_item_ac = dt_item[x];
+                }
+            }
+            //如果当前是“最热”
+            if (e == sort_btn[0]) {
+                $('#lg-type').children().children().removeClass('classify-menu-item-action');
+                $('#lg-type').children().eq(0).children().addClass('classify-menu-item-action');
+                $('#rt-type').children().remove();
+                $('#rt-type').append(
+                    '<li class="classify-menu-item"><a class="tp-item classify-menu-item-action" onclick="tpItem(this)" href="javascript:void(0)">全部</a></li>'
+                );
+                e.classList.add('sort-btn-action');
+                sort_btn[1].classList.remove('sort-btn-action');
+
+                //听力
+                if (dt_item_ac.innerText == '听力') {
+                    $('#course-box').children().remove();
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/listeningCourses_manageByDownload/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Listening
+                                for (var y = 0; y < r.info.courses.listeningCourses.length; y++) {
+                                    courseListen(r, y);
+                                }
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+                //口语
+                else if (dt_item_ac.innerText == '口语') {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/oralCourses_manageByDownload/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Speaking
+                                for (var y = 0; y < r.info.courses.oralCourses.length; y++) {
+                                    courseSpeak(r, y);
+                                }
+
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                }
+                //阅读
+                else if (dt_item_ac.innerText == '阅读') {
+                    $.ajax({
+                        type: 'get',
+                        url: first + '/course/user/readCourses_manageByDownload/' + thisPage, //可能有问题
+                        dataType: 'json',
+                        success: function (r) {
+                            if (r.status == true) {
+                                //Reading
+                                for (var y = 0; y < r.info.courses.readingCourses.length; y++) {
+                                    courseRead(r, y);
+                                }
+
+                            } else {
+                                alert('请求错误！')
+                            }
+                        }
+                    });
+                } else {
+                    alert('先选择听力，口语或阅读');
+                }
+
+            } else {
+                e.classList.add('sort-btn-action');
+                sort_btn[0].classList.remove('sort-btn-action');
+            }
+        }
+    </script>
+</body>
+
+</html>
