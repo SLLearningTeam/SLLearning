@@ -1,7 +1,17 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View,Image} from "react-native";
+import {
+ActivityIndicator, 
+Animated, 
+FlatList, 
+ScrollView, 
+StyleSheet, 
+Text, 
+View,
+Image,
+TouchableOpacity,
+} from "react-native";
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+import {Navigator} from 'react-native-deprecated-custom-components';
 const REQUEST_URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
 
 class FlatListExample extends Component {
@@ -84,13 +94,17 @@ class FlatListExample extends Component {
     }
 
     //返回itemView
-    renderItemView({item}) {
+    renderItemView=({item})=> {
+        
         return (
-            <View>
+            <TouchableOpacity onPress={this.tiao.bind(this)}>
+            <View>    
                <View style={{borderWidth:1,height:120,flexDirection:'row'}}>
+                    
                   <View>
                      <Image source={require('../imgs/logo.png')} style={styles.logo}/>
                   </View>
+                    
                   <View style={{marginTop:10}}>
                      <Text style={styles.title}>课程名: {item.value.name} ({item.value.id})
                      </Text>
@@ -101,16 +115,18 @@ class FlatListExample extends Component {
                      <Text style={styles.content}>课程简介: {item.value.name}</Text>
                   </View>
                </View>
+              
             </View>
+               </TouchableOpacity>
         );
+      
     }
 
     renderData() {
         return (
             <ScrollView >
-            
-                <AnimatedFlatList
-                    data={this.state.dataArray}
+                <AnimatedFlatList              
+                    data={this.state.dataArray}                
                     renderItem={this.renderItemView}
                 />
             </ScrollView>
@@ -128,6 +144,14 @@ class FlatListExample extends Component {
         //加载数据
         return this.renderData();
     }
+    tiao(){
+        const navigator = this.props.navigator;
+        navigator.push({
+            component:ShiTi
+        })
+    }
+    
+   
 }
 
 const styles = StyleSheet.create({

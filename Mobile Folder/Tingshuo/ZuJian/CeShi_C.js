@@ -29,13 +29,13 @@ componentDidMount() {
             .then((responseJson) => {
                 this.setState({
                     loaded: true,
-                    title : responseJson.info[0].questionContent,
-                    A : responseJson.info[0].answerA,
-                    B : responseJson.info[0].answerB,
-                    C : responseJson.info[0].answerC,
-                    D : responseJson.info[0].answerD,
-                    reason : responseJson.info[0].answerReason,
-                    answerReal : responseJson.info[0].answerReal,
+                    title : responseJson.info[4].questionContent,
+                    A : responseJson.info[4].answerA,
+                    B : responseJson.info[4].answerB,
+                    C : responseJson.info[4].answerC,
+                    D : responseJson.info[4].answerD,
+                    reason : responseJson.info[4].answerReason,
+                    answerReal : responseJson.info[4].answerReal,
                 });
                 
             })
@@ -105,7 +105,7 @@ componentDidMount() {
                </RadioModal>
            </View>
       <View style={{alignItems:'baseline',flex:1,borderBottomWidth:1}}>
-      
+     
       <View style={{flexDirection:'column',}}>
      <View style={{flexDirection:'row',}}>
         <TouchableOpacity onPress={() => this._onPressDaAn()}>

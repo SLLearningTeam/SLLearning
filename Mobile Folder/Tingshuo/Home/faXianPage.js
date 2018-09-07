@@ -15,8 +15,9 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import Router from '../ZuJian/Router'
 import Lunbo from '../ZuJian/Lunbo'
-import ShiTi from '../ZuJian/ShiTi'
+
 import TuiJian from '../ZuJian/TuiJian'
 import SideMenu from 'react-native-side-menu';
 import {Navigator} from 'react-native-deprecated-custom-components';
@@ -28,18 +29,11 @@ export default class faXianPage extends Component<Props> {
       <View style={{padding:5}}>
       <Lunbo />
       </View>
-      <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
-      <TuiJian />
-      </TouchableOpacity>
-       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
-      <TuiJian />
-      </TouchableOpacity>
-       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
-      <TuiJian />
-      </TouchableOpacity>
-       <TouchableOpacity onPress = {this.TPagePress.bind(this)}>
-      <TuiJian />
-      </TouchableOpacity>
+      <View>
+      
+      <TuiJian navigator={this.props.navigator}/>
+    
+      </View>
      </ScrollView>
     );
   }

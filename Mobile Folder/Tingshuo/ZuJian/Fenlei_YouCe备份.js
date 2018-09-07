@@ -1,9 +1,21 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View,Image} from "react-native";
+import {
+ActivityIndicator, 
+Animated, 
+FlatList, 
+ScrollView, 
+StyleSheet, 
+Text, 
+View,
+Image,
+TouchableOpacity,
+} from "react-native";
 
+import FenLei_Z from './FenLei_Z'
+import {Navigator} from 'react-native-deprecated-custom-components';
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-const REQUEST_URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
-
+const REQUEST_URL = 'http://101.200.51.53:8080/SSLearningTeam/language/user/getlanguages/1';
+const img_url='http://101.200.51.53:8080/SSLearningTeam//Languages//2fe400c5-94fe-48e7-b01c-4531a9228dbe_english.png'
 class FlatListExample extends Component {
     static navigationOptions = {
         title: 'FlatListExample',
@@ -26,12 +38,12 @@ class FlatListExample extends Component {
         fetch(REQUEST_URL)
             .then((response) => response.json())
             .then((responseData) => {
-                let data = responseData.items;
+                let data = responseData.info;
                 let dataBlob = [];
                 let i = 0;
                 data.map(function (item) {
                     dataBlob.push({
-                        key: i,
+                        key: i+1,
                         value: item,
                     })
                     i++;
@@ -84,33 +96,24 @@ class FlatListExample extends Component {
     }
 
     //返回itemView
-    renderItemView({item}) {
+    renderItemView=({item})=> {       
         return (
-            <View>
-               <View style={{borderWidth:1,height:120,flexDirection:'row'}}>
-                  <View>
-                     <Image source={require('../imgs/logo.png')} style={styles.logo}/>
-                  </View>
-                  <View style={{marginTop:10}}>
-                     <Text style={styles.title}>课程名: {item.value.name} ({item.value.id})
-                     </Text>
-                        <View style={{flexDirection:'row'}}>
-                            <Image source={require('../imgs/bofangliang.png')} style={styles.img}/>
-                            <Text style={styles.number}>:{item.value.id}</Text>
-                        </View>
-                     <Text style={styles.content}>课程简介: {item.value.name}</Text>
-                  </View>
+            <TouchableOpacity onPress={this.tiaozhuan.bind(this)}>  
+            <View> 
+               <View style={{borderWidth:1,height:80,width:360,backgroundColor:'#AEEEEE',marginLeft:20,marginTop:30,borderRadius:70}}>    
+                    <Text style={styles.content}>{item.value.languageName}</Text>
                </View>
             </View>
+            </TouchableOpacity>
         );
+      
     }
 
     renderData() {
         return (
             <ScrollView >
-            
-                <AnimatedFlatList
-                    data={this.state.dataArray}
+                <AnimatedFlatList              
+                    data={this.state.dataArray}                
                     renderItem={this.renderItemView}
                 />
             </ScrollView>
@@ -128,6 +131,14 @@ class FlatListExample extends Component {
         //加载数据
         return this.renderData();
     }
+    tiaozhuan(){
+        const navigator = this.props.navigator;
+        navigator.push({
+            component:FenLei_Z
+        })
+    }
+    
+   
 }
 
 const styles = StyleSheet.create({
@@ -138,29 +149,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
-    title: {
-        fontSize: 20,
-        color: 'blue',
-    },
     content: {
-        fontSize: 15,
-        color: 'black',
+        fontSize: 20,
+        color: 'white',
+        fontWeight:'bold',
+        textAlign:'center',
+        marginTop:20,
     },
-    number:{
-        fontSize:20,
-        color:'black',
-    },
-    logo:{
-        width:80,
-        height:80,
-        borderRadius:20,
-        margin:10
-    },
-    img:{
-        width:30,
-        height:30,
-
-    }
-
 });
 module.exports = FlatListExample;

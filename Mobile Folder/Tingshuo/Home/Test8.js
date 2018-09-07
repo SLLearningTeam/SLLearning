@@ -1,6 +1,17 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View,Image} from "react-native";
-
+import {
+ActivityIndicator, 
+Animated, 
+FlatList, 
+ScrollView, 
+StyleSheet, 
+Text, 
+View,
+Image,
+TouchableOpacity,
+} from "react-native";
+import ShiTi from '../ZuJian/ShiTi';
+import {Navigator} from 'react-native-deprecated-custom-components';
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const REQUEST_URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
 
@@ -86,21 +97,10 @@ class FlatListExample extends Component {
     //返回itemView
     renderItemView({item}) {
         return (
-            <View>
-               <View style={{borderWidth:1,height:120,flexDirection:'row'}}>
-                  <View>
-                     <Image source={require('../imgs/logo.png')} style={styles.logo}/>
-                  </View>
-                  <View style={{marginTop:10}}>
-                     <Text style={styles.title}>课程名: {item.value.name} ({item.value.id})
-                     </Text>
-                        <View style={{flexDirection:'row'}}>
-                            <Image source={require('../imgs/bofangliang.png')} style={styles.img}/>
-                            <Text style={styles.number}>:{item.value.id}</Text>
-                        </View>
-                     <Text style={styles.content}>课程简介: {item.value.name}</Text>
-                  </View>
-               </View>
+            <View>  
+            <TouchableOpacity onPress={this.tiaozhuan.bind(this)}>  
+              <Text>课程{item.value.name}</Text>
+              </TouchableOpacity>
             </View>
         );
     }
@@ -108,10 +108,10 @@ class FlatListExample extends Component {
     renderData() {
         return (
             <ScrollView >
-            
-                <AnimatedFlatList
-                    data={this.state.dataArray}
+                <AnimatedFlatList              
+                    data={this.state.dataArray}                
                     renderItem={this.renderItemView}
+                    onPress = {this._onPressItem}
                 />
             </ScrollView>
         );
@@ -128,6 +128,13 @@ class FlatListExample extends Component {
         //加载数据
         return this.renderData();
     }
+    tiaozhuan(){
+        const navigator = this.navigator;
+        navigator.push({
+            component:ShiTi
+        })
+    }
+   
 }
 
 const styles = StyleSheet.create({

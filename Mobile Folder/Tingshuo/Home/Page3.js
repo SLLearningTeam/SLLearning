@@ -15,22 +15,29 @@ import {
   TouchableOpacity
   }from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components';
-import Home from './Home'
+import Page1 from './Page1'
+import Page2 from './Page2'
 /*导入外部组件类*/
 export default class App extends Component<Props> {
   render() {  
     return (
-      <View>
-        <Text>英文页</Text>
-        <TouchableOpacity onPress={this.fanhui.bind(this)}>
-        <Text>点击返回</Text>
-        </TouchableOpacity>
-      </View>
+      <Navigator
+      //初始化路由
+      initialRoute = {{component:Page1,
+        name:'首页'
+      }}
+      
+      renderScene = {
+        (route,navigator)=>{
+          let Component = route.component;
+          if(route.component){
+            return <Component{...route.params}
+            navigator = {navigator} />
+          }
+        }
+      }
+      />   
     );
-  }
-  fanhui(){
-    const navigator=this.props.navigator;
-    navigator.pop();
   }
 }
 

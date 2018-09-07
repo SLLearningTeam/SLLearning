@@ -1,8 +1,19 @@
 import React, {Component} from "react";
-import {ActivityIndicator, Animated, FlatList, ScrollView, StyleSheet, Text, View,Image} from "react-native";
+import {
+ActivityIndicator, 
+Animated, 
+FlatList, 
+ScrollView, 
+StyleSheet, 
+Text, 
+View,
+Image,
+TouchableOpacity,
+} from "react-native";
 
+import {Navigator} from 'react-native-deprecated-custom-components';
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-const REQUEST_URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
+const REQUEST_URL = 'http://101.200.51.53:8080/SSLearningTeam/course/user/getAllQuestion?courseId=1&courseType=listeningcourse';
 
 class FlatListExample extends Component {
     static navigationOptions = {
@@ -26,7 +37,7 @@ class FlatListExample extends Component {
         fetch(REQUEST_URL)
             .then((response) => response.json())
             .then((responseData) => {
-                let data = responseData.items;
+                let data = responseData.info;
                 let dataBlob = [];
                 let i = 0;
                 data.map(function (item) {
@@ -84,33 +95,35 @@ class FlatListExample extends Component {
     }
 
     //返回itemView
-    renderItemView({item}) {
+    renderItemView=({item})=> { 
         return (
-            <View>
-               <View style={{borderWidth:1,height:120,flexDirection:'row'}}>
+            <TouchableOpacity onPress={this.tiao.bind(this)}>
+            <View>    
+               <View style={{borderWidth:1,height:120,flexDirection:'row'}}>                  
                   <View>
                      <Image source={require('../imgs/logo.png')} style={styles.logo}/>
-                  </View>
+                  </View> 
                   <View style={{marginTop:10}}>
-                     <Text style={styles.title}>课程名: {item.value.name} ({item.value.id})
+                     <Text style={styles.title}> {item.value.name} ({item.value.id})
                      </Text>
                         <View style={{flexDirection:'row'}}>
                             <Image source={require('../imgs/bofangliang.png')} style={styles.img}/>
                             <Text style={styles.number}>:{item.value.id}</Text>
                         </View>
-                     <Text style={styles.content}>课程简介: {item.value.name}</Text>
+                     <Text style={styles.content}> {item.value.name}</Text>
                   </View>
-               </View>
+               </View>             
             </View>
+               </TouchableOpacity>
         );
+      
     }
 
     renderData() {
         return (
             <ScrollView >
-            
-                <AnimatedFlatList
-                    data={this.state.dataArray}
+                <AnimatedFlatList              
+                    data={this.state.dataArray}                
                     renderItem={this.renderItemView}
                 />
             </ScrollView>
@@ -128,6 +141,14 @@ class FlatListExample extends Component {
         //加载数据
         return this.renderData();
     }
+    tiao(){
+        const navigator = this.navigator;
+        navigator.push({
+            component:ShiTi
+        })
+    }
+    
+   
 }
 
 const styles = StyleSheet.create({

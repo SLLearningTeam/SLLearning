@@ -1,0 +1,2 @@
+let v = this.state.show_DaAn ? <Text style={{fontSize:18,color:'green'}}>正确答案是:第{item.value.answerReal}个</Text> : null;
+    let c = this.state.show_JieXi ? <Text style={{fontSize:18,color:'green'}}>{item.value.answerReason}</Text> : null;

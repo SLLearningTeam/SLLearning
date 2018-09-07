@@ -29,13 +29,13 @@ componentDidMount() {
             .then((responseJson) => {
                 this.setState({
                     loaded: true,
-                    title : responseJson.info[0].questionContent,
-                    A : responseJson.info[0].answerA,
-                    B : responseJson.info[0].answerB,
-                    C : responseJson.info[0].answerC,
-                    D : responseJson.info[0].answerD,
-                    reason : responseJson.info[0].answerReason,
-                    answerReal : responseJson.info[0].answerReal,
+                    title : responseJson.info[7].questionContent,
+                    A : responseJson.info[7].answerA,
+                    B : responseJson.info[7].answerB,
+                    C : responseJson.info[7].answerC,
+                    D : responseJson.info[7].answerD,
+                    reason : responseJson.info[7].answerReason,
+                    answerReal : responseJson.info[7].answerReal,
                 });
                 
             })

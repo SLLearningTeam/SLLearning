@@ -29,13 +29,13 @@ componentDidMount() {
             .then((responseJson) => {
                 this.setState({
                     loaded: true,
-                    title : responseJson.info[0].questionContent,
-                    A : responseJson.info[0].answerA,
-                    B : responseJson.info[0].answerB,
-                    C : responseJson.info[0].answerC,
-                    D : responseJson.info[0].answerD,
-                    reason : responseJson.info[0].answerReason,
-                    answerReal : responseJson.info[0].answerReal,
+                    title : responseJson.info[1].questionContent,
+                    A : responseJson.info[1].answerA,
+                    B : responseJson.info[1].answerB,
+                    C : responseJson.info[1].answerC,
+                    D : responseJson.info[1].answerD,
+                    reason : responseJson.info[1].answerReason,
+                    answerReal : responseJson.info[1].answerReal,
                 });
                 
             })
@@ -43,6 +43,18 @@ componentDidMount() {
                 console.error(error);
             });
     };
+
+Post () {
+    const url = `http://101.200.51.53:8080/SSLearningTeam/course/user/addOralCourseScore?userId=2&&courseType=2&&courseId=2&&oralScore=78`
+    fetch(url)
+      .then((response)=>{return response.json();})
+      .then((responseData)=>{
+        alert(responseData.info)
+      })
+      .catch((error)=>{
+          alert(error);
+      })
+  }
 
   render() {
     let v = this.state.show_DaAn ? <Text style={{fontSize:18,color:'green'}}>正确答案是第：{this.state.answerReal}个</Text> : null;
@@ -105,7 +117,7 @@ componentDidMount() {
                </RadioModal>
            </View>
       <View style={{alignItems:'baseline',flex:1,borderBottomWidth:1}}>
-      
+     
       <View style={{flexDirection:'column',}}>
      <View style={{flexDirection:'row',}}>
         <TouchableOpacity onPress={() => this._onPressDaAn()}>
@@ -172,11 +184,7 @@ componentDidMount() {
           text_value:35
         })
     }
-  TiJiao(){
-      
-       
-    
-  }
+  
 
 }
 
