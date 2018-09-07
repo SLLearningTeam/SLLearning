@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class='mb-event' data-server-country='CN' lang='zh-Hans-CN'>
+<head>
+<meta content='text/html;charset=utf-8' http-equiv='Content-Type'>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='yes' name='mobile-web-app-capable'>
+<meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
+<meta content='webkit' name='renderer'>
+<meta content='#F55D54' name='theme-color'>
+<title>
+听说Web
+</title>
+<link href='/uploads3/icons/925/9258344/android_icon_1530154580.png' rel='icon' sizes='192x192'>
+<link href='/uploads3/icons/925/9258344/retina_icon_1530154580.png' rel='apple-touch-icon' sizes='120x120'>
+<link href='/uploads3/icons/925/9258344/retina3x_icon_1530154580.png' rel='apple-touch-icon' sizes='180x180'>
+<link href='/uploads3/icons/925/9258344/ipad_icon_1530154580.png' rel='apple-touch-icon' sizes='144x144'>
+<link href='/uploads3/icons/925/9258344/ipad_icon_1530154580.png' rel='apple-touch-icon' sizes='152x152'>
+<link href='images/splashes/retina.png' media='(device-width: 320px) and (device-height: 568px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphone6_portrait_retina.png' media='(device-width: 375px) and (device-height: 667px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphone6plus_portrait_retina.png' media='(device-width: 414px) and (device-height: 736px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphonex_portrait_retina.png' media='(device-width: 375px) and (device-height: 812px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/ipad_portrait_retina.png' media='(device-width: 768px) and (device-height: 1024px)  and (orientation:portrait)' rel='apple-touch-startup-image'>
+<link href='images/splashes/ipad_landscape_retina.png' media='(device-width: 768px) and (device-height: 1024px)  and (orientation:landscape)' rel='apple-touch-startup-image'>
+<style>
+  html, body {
+    font-family: -apple-system, "SF UI Text", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+    overflow: hidden;
+    height: 100%; }
+  
+  html.is-full-screen {
+    height: 100vh; }
+  
+  body {
+    background: whitesmoke;
+    color: #525e71; }
+    body.mobile {
+      background-color: white; }
+  
+  #download, #header {
+    display: none; }
+  
+  #notification {
+    position: fixed;
+    top: -70px;
+    left: 0; }
+  
+  .notice {
+    padding: 10px;
+    font-size: 14px; }
+    .notice p {
+      margin-bottom: 10px; }
+  
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(51, 54, 58, 0.6) transparent;
+    border-radius: 100%;
+    transform-origin: 50% 50% 0px;
+    -webkit-animation: mb-spin 0.8s infinite linear;
+    animation: mb-spin 0.8s infinite linear;
+    display: inline-block; }
+  
+  @-webkit-keyframes mb-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+  
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg); } }
+  
+  @keyframes mb-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+  
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg); } }
+  
+  #safemode, #logo, #device {
+    display: none; }
+  
+  #font-preload {
+    position: absolute;
+    top: -65535px;
+    left: -65535px;
+    font-size: 12px;
+    pointer-events: none; }
+    #font-preload .aw {
+      position: absolute;
+      width: auto;
+      white-space: nowrap; }
+    #font-preload .ah {
+      position: absolute;
+      height: auto;
+      word-break: break-word;
+      word-wrap: break-word; }
+      #font-preload .ah p {
+        margin-bottom: 5px;
+        white-space: pre-wrap; }
+        #font-preload .ah p:last-child {
+          margin-bottom: 0px; }
+  
+  #loading {
+    width: 86px;
+    height: 86px;
+    z-index: 2;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -43px;
+    text-align: center;
+    font-size: 12px; }
+    #loading .logo, #loading .indicator {
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 86px;
+      height: 86px;
+      overflow: hidden;
+      background: url("images/logo-lg.svg");
+      background-size: 86px 86px; }
+    #loading .logo {
+      opacity: 0.3; }
+    #loading .indicator {
+      opacity: 1;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      height: 0%; }
+    #loading span {
+      position: absolute;
+      width: 300px;
+      left: 50%;
+      top: 110px;
+      margin-left: -150px;
+      font-size: 14px;
+      line-height: 28px;
+      color: #f77d77; }
+</style>
+<style>
+  ::-webkit-scrollbar-track {
+    background-color: transparent; }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #dedee4;
+    border-radius: 4px; }
+  
+  ::-webkit-scrollbar-corner {
+    background-color: transparent; }
+</style>
+
+<style>
+  #splash {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f0f0f2; }
+    #splash.is-landscape img {
+      top: 50%;
+      left: 50%;
+      width: 100vh;
+      height: 100vw;
+      transform: translate(-50%, -50%) rotate(-90deg); }
+    #splash img {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    #splash .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px; }
+</style>
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="ldzYg0JyOJ0+jX8T5YQhm/6/Lo5VZvsTh1KCFCveJ/WmpmHxpUo+WhZD9l1kUcksBmyDlPi97pO7H9cLwRsl4w==" />
+</head>
+<body>
+<div id='font-preload'>
+<span class='dora'>check</span>
+<span class='md'>check</span>
+<span class='mb icon-save'></span>
+<span class='fa fa-user'></span>
+<div class='aw'></div>
+<div class='ah'></div>
+</div>
+<div id='loading'>
+<div class='logo'></div>
+<div class='indicator'></div>
+<span>
+正在读取 听说Web...
+</span>
+</div>
+<div data-user='null' id='workspace'></div>
+<div class='safe-mask' id='safemode'>
+<div class='indicator restore'>
+<div class='spinner'></div>
+<div class='text'>
+此操作可能需要几分钟，请您耐心等待…
+<span class='progress'>0%</span>
+</div>
+</div>
+</div>
+
+
+<link rel="stylesheet" media="screen" href="webpack/font-icons-bdb17e594ab0c948ba03.css" />
+<link href='css/roboto.css' media='screen' rel='stylesheet'>
+
+<link rel="stylesheet" media="screen" href="assets/sharing-5ad7d5e94989f22df682df155ad1b09a.css" />
+<link rel="stylesheet" media="screen" href="webpack/lib-preview-487766b0467107d6d741.css" />
+<link rel="stylesheet" media="screen" href="webpack/preview-ede7027955e16444c034.css" />
+<script>
+  var RELEASE_HASH = 'efbf8f823cd8ca96b99391d9939326563be437ae'
+  var MBServer = 'modao.cc'
+  document.getElementsByClassName('indicator')[0].style.height = '30%'
+</script>
+<script src="webpack/webpack-runtime-60d5508d5caf3da5bd34.js"></script>
+<script src="webpack/i18n-zh-CN-0ec476ef35cf6b022bf4.js"></script>
+<script src="webpack/vendor-824badd4891329c47d5c.js"></script>
+<script src="assets/sharing-9eaa2b9cc1c14ce1a3f84d61d19ca029.js"></script>
+<script src="webpack/lib-preview-28a2686275ceb9820361.js"></script>
+<script src="webpack/preview-3c0e9e34e15eb64b1a54.js"></script>
+<script>
+  $(function () {
+    if (MB.isMobile()) {
+      $('body').addClass('mobile')
+      MB.ga('send', 'event', 'goal', '在移动端打开了应用')
+    }
+  
+    MB.isInApp = false
+  
+    MB.load({
+      token: 'j0YLbl3u8avfCxeF0jigBlGSykNDeXj',
+      encryptedPassword: '',
+      isPasswordRequired: false,
+      installerProject: {"name":"听说Web","accessToken":"j0YLbl3u8avfCxeF0jigBlGSykNDeXj","iconUrl":"/uploads3/icons/925/9258344/retina3x_icon_1530154580.png","userPlan":"startup","updatedAt":"2018-07-02T15:40:52+08:00","exportable":true,"passwordRequired":false,"password":null,"ios_client_url":"https://itunes.apple.com/cn/app/mockingbot/id1050565468?ls=1\u0026mt=8","android_client_url":"http://a.app.qq.com/o/simple.jsp?pkgname=com.mockingbot"}
+    })
+  })
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  ga('create', 'UA-29613374-1', 'auto');
+  ga('set', 'userId', '');
+  ga('require', 'ec');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+<script src="data/project.json"></script>
+<script src="data/artboards.json"></script>
